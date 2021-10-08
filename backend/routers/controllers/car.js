@@ -11,7 +11,7 @@ const addNewCar = (req, res) => {
     car_types_id,
     car_brand_id,
   } = req.body;
-  
+
   const query = `INSERT INTO cars
  (c_img,color,model,description,manifactoring_year,day_price,car_types_id,car_brand_id)
  VALUES(?,?,?,?,?,?,?,?)`;
@@ -40,57 +40,83 @@ const addNewCar = (req, res) => {
     }
   });
 };
-const getCarById=(req,res)=>{
-    const car_id = req.params.car_id
-    const query=`SELECT * FROM cars INNER JOIN car_brands ON cars.car_id=car_brands.brand_id
-     INNER JOIN car_types ON cars.car_id=car_types.typeCar_id WHERE cars.car_id=${car_id}`
-    
-     carModel.query(query,(err,result)=>{
-         if(!result.length){
-            res.status(201).json({
-                success: true,
-                message: `not found any car`,
-              });
-         } else if(err){
-            res.status(500).json({
-                success: false,
-                message: `Server Error`,
-                err: err,
-              });
-         }
-         res.status(201).json({
-            success: true,
-            result: result,
-          });
-     })
-    }
-    
- const getCarByuserId=(req,res)=>{
-const user_id = req.params.user_id
-const query=`SELECT * FROM cars INNER JOIN car_brands ON cars.car_id=car_brands.brand_id
-INNER JOIN car_types ON cars.car_id=car_types.typeCar_id WHERE cars.user_id=?`
-const data = [user_id]
-carModel.query(query,data,(err,result)=>{
-    console.log("dddddddddddddddddddddddddddddddddddddddddd");
+const getCarById = (req, res) => {
+  const car_id = req.params.car_id;
+  const query = `SELECT * FROM cars INNER JOIN car_brands ON cars.car_id=car_brands.brand_id
+     INNER JOIN car_types ON cars.car_id=car_types.typeCar_id WHERE cars.car_id=${car_id}`;
 
-    if(!result.length){
-       res.status(201).json({
-           success: false,
-           message: `not found any car`,
-
-         });
-    } else if(err){
-       res.status(500).json({
-           success: false,
-           message: `Server Error`,
-           err: err,
-         });
+  carModel.query(query, (err, result) => {
+    if (!result.length) {
+      res.status(201).json({
+        success: true,
+        message: `not found any car`,
+      });
+    } else if (err) {
+      res.status(500).json({
+        success: false,
+        message: `Server Error`,
+        err: err,
+      });
     }
     res.status(201).json({
-       success: true,
-       result: result,
-     });
-})
-    }
+      success: true,
+      result: result,
+    });
+  });
+};
 
-module.exports = { addNewCar,getCarById,getCarByuserId};
+const getCarByuserId = (req, res) => {
+  const user_id = req.params.user_id;
+  const query = `SELECT * FROM cars INNER JOIN car_brands ON cars.car_id=car_brands.brand_id
+INNER JOIN car_types ON cars.car_id=car_types.typeCar_id WHERE cars.user_id=?`;
+  const data = [user_id];
+  carModel.query(query, data, (err, result) => {
+    console.log("dddddddddddddddddddddddddddddddddddddddddd");
+
+    if (!result.length) {
+      res.status(500).json({
+        success: false,
+        message: `not found any car`,
+      });
+    } else if (err) {
+      res.status(404).json({
+        success: false,
+        message: `Server Error`,
+        err: err,
+      });
+    }
+    res.status(201).json({
+      success: true,
+      result: result,
+    });
+  });
+};
+
+const updateCarById = (req, res) => {
+  const car_id = req.params.car_id;
+  const {c_img,color,carLicense,description,is_Available,day_price}=req.body
+  const query = `UPDATE cars set c_img=?,color=?,carLicense=?,description=?,is_Available=?,day_price=? WHERE car_id=?`
+  const data = [c_img,color,carLicense,description,is_Available,day_price,car_id]
+  carModel.query(query, data, (err, result) => {
+      
+    if (err) {
+        res.status(404).json({
+            success: false,
+            message: `Server Error`,
+            err: err,
+          });
+    } else if (!result.affectedRows) {
+      res.status(500).json({
+        success: false,
+        message: `car not found`,
+        
+      });
+    }
+    res.status(202).json({
+      success: true,
+      result: result,
+    });
+  });
+};
+
+module.exports = { addNewCar, getCarById, getCarByuserId, updateCarById };
