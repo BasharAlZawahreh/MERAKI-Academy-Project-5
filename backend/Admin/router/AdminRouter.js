@@ -37,6 +37,9 @@ adminRouter.get("/reserves", authentication, getAllCars);
 //patch  http://localhost:5000/admin/makeAdmin/2
 adminRouter.patch("/blockUser/:id", authentication, BlockUserById);
 
+//patch  http://localhost:5000/admin/makeAdmin/2
+adminRouter.patch("/confirmReserve/:id", authentication, confirmReservation);
+
 adminRouter.delete("/deleteRate/:id", authentication, DeleteRatebyId);
 
 //post  http://localhost:5000/admin/makeAdmin/2
