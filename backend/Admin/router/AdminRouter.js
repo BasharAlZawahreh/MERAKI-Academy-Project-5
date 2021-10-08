@@ -1,10 +1,13 @@
 const express = require("express");
 const { login } = require("../../Admin/Controllers/login");
+
 const {
-  makeUserAdminById,
-  getAllUsers,
-  BlockUserById,
+    makeUserAdminById,
+    getAllUsers,
+    BlockUserById,
 } = require("../../Admin/Controllers/users");
+
+const { DeleteRatebyId } = require("../../Admin/Controllers/rates");
 
 // define router
 const adminRouter = express.Router();
@@ -21,6 +24,8 @@ adminRouter.get("/users", authentication, getAllUsers);
 
 //patch  http://localhost:5000/admin/makeAdmin/2
 adminRouter.patch("/blockUser/:id", authentication, BlockUserById);
+
+adminRouter.delete("/deleteRate/:id", authentication, DeleteRatebyId);
 
 //post  http://localhost:5000/admin/makeAdmin/2
 adminRouter.post(

@@ -49,8 +49,14 @@ const BlockUserById = (req, res) => {
   const query = `UPDATE users SET is_blocked=1 WHERE user_id=${id} and role="user"`;
 
   connection.query(query, (err, result) => {
+    if (err) {
+      return res.status(500).json({
+        success: false,
+        message: `server error`,
+      });
+    }
     if (result.affectedRows) {
-      res.status(202).json({
+      return res.status(202).json({
         success: true,
         message: ` Success user blocked`,
         result: result,
