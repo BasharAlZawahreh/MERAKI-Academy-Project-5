@@ -11,10 +11,12 @@ app.use(express.json());
 const adminRouter=require("./Admin/router/AdminRouter");
 const userRouter=require("./routers/routes/user");
 const loginRouter=require("./routers/routes/login");
+const carRouter =require("./routers/routes/car")
 // Routers
 app.use("/admin",adminRouter);
 app.use("/login",loginRouter);
 app.use("/users",userRouter);
+app.use("/car",carRouter)
 
 app.use("*", (req, res) => res.status(404).json("NO content at this path"));
 
