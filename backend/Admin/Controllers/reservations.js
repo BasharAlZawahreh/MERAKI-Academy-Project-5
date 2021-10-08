@@ -2,7 +2,7 @@ const connection = require("../../db/db");
 
 
 const getAllReservations = (req, res) => {
-  const query = `SELECT * FROM reservations`;
+  const query = `SELECT * FROM reservations INNER JOIN cars ON cars.car_id = res_id`;
 
   connection.query(query, (err, result) => {
     if (!result.length) {

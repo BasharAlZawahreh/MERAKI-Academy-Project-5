@@ -43,6 +43,7 @@ const addNewCar = (req, res) => {
   });
 };
 const getCarById = (req, res) => {
+  console.log('get car by id')
   const car_id = req.params.car_id;
   const query = `SELECT * FROM cars INNER JOIN car_brands ON cars.car_id=car_brands.brand_id
      INNER JOIN car_types ON cars.car_id=car_types.typeCar_id WHERE cars.car_id=${car_id} AND cars.is_Deleted=0`;
@@ -177,6 +178,7 @@ const deleteCarById = (req, res) => {
 
 // this function return cars according to filters
 const carsFilter = (req, res) => {
+  console.log('cars filter')
   const {
     car_type,
     color,
@@ -200,8 +202,8 @@ const carsFilter = (req, res) => {
   const query = `SELECT * FROM cars 
   INNER JOIN car_types ON car_types.typeCar_id = car_types_id
   INNER JOIN car_brands ON car_brands.brand_id = car_brand_id
-  WHERE brand="${car_type}"  
-  AND label="${brand_car}"  
+  WHERE brand="${brand_car}"  
+  AND car_type="${car_type}"  
   AND color="${color}"  
   AND model="${model}"  
   AND manifactoring_year=${manifactoring_year}  

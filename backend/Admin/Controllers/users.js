@@ -44,7 +44,8 @@ const getAllUsers = (req, res) => {
   });
 };
 
-const BlockUserById = (req, res) => {
+
+const blockUserById = (req, res) => {
   const id = req.params.id;
   const query = `UPDATE users SET is_blocked=1 WHERE user_id=${id} and role="user"`;
 
@@ -69,5 +70,29 @@ const BlockUserById = (req, res) => {
     }
   });
 };
+const unBlockUserById = (req, res) => {
+  const id = req.params.id;
+  const query = `UPDATE users SET is_blocked=0 WHERE user_id=${id} and role="user"`;
 
-module.exports = { makeUserAdminById, getAllUsers, BlockUserById };
+  connection.query(query, (err, result) => {
+    if (err) {
+      return res.status(500).json({
+        success: false,
+        message: `server error`,
+      });
+    }
+    if (result.affectedRows) {
+      return res.status(202).json({
+        success: true,
+        message: ` Success user blocked`,
+        result: result,
+      });
+    } else {
+      return res.status(404).json({
+        success: false,
+        message: `The result => ${id} not found`,
+      });
+    }
+  });
+};
+module.exports = { makeUserAdminById, getAllUsers, blockUserById, unBlockUserById };

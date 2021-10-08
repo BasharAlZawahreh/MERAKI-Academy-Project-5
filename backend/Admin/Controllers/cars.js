@@ -1,7 +1,9 @@
 const connection = require('../../db/db')
 
 const getAllCars = (req, res) => {
-    const query = `SELECT * FROM cars`;
+    const query = `SELECT * FROM cars 
+    INNER JOIN car_types ON car_types.typeCar_id = car_types_id
+    INNER JOIN car_brands ON car_brands.brand_id = car_brand_id`;
   
     connection.query(query, (err, result) => {
       if (!result.length) {
