@@ -23,17 +23,18 @@ const createNewReservation=(req,res)=>{
 }
 
 const getAllReservationsByUserId=(req,res)=>{
- const id=req.params.id
-  console.log(id)
- const query=`SELECT * FROM reservations INNER JOIN users ON reservations.res_id= users.user_id 
+  const userId=req.token.user_id
+  console.log(req.token)
+  console.log(userId)
+  const query=`SELECT * FROM reservations INNER JOIN users ON reservations.res_id= users.user_id
  INNER JOIN cars ON reservations.res_id=cars.car_id
- where(reservations.users_id=?)`
+ WHERE reservations.users_id=?`
 
- const data=[id]
+ const data=[userId]
 
- reservationModel.query(query,data,(err,result)=>{
- 
-    if (result){
+  reservationModel.query(query,data,(err,result)=>{
+  console.log(result)
+     if (result.length){
         res.status(201).json({
           success: true,
           message: `All Reservation `,
