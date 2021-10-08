@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS users (
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS car_types (
   typeCar_id INT NOT NULL AUTO_INCREMENT,
-  description VARCHAR(100) ,
+  descr VARCHAR(100) ,
   label VARCHAR(255) NOT NULL,
   PRIMARY KEY (typeCar_id)
  );
@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS car_types (
 CREATE TABLE IF NOT EXISTS car_brands (
   brand_id INT NOT NULL AUTO_INCREMENT,
   description VARCHAR(100) ,
-  label VARCHAR(45) NOT NULL UNIQUE,
+  brand VARCHAR(45) NOT NULL UNIQUE,
   PRIMARY KEY (brand_id)
  );
 
@@ -48,12 +48,14 @@ CREATE TABLE IF NOT EXISTS car_brands (
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS cars(
   car_id INT NOT NULL AUTO_INCREMENT,
+  c_img VARCHAR(255)  ,
   color VARCHAR(255) NOT NULL,
   model VARCHAR(255) NOT NULL,
-  carLicense BLOB NOT NULL,
+  carLicense VARCHAR(255) NOT NULL,
   description VARCHAR(255) NULL,
   manifactoring_year DATE NOT NULL,
   is_Available TINYINT  DEFAULT 1,
+  is_Deleted TINYINT  DEFAULT 0,
   day_price DOUBLE NOT NULL,
   user_id INT NOT NULL,
  FOREIGN KEY (user_id) REFERENCES users(user_id),
@@ -96,6 +98,3 @@ CREATE TABLE IF NOT EXISTS rates(
    FOREIGN KEY (user_id) REFERENCES users(user_id),
   PRIMARY KEY ( rate_id  )
  );
-
-
-
