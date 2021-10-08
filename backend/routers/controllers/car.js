@@ -66,12 +66,11 @@ const getCarById = (req, res) => {
 };
 
 const getCarByuserId = (req, res) => {
-  const user_id = req.params.user_id;
+  const user_id = req.token.userId;
   const query = `SELECT * FROM cars INNER JOIN car_brands ON cars.car_id=car_brands.brand_id
 INNER JOIN car_types ON cars.car_id=car_types.typeCar_id WHERE cars.user_id=? AND cars.is_Deleted=0`;
   const data = [user_id];
   carModel.query(query, data, (err, result) => {
-    console.log("dddddddddddddddddddddddddddddddddddddddddd");
 
     if (!result.length) {
       res.status(500).json({
