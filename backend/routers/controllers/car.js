@@ -65,5 +65,32 @@ const getCarById=(req,res)=>{
      })
     }
     
+ const getCarByuserId=(req,res)=>{
+const user_id = req.params.user_id
+const query=`SELECT * FROM cars INNER JOIN car_brands ON cars.car_id=car_brands.brand_id
+INNER JOIN car_types ON cars.car_id=car_types.typeCar_id WHERE cars.user_id=?`
+const data = [user_id]
+carModel.query(query,data,(err,result)=>{
+    console.log("dddddddddddddddddddddddddddddddddddddddddd");
 
-module.exports = { addNewCar,getCarById};
+    if(!result.length){
+       res.status(201).json({
+           success: false,
+           message: `not found any car`,
+
+         });
+    } else if(err){
+       res.status(500).json({
+           success: false,
+           message: `Server Error`,
+           err: err,
+         });
+    }
+    res.status(201).json({
+       success: true,
+       result: result,
+     });
+})
+    }
+
+module.exports = { addNewCar,getCarById,getCarByuserId};
