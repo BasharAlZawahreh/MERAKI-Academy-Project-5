@@ -3,7 +3,7 @@ const {createNewReservation,getAllReservationsByUserId,updateReservationById,del
 const reservationRouter=express.Router();
  const {authentication}=require("../middlewares/authentication")
 reservationRouter.post("/",authentication,createNewReservation)
- reservationRouter.get("/user_id",authentication,getAllReservationsByUserId)
+ reservationRouter.get("/user",authentication,getAllReservationsByUserId)
  reservationRouter.put("/:id",authentication,updateReservationById)
  reservationRouter.delete("/:id",authentication,deleteReservationById)
 
