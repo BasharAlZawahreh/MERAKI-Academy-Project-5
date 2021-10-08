@@ -7,17 +7,17 @@ const login = (req, res) => {
   const password = req.body.password;
   const email = req.body.email;
   const queryString = `SELECT * from users  WHERE email="${email}" AND role="SuperAdmin" OR role="Admin"`;
-  const data=[email]
   connection.query(queryString, async(err, data, fields)=> {
    if(!data.length){
-     res.json("The email doesn't exist")
+    return res.json("The email doesn't exist")
    }
    if(err){
-     res.status(500).json("server Error")
+    return res.status(500).json("server Error")
    }
+   try {
+     const valid = await bcrypt.compare(password, data[0].password);
+     console.log(`${password},  ${data[0].password},  ${valid}`)
 
-    try {
-        const valid = await bcrypt.compare(password, data[0].password);
         if (!valid) {
           return res.status(403).json({
             success: false,
@@ -25,7 +25,7 @@ const login = (req, res) => {
           });
         }
         const payload = {
-          userId:  data[0].id,
+          userId:  data[0].user_id,
           role:  data[0].role,
         };
 
@@ -34,7 +34,7 @@ const login = (req, res) => {
         };
 
         // console.log(payload);
-        const token = jwt.sign(payload, process.env.SECRET, options);
+        const token = jwt.sign(payload, process.env.ADMIN_SECRET, options);
         res.status(200).json({
           success: true,
           message: `Email and Password are correct`,
