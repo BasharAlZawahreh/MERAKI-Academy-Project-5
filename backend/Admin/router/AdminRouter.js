@@ -2,12 +2,17 @@ const express = require("express");
 const { login } = require("../../Admin/Controllers/login");
 
 const {
-    makeUserAdminById,
-    getAllUsers,
-    BlockUserById,
+  makeUserAdminById,
+  getAllUsers,
+  BlockUserById,
 } = require("../../Admin/Controllers/users");
 
 const { DeleteRatebyId } = require("../../Admin/Controllers/rates");
+
+const {
+  getAllReservations,
+  confirmReservation,
+} = require("../../Admin/Controllers/reservations");
 
 // define router
 const adminRouter = express.Router();
@@ -21,6 +26,11 @@ adminRouter.post("/login", login);
 
 //get  http://localhost:5000/admin/users/
 adminRouter.get("/users", authentication, getAllUsers);
+//get  http://localhost:5000/admin/reserves/
+adminRouter.get("/reserves", authentication, getAllReservations);
+
+//get  http://localhost:5000/admin/cars/
+adminRouter.get("/reserves", authentication, getAllReservations);
 
 //patch  http://localhost:5000/admin/makeAdmin/2
 adminRouter.patch("/blockUser/:id", authentication, BlockUserById);
