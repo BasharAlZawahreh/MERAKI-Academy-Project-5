@@ -1,10 +1,10 @@
 const express=require("express");
 const {createNewReservation,getAllReservationsByUserId,updateReservationById,deleteReservationById}=require("../controllers/reservation");
 const reservationRouter=express.Router();
-
-reservationRouter.post("/",createNewReservation)
-reservationRouter.get("/:id",getAllReservationsByUserId)
-reservationRouter.put("/:id",updateReservationById)
-reservationRouter.delete("/:id",deleteReservationById)
+const {authentication}=require("../middlewares/authentication")
+reservationRouter.post("/",authentication,createNewReservation)
+reservationRouter.get("/:id",authentication,getAllReservationsByUserId)
+reservationRouter.put("/:id",authentication,updateReservationById)
+reservationRouter.delete("/:id",authentication,deleteReservationById)
 
 module.exports=reservationRouter

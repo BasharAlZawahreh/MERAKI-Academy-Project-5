@@ -63,8 +63,8 @@ const id=req.params.id;
           message: ` Success updated`,
           reservation: result,
         })
-      } else {
-        return res.status(404).json({
+       }else {
+        return res.status(500).json({
           success: false,
           message: `The Reservation => ${id} not found`,
        
@@ -83,7 +83,7 @@ const deleteReservationById=(req,res)=>{
               reservation: result,
             })
           } else {
-            return res.status(404).json({
+            return res.status(500).json({
               success: false,
               message: `The  Reservation => ${id} not found`,
            
