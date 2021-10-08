@@ -9,6 +9,8 @@ const {
 
 const { DeleteRatebyId } = require("../../Admin/Controllers/rates");
 
+const { getAllCars } = require("../../Admin/Controllers/cars");
+
 const {
   getAllReservations,
   confirmReservation,
@@ -30,7 +32,7 @@ adminRouter.get("/users", authentication, getAllUsers);
 adminRouter.get("/reserves", authentication, getAllReservations);
 
 //get  http://localhost:5000/admin/cars/
-adminRouter.get("/reserves", authentication, getAllReservations);
+adminRouter.get("/reserves", authentication, getAllCars);
 
 //patch  http://localhost:5000/admin/makeAdmin/2
 adminRouter.patch("/blockUser/:id", authentication, BlockUserById);
