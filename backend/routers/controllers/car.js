@@ -1,6 +1,7 @@
 const carModel = require("../../db/db");
 
 const addNewCar = (req, res) => {
+    let user_id = req.token.user_id
   const {
     c_img,
     color,
@@ -13,8 +14,8 @@ const addNewCar = (req, res) => {
   } = req.body;
 
   const query = `INSERT INTO cars
- (c_img,color,model,description,manifactoring_year,day_price,car_types_id,car_brand_id)
- VALUES(?,?,?,?,?,?,?,?)`;
+ (c_img,color,model,description,manifactoring_year,day_price,user_id,car_types_id,car_brand_id)
+ VALUES(?,?,?,?,?,?,?,?,?)`;
   const data = [
     c_img,
     color,
@@ -22,6 +23,7 @@ const addNewCar = (req, res) => {
     description,
     manifactoring_year,
     day_price,
+    user_id,
     car_types_id,
     car_brand_id,
   ];
