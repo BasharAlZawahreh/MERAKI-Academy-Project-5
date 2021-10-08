@@ -119,4 +119,32 @@ const updateCarById = (req, res) => {
   });
 };
 
-module.exports = { addNewCar, getCarById, getCarByuserId, updateCarById };
+const toggleCarAvailability=(req,res)=>{
+    const car_id = req.params.car_id;
+    const query = `UPDATE cars SET is_Available=0 WHERE car_id=${car_id}`
+    
+    carModel.query(query,  (err, result) => {
+        
+      if (err) {
+          res.status(404).json({
+              success: false,
+              message: `Server Error`,
+              err: err,
+            });
+      } else if (!result.affectedRows) {
+        res.status(500).json({
+          success: false,
+          message: `car not found`,
+          
+        });
+      }
+      res.status(202).json({
+        success: true,
+        result: result,
+      });
+    });
+};
+
+
+
+module.exports = { addNewCar, getCarById, getCarByuserId, updateCarById,toggleCarAvailability };
