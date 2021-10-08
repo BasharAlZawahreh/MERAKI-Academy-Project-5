@@ -19,9 +19,8 @@ const makeUserAdminById = async (req, res) => {
   });
 };
 
-
 const getAllUsers = (req, res) => {
-  console.log('get all users')
+  console.log("get all users");
   const query = `SELECT * FROM users`;
 
   connection.query(query, (err, result) => {
@@ -39,16 +38,30 @@ const getAllUsers = (req, res) => {
     }
     return res.status(200).json({
       success: true,
-      message: 'all users',
+      message: "all users",
       result: result,
     });
   });
 };
 
-const BlockUserById = (req,res) =>{
-  const id = req.params.id
-  
+const BlockUserById = (req, res) => {
+  const id = req.params.id;
+  const query = `UPDATE users SET is_blocked=1 WHERE user_id=${id} and role="user"`;
 
-}
+  connection.query(query, (err, result) => {
+    if (result.affectedRows) {
+      res.status(202).json({
+        success: true,
+        message: ` Success user blocked`,
+        result: result,
+      });
+    } else {
+      return res.status(404).json({
+        success: false,
+        message: `The result => ${id} not found`,
+      });
+    }
+  });
+};
 
-module.exports = { makeUserAdminById, getAllUsers };
+module.exports = { makeUserAdminById, getAllUsers, BlockUserById };
