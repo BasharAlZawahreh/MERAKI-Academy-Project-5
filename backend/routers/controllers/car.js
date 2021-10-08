@@ -40,5 +40,30 @@ const addNewCar = (req, res) => {
     }
   });
 };
+const getCarById=(req,res)=>{
+    const car_id = req.params.car_id
+    const query=`SELECT * FROM cars INNER JOIN car_brands ON cars.car_id=car_brands.brand_id
+     INNER JOIN car_types ON cars.car_id=car_types.typeCar_id WHERE cars.car_id=${car_id}`
+    
+     carModel.query(query,(err,result)=>{
+         if(!result.length){
+            res.status(201).json({
+                success: true,
+                message: `not found any car`,
+              });
+         } else if(err){
+            res.status(500).json({
+                success: false,
+                message: `Server Error`,
+                err: err,
+              });
+         }
+         res.status(201).json({
+            success: true,
+            result: result,
+          });
+     })
+    }
+    
 
-module.exports = { addNewCar};
+module.exports = { addNewCar,getCarById};
