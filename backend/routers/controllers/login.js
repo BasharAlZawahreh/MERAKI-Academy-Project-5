@@ -29,9 +29,10 @@ const login = (req, res) => {
             message: `The password you’ve entered is incorrect`,
           });
       }
-
+   console.log(result[0].user_id)
       const payload = {
-        userId: result[0].id,
+        
+        user_id: result[0].user_id,
         userName: result[0].firstName,
         country: result[0].country,
         role: result[0].role,
