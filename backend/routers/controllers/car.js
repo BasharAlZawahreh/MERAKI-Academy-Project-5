@@ -43,12 +43,12 @@ const addNewCar = (req, res) => {
 const getCarById = (req, res) => {
   const car_id = req.params.car_id;
   const query = `SELECT * FROM cars INNER JOIN car_brands ON cars.car_id=car_brands.brand_id
-     INNER JOIN car_types ON cars.car_id=car_types.typeCar_id WHERE cars.car_id=${car_id}`;
+     INNER JOIN car_types ON cars.car_id=car_types.typeCar_id WHERE cars.car_id=${car_id} AND cars.is_Deleted=0`;
 
   carModel.query(query, (err, result) => {
     if (!result.length) {
       res.status(201).json({
-        success: true,
+        success: false,
         message: `not found any car`,
       });
     } else if (err) {
@@ -68,7 +68,7 @@ const getCarById = (req, res) => {
 const getCarByuserId = (req, res) => {
   const user_id = req.params.user_id;
   const query = `SELECT * FROM cars INNER JOIN car_brands ON cars.car_id=car_brands.brand_id
-INNER JOIN car_types ON cars.car_id=car_types.typeCar_id WHERE cars.user_id=?`;
+INNER JOIN car_types ON cars.car_id=car_types.typeCar_id WHERE cars.user_id=? AND cars.is_Deleted=0`;
   const data = [user_id];
   carModel.query(query, data, (err, result) => {
     console.log("dddddddddddddddddddddddddddddddddddddddddd");
@@ -145,6 +145,34 @@ const toggleCarAvailability=(req,res)=>{
     });
 };
 
+const deleteCarById=(req,res)=>{
+    //we will makw soft delete
+    const car_id = req.params.car_id;
+    const query = `UPDATE cars SET is_Deleted=1 WHERE car_id=${car_id}`
+    
+    carModel.query(query,  (err, result) => {
+        
+      if (err) {
+          res.status(404).json({
+              success: false,
+              message: `Server Error`,
+              err: err,
+            });
+      } else if (!result.affectedRows) {
+        res.status(500).json({
+          success: false,
+          message: `car not found`,
+          
+        });
+      }
+      res.status(202).json({
+        success: true,
+        message: "success deleted",
+      });
+    });
 
 
-module.exports = { addNewCar, getCarById, getCarByuserId, updateCarById,toggleCarAvailability };
+}
+
+
+module.exports = { addNewCar, getCarById, getCarByuserId, updateCarById,toggleCarAvailability ,deleteCarById};

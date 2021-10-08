@@ -55,6 +55,7 @@ CREATE TABLE IF NOT EXISTS cars(
   description VARCHAR(255) NULL,
   manifactoring_year DATE NOT NULL,
   is_Available TINYINT  DEFAULT 1,
+  is_Deleted TINYINT  DEFAULT 0,
   day_price DOUBLE NOT NULL,
   user_id INT NOT NULL,
  FOREIGN KEY (user_id) REFERENCES users(user_id),
