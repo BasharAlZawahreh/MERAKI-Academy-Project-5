@@ -4,7 +4,7 @@ const {authentication}=require("../middlewares/authentication")
 const carRouter = express.Router()
 
 carRouter.post("/",authentication,addNewCar)
-carRouter.get("/:car_id",authentication,getCarById)
+carRouter.get("/:car_id",getCarById)
 carRouter.get("/user",authentication,getCarByuserId)
 carRouter.put("/:car_id",authentication,updateCarById)
 carRouter.put("/available/:car_id",authentication,toggleCarAvailability)

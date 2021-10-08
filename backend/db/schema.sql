@@ -48,10 +48,10 @@ CREATE TABLE IF NOT EXISTS car_brands (
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS cars(
   car_id INT NOT NULL AUTO_INCREMENT,
-  c_img VARCHAR(255)  ,
+  c_img LONGBLOB  ,
   color VARCHAR(255) NOT NULL,
   model VARCHAR(255) NOT NULL,
-  carLicense VARCHAR(255) NOT NULL,
+  carLicense LONGBLOB,
   description VARCHAR(255) NULL,
   manifactoring_year DATE NOT NULL,
   is_Available TINYINT  DEFAULT 1,

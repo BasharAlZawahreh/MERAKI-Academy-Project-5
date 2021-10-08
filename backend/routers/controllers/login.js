@@ -34,7 +34,7 @@ const login = (req, res) => {
         
         user_id: result[0].user_id,
         userName: result[0].firstName,
-        country: result[0].country,
+        country: result[0].city,
         role: result[0].role,
       }
       const options = {
