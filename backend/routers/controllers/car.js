@@ -49,7 +49,7 @@ const getCarById = (req, res) => {
 
   carModel.query(query, (err, result) => {
     if (!result.length) {
-      res.status(201).json({
+      res.status(404).json({
         success: false,
         message: `not found any car`,
       });
@@ -209,11 +209,24 @@ const carsFilter = (req, res) => {
   AND is_Available=1`;
 
   connection.query(query, (err, result) => {
-    if (err) {
-      return res.status(500).json({ success: false, message: "server error" });
+    if (!result.length) {
+      return res.status(404).json({
+        success: false,
+        message: `not found any related car`,
+      });
+    } else if (err) {
+      return res.status(500).json({
+        success: false,
+        message: `Server Error`,
+        err: err,
+      });
     }
-    res.status(200).json({ success: true, message: "Success", filter: result });
-    console.log(result);
+
+    res.status(200).json({
+      success: true,
+      message: 'filtered cars',
+      result: result,
+    });
   });
 };
 
