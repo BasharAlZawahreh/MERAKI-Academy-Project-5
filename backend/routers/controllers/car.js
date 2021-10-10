@@ -1,7 +1,11 @@
 const carModel = require("../../db/db");
 
 const addNewCar = (req, res) => {
-  console.log("ddd",req.body.urls.length);
+  let resut = res.status(201).json({
+    success: true,
+    message: `you're car added successfuly `,
+  });
+  
   let user_id = req.token.user_id;
   const urls = req.body.urls;
   const {
@@ -27,8 +31,9 @@ const addNewCar = (req, res) => {
     car_brand_id,
   ];
   carModel.query(query, data, (err, result) => {
+
     if (err) {
-      res.status(500).json({
+     return res.status(500).json({
         success: false,
         message: `Server Error`,
         err: err,
@@ -44,17 +49,15 @@ const addNewCar = (req, res) => {
         const data = [urls[0], car_id];
         urls.shift();
         carModel.query(query, data, (err, result) => {
-          if(!result.affectedRows){
           
-              res.status(201).json({
-                success: true,
-                message: `you're car added successfuly `,
-              });
+          if(result.affectedRows){
+          
+            resut=resut
             
           } else {
-            res.status(404).json({
-              success: false,
-              message: `some thing error `,
+         res =  res.status(404).json({
+               success: false,
+               message: `some thing error `,
             });
 
           }
@@ -64,11 +67,14 @@ const addNewCar = (req, res) => {
     }
 
   });
-}
+  return resut 
+};
 const getCarById = (req, res) => {
   const car_id = req.params.car_id;
   const query = `SELECT * FROM cars INNER JOIN car_brands ON cars.car_id=car_brands.brand_id
-     INNER JOIN car_types ON cars.car_id=car_types.typeCar_id WHERE cars.car_id=${car_id} AND cars.is_Deleted=0`;
+     INNER JOIN car_types ON cars.car_id=car_types.typeCar_id 
+     INNER JOIN car_imgs ON cars.car_id=car_imgs.car_id
+     WHERE cars.car_id=${car_id} AND cars.is_Deleted=0`;
 
   carModel.query(query, (err, result) => {
 
@@ -92,15 +98,15 @@ const getCarById = (req, res) => {
 };
 
 const getCarByuserId = (req, res) => {
-
-  const user_id = req.token.userId;
+  
   const query = `SELECT * FROM cars INNER JOIN car_brands ON cars.car_id=car_brands.brand_id
 INNER JOIN car_types ON cars.car_id=car_types.typeCar_id 
-WHERE cars.user_id=? AND cars.is_Deleted=0`;
-  const data = [user_id];
-  carModel.query(query, data, (err, result) => {
-    console.log("err",err);
-    console.log("res",result);
+INNER JOIN car_imgs ON cars.car_id=car_imgs.car_id
+WHERE cars.user_id=${req.token.user_id} AND cars.is_Deleted=0`;
+
+  console.log(req.token);
+  carModel.query(query,  (err, result) => {
+
     if (!result.length) {
      return res.status(500).json({
         success: false,
