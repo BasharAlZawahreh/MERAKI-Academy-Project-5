@@ -1,9 +1,14 @@
 const carModel = require("../../db/db");
 
 const addNewCar = (req, res) => {
+  let resut = res.status(201).json({
+    success: true,
+    message: `you're car added successfuly `,
+  });
+  
   let user_id = req.token.user_id;
+  const urls = req.body.urls;
   const {
-    c_img,
     color,
     model,
     description,
@@ -12,12 +17,10 @@ const addNewCar = (req, res) => {
     car_types_id,
     car_brand_id,
   } = req.body;
-
   const query = `INSERT INTO cars
- (c_img,color,model,description,manifactoring_year,day_price,user_id,car_types_id,car_brand_id)
- VALUES(?,?,?,?,?,?,?,?,?)`;
+ (color,model,description,manifactoring_year,day_price,user_id,car_types_id,car_brand_id)
+ VALUES(?,?,?,?,?,?,?,?)`;
   const data = [
-    c_img,
     color,
     model,
     description,
@@ -28,27 +31,54 @@ const addNewCar = (req, res) => {
     car_brand_id,
   ];
   carModel.query(query, data, (err, result) => {
+
     if (err) {
-      res.status(500).json({
+     return res.status(500).json({
         success: false,
         message: `Server Error`,
         err: err,
       });
-    } else if (result) {
-      res.status(201).json({
-        success: true,
-        message: `you're car added successfuly `,
-      });
+    } else if (result.affectedRows) {
+      let car_id = result.insertId;
+      
+      while (urls.length) {
+       
+        let query = `INSERT INTO car_imgs
+        (imgUrl,car_id)
+        VALUES(?,?)`;
+        const data = [urls[0], car_id];
+        urls.shift();
+        carModel.query(query, data, (err, result) => {
+          
+          if(result.affectedRows){
+          
+            resut=resut
+            
+          } else {
+         res =  res.status(404).json({
+               success: false,
+               message: `some thing error `,
+            });
+
+          }
+
+        });
+      }
     }
+
   });
+  return resut 
 };
 const getCarById = (req, res) => {
   console.log('get car by id')
   const car_id = req.params.car_id;
   const query = `SELECT * FROM cars INNER JOIN car_brands ON cars.car_id=car_brands.brand_id
-     INNER JOIN car_types ON cars.car_id=car_types.typeCar_id WHERE cars.car_id=${car_id} AND cars.is_Deleted=0`;
+     INNER JOIN car_types ON cars.car_id=car_types.typeCar_id 
+     INNER JOIN car_imgs ON cars.car_id=car_imgs.car_id
+     WHERE cars.car_id=${car_id} AND cars.is_Deleted=0`;
 
   carModel.query(query, (err, result) => {
+
     if (!result.length) {
       res.status(404).json({
         success: false,
@@ -69,24 +99,27 @@ const getCarById = (req, res) => {
 };
 
 const getCarByuserId = (req, res) => {
-  const user_id = req.token.userId;
+  
   const query = `SELECT * FROM cars INNER JOIN car_brands ON cars.car_id=car_brands.brand_id
-INNER JOIN car_types ON cars.car_id=car_types.typeCar_id WHERE cars.user_id=? AND cars.is_Deleted=0`;
-  const data = [user_id];
-  carModel.query(query, data, (err, result) => {
+INNER JOIN car_types ON cars.car_id=car_types.typeCar_id 
+LEFT JOIN car_imgs ON cars.car_id=car_imgs.car_id
+WHERE cars.user_id=${req.token.user_id} AND cars.is_Deleted=0`;
+
+  console.log(req.token);
+  carModel.query(query,  (err, result) => {
     if (!result.length) {
-      res.status(500).json({
+     return res.status(500).json({
         success: false,
         message: `not found any car`,
       });
     } else if (err) {
-      res.status(404).json({
+     return res.status(404).json({
         success: false,
         message: `Server Error`,
         err: err,
       });
     }
-    res.status(201).json({
+  return  res.status(201).json({
       success: true,
       result: result,
     });
@@ -95,11 +128,10 @@ INNER JOIN car_types ON cars.car_id=car_types.typeCar_id WHERE cars.user_id=? AN
 
 const updateCarById = (req, res) => {
   const car_id = req.params.car_id;
-  const { c_img, color, carLicense, description, is_Available, day_price } =
+  const { color, carLicense, description, is_Available, day_price } =
     req.body;
-  const query = `UPDATE cars set c_img=?,color=?,carLicense=?,description=?,is_Available=?,day_price=? WHERE car_id=?`;
+  const query = `UPDATE cars set color=?,carLicense=?,description=?,is_Available=?,day_price=? WHERE car_id=?`;
   const data = [
-    c_img,
     color,
     carLicense,
     description,
@@ -109,18 +141,18 @@ const updateCarById = (req, res) => {
   ];
   carModel.query(query, data, (err, result) => {
     if (err) {
-      res.status(404).json({
+     return res.status(404).json({
         success: false,
         message: `Server Error`,
         err: err,
       });
     } else if (!result.affectedRows) {
-      res.status(500).json({
+     return res.status(500).json({
         success: false,
         message: `car not found`,
       });
     }
-    res.status(202).json({
+   return res.status(202).json({
       success: true,
       result: result,
     });
@@ -133,18 +165,18 @@ const toggleCarAvailability = (req, res) => {
 
   carModel.query(query, (err, result) => {
     if (err) {
-      res.status(404).json({
+     return res.status(404).json({
         success: false,
         message: `Server Error`,
         err: err,
       });
     } else if (!result.affectedRows) {
-      res.status(500).json({
+     return res.status(500).json({
         success: false,
         message: `car not found`,
       });
     }
-    res.status(202).json({
+   return res.status(202).json({
       success: true,
       result: result,
     });
@@ -164,17 +196,18 @@ const deleteCarById = (req, res) => {
         err: err,
       });
     } else if (!result.affectedRows) {
-      res.status(500).json({
+     return res.status(500).json({
         success: false,
         message: `car not found`,
       });
     }
-    res.status(202).json({
+    return res.status(202).json({
       success: true,
       message: "success deleted",
     });
   });
 };
+
 
 // this function return cars according to filters
 const carsFilter = (req, res) => {
@@ -202,6 +235,7 @@ const carsFilter = (req, res) => {
   const query = `SELECT * FROM cars 
   INNER JOIN car_types ON car_types.typeCar_id = car_types_id
   INNER JOIN car_brands ON car_brands.brand_id = car_brand_id
+  LEFT JOIN car_imgs ON cars.car_id=car_imgs.car_id
   WHERE brand="${brand_car}"  
   AND car_type="${car_type}"  
   AND color="${color}"  
