@@ -1,8 +1,8 @@
+CREATE DATABASE IF NOT EXISTS sql6442806;
 
 USE sql6442806 ;
-
 -- -----------------------------------------------------
--- Table  autoRental . users 
+-- Table  autoRental . users
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS users (
   user_id INT NOT NULL AUTO_INCREMENT,
@@ -20,32 +20,26 @@ CREATE TABLE IF NOT EXISTS users (
   is_Blocked TINYINT   DEFAULT 0,
   PRIMARY KEY (user_id)
   );
-
 -- -----------------------------------------------------
--- Table  autoRental . car_types 
+-- Table  autoRental . car_types
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS car_types (
   typeCar_id INT NOT NULL AUTO_INCREMENT,
-  descr VARCHAR(100) ,
-  label VARCHAR(255) NOT NULL,
+    car_type VARCHAR(255) ,
+  type_desc VARCHAR(100) ,
   PRIMARY KEY (typeCar_id)
  );
-
-
 -- -----------------------------------------------------
--- Table  autoRental . car_brands 
+-- Table  autoRental . car_brands
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS car_brands (
   brand_id INT NOT NULL AUTO_INCREMENT,
-  description VARCHAR(100) ,
+  decrp VARCHAR(100) ,
   brand VARCHAR(45) NOT NULL UNIQUE,
   PRIMARY KEY (brand_id)
  );
-
-
-
 -- -----------------------------------------------------
--- Table  autoRental . cars 
+-- Table  autoRental . cars
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS cars(
   car_id INT NOT NULL AUTO_INCREMENT,
@@ -63,12 +57,9 @@ CREATE TABLE IF NOT EXISTS cars(
   FOREIGN KEY (car_types_id) REFERENCES car_types(typeCar_id),
   car_brand_id INT NOT NULL,
   FOREIGN KEY (car_brand_id) REFERENCES car_brands(brand_id),
-
   PRIMARY KEY (car_id));
-
-
 -- -----------------------------------------------------
--- Table  autoRental . reservations 
+-- Table  autoRental . reservations
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS reservations (
   res_id INT NOT NULL AUTO_INCREMENT,
@@ -82,10 +73,8 @@ CREATE TABLE IF NOT EXISTS reservations (
   FOREIGN KEY (car_id) REFERENCES cars(car_id),
   PRIMARY KEY (res_id)
  );
-
-
 -- -----------------------------------------------------
--- Table  autoRental . rates 
+-- Table  autoRental . rates
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS rates(
   rate_id  INT NOT NULL AUTO_INCREMENT,
