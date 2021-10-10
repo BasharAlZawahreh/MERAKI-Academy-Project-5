@@ -101,7 +101,7 @@ const getCarByuserId = (req, res) => {
   
   const query = `SELECT * FROM cars INNER JOIN car_brands ON cars.car_id=car_brands.brand_id
 INNER JOIN car_types ON cars.car_id=car_types.typeCar_id 
-INNER JOIN car_imgs ON cars.car_id=car_imgs.car_id
+LEFT JOIN car_imgs ON cars.car_id=car_imgs.car_id
 WHERE cars.user_id=${req.token.user_id} AND cars.is_Deleted=0`;
 
   console.log(req.token);
@@ -128,11 +128,10 @@ WHERE cars.user_id=${req.token.user_id} AND cars.is_Deleted=0`;
 
 const updateCarById = (req, res) => {
   const car_id = req.params.car_id;
-  const { c_img, color, carLicense, description, is_Available, day_price } =
+  const { color, carLicense, description, is_Available, day_price } =
     req.body;
-  const query = `UPDATE cars set c_img=?,color=?,carLicense=?,description=?,is_Available=?,day_price=? WHERE car_id=?`;
+  const query = `UPDATE cars set color=?,carLicense=?,description=?,is_Available=?,day_price=? WHERE car_id=?`;
   const data = [
-    c_img,
     color,
     carLicense,
     description,
