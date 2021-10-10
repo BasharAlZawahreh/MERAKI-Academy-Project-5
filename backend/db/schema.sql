@@ -43,12 +43,12 @@ CREATE TABLE IF NOT EXISTS car_brands (
  );
 
 
+
 -- -----------------------------------------------------
 -- Table  autoRental . cars 
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS cars(
   car_id INT NOT NULL AUTO_INCREMENT,
-  c_img LONGBLOB  ,
   color VARCHAR(255) NOT NULL,
   model VARCHAR(255) NOT NULL,
   carLicense LONGBLOB,
