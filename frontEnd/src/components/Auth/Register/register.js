@@ -14,7 +14,6 @@ const Register=()=>{
             
             axios.post("http://localhost:5000/users",{firstName,lastName,email,password})
             .then((result)=>{
-                console.log(result);
                 setDone(<div className="succes">the user has been added successfully</div>)
             }).catch((err)=>{
                 setDone(<div className="wrong">error happen while regeister please try again</div>)
