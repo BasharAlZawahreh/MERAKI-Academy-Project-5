@@ -200,7 +200,6 @@ const deleteCarById = (req, res) => {
 // this function return cars according to filters
 const carsFilter = (req, res) => {
   const {
-    car_type,
     color,
     brand_car,
     manifactoring_year,
@@ -209,6 +208,7 @@ const carsFilter = (req, res) => {
     model,
   } = req.body;
 
+  const car_type = req.body.car_type || "";
   //test query
   /*
   `SELECT * FROM cars
@@ -224,24 +224,26 @@ const carsFilter = (req, res) => {
   INNER JOIN car_brands ON car_brands.brand_id = car_brand_id
   LEFT JOIN car_imgs ON cars.car_id=car_imgs.car_id
   WHERE brand="${brand_car}"  
-  AND car_type="${car_type}"  
+  AND car_type LIKE "%${car_type}"
   AND color="${color}"  
   AND model="${model}"  
   AND manifactoring_year=${manifactoring_year}  
   AND day_price BETWEEN ${day_price_from} AND ${day_price_to}
   AND is_Available=1`;
 
+  console.log(query);
   connection.query(query, (err, result) => {
-    if (!result.length) {
-      return res.status(404).json({
-        success: false,
-        message: `not found any related car`,
-      });
-    } else if (err) {
+    console.log(err);
+    if (err) {
       return res.status(500).json({
         success: false,
         message: `Server Error`,
         err: err,
+      });
+    } else if (!result.length) {
+      return res.status(404).json({
+        success: false,
+        message: `not found any related car`,
       });
     }
 

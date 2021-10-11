@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import axios from "axios";
-import { setSearches } from "../../actions/search";
+import {setSearches} from '../../actions/search'
 
 function SearchForm() {
   const [carTypes, setcarTypes] = useState([]);
@@ -180,7 +180,6 @@ function SearchForm() {
 
   const getCarTypes = async () => {
     const res = await axios.get("http://localhost:5000/car/cartypes");
-    console.log(res.data.result);
     if (res.data.result) {
       setcarTypes(res.data.result);
     }
@@ -208,15 +207,15 @@ function SearchForm() {
       day_price_to: priceTo,
       model: model,
     };
-    console.log(data);
 
     const res = await axios.post("http://localhost:5000/car/filter", data);
 
+    console.log(res.data.result);
     dispatch(setSearches(res.data.result));
   };
 
   return (
-    <div>
+    <div className="lg">
       <form>
         <div className="form-group">
           <label htmlFor="carTypes">car type</label>
@@ -263,7 +262,7 @@ function SearchForm() {
           <label htmlFor="carColors">car color</label>
           <select
             id="carColors"
-            class="form-control form-control-lg"
+            className="form-control form-control-lg"
             onChange={(e) => setcarColor(e.target.value)}
           >
             <option defaultValue>choose a type</option>
@@ -278,11 +277,11 @@ function SearchForm() {
           </select>
         </div>
 
-        <div class="form-group">
+        <div className="form-group">
           <label htmlFor="carYear">car year</label>
           <select
             id="carYear"
-            class="form-control form-control-lg"
+            className="form-control form-control-lg"
             onChange={(e) => setcarYear(e.target.value)}
           >
             <option defaultValue>choose a year</option>
@@ -335,7 +334,7 @@ function SearchForm() {
         </div>
       </form>
 
-      <button type="button" onClick={submitSearch}>
+      <button className="btn btn-success" type="button" onClick={submitSearch}>
         Search
       </button>
     </div>

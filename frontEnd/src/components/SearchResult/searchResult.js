@@ -3,16 +3,15 @@ import { useSelector } from "react-redux";
 
 function SearchResult() {
   const state = useSelector((state) => {
-    // specify which state to subscribe to (state tree => reducer => state name )
     return {
       searches: state.searches.searches,
     };
   });
 
   return <div>
-      {state.searches.map((s,i)=>{
+     {state.searches.map((car,i)=>{
         return  <div key={i}>
-              {s}
+              <p>{car.color}</p>
           </div>
       })}
   </div>;
