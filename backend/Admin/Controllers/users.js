@@ -84,7 +84,7 @@ const unBlockUserById = (req, res) => {
     if (result.affectedRows) {
       return res.status(202).json({
         success: true,
-        message: ` Success user blocked`,
+        message: ` Success user unBlocked`,
         result: result,
       });
     } else {
