@@ -1,4 +1,4 @@
-const carModel = require("../../db/db");
+const connection = require("../../db/db");
 
 const addNewCar = (req, res) => {
   let resut = res.status(201).json({
@@ -30,7 +30,7 @@ const addNewCar = (req, res) => {
     car_types_id,
     car_brand_id,
   ];
-  carModel.query(query, data, (err, result) => {
+  connection.query(query, data, (err, result) => {
 
     if (err) {
      return res.status(500).json({
@@ -48,7 +48,7 @@ const addNewCar = (req, res) => {
         VALUES(?,?)`;
         const data = [urls[0], car_id];
         urls.shift();
-        carModel.query(query, data, (err, result) => {
+        connection.query(query, data, (err, result) => {
           
           if(result.affectedRows){
           
@@ -77,7 +77,7 @@ const getCarById = (req, res) => {
      INNER JOIN car_imgs ON cars.car_id=car_imgs.car_id
      WHERE cars.car_id=${car_id} AND cars.is_Deleted=0`;
 
-  carModel.query(query, (err, result) => {
+  connection.query(query, (err, result) => {
 
     if (!result.length) {
       res.status(404).json({
@@ -106,7 +106,7 @@ LEFT JOIN car_imgs ON cars.car_id=car_imgs.car_id
 WHERE cars.user_id=${req.token.user_id} AND cars.is_Deleted=0`;
 
   console.log(req.token);
-  carModel.query(query,  (err, result) => {
+  connection.query(query,  (err, result) => {
     if (!result.length) {
      return res.status(500).json({
         success: false,
@@ -139,7 +139,7 @@ const updateCarById = (req, res) => {
     day_price,
     car_id,
   ];
-  carModel.query(query, data, (err, result) => {
+  connection.query(query, data, (err, result) => {
     if (err) {
      return res.status(404).json({
         success: false,
@@ -163,7 +163,7 @@ const toggleCarAvailability = (req, res) => {
   const car_id = req.params.car_id;
   const query = `UPDATE cars SET is_Available=0 WHERE car_id=${car_id}`;
 
-  carModel.query(query, (err, result) => {
+  connection.query(query, (err, result) => {
     if (err) {
      return res.status(404).json({
         success: false,
@@ -188,7 +188,7 @@ const deleteCarById = (req, res) => {
   const car_id = req.params.car_id;
   const query = `UPDATE cars SET is_Deleted=1 WHERE car_id=${car_id}`;
 
-  carModel.query(query, (err, result) => {
+  connection.query(query, (err, result) => {
     if (err) {
       res.status(404).json({
         success: false,
@@ -267,7 +267,7 @@ const carsFilter = (req, res) => {
 };
 
 
-const getCarTypes = () =>{
+const getCarTypes = (req,res) =>{
   const query = `SELECT * FROM car_types`
   connection.query(query, (err, result) => {
    if (err) {
@@ -286,7 +286,7 @@ const getCarTypes = () =>{
   });
 }
 
-const getCarBrands = () =>{
+const getCarBrands = (req,res) =>{
   const query = `SELECT * FROM car_brands`
   connection.query(query, (err, result) => {
    if (err) {
