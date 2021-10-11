@@ -1,11 +1,11 @@
-export const setReservation=(cars)=>{
-    return  {type:"SET_RESERVATION",payload:Reservations}
+export const setReservation=(reservations)=>{
+    return  {type:"SET_RESERVATION",payload:reservations}
 }
-export const updateReservation=(car)=>{
-    return {type:"UPDATE_RESERVATION",payload:Reservation}
+export const updateReservation=(reservation)=>{
+    return {type:"UPDATE_RESERVATION",payload:reservation}
 }
-export const addReservation=(car)=>{
-    return {type:"ADD_RESERVATION",payload:Reservation}
+export const addReservation=(reservation)=>{
+    return {type:"ADD_RESERVATION",payload:reservation}
 }
 export const deleteReservation=(id)=>{
     return {type:"DELETE_RESERVATION",payload:id}
