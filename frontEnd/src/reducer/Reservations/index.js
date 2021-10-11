@@ -1,7 +1,7 @@
 const initialState = {
   reservations: [],
 };
-const Reservation = (state = initialState, { type, payload }) => {
+const reservation = (state = initialState, { type, payload }) => {
   switch (type) {
     case "ADD_RESERVATION":
       return { reservations: [...state.reservations, payload] };
@@ -25,4 +25,4 @@ const Reservation = (state = initialState, { type, payload }) => {
       return state;
   }
 };
-export default Reservation;
+export default reservation;
