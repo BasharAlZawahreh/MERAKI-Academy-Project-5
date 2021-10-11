@@ -125,4 +125,4 @@ const loginWithGoogle = async (req, res) => {
       }
     });
 };
-module.exports = { createNewUser, updateUserById };
+module.exports = { createNewUser, updateUserById,loginWithGoogle };
