@@ -23,6 +23,7 @@ CREATE TABLE IF NOT EXISTS users (
 -- -----------------------------------------------------
 -- Table  autoRental . car_types
 -- -----------------------------------------------------
+
 CREATE TABLE IF NOT EXISTS car_types (
   typeCar_id INT NOT NULL AUTO_INCREMENT,
     car_type VARCHAR(255) ,
@@ -57,7 +58,19 @@ CREATE TABLE IF NOT EXISTS cars(
   FOREIGN KEY (car_types_id) REFERENCES car_types(typeCar_id),
   car_brand_id INT NOT NULL,
   FOREIGN KEY (car_brand_id) REFERENCES car_brands(brand_id),
+  main_img VARCHAR(255) NOT NULL,
   PRIMARY KEY (car_id));
+-- -----------------------------------------------------
+-- Table  autoRental . imgs 
+-- -----------------------------------------------------
+  CREATE TABLE IF NOT EXISTS car_imgs (
+  img_id INT NOT NULL AUTO_INCREMENT,
+    imgUrl VARCHAR(255) ,
+  car_id int ,
+   FOREIGN KEY (car_id) REFERENCES cars ( car_id),
+  PRIMARY KEY (typeCar_id)
+ );
+
 -- -----------------------------------------------------
 -- Table  autoRental . reservations
 -- -----------------------------------------------------

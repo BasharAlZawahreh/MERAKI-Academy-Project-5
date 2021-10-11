@@ -16,10 +16,11 @@ const addNewCar = (req, res) => {
     day_price,
     car_types_id,
     car_brand_id,
+    main_img
   } = req.body;
   const query = `INSERT INTO cars
  (color,model,description,manifactoring_year,day_price,user_id,car_types_id,car_brand_id)
- VALUES(?,?,?,?,?,?,?,?)`;
+ VALUES(?,?,?,?,?,?,?,?,?)`;
   const data = [
     color,
     model,
@@ -29,6 +30,7 @@ const addNewCar = (req, res) => {
     user_id,
     car_types_id,
     car_brand_id,
+    main_img
   ];
   connection.query(query, data, (err, result) => {
     if (err) {
@@ -61,8 +63,9 @@ const addNewCar = (req, res) => {
   });
   return resut;
 };
+
 const getCarById = (req, res) => {
-  console.log("get car by id");
+
   const car_id = req.params.car_id;
   const query = `SELECT * FROM cars INNER JOIN car_brands ON cars.car_id=car_brands.brand_id
      INNER JOIN car_types ON cars.car_id=car_types.typeCar_id 
@@ -118,7 +121,7 @@ WHERE cars.user_id=${req.token.user_id} AND cars.is_Deleted=0`;
 
 const updateCarById = (req, res) => {
   const car_id = req.params.car_id;
-  const { color, carLicense, description, is_Available, day_price } = req.body;
+  const { color, carLicense, description, is_Available, day_price ,main_img} = req.body;
   const query = `UPDATE cars set color=?,carLicense=?,description=?,is_Available=?,day_price=? WHERE car_id=?`;
   const data = [
     color,
@@ -127,6 +130,7 @@ const updateCarById = (req, res) => {
     is_Available,
     day_price,
     car_id,
+    main_img
   ];
   connection.query(query, data, (err, result) => {
     if (err) {
@@ -209,6 +213,12 @@ const carsFilter = (req, res) => {
   } = req.body;
 
   const car_type = req.body.car_type || "";
+  const color = req.body.color || "";
+  const brand_car=req.body.brand_car || "";
+  const manifactoring_year=req.body.manifactoring_year || "";
+  const model=req.body.model || "";
+
+
   //test query
   /*
   `SELECT * FROM cars
@@ -223,11 +233,11 @@ const carsFilter = (req, res) => {
   INNER JOIN car_types ON car_types.typeCar_id = car_types_id
   INNER JOIN car_brands ON car_brands.brand_id = car_brand_id
   LEFT JOIN car_imgs ON cars.car_id=car_imgs.car_id
-  WHERE brand="${brand_car}"  
+  WHERE brand LIKE "%${brand_car}"  
   AND car_type LIKE "%${car_type}"
-  AND color="${color}"  
-  AND model="${model}"  
-  AND manifactoring_year=${manifactoring_year}  
+  AND color LIKE "%${color}"  
+  AND model LIKE "%${model}%"  
+  AND manifactoring_year lIKE "%${manifactoring_year}"  
   AND day_price BETWEEN ${day_price_from} AND ${day_price_to}
   AND is_Available=1`;
 
