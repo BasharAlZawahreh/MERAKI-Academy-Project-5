@@ -266,6 +266,47 @@ const carsFilter = (req, res) => {
   });
 };
 
+
+const getCarTypes = () =>{
+  const query = `SELECT * FROM car_types`
+  connection.query(query, (err, result) => {
+   if (err) {
+      return res.status(500).json({
+        success: false,
+        message: `Server Error`,
+        err: err,
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      message: 'car types',
+      result: result,
+    });
+  });
+}
+
+const getCarBrands = () =>{
+  const query = `SELECT * FROM car_brands`
+  connection.query(query, (err, result) => {
+   if (err) {
+      return res.status(500).json({
+        success: false,
+        message: `Server Error`,
+        err: err,
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      message: 'car types',
+      result: result,
+    });
+  });
+}
+
+
+
 module.exports = {
   addNewCar,
   getCarById,
@@ -274,4 +315,6 @@ module.exports = {
   toggleCarAvailability,
   deleteCarById,
   carsFilter,
+  getCarTypes,
+  getCarBrands
 };
