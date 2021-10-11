@@ -2,10 +2,6 @@ const userModel = require("../../db/db");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
-const { OAuth2Client } = require("google-auth-library");
-const client = new OAuth2Client(
-  "748391034640-4faj5hc4s827b2h6k3c9cni55uq46djh.apps.googleusercontent.com"
-);
 const createNewUser = async (req, res) => {
   let { firstName, lastName, email, password } = req.body;
   password = await bcrypt.hash(password, 10);
