@@ -9,13 +9,14 @@ const login = (req, res) => {
   const query = "SELECT * FROM users WHERE users.role=? AND users.email=? "
   const data = ["user",email]
   connection.query(query,data,async(err,result)=>{
+    console.log(result);
       if(!result.length){
         return res.status(404).json({
             success: false,
             message: `The email doesn't exist`,
           });
       }else if(err){
-        res.status(500).json({
+       return res.status(500).json({
             success: false,
             message: `Server Error`,
             err: err,
