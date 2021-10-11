@@ -42,7 +42,8 @@ const  responsesuccessGoogle=(response)=>{
     
   }
 
-const Enter= async()=>{
+const Enter= async(e)=>{
+  e.preventDefault()
     try {
         const res = await axios.post("http://localhost:5000/login", {
           email,
@@ -74,12 +75,37 @@ useEffect(() => {
   });
 
     return(
+      
         <>
-            <div>
-                <input onChange={(e)=>{setEmail(e.target.value)}} placeholder="Email Here" type="text"/>
-                <input onChange={(e)=>{setPassword(e.target.value)}} placeholder="Password Here" type="password"/>
-                <button onClick={Enter}>Login</button>
-                <GoogleLogin
+           <section class="sign-in">
+            <div class="container">
+                <div class="signin-content">
+                    <div class="signin-image">
+                        <figure><img src="images/signin-image.jpg" alt="sing up image"/></figure>
+                        <a href="#" class="signup-image-link">Create an account</a>
+                    </div>
+
+                    <div class="signin-form">
+                        <h2 class="form-title">Login</h2>
+                        <form onSubmit={Enter} class="register-form" id="login-form">
+                            <div class="form-group">
+                                <label for="your_name"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                                <input type="text" name="your_name" onChange={(e)=>{setEmail(e.target.value)}} id="your_name" placeholder="Your Email"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="your_pass"><i class="zmdi zmdi-lock"></i></label>
+                                <input type="password" name="your_pass" onChange={(e)=>{setPassword(e.target.value)}} id="your_pass" placeholder="Password"/>
+                            </div>
+                            <div class="form-group form-button">
+                                <button name="signin" id="signin" class="form-submit">Login</button>
+                            </div>
+                        </form>
+                {message && <div>{message}</div>}
+
+                        <div class="social-login">
+                            <span class="social-label">Or login with</span>
+                            <ul class="socials">
+                            <GoogleLogin
         clientId="748391034640-4faj5hc4s827b2h6k3c9cni55uq46djh.apps.googleusercontent.com"
         buttonText="Login"
         onSuccess={(response)=>responsesuccessGoogle(response)}
@@ -87,9 +113,12 @@ useEffect(() => {
         cookiePolicy={'single_host_origin'}
         
         />
-                {message && <div>{message}</div>}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
-
+        </section>
         </>
     )
 }
