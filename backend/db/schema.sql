@@ -47,7 +47,7 @@ CREATE TABLE IF NOT EXISTS cars(
   model VARCHAR(255) NOT NULL,
   carLicense LONGBLOB,
   description VARCHAR(255) NULL,
-  manifactoring_year DATE NOT NULL,
+  manifactoring_year YEAR(4) NOT NULL,
   is_Available TINYINT  DEFAULT 1,
   is_Deleted TINYINT  DEFAULT 0,
   day_price DOUBLE NOT NULL,

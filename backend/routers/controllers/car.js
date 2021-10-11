@@ -5,7 +5,7 @@ const addNewCar = (req, res) => {
     success: true,
     message: `you're car added successfuly `,
   });
-  
+
   let user_id = req.token.user_id;
   const urls = req.body.urls;
   const {
@@ -31,46 +31,38 @@ const addNewCar = (req, res) => {
     car_brand_id,
   ];
   connection.query(query, data, (err, result) => {
-
     if (err) {
-     return res.status(500).json({
+      return res.status(500).json({
         success: false,
         message: `Server Error`,
         err: err,
       });
     } else if (result.affectedRows) {
       let car_id = result.insertId;
-      
+
       while (urls.length) {
-       
         let query = `INSERT INTO car_imgs
         (imgUrl,car_id)
         VALUES(?,?)`;
         const data = [urls[0], car_id];
         urls.shift();
         connection.query(query, data, (err, result) => {
-          
-          if(result.affectedRows){
-          
-            resut=resut
-            
+          if (result.affectedRows) {
+            resut = resut;
           } else {
-         res =  res.status(404).json({
-               success: false,
-               message: `some thing error `,
+            res = res.status(404).json({
+              success: false,
+              message: `some thing error `,
             });
-
           }
-
         });
       }
     }
-
   });
-  return resut 
+  return resut;
 };
 const getCarById = (req, res) => {
-  console.log('get car by id')
+  console.log("get car by id");
   const car_id = req.params.car_id;
   const query = `SELECT * FROM cars INNER JOIN car_brands ON cars.car_id=car_brands.brand_id
      INNER JOIN car_types ON cars.car_id=car_types.typeCar_id 
@@ -78,7 +70,6 @@ const getCarById = (req, res) => {
      WHERE cars.car_id=${car_id} AND cars.is_Deleted=0`;
 
   connection.query(query, (err, result) => {
-
     if (!result.length) {
       res.status(404).json({
         success: false,
@@ -99,27 +90,26 @@ const getCarById = (req, res) => {
 };
 
 const getCarByuserId = (req, res) => {
-  
   const query = `SELECT * FROM cars INNER JOIN car_brands ON cars.car_id=car_brands.brand_id
 INNER JOIN car_types ON cars.car_id=car_types.typeCar_id 
 LEFT JOIN car_imgs ON cars.car_id=car_imgs.car_id
 WHERE cars.user_id=${req.token.user_id} AND cars.is_Deleted=0`;
 
   console.log(req.token);
-  connection.query(query,  (err, result) => {
+  connection.query(query, (err, result) => {
     if (!result.length) {
-     return res.status(500).json({
+      return res.status(500).json({
         success: false,
         message: `not found any car`,
       });
     } else if (err) {
-     return res.status(404).json({
+      return res.status(404).json({
         success: false,
         message: `Server Error`,
         err: err,
       });
     }
-  return  res.status(201).json({
+    return res.status(201).json({
       success: true,
       result: result,
     });
@@ -128,8 +118,7 @@ WHERE cars.user_id=${req.token.user_id} AND cars.is_Deleted=0`;
 
 const updateCarById = (req, res) => {
   const car_id = req.params.car_id;
-  const { color, carLicense, description, is_Available, day_price } =
-    req.body;
+  const { color, carLicense, description, is_Available, day_price } = req.body;
   const query = `UPDATE cars set color=?,carLicense=?,description=?,is_Available=?,day_price=? WHERE car_id=?`;
   const data = [
     color,
@@ -141,18 +130,18 @@ const updateCarById = (req, res) => {
   ];
   connection.query(query, data, (err, result) => {
     if (err) {
-     return res.status(404).json({
+      return res.status(404).json({
         success: false,
         message: `Server Error`,
         err: err,
       });
     } else if (!result.affectedRows) {
-     return res.status(500).json({
+      return res.status(500).json({
         success: false,
         message: `car not found`,
       });
     }
-   return res.status(202).json({
+    return res.status(202).json({
       success: true,
       result: result,
     });
@@ -165,18 +154,18 @@ const toggleCarAvailability = (req, res) => {
 
   connection.query(query, (err, result) => {
     if (err) {
-     return res.status(404).json({
+      return res.status(404).json({
         success: false,
         message: `Server Error`,
         err: err,
       });
     } else if (!result.affectedRows) {
-     return res.status(500).json({
+      return res.status(500).json({
         success: false,
         message: `car not found`,
       });
     }
-   return res.status(202).json({
+    return res.status(202).json({
       success: true,
       result: result,
     });
@@ -196,7 +185,7 @@ const deleteCarById = (req, res) => {
         err: err,
       });
     } else if (!result.affectedRows) {
-     return res.status(500).json({
+      return res.status(500).json({
         success: false,
         message: `car not found`,
       });
@@ -208,10 +197,8 @@ const deleteCarById = (req, res) => {
   });
 };
 
-
 // this function return cars according to filters
 const carsFilter = (req, res) => {
-  console.log('cars filter')
   const {
     car_type,
     color,
@@ -260,17 +247,16 @@ const carsFilter = (req, res) => {
 
     res.status(200).json({
       success: true,
-      message: 'filtered cars',
+      message: "filtered cars",
       result: result,
     });
   });
 };
 
-
-const getCarTypes = (req,res) =>{
-  const query = `SELECT * FROM car_types`
+const getCarTypes = (req, res) => {
+  const query = `SELECT * FROM car_types`;
   connection.query(query, (err, result) => {
-   if (err) {
+    if (err) {
       return res.status(500).json({
         success: false,
         message: `Server Error`,
@@ -280,16 +266,16 @@ const getCarTypes = (req,res) =>{
 
     return res.status(200).json({
       success: true,
-      message: 'car types',
+      message: "car types",
       result: result,
     });
   });
-}
+};
 
-const getCarBrands = (req,res) =>{
-  const query = `SELECT * FROM car_brands`
+const getCarBrands = (req, res) => {
+  const query = `SELECT * FROM car_brands`;
   connection.query(query, (err, result) => {
-   if (err) {
+    if (err) {
       return res.status(500).json({
         success: false,
         message: `Server Error`,
@@ -299,13 +285,11 @@ const getCarBrands = (req,res) =>{
 
     return res.status(200).json({
       success: true,
-      message: 'car types',
+      message: "car types",
       result: result,
     });
   });
-}
-
-
+};
 
 module.exports = {
   addNewCar,
@@ -316,5 +300,5 @@ module.exports = {
   deleteCarById,
   carsFilter,
   getCarTypes,
-  getCarBrands
+  getCarBrands,
 };

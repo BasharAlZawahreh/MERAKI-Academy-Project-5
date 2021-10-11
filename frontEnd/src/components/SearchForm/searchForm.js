@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
 import axios from "axios";
+import { setSearches } from "../../actions/search";
 
 function SearchForm() {
   const [carTypes, setcarTypes] = useState([]);
@@ -156,13 +158,15 @@ function SearchForm() {
     "YellowGreen",
   ];
 
-  const [carType, setcarType] = useState(0);
-  const [carBrand, setcarBrand] = useState(0);
+  const [carType, setcarType] = useState("");
+  const [carBrand, setcarBrand] = useState("");
   const [carColor, setcarColor] = useState("");
   const [carYear, setcarYear] = useState(0);
   const [priceFrom, setpriceFrom] = useState(0);
   const [priceTo, setpriceTo] = useState(0);
   const [model, setModel] = useState("");
+
+  const dispatch = useDispatch();
 
   const getAllYears = () => {
     const years = [];
@@ -183,7 +187,6 @@ function SearchForm() {
   };
   const getCarBrands = async () => {
     const res = await axios.get("http://localhost:5000/car/carbrands");
-
     if (res.data.result) {
       setcarBrands(res.data.result);
     }
@@ -205,9 +208,11 @@ function SearchForm() {
       day_price_to: priceTo,
       model: model,
     };
+    console.log(data);
 
-    const res = await axios.post("http://localhost:5000/car/filter",data);
+    const res = await axios.post("http://localhost:5000/car/filter", data);
 
+    dispatch(setSearches(res.data.result));
   };
 
   return (
@@ -218,13 +223,15 @@ function SearchForm() {
           <select
             id="carTypes"
             className="form-control form-control-lg"
-            onChange={(e) => setcarType(e.target.value)}
+            onChange={(e) => {
+              setcarType(e.target.value);
+            }}
           >
+            <option defaultValue>choose a type</option>
             {carTypes &&
               carTypes.map((type, i) => {
-                console.log(type);
                 return (
-                  <option value={type.typeCar_id} key={i}>
+                  <option value={type.car_type} key={i}>
                     {type.car_type}
                   </option>
                 );
@@ -239,10 +246,12 @@ function SearchForm() {
             className="form-control form-control-lg"
             onChange={(e) => setcarBrand(e.target.value)}
           >
+            <option defaultValue>choose a brand</option>
+
             {carBrands &&
               carBrands.map((brand, i) => {
                 return (
-                  <option value={brand.brand_id} key={i}>
+                  <option value={brand.brand} key={i}>
                     {brand.brand}
                   </option>
                 );
@@ -257,6 +266,8 @@ function SearchForm() {
             class="form-control form-control-lg"
             onChange={(e) => setcarColor(e.target.value)}
           >
+            <option defaultValue>choose a type</option>
+
             {colors.map((color, i) => {
               return (
                 <option value={color} key={i}>
@@ -274,6 +285,8 @@ function SearchForm() {
             class="form-control form-control-lg"
             onChange={(e) => setcarYear(e.target.value)}
           >
+            <option defaultValue>choose a year</option>
+
             {allYears &&
               allYears.map((year, i) => {
                 return (
@@ -297,7 +310,7 @@ function SearchForm() {
             }}
           />
         </div>
-        
+
         <div className="form-group">
           <label htmlFor="dayPrice">day price</label>
           <input
