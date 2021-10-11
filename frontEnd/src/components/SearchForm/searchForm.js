@@ -156,6 +156,14 @@ function SearchForm() {
     "YellowGreen",
   ];
 
+  const [carType, setcarType] = useState(0);
+  const [carBrand, setcarBrand] = useState(0);
+  const [carColor, setcarColor] = useState("");
+  const [carYear, setcarYear] = useState(0);
+  const [priceFrom, setpriceFrom] = useState(0);
+  const [priceTo, setpriceTo] = useState(0);
+  const [model, setModel] = useState("");
+
   const getAllYears = () => {
     const years = [];
     const nowYear = new Date().getFullYear();
@@ -187,12 +195,31 @@ function SearchForm() {
     getAllYears();
   }, []);
 
+  const submitSearch = async () => {
+    const data = {
+      car_type: carType,
+      color: carColor,
+      brand_car: carBrand,
+      manifactoring_year: carYear,
+      day_price_from: priceFrom,
+      day_price_to: priceTo,
+      model: model,
+    };
+
+    const res = await axios.post("http://localhost:5000/car/filter",data);
+
+  };
+
   return (
     <div>
       <form>
         <div className="form-group">
           <label htmlFor="carTypes">car type</label>
-          <select id="carTypes" className="form-control form-control-lg" onChange={(e)=>console.log(e.target.value)}>
+          <select
+            id="carTypes"
+            className="form-control form-control-lg"
+            onChange={(e) => setcarType(e.target.value)}
+          >
             {carTypes &&
               carTypes.map((type, i) => {
                 console.log(type);
@@ -207,7 +234,11 @@ function SearchForm() {
 
         <div className="form-group">
           <label htmlFor="carBrands">car brand</label>
-          <select id="carBrands" className="form-control form-control-lg">
+          <select
+            id="carBrands"
+            className="form-control form-control-lg"
+            onChange={(e) => setcarBrand(e.target.value)}
+          >
             {carBrands &&
               carBrands.map((brand, i) => {
                 return (
@@ -221,7 +252,11 @@ function SearchForm() {
 
         <div className="form-group">
           <label htmlFor="carColors">car color</label>
-          <select id="carColors" class="form-control form-control-lg">
+          <select
+            id="carColors"
+            class="form-control form-control-lg"
+            onChange={(e) => setcarColor(e.target.value)}
+          >
             {colors.map((color, i) => {
               return (
                 <option value={color} key={i}>
@@ -234,7 +269,11 @@ function SearchForm() {
 
         <div class="form-group">
           <label htmlFor="carYear">car year</label>
-          <select id="carYear" class="form-control form-control-lg">
+          <select
+            id="carYear"
+            class="form-control form-control-lg"
+            onChange={(e) => setcarYear(e.target.value)}
+          >
             {allYears &&
               allYears.map((year, i) => {
                 return (
@@ -247,28 +286,45 @@ function SearchForm() {
         </div>
 
         <div className="form-group">
-          <label htmlFor="priceRange">price range</label>
-
+          <label htmlFor="model">car model</label>
           <input
-            type="range"
-            className="form-control-range"
-            id="priceRange"
-            min="14.99"
-            max="299.99"
-            step="1"
+            type="text"
+            className="form-control"
+            id="model"
+            placeholder="BMW"
+            onChange={(e) => {
+              setModel(e.target.value);
+            }}
           />
         </div>
-
-        {/* <div className="form-group">
-        <label htmlFor="exampleFormControlInput1">Email address</label>
-        <input
-          type="email"
-          className="form-control"
-          id="exampleFormControlInput1"
-          placeholder="name@example.com"
-        />
-      </div> */}
+        
+        <div className="form-group">
+          <label htmlFor="dayPrice">day price</label>
+          <input
+            type="text"
+            className="form-control"
+            id="dayPriceFrom"
+            placeholder="15"
+            onChange={(e) => {
+              setpriceFrom(e.target.value);
+            }}
+          />
+          -
+          <input
+            type="text"
+            className="form-control"
+            id="dayPriceTo"
+            placeholder="300"
+            onChange={(e) => {
+              setpriceTo(e.target.value);
+            }}
+          />
+        </div>
       </form>
+
+      <button type="button" onClick={submitSearch}>
+        Search
+      </button>
     </div>
   );
 }
