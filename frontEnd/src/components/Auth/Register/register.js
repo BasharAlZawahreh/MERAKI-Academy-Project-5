@@ -52,9 +52,7 @@ const Register=()=>{
         </div>
     </section>
     // <div className="Register">
-    // <input type="text" placeholder="firstName" onChange={(e)=>{
-    //     serFirstName(e.target.value)
-    // }} />
+    // <input type="text" placeholder="firstName"  />
     // <input type="text" placeholder="lastName" onChange={(e)=>{
     //     setLastName(e.target.value)
     // }} />
