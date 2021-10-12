@@ -1,10 +1,7 @@
 const connection = require("../../db/db");
 
 const addNewCar = (req, res) => {
-  let resut = res.status(201).json({
-    success: true,
-    message: `you're car added successfuly `,
-  });
+
 
   let user_id = req.token.user_id;
   const urls = req.body.urls;
@@ -19,7 +16,7 @@ const addNewCar = (req, res) => {
     main_img
   } = req.body;
   const query = `INSERT INTO cars
- (color,model,description,manifactoring_year,day_price,user_id,car_types_id,car_brand_id)
+ (color,model,description,manifactoring_year,day_price,user_id,car_types_id,car_brand_id,main_img)
  VALUES(?,?,?,?,?,?,?,?,?)`;
   const data = [
     color,
@@ -32,7 +29,11 @@ const addNewCar = (req, res) => {
     car_brand_id,
     main_img
   ];
+  // let carId = 0
   connection.query(query, data, (err, result) => {
+    console.log("res",result);
+    console.log("urls",urls);
+    console.log("err",err);
     if (err) {
       return res.status(500).json({
         success: false,
@@ -41,27 +42,30 @@ const addNewCar = (req, res) => {
       });
     } else if (result.affectedRows) {
       let car_id = result.insertId;
+      res.json(result)
+       if(urls){
+        while (urls.length) {
+          let query = `INSERT INTO car_imgs
+          (imgUrl,car_id)
+          VALUES(?,?)`;
+          const data = [urls[0], car_id];
+          urls.shift();
+          connection.query(query, data, (err, result) => {
+            if (result.affectedRows) {
+              result1["result"].push(result)
+            } else if(err) {
+              return res.status(404).json({
+                success: false,
+                message: `some thing error `,
+              });
+            }
+          });
+        }
+       }
 
-      while (urls.length) {
-        let query = `INSERT INTO car_imgs
-        (imgUrl,car_id)
-        VALUES(?,?)`;
-        const data = [urls[0], car_id];
-        urls.shift();
-        connection.query(query, data, (err, result) => {
-          if (result.affectedRows) {
-            resut = resut;
-          } else {
-            res = res.status(404).json({
-              success: false,
-              message: `some thing error `,
-            });
-          }
-        });
-      }
     }
   });
-  return resut;
+  
 };
 
 const getCarById = (req, res) => {
@@ -260,6 +264,7 @@ const carsFilter = (req, res) => {
 };
 
 const getCarTypes = (req, res) => {
+  console.log("carType");
   const query = `SELECT * FROM car_types`;
   connection.query(query, (err, result) => {
     if (err) {
@@ -281,6 +286,7 @@ const getCarTypes = (req, res) => {
 const getCarBrands = (req, res) => {
   const query = `SELECT * FROM car_brands`;
   connection.query(query, (err, result) => {
+    console.log(err);
     if (err) {
       return res.status(500).json({
         success: false,

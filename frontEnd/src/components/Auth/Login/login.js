@@ -10,11 +10,14 @@ const dispatch=useDispatch();
 const [email, setEmail] = useState("");
 const [message, setMessage] = useState("");
 const [password, setPassword] = useState("");
+
+
 const state=useSelector((state)=>{
     return {
         token:state.token.token
     }
 });
+
 
 const  responsesuccessGoogle=(response)=>{
     // console.log(response.profileObj);
@@ -50,9 +53,10 @@ const Enter= async()=>{
         });
         if (res.data.success) {
           setMessage("");
+          console.log(res.data);
           dispatch(setToken(res.data.token))
           localStorage.setItem("token", res.data.token);
-          console.log("Yes");
+          
           
         }
     }catch (error) {
@@ -65,10 +69,11 @@ const Enter= async()=>{
 }
 
 useEffect(() => {
-    if (state.token) {
+
+    if (!state.token) {
         // alert("Yes");
         dispatch(setToken(localStorage.getItem("token")));
-        console.log(state.token);
+        
         //   history.push("/dashboard");
     }
   });
