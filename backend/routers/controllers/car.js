@@ -43,30 +43,46 @@ const addNewCar = (req, res) => {
     } else if (result.affectedRows) {
       let car_id = result.insertId;
       res.json(result)
-       if(urls){
-        while (urls.length) {
-          let query = `INSERT INTO car_imgs
-          (imgUrl,car_id)
-          VALUES(?,?)`;
-          const data = [urls[0], car_id];
-          urls.shift();
-          connection.query(query, data, (err, result) => {
-            if (result.affectedRows) {
-              result1["result"].push(result)
-            } else if(err) {
-              return res.status(404).json({
-                success: false,
-                message: `some thing error `,
-              });
-            }
-          });
-        }
-       }
+
 
     }
   });
   
 };
+
+const addImgs=(req,res)=>{
+  console.log("req.body",req.body);
+  let finalResult = {
+    success: true,
+    message: `added successfully `,
+    result1: []
+  }
+  let status = 201
+  const urls = req.body.imgUrl
+  const car_id = req.body.car_id
+  if(urls){
+    while (urls.length) {
+      let query = `INSERT INTO car_imgs
+      (imgUrl,car_id)
+      VALUES(?,?)`;
+      const data = [urls[0], car_id];
+      urls.shift();
+      connection.query(query, data, (err, result) => {
+        if (result.affectedRows) {
+          finalResult.result1.push(result)
+        } else if(err) {
+          finalResult = ({
+            success: false,
+            message: `some thing error `,
+            err: err
+          });
+          status = 400
+        }
+      });
+    }
+   }
+   return res.status(status).json(finalResult)
+}
 
 const getCarById = (req, res) => {
 
@@ -313,4 +329,5 @@ module.exports = {
   carsFilter,
   getCarTypes,
   getCarBrands,
+  addImgs
 };

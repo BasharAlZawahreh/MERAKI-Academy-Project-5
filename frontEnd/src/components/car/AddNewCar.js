@@ -3,8 +3,11 @@ import axios from "axios";
 //rcfe
 import { storage } from "../config";
 import { useSelector } from "react-redux";
-
+let car_id = 0
+let urls = []
 const AddNewCar = () => {
+  let message =""
+
 
   const state =useSelector((state)=>{
    return{token:state.token.token} 
@@ -13,12 +16,12 @@ const AddNewCar = () => {
 
 
   const [mainImg, setMainImg] = useState(null);
-  const [urlMainImg, setUrlMainImg] = useState("");
 
+  const [imgUrl, setImgUrl] = useState([]);
 
   const [images, setImages] = useState([]);
 
-  const [urls, setUrls] = useState([]);
+ 
   const [progress, setProgress] = useState(0);
 
   const [carTypes, setcarTypes] = useState([]);
@@ -258,28 +261,30 @@ const AddNewCar = () => {
           .getDownloadURL()
           .then((url) => {
             data["main_img"]=  url
-            setUrlMainImg(url)})
+           })
           
       }
     )
     Promise.all(task)
       .then(async() => {
         alert("All images uploaded")
-        
-         data["main_img"]= urlMainImg
          console.log(data);
       
         axios.post("http://localhost:5000/car",data,{headers:{authorization:`Bearer ${state.token}`}})
-        .then(result=>{let message=`added successfuly`})
-        .catch(err=>{message=err})
+        .then(result=>{ message=`added successfuly`
+        car_id=result.data.insertId
+      console.log("car_Id",car_id)})
+        .catch(err=>{console.log("err");})
       })
       .catch((err) => console.log(err));
   };
 
  
   const handleUpload = () => {
+    
     const promises = [];
     images.map((image) => {
+     
       const uploadTask = storage.ref(`images/${image.name}`).put(image);
       promises.push(uploadTask);
       uploadTask.on(
@@ -298,8 +303,13 @@ const AddNewCar = () => {
             .ref("images")
             .child(image.name)
             .getDownloadURL()
-            .then((urls) => {
-              setUrls((prevState) => [...prevState, urls]);
+            .then(async(url) => {
+              // console.log("url",url);
+              console.log("ss",imgUrl);
+              let oldUrl = [...imgUrl,url]
+              
+              console.log(oldUrl);
+              setImgUrl(oldUrl)
             });
         }
       );
@@ -307,14 +317,17 @@ const AddNewCar = () => {
     Promise.all(promises)
       .then(() => {
         alert("All images uploaded")
-        axios.post("http://localhost:5000/car",data,{headers:{authorization:`Bearer ${state.token}`}})
+        console.log("urls",imgUrl);
+console.log( imgUrl.length);
+        console.log("carId",car_id);
+       
+        axios.post("http://localhost:5000/car/imgs",{imgUrl,car_id},{headers:{authorization:`Bearer ${state.token}`}})
+        .then(result=>{console.log(result)})
+        .catch(err=>{console.log(err);})
       })
       .catch((err) => console.log(err));
   };
-  const submitForm= async()=>{
-    uploadMainImg()
-    handleUpload()
-  }
+
 
 
 
@@ -448,10 +461,13 @@ const AddNewCar = () => {
         </div>
       </form>
 
-      <button className="btn btn-success" type="button" onClick={submitForm}>
-        add
+      <button className="btn btn-success" type="button" onClick={uploadMainImg}>
+        add youre car 
       </button>
       {message}
+      <button multiple className="btn btn-success" type="button" onClick={handleUpload}>
+        add more pictures for youre care
+      </button>
     </div>
   );
 };
