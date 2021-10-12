@@ -29,7 +29,8 @@ const createNewUser = async (req, res) => {
 };
 
 const updateUserById = async (req, res) => {
-  let id = req.params.id;
+  console.log(req.token.user_id)
+   let id = req.token.user_id;
   let { firstName, lastName, age, city, password } = req.body;
   password = await bcrypt.hash(password, 10);
   const query = `UPDATE users SET firstName=?,lastName=?,age=?,city=?,password=? WHERE user_id=? and role="user"`;
