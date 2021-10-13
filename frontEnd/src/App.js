@@ -1,18 +1,23 @@
-import React from 'react';
-import './App.css';
-import SearchForm from './components/SearchForm/searchForm';
-import SearchResult from './components/SearchResult/searchResult';
-import AddNewCar from './components/car/AddNewCar';
-import Login from "./components/Auth/Login/login"
-import Profile from './components/Profile/profile';
+import React from "react";
+import "./App.css";
+import SearchForm from "./components/SearchForm/searchForm";
+import SearchResult from "./components/SearchResult/searchResult";
+import AddNewCar from "./components/car/AddNewCar";
+import Login from "./components/Auth/Login/login";
+import Profile from "./components/Profile/profile";
+import Dashboard from "./components/Admin/Dashboard/Dashboard";
+import { Route } from "react-router";
 
 export default function App() {
   return (
     <div>
       <p>App</p>
-      <Login/>
+      <Login />
       {/* <AddNewCar/> */}
-    <Profile/>
+      <Profile />
+      <Route path="/admin">
+        <Dashboard />
+      </Route>
     </div>
   );
 }
