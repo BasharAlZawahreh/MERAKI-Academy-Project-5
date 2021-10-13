@@ -4,6 +4,7 @@ import SearchForm from './components/SearchForm/searchForm';
 import SearchResult from './components/SearchResult/searchResult';
 import AddNewCar from './components/car/AddNewCar';
 import Login from "./components/Auth/Login/login"
+import Register from "./components/Auth/Register/register"
 import Profile from './components/Profile/profile';
 import Nav from './components/NavBar/nav';
 
@@ -13,7 +14,8 @@ export default function App() {
       <p>App</p>
       {/* <AddNewCar/> */}
     <Nav/>
-      {/* <Login/> */}
+      <Login/>
+      {/* <Register/> */}
     {/* <Profile/> */}
     </div>
   );
