@@ -78,18 +78,18 @@ const getCarById = (req, res) => {
 
   connection.query(query, (err, result) => {
     if (!result.length) {
-      res.status(404).json({
+     return res.status(404).json({
         success: false,
         message: `not found any car`,
       });
     } else if (err) {
-      res.status(500).json({
+    return  res.status(500).json({
         success: false,
         message: `Server Error`,
         err: err,
       });
     }
-    res.status(201).json({
+   return res.status(201).json({
       success: true,
       result: result,
     });
