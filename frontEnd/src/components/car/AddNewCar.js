@@ -5,6 +5,7 @@ import { storage } from "../config";
 import { useSelector } from "react-redux";
 let car_id = 0
 let urls = []
+let count = 0
 const AddNewCar = () => {
   let message =""
 
@@ -218,11 +219,41 @@ const AddNewCar = () => {
     getAllYears();
   }, []);
 
-  const addMainIm = (e) => {
+  function addMainImge(e) {
+    let data = {
+      color: carColor,
+      model: model,
+      description: desc,
+      manifactoring_year: carYear,
+      day_price: dayPrice,
+      car_types_id: carType,
+      car_brand_id: carBrand,
+    };
     if (e.target.files[0]) {
-      setMainImg(e.target.files[0]);
+      let mainImg = e.target.files[0];
+      let uploadTask = storage.ref(`images/${mainImg.name}`).put(mainImg);
+      uploadTask.on(
+        "state_change",
+        (snapshot) => { },
+        (error) => {
+          console.log(error);
+        },
+        async () => {
+          await storage
+            .ref("images")
+            .child(mainImg.name)
+            .getDownloadURL()
+            .then((url) => {
+              task.push(uploadTask);
+              data["main_img"] = url;
+            });
+
+        }
+      );
+
     }
-  };
+
+  }
   const handleChange = (e) => {
     for (let i = 0; i < e.target.files.length; i++) {
       const newImage = e.target.files[i];
@@ -236,52 +267,31 @@ const AddNewCar = () => {
   
 
   const uploadMainImg = () => {
+    
     let task = [];
-    let data = {   
-       color:carColor,
-      model: model,
-      description:desc,
-      manifactoring_year:carYear,
-      day_price:dayPrice,
-      car_types_id:carType,
-      car_brand_id:carBrand,
-      }
-    let uploadTask = storage.ref(`images/${mainImg.name}`).put(mainImg);
-    task.push(uploadTask);
-    uploadTask.on(
-      "state_change",
-      (snapshot) => {},
-      (error) => {
-        console.log(error);
-      },
-      () => {
-        storage
-          .ref("images")
-          .child(mainImg.name)
-          .getDownloadURL()
-          .then((url) => {
-            data["main_img"]=  url
-           })
-          
-      }
-    )
-    Promise.all(task)
-      .then(async() => {
-        alert("All images uploaded")
-         console.log(data);
+
+    
+    
+ 
+    
       
-        axios.post("http://localhost:5000/car",data,{headers:{authorization:`Bearer ${state.token}`}})
+      
+       await axios.post("http://localhost:5000/car",data,{headers:{authorization:`Bearer ${state.token}`}})
         .then(result=>{ message=`added successfuly`
         car_id=result.data.insertId
       console.log("car_Id",car_id)})
         .catch(err=>{console.log("err");})
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err))
+
+      
   };
 
  
+
   const handleUpload = () => {
     
+    console.log("coountuuu",count);
     const promises = [];
     images.map((image) => {
      
@@ -305,28 +315,42 @@ const AddNewCar = () => {
             .getDownloadURL()
             .then(async(url) => {
               // console.log("url",url);
-              console.log("ss",imgUrl);
-              let oldUrl = [...imgUrl,url]
-              
-              console.log(oldUrl);
-              setImgUrl(oldUrl)
+              setImgUrl((img)=>[...img,url])
+              //setImgUrl((oldUrl=>[...oldUrl,url]))
             });
         }
       );
     });
     Promise.all(promises)
-      .then(() => {
+      .then(async() => {
         alert("All images uploaded")
         console.log("urls",imgUrl);
-console.log( imgUrl.length);
+        console.log( imgUrl.length);
         console.log("carId",car_id);
-       
-        axios.post("http://localhost:5000/car/imgs",{imgUrl,car_id},{headers:{authorization:`Bearer ${state.token}`}})
-        .then(result=>{console.log(result)})
+      car_id=1
+       await axios.post("http://localhost:5000/car/imgs",{imgUrl,car_id},{headers:{authorization:`Bearer ${state.token}`}})
+        .then(result=>{
+          
+          console.log("odai",result)
+          if(!result.data.success){
+            count = count + 1
+          }})
+        
         .catch(err=>{console.log(err);})
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err))
+
+      
   };
+useEffect(()=>{
+  console.log("count",count);
+  if(count===1){
+    console.log("ddddddddddd");
+    count ++
+    handleUpload()
+   
+  }
+})
 
 
 
@@ -447,7 +471,7 @@ console.log( imgUrl.length);
             type="file"
             className="form-control"
             id="formGroupExampleInput"
-            onChange={addMainIm}
+            onChange={addMainImge}
           />
         </div>
         <div className="form-group">

@@ -1,6 +1,6 @@
-CREATE DATABASE IF NOT EXISTS sql6442806;
+CREATE DATABASE IF NOT EXISTS autoRental;
 
-USE sql6442806 ;
+USE autoRental ;
 -- -----------------------------------------------------
 -- Table  autoRental . users
 -- -----------------------------------------------------
@@ -68,7 +68,7 @@ CREATE TABLE IF NOT EXISTS cars(
     imgUrl VARCHAR(255) ,
   car_id int ,
    FOREIGN KEY (car_id) REFERENCES cars ( car_id),
-  PRIMARY KEY (typeCar_id)
+  PRIMARY KEY (img_id)
  );
 
 -- -----------------------------------------------------

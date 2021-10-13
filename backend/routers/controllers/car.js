@@ -2,7 +2,7 @@ const connection = require("../../db/db");
 
 const addNewCar = (req, res) => {
 
-
+ console.log("req",req.body)
   let user_id = req.token.user_id;
   const urls = req.body.urls;
   const {
@@ -53,7 +53,7 @@ const addNewCar = (req, res) => {
 const addImgs=(req,res)=>{
   console.log("req.body",req.body);
   let finalResult = {
-    success: true,
+    success: false,
     message: `added successfully `,
     result1: []
   }
@@ -68,8 +68,13 @@ const addImgs=(req,res)=>{
       const data = [urls[0], car_id];
       urls.shift();
       connection.query(query, data, (err, result) => {
+        console.log("result",result);
+        console.log("err",err);
         if (result.affectedRows) {
+          console.log("hi ");
+          finalResult.success=true
           finalResult.result1.push(result)
+         
         } else if(err) {
           finalResult = ({
             success: false,
@@ -81,7 +86,8 @@ const addImgs=(req,res)=>{
       });
     }
    }
-   return res.status(status).json(finalResult)
+   console.log("1",finalResult);
+    res.status(status).json(finalResult)
 }
 
 const getCarById = (req, res) => {

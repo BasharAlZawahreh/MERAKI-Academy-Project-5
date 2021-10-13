@@ -4,11 +4,14 @@ import SearchForm from './components/SearchForm/searchForm';
 import SearchResult from './components/SearchResult/searchResult';
 import AddNewCar from './components/car/AddNewCar';
 import Login from "./components/Auth/Login/login"
+import Register from './components/Auth/Register/register';
+
 
 export default function App() {
   return (
     <div>
       <p>App</p>
+
       <Login/>
       <AddNewCar/>
    
