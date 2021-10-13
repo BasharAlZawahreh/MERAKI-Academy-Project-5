@@ -7,13 +7,14 @@ import Login from "./components/Auth/Login/login"
 import Register from "./components/Auth/Register/register"
 import Profile from './components/Profile/profile';
 import Nav from './components/NavBar/nav';
-
+import AddReservation from './components/Reservation/reservation';
 export default function App() {
   return (
     <div>
       <p>App</p>
       {/* <AddNewCar/> */}
-    <Nav/>
+    {/* <Nav/> */}
+    <AddReservation/>
       <Login/>
       {/* <Register/> */}
     {/* <Profile/> */}
