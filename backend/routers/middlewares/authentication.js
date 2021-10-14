@@ -3,6 +3,7 @@ const jwt = require("jsonwebtoken");
 const authentication = (req, res, next) => {
   try {
     if (!req.headers.authorization) {
+      console.log("bashar");
       return res.status(403).json({
         success: false,
         message: `Forbidden`,
