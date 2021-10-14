@@ -4,8 +4,7 @@ const { login } = require("../../Admin/Controllers/login");
 const {
   makeUserAdminById,
   getAllUsers,
-  blockUserById,
-  unBlockUserById
+  toggleBlockUserById,
 } = require("../../Admin/Controllers/users");
 
 const { DeleteRatebyId } = require("../../Admin/Controllers/rates");
@@ -37,10 +36,10 @@ adminRouter.get("/reserves", authentication, getAllReservations);
 adminRouter.get("/cars", authentication, getAllCars);
 
 //patch  http://localhost:5000/admin/blockUser/2
-adminRouter.patch("/blockUser/:id", authentication, blockUserById);
+adminRouter.patch("/blockUser/:id", authentication, toggleBlockUserById);
 
 //patch  http://localhost:5000/admin/unBlockUser/2
-adminRouter.patch("/unblockUser/:id", authentication, unBlockUserById);
+// adminRouter.patch("/unblockUser/:id", authentication, unBlockUserById);
 
 //patch  http://localhost:5000/admin/confirmReserve/2
 adminRouter.patch("/confirmReserve/:id", authentication, confirmReservation);
