@@ -23,12 +23,11 @@ const  responsesuccessGoogle=(response)=>{
     // console.log(response.profileObj);
     axios.post("http://localhost:5000/login/loginWithGoogle",{tokenId: response.tokenId})
     .then((res) => {
-      console.log("NAif",res);
       if (res.data) {
         setMessage("");
         dispatch(setToken(res.data.token))
         localStorage.setItem("token", res.data.token);
-        // history.push("/home");
+        history.push("/slide");
       } else throw Error;
   }).catch((err) =>{
       if(err.message){
@@ -57,7 +56,7 @@ const Enter= async(e)=>{
           console.log(res.data);
           dispatch(setToken(res.data.token))
           localStorage.setItem("token", res.data.token);
-          
+          history.push("/slide"); 
           
         }
     }catch (error) {
@@ -72,10 +71,9 @@ const Enter= async(e)=>{
 useEffect(() => {
 
     if (!state.token) {
-        // alert("Yes");
         dispatch(setToken(localStorage.getItem("token")));
         
-        //   history.push("/dashboard");
+        //   history.push("/slide");
     }
   });
 

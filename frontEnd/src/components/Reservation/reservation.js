@@ -14,26 +14,20 @@ const AddReservation = () => {
     return {
       token: state.token.token,
       reservations: state.reservation.reservations,
+      car_Id:state.searches.car_Id
     };
   });
-  let car_id = 1;
-  // const getCar=()=>{
-  // // sum()
-  // }
-  console.log(PickUpDate);
-  console.log(returnDate);
+
+
   const booking = async () => {
+   let car_id=state.car_Id
     try {
       await axios
-        .get(`http://localhost:5000/car/car/1`)
-        .then(async (result) => {
-            console.log(result);
+        .get(`http://localhost:5000/car/car/${car_id}`)
+        .then((result) => {
           let price = result.data.result[0].day_price;
-        //   let Pick = PickUpDate;
-        //   let returnD = returnDate;
           let difference = new Date(PickUpDate).getTime() - new Date(returnDate).getTime();
           let days = Math.ceil(difference / (1000 * 3600 * 24));
-          console.log(difference);
           setAmount(days * price);
         }).then(async()=>{
             await axios
@@ -44,8 +38,8 @@ const AddReservation = () => {
                 headers: { Authorization: `Bearer ${state.token}` },
               }
             )
-            .then((result) => {
-              dispatch(addReservation(result.data.Reservations));
+            .then(async(result) => {
+             dispatch(addReservation(result.data.Reservations));
             })
             .catch((err) => {
               console.log("reserveErr", err);
@@ -72,7 +66,7 @@ const AddReservation = () => {
         placeholder="PickUpDate"
         onChange={(e) => setPickUpDate(e.target.value)}
       />
-      <input type="number" disabled value={`${amount} JD`} placeholder="amount" />
+      <input type="number" disabled value={`${amount}`} placeholder="amount" />
       <button
         onClick={() => {
           booking();
