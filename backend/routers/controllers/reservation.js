@@ -1,24 +1,26 @@
 const reservationModel=require("../../db/db")
 
 const createNewReservation=(req,res)=>{
-    const{ returnDate,PickUpDate,amount, users_id, car_id}=req.body
+  const users_id=req.token.user_id;
+    const{ returnDate,PickUpDate,amount, car_id}=req.body
     const query=`INSERT INTO reservations (returnDate,PickUpDate,amount, users_id, car_id)VALUES(?,?,?,?,?)`
     const data=[returnDate,PickUpDate,amount, users_id, car_id]
    
     reservationModel.query(query,data,(err,result)=>{
-        if (result.affectedRows){
-            res.status(201).json({
-              success: true,
-              message: `created Reservation `,
-              Reservations: result,
-            })
-          }else {
-            res.status(500).json({
-              success: false,
-              message: `Server Error`,
-          
-            });
-          }
+        if (!result.affectedRows){
+          return res.status(500).json({
+            success: false,
+            message: `Server Error`,
+        
+          });
+        }
+        
+        return res.status(201).json({
+           success: true,
+           message: `created Reservation `,
+           Reservations: result,
+         })
+
     })
 }
 

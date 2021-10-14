@@ -29,11 +29,12 @@ const createNewUser = async (req, res) => {
 };
 
 const updateUserById = async (req, res) => {
-  let id = req.params.id;
-  let { firstName, lastName, age, city, password } = req.body;
+  console.log(req.token.user_id)
+   let id = req.token.user_id;
+  let {firstName,lastName,age,city,password,ssn,birthDate,license_img,mobile } = req.body;
   password = await bcrypt.hash(password, 10);
-  const query = `UPDATE users SET firstName=?,lastName=?,age=?,city=?,password=? WHERE user_id=? and role="user"`;
-  const data = [firstName, lastName, age, city, password, id];
+  const query = `UPDATE users SET firstName=?,lastName=?,age=?,city=?,password=?,ssn=?,birthDate=?,license_img=?,mobile=? WHERE user_id=? and role="user"`;
+  const data = [firstName,lastName,age,city,password,ssn,birthDate,license_img,mobile, id];
 
   userModel.query(query, data, (err, result) => {
     if (result.affectedRows) {
