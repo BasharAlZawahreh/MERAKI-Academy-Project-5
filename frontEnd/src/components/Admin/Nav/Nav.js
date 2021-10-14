@@ -8,7 +8,7 @@ import Reservations from "../Reservations/Reservations";
 const Nav = () => {
   return (
     <div>
-      <Link to={Login} />
+      <Link to={Login} /> 
       <Link to={Cars} />
       <Link to={Users} />
       <Link to={Reservations} />
