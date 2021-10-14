@@ -42,10 +42,8 @@ const Nav = () => {
           <div class="header-btn1">
             <Link
               style={{ textDecoration: "none" }}
-              href="#"
               class="sign-in"
-              data-toggle="modal"
-              data-target="#modalLRForm"
+              to="/login"
             >
               LogIn
             </Link>
@@ -92,7 +90,7 @@ const Nav = () => {
                 localStorage.clear();
                 dispatch(setToken(""));
                 //       Appcontext.setToken("");
-                // history.push("/login");
+                history.push("/login");
               }}
             >
               Logout

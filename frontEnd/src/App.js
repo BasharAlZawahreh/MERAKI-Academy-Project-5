@@ -18,7 +18,7 @@ import Slide from './components/slider/slide';
 export default function App() {
   return (
     <div>
-      <p>App</p>
+          <Nav/>
         <Route path="/register">
           <Register/>
         </Route>
@@ -26,10 +26,12 @@ export default function App() {
           <Login/>
         </Route>
         <Route path="/slide">
-          <Nav/>
           <Slide/>
       <SearchForm/>
       <SearchResult/>
+        </Route>
+        <Route path="/addRes">
+          <AddReservation/>
         </Route>
       <Route path="/admin/login">
         <AdminLogin />
@@ -51,7 +53,6 @@ export default function App() {
         <AdminCars />
       </Route>
       {/* <AddNewCar/> */}
-    {/* <AddReservation/> */}
     {/* <Profile/> */}
     </div>
   );
