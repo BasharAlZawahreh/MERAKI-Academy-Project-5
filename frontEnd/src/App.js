@@ -14,11 +14,12 @@ import AdminDashboard from "./components/Admin/Dashboard/Dashboard";
 import AdminUsers from "./components/Admin/Users/Users";
 import AdminReservations from "./components/Admin/Reservations/Reservations";
 import AdminCars from "./components/Admin/Cars/Cars";
-import Slide from './components/slider/slide';
+// import Slide from './components/slider/slide';
 export default function App() {
   return (
     <div>
       <p>App</p>
+      <AddNewCar/>
         <Route path="/register">
           <Register/>
         </Route>
@@ -27,7 +28,7 @@ export default function App() {
         </Route>
         <Route path="/slide">
           <Nav/>
-          <Slide/>
+          {/* <Slide/> */}
       <SearchForm/>
       <SearchResult/>
         </Route>
