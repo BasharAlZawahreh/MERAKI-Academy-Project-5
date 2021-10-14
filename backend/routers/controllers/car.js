@@ -2,7 +2,7 @@ const connection = require("../../db/db");
 
 const addNewCar = (req, res) => {
 
-
+ console.log("req",req.body)
   let user_id = req.token.user_id;
   const urls = req.body.urls;
   const {
@@ -30,6 +30,7 @@ const addNewCar = (req, res) => {
     main_img
   ];
   // let carId = 0
+  console.log("dataoooooooo",data);
   connection.query(query, data, (err, result) => {
     console.log("res",result);
     console.log("urls",urls);
@@ -43,30 +44,55 @@ const addNewCar = (req, res) => {
     } else if (result.affectedRows) {
       let car_id = result.insertId;
       res.json(result)
-       if(urls){
-        while (urls.length) {
-          let query = `INSERT INTO car_imgs
-          (imgUrl,car_id)
-          VALUES(?,?)`;
-          const data = [urls[0], car_id];
-          urls.shift();
-          connection.query(query, data, (err, result) => {
-            if (result.affectedRows) {
-              result1["result"].push(result)
-            } else if(err) {
-              return res.status(404).json({
-                success: false,
-                message: `some thing error `,
-              });
-            }
-          });
-        }
-       }
+
 
     }
   });
   
 };
+
+const addImgs=(req,res)=>{
+  console.log("kkkkkkkkkkkkkkkkkkkkkkkkkkkk");
+  console.log("req.body",req.body);
+  let finalResult = {
+    success: false,
+    message: `added successfully `,
+    result1: []
+  }
+  let status = 201
+  const urls = req.body.imgUrl
+  const car_id = req.body.car_id
+  console.log("urls=>",urls);
+  console.log("car_id=>",car_id);
+  if(urls){
+    while (urls.length) {
+      let query = `INSERT INTO car_imgs
+      (imgUrl,car_id)
+      VALUES(?,?)`;
+      const data = [urls[0], car_id];
+      urls.shift();
+      connection.query(query, data, (err, result) => {
+        console.log("result",result);
+        console.log("err",err);
+        if (result.affectedRows) {
+          console.log("hi ");
+          finalResult.success=true
+          finalResult.result1.push(result)
+         
+        } else if(err) {
+          finalResult = ({
+            success: false,
+            message: `some thing error `,
+            err: err
+          });
+          status = 400
+        }
+      });
+    }
+   }
+   console.log("1",finalResult);
+    res.status(status).json(finalResult)
+}
 
 const getCarById = (req, res) => {
 
@@ -313,4 +339,5 @@ module.exports = {
   carsFilter,
   getCarTypes,
   getCarBrands,
+  addImgs
 };

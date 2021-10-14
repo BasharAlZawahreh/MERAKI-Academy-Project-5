@@ -8,12 +8,14 @@ const {
   deleteCarById,
   carsFilter,
   getCarTypes,
-  getCarBrands
+  getCarBrands,
+  addImgs
 } = require("../controllers/car");
 const { authentication } = require("../middlewares/authentication");
 const carRouter = express.Router();
 
 carRouter.post("/",authentication,addNewCar)
+carRouter.post("/imgs",authentication,addImgs)
 carRouter.get("/user",authentication,getCarByuserId)
 carRouter.get("/cartypes", getCarTypes);
 carRouter.get("/carbrands", getCarBrands);

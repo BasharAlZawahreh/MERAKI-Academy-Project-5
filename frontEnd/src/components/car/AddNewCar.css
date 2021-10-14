@@ -1,0 +1,9 @@
+button:disabled{
+    background-color: red;
+    color: white;
+}
+button:enabled{
+    background-color: green;
+    color: white;   
+    width: 150px;
+}
