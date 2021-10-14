@@ -1,27 +1,23 @@
-import React from "react";
-import "./App.css";
-import SearchForm from "./components/SearchForm/searchForm";
-import SearchResult from "./components/SearchResult/searchResult";
-import AddNewCar from "./components/car/AddNewCar";
-import Login from "./components/Auth/Login/login";
-import Profile from "./components/Profile/profile";
-import Dashboard from "./components/Admin/Dashboard/Dashboard";
-import { Route } from "react-router";
-import Users from "./components/Admin/Users/Users"
-import AdminLogin from "./components/Admin/Login/Login"
-
+import React from 'react';
+import './App.css';
+import SearchForm from './components/SearchForm/searchForm';
+import SearchResult from './components/SearchResult/searchResult';
+import AddNewCar from './components/car/AddNewCar';
+import Login from "./components/Auth/Login/login"
+import Register from "./components/Auth/Register/register"
+import Profile from './components/Profile/profile';
+import Nav from './components/NavBar/nav';
+import AddReservation from './components/Reservation/reservation';
 export default function App() {
   return (
     <div>
       <p>App</p>
-      {/* <Login /> */}
       {/* <AddNewCar/> */}
-      {/* <Profile /> */}
-      <Route path="/admin">
-        <AdminLogin/>
-        {/* <Dashboard /> */}
-        <Users/>
-      </Route>
+    {/* <Nav/> */}
+    <AddReservation/>
+      <Login/>
+      {/* <Register/> */}
+    {/* <Profile/> */}
     </div>
   );
 }

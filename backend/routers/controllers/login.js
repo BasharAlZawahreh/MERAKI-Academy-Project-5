@@ -76,10 +76,12 @@ const loginWithGoogle = async (req, res) => {
                 email + process.env.SECRET,
                 result.password
               );
+              console.log(result);
               if (!valid) {
                 return res.status(403).json({
                   success: false,
                   message: "Password incorrect",
+                  token:result
                 });
               }
               const payload = {
