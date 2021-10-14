@@ -19,7 +19,6 @@ const Login = () => {
   });
 
   const responsesuccessGoogle = (response) => {
-    // console.log(response.profileObj);
     axios
       .post("http://localhost:5000/login/loginWithGoogle", {
         tokenId: response.tokenId,
@@ -31,7 +30,7 @@ const Login = () => {
             setMessage("");
             dispatch(setToken(res.data.token));
             localStorage.setItem("token", res.data.token);
-            // history.push("/home");
+             history.push("/admin/dashboard");
           } else {
             setMessage("Sorry you aren't an Admin!");
           }
@@ -73,9 +72,9 @@ const Login = () => {
   };
 
   useEffect(() => {
-    if (!state.token) {
+    if (!state.token && localStorage.getItem("token")) {
       dispatch(setToken(localStorage.getItem("token")));
-      //   history.push("/dashboard");
+      history.push("/admin/dashboard");
     }
   }, []);
 
