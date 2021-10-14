@@ -30,6 +30,7 @@ const addNewCar = (req, res) => {
     main_img
   ];
   // let carId = 0
+  console.log("dataoooooooo",data);
   connection.query(query, data, (err, result) => {
     console.log("res",result);
     console.log("urls",urls);
@@ -51,6 +52,7 @@ const addNewCar = (req, res) => {
 };
 
 const addImgs=(req,res)=>{
+  console.log("kkkkkkkkkkkkkkkkkkkkkkkkkkkk");
   console.log("req.body",req.body);
   let finalResult = {
     success: false,
@@ -60,6 +62,8 @@ const addImgs=(req,res)=>{
   let status = 201
   const urls = req.body.imgUrl
   const car_id = req.body.car_id
+  console.log("urls=>",urls);
+  console.log("car_id=>",car_id);
   if(urls){
     while (urls.length) {
       let query = `INSERT INTO car_imgs

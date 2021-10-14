@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 //rcfe
+import "../car/AddNewCar.css"
 import { storage } from "../config";
 import { useSelector } from "react-redux";
 let car_id = 0
-let urls = []
-let count = 0
+let x =""
+let imgUrl =[]
+let odaisUrl=[]
 const AddNewCar = () => {
   let message =""
 
@@ -16,13 +18,6 @@ const AddNewCar = () => {
   console.log("stateCar",state.token);
 
 
-  const [mainImg, setMainImg] = useState(null);
-
-  const [imgUrl, setImgUrl] = useState([]);
-
-  const [images, setImages] = useState([]);
-
- 
   const [progress, setProgress] = useState(0);
 
   const [carTypes, setcarTypes] = useState([]);
@@ -219,46 +214,84 @@ const AddNewCar = () => {
     getAllYears();
   }, []);
 
-  function addMainImge(e) {
-    let data = {
-      color: carColor,
-      model: model,
-      description: desc,
-      manifactoring_year: carYear,
-      day_price: dayPrice,
-      car_types_id: carType,
-      car_brand_id: carBrand,
-    };
+  const addMainIm = (e) => {
+    let task=[]
     if (e.target.files[0]) {
-      let mainImg = e.target.files[0];
-      let uploadTask = storage.ref(`images/${mainImg.name}`).put(mainImg);
+      let mainOdai = e.target.files[0]
+      let uploadTask = storage.ref(`images/${mainOdai.name}`).put(mainOdai);
+      task.push(uploadTask);
       uploadTask.on(
         "state_change",
-        (snapshot) => { },
+        (snapshot) => {},
         (error) => {
           console.log(error);
         },
-        async () => {
-          await storage
+        () => {
+          storage
             .ref("images")
-            .child(mainImg.name)
-            .getDownloadURL()
-            .then((url) => {
-              task.push(uploadTask);
-              data["main_img"] = url;
-            });
-
+            .child(mainOdai.name)
+           .getDownloadURL()
+            .then(async(url) => {
+              console.log(url);
+              x =  url
+              console.log("odai",x);
+             })
+            
         }
-      );
-
+      )
+      Promise.all(task)
     }
-
-  }
+    
+  };
+  
+  
   const handleChange = (e) => {
+    let odais = []
+   
+    console.log(e.target.files.length);
+    
     for (let i = 0; i < e.target.files.length; i++) {
       const newImage = e.target.files[i];
       newImage["id"] = Math.random();
-      setImages((prevState) => [...prevState, newImage]);
+      odais.push(newImage)
+      console.log("=>",odais);
+    }
+    if(odais.length===e.target.files.length){
+      const promises = [];
+      odais.map((image) => {
+       
+        const uploadTask = storage.ref(`images/${image.name}`).put(image);
+        promises.push(uploadTask);
+        uploadTask.on(
+          "state_changed",
+          (snapshot) => {
+            const progress = Math.round(
+              (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+            );
+            setProgress(progress);
+          },
+          (error) => {
+            console.log(error);
+          },
+           () => {
+             storage
+              .ref("images")
+              .child(image.name)
+              .getDownloadURL()
+              .then((url) => {
+                // console.log("url",url);
+                odaisUrl.push(url)
+                if(odaisUrl.length===e.target.files.length){
+                console.log(odaisUrl)
+                imgUrl=[...odaisUrl]
+              console.log(imgUrl);}
+                //setImgUrl((oldUrl=>[...oldUrl,url]))
+              });
+          }
+        );
+      });
+      Promise.all(promises)
+      console.log(odaisUrl);
     }
   };
   
@@ -266,96 +299,53 @@ const AddNewCar = () => {
  
   
 
-  const uploadMainImg = () => {
-    
-    let task = [];
 
-    
-    
- 
-    
-      
-      
-       await axios.post("http://localhost:5000/car",data,{headers:{authorization:`Bearer ${state.token}`}})
-        .then(result=>{ message=`added successfuly`
-        car_id=result.data.insertId
-      console.log("car_Id",car_id)})
-        .catch(err=>{console.log("err");})
-      })
-      .catch((err) => console.log(err))
-
-      
-  };
 
  
 
-  const handleUpload = () => {
-    
-    console.log("coountuuu",count);
-    const promises = [];
-    images.map((image) => {
-     
-      const uploadTask = storage.ref(`images/${image.name}`).put(image);
-      promises.push(uploadTask);
-      uploadTask.on(
-        "state_changed",
-        (snapshot) => {
-          const progress = Math.round(
-            (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-          );
-          setProgress(progress);
-        },
-        (error) => {
-          console.log(error);
-        },
-        async () => {
-          await storage
-            .ref("images")
-            .child(image.name)
-            .getDownloadURL()
-            .then(async(url) => {
-              // console.log("url",url);
-              setImgUrl((img)=>[...img,url])
-              //setImgUrl((oldUrl=>[...oldUrl,url]))
-            });
-        }
-      );
-    });
-    Promise.all(promises)
-      .then(async() => {
-        alert("All images uploaded")
-        console.log("urls",imgUrl);
-        console.log( imgUrl.length);
-        console.log("carId",car_id);
-      car_id=1
-       await axios.post("http://localhost:5000/car/imgs",{imgUrl,car_id},{headers:{authorization:`Bearer ${state.token}`}})
-        .then(result=>{
-          
-          console.log("odai",result)
-          if(!result.data.success){
-            count = count + 1
-          }})
-        
-        .catch(err=>{console.log(err);})
-      })
-      .catch((err) => console.log(err))
+ 
 
-      
-  };
+const addToData=async()=>{
+
+  let data = {   
+    color:carColor,
+   model: model,
+   description:desc,
+   manifactoring_year:carYear,
+   day_price:dayPrice,
+   car_types_id:carType,
+   car_brand_id:carBrand,
+   main_img:x
+   }
+
+    await axios.post("http://localhost:5000/car",data,{headers:{authorization:`Bearer ${state.token}`}})
+     .then(result=>{ message=`added successfuly`
+     car_id=result.data.insertId
+   console.log("car_Id",car_id)})
+     .catch(err=>{console.log("err");})
+
+     await  axios.post("http://localhost:5000/car/imgs",{imgUrl,car_id},{headers:{authorization:`Bearer ${state.token}`}})
+     .then(result=>{
+       console.log(result);
+     })
+   .catch((err) => console.log(err))
+};
+
+const stateButton={
+  disabled: true
+}
+
 useEffect(()=>{
-  console.log("count",count);
-  if(count===1){
-    console.log("ddddddddddd");
-    count ++
-    handleUpload()
-   
+  console.log("IM here");
+  if(x&&imgUrl){
+    console.log("Odai taha jaabb");
+    stateButton.disabled=false
   }
+
 })
 
-
-
-
   return (
+    <>
     <div>
       <form>
         <div className="form-group">
@@ -471,7 +461,7 @@ useEffect(()=>{
             type="file"
             className="form-control"
             id="formGroupExampleInput"
-            onChange={addMainImge}
+            onChange={addMainIm}
           />
         </div>
         <div className="form-group">
@@ -484,15 +474,14 @@ useEffect(()=>{
           />
         </div>
       </form>
+     
 
-      <button className="btn btn-success" type="button" onClick={uploadMainImg}>
-        add youre car 
-      </button>
-      {message}
-      <button multiple className="btn btn-success" type="button" onClick={handleUpload}>
-        add more pictures for youre care
-      </button>
     </div>
+
+     <button className="addcar" disabled={stateButton.disabled} type="button"  onClick={addToData}>
+     add youre car 
+   </button>
+   </>
   );
 };
 export default AddNewCar;
