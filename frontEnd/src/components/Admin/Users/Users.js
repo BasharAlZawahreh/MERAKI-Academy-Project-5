@@ -10,7 +10,7 @@ import {
 import { matchSorter } from "match-sorter";
 import "./Users.css";
 import axios from "axios";
-import { setUser } from "../../../actions/users";
+import { setUser, deleteUser } from "../../../actions/users";
 import { useSelector, useDispatch } from "react-redux";
 
 const Styles = styled.div`
@@ -383,6 +383,21 @@ function Users() {
     console.log(res.data.result);
   };
 
+  const makeAdmin = async (id) => {
+    await axios
+      .post(
+        `http://localhost:5000/admin/makeAdmin/${id}`,
+        {},
+        { headers: { Authorization: `Bearer ${token}` } }
+      )
+      .then((res) => {
+        dispatch(deleteUser(id));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   const columns = React.useMemo(() => [
     {
       Header: "Name",
@@ -468,6 +483,18 @@ function Users() {
                 />
                 <span class="slider round"></span>
               </label>
+            );
+          },
+        },
+        {
+          Header: "Make Admin",
+          id: "makeAdmin",
+          accessor: "makeAdmin",
+          Cell: ({ cell }) => {
+            return (
+              <button onClick={() => makeAdmin(cell.row.values.id)}>
+                Make Admin
+              </button>
             );
           },
         },
