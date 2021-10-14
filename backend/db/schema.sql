@@ -1,6 +1,6 @@
-CREATE DATABASE IF NOT EXISTS sql6442806;
+CREATE DATABASE IF NOT EXISTS autoRental;
 
-USE sql6442806 ;
+USE autoRental ;
 -- -----------------------------------------------------
 -- Table  autoRental . users
 -- -----------------------------------------------------
