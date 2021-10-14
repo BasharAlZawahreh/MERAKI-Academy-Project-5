@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React from "react";
 import "./App.css";
 import SearchForm from "./components/SearchForm/searchForm";
@@ -14,12 +15,24 @@ import AdminUsers from "./components/Admin/Users/Users";
 import AdminReservations from "./components/Admin/Reservations/Reservations";
 import AdminCars from "./components/Admin/Cars/Cars";
 
+=======
+import React from 'react';
+import './App.css';
+import SearchForm from './components/SearchForm/searchForm';
+import SearchResult from './components/SearchResult/searchResult';
+import AddNewCar from './components/car/AddNewCar';
+import Login from "./components/Auth/Login/login"
+import Register from "./components/Auth/Register/register"
+import Profile from './components/Profile/profile';
+import Nav from './components/NavBar/nav';
+import AddReservation from './components/Reservation/reservation';
+>>>>>>> f2c2bcb2799dc20644e9dcc824c2aeba5931a852
 export default function App() {
   return (
     <div>
       <p>App</p>
-      {/* <Login /> */}
       {/* <AddNewCar/> */}
+<<<<<<< HEAD
       {/* <Profile /> */}
 
       <Route path="/admin/login">
@@ -41,6 +54,13 @@ export default function App() {
       <Route path="/admin/cars">
         <AdminCars />
       </Route>
+=======
+    {/* <Nav/> */}
+    <AddReservation/>
+      <Login/>
+      {/* <Register/> */}
+    {/* <Profile/> */}
+>>>>>>> f2c2bcb2799dc20644e9dcc824c2aeba5931a852
     </div>
   );
 }
