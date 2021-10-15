@@ -6,7 +6,7 @@ import AddNewCar from './components/car/AddNewCar';
 import Login from "./components/Auth/Login/login"
 import Register from "./components/Auth/Register/register"
 import Profile from './components/Profile/profile';
-import Nav from './components/NavBar/nav';
+// import Nav from './components/NavBar/nav';
 import AddReservation from './components/Reservation/reservation';
 import { Route } from 'react-router';
 import AdminLogin from "./components/Admin/Login/Login";
@@ -14,11 +14,11 @@ import AdminDashboard from "./components/Admin/Dashboard/Dashboard";
 import AdminUsers from "./components/Admin/Users/Users";
 import AdminReservations from "./components/Admin/Reservations/Reservations";
 import AdminCars from "./components/Admin/Cars/Cars";
-import Slide from './components/slider/slide';
+// import Slide from './components/slider/slide';
 export default function App() {
   return (
     <div>
-          <Nav/>
+          {/* <Nav/> */}
         <Route path="/register">
           <Register/>
         </Route>
@@ -26,7 +26,7 @@ export default function App() {
           <Login/>
         </Route>
         <Route path="/slide">
-          <Slide/>
+          {/* <Slide/> */}
       <SearchForm/>
       <SearchResult/>
         </Route>

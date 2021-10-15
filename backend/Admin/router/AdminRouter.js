@@ -13,7 +13,7 @@ const { getAllCars } = require("../../Admin/Controllers/cars");
 
 const {
   getAllReservations,
-  confirmReservation,
+  toggleConfirmationById
 } = require("../../Admin/Controllers/reservations");
 
 // define router
@@ -42,7 +42,8 @@ adminRouter.patch("/blockUser/:id", authentication, toggleBlockUserById);
 // adminRouter.patch("/unblockUser/:id", authentication, unBlockUserById);
 
 //patch  http://localhost:5000/admin/confirmReserve/2
-adminRouter.patch("/confirmReserve/:id", authentication, confirmReservation);
+adminRouter.patch("/confirmReserve/:id", authentication, toggleConfirmationById);
+
 
 //delete  http://localhost:5000/admin/deleteRate/2
 adminRouter.delete("/deleteRate/:id", authentication, DeleteRatebyId);

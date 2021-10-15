@@ -406,13 +406,13 @@ function Cars() {
         {
           Header: "Color",
           accessor: "color",
-          Filter: NumberRangeColumnFilter,
-          filter: "between",
+          filter: "fuzzyText",
         },
         {
           Header: "Day Price",
           accessor: "dayPrice",
-          filter: "fuzzyText",
+          Filter: NumberRangeColumnFilter,
+          filter: "between",
         },
         {
           Header: "License",
