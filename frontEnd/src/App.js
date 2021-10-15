@@ -15,6 +15,7 @@ import AdminUsers from "./components/Admin/Users/Users";
 import AdminReservations from "./components/Admin/Reservations/Reservations";
 import AdminCars from "./components/Admin/Cars/Cars";
 import Slide from './components/slider/slide';
+ import AddRates from './components/Rate/rates'
 export default function App() {
   return (
     <div>
@@ -30,9 +31,10 @@ export default function App() {
       <SearchForm/>
       <SearchResult/>
         </Route>
-        <Route path="/addRes">
+        {/* <Route path="/addRes">
           <AddReservation/>
-        </Route>
+        
+        </Route> */}
       <Route path="/admin/login">
         <AdminLogin />
       </Route>
@@ -54,6 +56,8 @@ export default function App() {
       </Route>
       {/* <AddNewCar/> */}
     {/* <Profile/> */}
+    <AddRates/>
+    <AddReservation/>
     </div>
   );
 }
