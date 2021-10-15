@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { addReservation } from "../../actions/reservations";
+import Card from 'react-bootstrap/Card'
+import Button from 'react-bootstrap/Button'
+
 const AddReservation = () => {
   const dispatch = useDispatch();
   const [returnDate, setReturnDate] = useState("");
@@ -75,6 +78,16 @@ const AddReservation = () => {
         Reservation
       </button>
     </div>
+
+
+
+
+
+
+
   );
 };
 export default AddReservation;
+
+
+
