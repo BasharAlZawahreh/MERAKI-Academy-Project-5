@@ -1,5 +1,5 @@
 const initialState = {
-    token: "",
+    token: localStorage.getItem("token"),
   };
 
    const token = (state=initialState,{type,payload}) => {

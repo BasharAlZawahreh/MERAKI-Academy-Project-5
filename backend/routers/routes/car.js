@@ -23,7 +23,7 @@ carRouter.get("/carbrands", getCarBrands);
 carRouter.get("/car/:car_id",getCarById)
 carRouter.put("/:car_id",authentication,updateCarById)
 carRouter.put("/available/:car_id",authentication,toggleCarAvailability)
-carRouter.put("/delete/:car_id",authentication,deleteCarById)
+carRouter.put("/delete/:car_id",deleteCarById)
 
 carRouter.post("/filter", carsFilter);
 

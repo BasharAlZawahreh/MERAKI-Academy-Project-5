@@ -296,14 +296,6 @@ const AddNewCar = () => {
   };
   
   
- 
-  
-
-
-
- 
-
- 
 
 const addToData=async()=>{
 
@@ -331,15 +323,13 @@ const addToData=async()=>{
    .catch((err) => console.log(err))
 };
 
-const stateButton={
-  disabled: true
-}
+const [enable,setEnable]=useState(true)
 
 useEffect(()=>{
   console.log("IM here");
   if(x&&imgUrl){
     console.log("Odai taha jaabb");
-    stateButton.disabled=false
+    setEnable(false)
   }
 
 })
@@ -456,6 +446,7 @@ useEffect(()=>{
 
           />
         </div>
+        
         <div className="form-group">
           <input
             type="file"
@@ -478,7 +469,7 @@ useEffect(()=>{
 
     </div>
 
-     <button className="addcar" disabled={stateButton.disabled} type="button"  onClick={addToData}>
+     <button className="addcar" disabled={enable} type="button"  onClick={addToData}>
      add youre car 
    </button>
    </>
