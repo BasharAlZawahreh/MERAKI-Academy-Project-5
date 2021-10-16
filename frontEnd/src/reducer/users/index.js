@@ -9,6 +9,13 @@ const user = (state = initialState, { type, payload }) => {
     case "SET_USER":
       return { users: payload };
 
+    case "DELETE_USER":
+      return {
+        users: state.users.filter((elem) => {
+          return elem.user_id !== payload;
+        }),
+      };
+
     case "UPDATE_USER":
       return {
         users: state.users.map((elem) => {

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import axios from "axios";
 import {setSearches} from '../../actions/search'
-
+import './searchForm.css'
 function SearchForm() {
   const [carTypes, setcarTypes] = useState([]);
   const [carBrands, setcarBrands] = useState([]);
@@ -218,7 +218,7 @@ function SearchForm() {
     <div className="lg">
       <form>
         <div className="form-group">
-          <label htmlFor="carTypes">car type</label>
+          {/* <label htmlFor="carTypes">car type</label> */}
           <select
             id="carTypes"
             className="form-control form-control-lg"
@@ -239,7 +239,7 @@ function SearchForm() {
         </div>
 
         <div className="form-group">
-          <label htmlFor="carBrands">car brand</label>
+          {/* <label htmlFor="carBrands">car brand</label> */}
           <select
             id="carBrands"
             className="form-control form-control-lg"
@@ -259,7 +259,7 @@ function SearchForm() {
         </div>
 
         <div className="form-group">
-          <label htmlFor="carColors">car color</label>
+          {/* <label htmlFor="carColors">car color</label> */}
           <select
             id="carColors"
             className="form-control form-control-lg"
@@ -278,7 +278,7 @@ function SearchForm() {
         </div>
 
         <div className="form-group">
-          <label htmlFor="carYear">car year</label>
+          {/* <label htmlFor="carYear">car year</label> */}
           <select
             id="carYear"
             className="form-control form-control-lg"
@@ -298,7 +298,7 @@ function SearchForm() {
         </div>
 
         <div className="form-group">
-          <label htmlFor="model">car model</label>
+          {/* <label for="model">car model</label> */}
           <input
             type="text"
             className="form-control"
@@ -311,7 +311,7 @@ function SearchForm() {
         </div>
 
         <div className="form-group">
-          <label htmlFor="dayPrice">day price</label>
+          {/* <label htmlFor="dayPrice">day price</label> */}
           <input
             type="text"
             className="form-control"

@@ -34,7 +34,11 @@ function SearchResult() {
                   href="#"
                   id={car.car_id}
                   class="btn"
-                  onClick={() => dispatch(setSearchCarId(car.car_id))}
+                  onClick={() =>{ 
+                    history.push("/addRes")
+                    dispatch(setSearchCarId(car.car_id))
+                  }}
+                  
                 >
                   Rent Now
                 </button>

@@ -6,13 +6,14 @@ import { storage } from "../config";
 import { useSelector } from "react-redux";
 let car_id = 0
 let x =""
-let imgUrl =[]
+
 let odaisUrl=[]
 const AddNewCar = () => {
   let message =""
 
-
-  const state =useSelector((state)=>{
+ const [imgUrl,setImgUrl]=useState("")
+ const [x,setx]=useState("")
+   const state =useSelector((state)=>{
    return{token:state.token.token} 
   })
   console.log("stateCar",state.token);
@@ -233,7 +234,7 @@ const AddNewCar = () => {
            .getDownloadURL()
             .then(async(url) => {
               console.log(url);
-              x =  url
+              setx(url)
               console.log("odai",x);
              })
             
@@ -283,7 +284,7 @@ const AddNewCar = () => {
                 odaisUrl.push(url)
                 if(odaisUrl.length===e.target.files.length){
                 console.log(odaisUrl)
-                imgUrl=[...odaisUrl]
+                setImgUrl(odaisUrl)
               console.log(imgUrl);}
                 //setImgUrl((oldUrl=>[...oldUrl,url]))
               });
@@ -291,7 +292,7 @@ const AddNewCar = () => {
         );
       });
       Promise.all(promises)
-      console.log(odaisUrl);
+      // console.log(odaisUrl);
     }
   };
   
@@ -330,9 +331,10 @@ useEffect(()=>{
   if(x&&imgUrl){
     console.log("Odai taha jaabb");
     setEnable(false)
+
   }
 
-})
+},[x,imgUrl])
 
   return (
     <>
