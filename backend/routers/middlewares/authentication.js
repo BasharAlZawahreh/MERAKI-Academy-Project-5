@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken");
 
 const authentication = (req, res, next) => {
+  console.log("ddddd",req.headers.authorization);
   try {
     if (!req.headers.authorization) {
       console.log("bashar");

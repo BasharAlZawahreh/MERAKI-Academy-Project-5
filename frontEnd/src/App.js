@@ -14,12 +14,18 @@ import AdminDashboard from "./components/Admin/Dashboard/Dashboard";
 import AdminUsers from "./components/Admin/Users/Users";
 import AdminReservations from "./components/Admin/Reservations/Reservations";
 import AdminCars from "./components/Admin/Cars/Cars";
-import Slide from './components/slider/slide';
- import AddRates from './components/Rate/rates'
+
+import MyCars from './components/car/Mycars';
+import UpdateCar from './components/car/UpdateCar';
+// import Slide from './components/slider/slide';
 export default function App() {
   return (
     <div>
-          <Nav/>
+      <p>App</p>
+      <Route path="/updateCar/:id">
+         <UpdateCar/>
+        </Route>
+
         <Route path="/register">
           <Register/>
         </Route>
@@ -27,9 +33,13 @@ export default function App() {
           <Login/>
         </Route>
         <Route path="/slide">
-          <Slide/>
-      <SearchForm/>
-      <SearchResult/>
+
+        <MyCars/>
+          {/* <Nav/> */}
+          {/* <Slide/> */}
+      {/* <SearchForm/> */}
+      {/* <SearchResult/> */}
+
         </Route>
         {/* <Route path="/addRes">
           <AddReservation/>
@@ -40,6 +50,7 @@ export default function App() {
       </Route>
 
       <Route path="/admin/dashboard">
+    
         <AdminDashboard />
       </Route>
 
@@ -53,6 +64,9 @@ export default function App() {
 
       <Route path="/admin/cars">
         <AdminCars />
+      </Route>
+      <Route path="/addNewCar">
+        <AddNewCar />
       </Route>
       {/* <AddNewCar/> */}
     {/* <Profile/> */}

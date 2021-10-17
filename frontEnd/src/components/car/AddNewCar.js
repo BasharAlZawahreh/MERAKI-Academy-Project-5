@@ -297,14 +297,6 @@ const AddNewCar = () => {
   };
   
   
- 
-  
-
-
-
- 
-
- 
 
 const addToData=async()=>{
 
@@ -339,7 +331,7 @@ useEffect(()=>{
   if(x&&imgUrl){
     console.log("Odai taha jaabb");
     setEnable(false)
-    
+
   }
 
 },[x,imgUrl])
@@ -456,6 +448,7 @@ useEffect(()=>{
 
           />
         </div>
+        
         <div className="form-group">
           <input
             type="file"

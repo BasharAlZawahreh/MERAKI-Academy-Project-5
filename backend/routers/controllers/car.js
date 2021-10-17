@@ -123,9 +123,9 @@ const getCarById = (req, res) => {
 };
 
 const getCarByuserId = (req, res) => {
+ 
   const query = `SELECT * FROM cars INNER JOIN car_brands ON cars.car_id=car_brands.brand_id
-INNER JOIN car_types ON cars.car_id=car_types.typeCar_id 
-LEFT JOIN car_imgs ON cars.car_id=car_imgs.car_id
+INNER JOIN car_types ON cars.car_types_id=car_types.typeCar_id 
 WHERE cars.user_id=${req.token.user_id} AND cars.is_Deleted=0`;
 
   connection.query(query, (err, result) => {
@@ -149,19 +149,19 @@ WHERE cars.user_id=${req.token.user_id} AND cars.is_Deleted=0`;
 };
 
 const updateCarById = (req, res) => {
+  console.log("odai",req.body);
   const car_id = req.params.car_id;
-  const { color, carLicense, description, is_Available, day_price ,main_img} = req.body;
-  const query = `UPDATE cars set color=?,carLicense=?,description=?,is_Available=?,day_price=? WHERE car_id=?`;
+  const { color,  description,day_price , is_Available, main_img} = req.body;
+  const query = `UPDATE cars set color=?,description=?,is_Available=?,day_price=?,main_img=? WHERE car_id=${car_id}`;
   const data = [
     color,
-    carLicense,
     description,
     is_Available,
     day_price,
-    car_id,
     main_img
   ];
   connection.query(query, data, (err, result) => {
+    console.log(result);
     if (err) {
       return res.status(404).json({
         success: false,
@@ -212,7 +212,7 @@ const deleteCarById = (req, res) => {
 
   connection.query(query, (err, result) => {
     if (err) {
-      res.status(404).json({
+    return   res.status(404).json({
         success: false,
         message: `Server Error`,
         err: err,
