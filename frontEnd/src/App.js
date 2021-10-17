@@ -15,10 +15,12 @@ import AdminUsers from "./components/Admin/Users/Users";
 import AdminReservations from "./components/Admin/Reservations/Reservations";
 import AdminCars from "./components/Admin/Cars/Cars";
 import Slide from './components/slider/slide';
+import ResevationDash from './components/DashReservation/dashreservation'
 export default function App() {
   return (
     <div>
           <Nav/>
+          <ResevationDash/>
         <Route path="/register">
           <Register/>
         </Route>
@@ -26,7 +28,8 @@ export default function App() {
           <Login/>
         </Route>
         <Route path="/slide">
-          <Slide/>
+                <AddNewCar/>
+
       <SearchForm/>
       <SearchResult/>
         </Route>
