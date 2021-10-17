@@ -1,6 +1,7 @@
 button:disabled{
     background-color: red;
     color: white;
+    cursor: pointer;
 }
 button:enabled{
     background-color: green;

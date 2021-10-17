@@ -32,14 +32,19 @@ const AddReservation = () => {
 
   // })
   let car_id=state.car_Id
-  const calc=async()=>{
-    let price = newvalue.day_price;
-    let difference =await new Date(PickUpDate).getTime() - new Date(returnDate).getTime();
-    let days =await Math.ceil(difference / (1000 * 3600 * 24));
-    console.log("difference",difference);
-    console.log("days",days);
-    setAmount(days * price);
-  }
+//   const calc=()=>{
+// try {
+//   let price = newvalue.day_price;
+//   let difference = new Date(PickUpDate).getTime() - new Date(returnDate).getTime();
+//   let days = Math.ceil(difference / (1000 * 3600 * 24));
+//   console.log("difference",difference);
+//   console.log("days",days);
+//   setAmount(days * price);
+  
+// } catch (error) {
+//   console.log(error);
+// }
+//   }
 //   const updateResrvationById=async(id)=>{
 //         calc();
 //     try {
@@ -59,11 +64,11 @@ const updatebooking = async (car_id) => {
   // let data={ returnDate=newvalue.returnDate, PickUpDate=newvalue.returnDate, amount, car_id }
   console.log(newvalue);
   try {
-        // let price = newvalue.day_price;
-        // let difference = new Date(PickUpDate).getTime() - new Date(returnDate).getTime();
-        // let days = Math.ceil(difference / (1000 * 3600 * 24));
-        // setAmount(days * price);
-        calc();
+        let price = newvalue.day_price;
+        let difference = new Date(PickUpDate).getTime() - new Date(returnDate).getTime();
+        let days = Math.ceil(difference / (1000 * 3600 * 24));
+        setAmount(days * price);
+        // calc();
         console.log("pick",PickUpDate);
         console.log("return",returnDate);
         console.log("id",car_id);
@@ -76,7 +81,7 @@ const updatebooking = async (car_id) => {
               headers: { Authorization: `Bearer ${state.token}` },
             }
           )
-          .then(async(result) => {
+          .then((result) => {
            dispatch(addReservation(result.data.Reservations));
           })
           .catch((err) => {
