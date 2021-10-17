@@ -62,7 +62,6 @@ const AddReservation = () => {
 // }
 const updatebooking = async (car_id) => {
   // let data={ returnDate=newvalue.returnDate, PickUpDate=newvalue.returnDate, amount, car_id }
-  console.log(newvalue);
   try {
         let price = newvalue.day_price;
         let difference = new Date(PickUpDate).getTime() - new Date(returnDate).getTime();
@@ -128,7 +127,7 @@ const updatebooking = async (car_id) => {
 // },[amount])
   return (
     <>
-    {state.editOrInsert?(
+    {!state.editOrInsert?(
       <div className="Reservation_content" style={{padding:"30px"}}>
         <label htmlFor="returnDate">Return Date</label>
       <input

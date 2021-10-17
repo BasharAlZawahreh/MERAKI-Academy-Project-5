@@ -1,6 +1,6 @@
 const initialState = {
   reservations: [],
-  editOrInsert:true,
+  editOrInsert:false,
   farhan:{}
 };
 const reservation = (state = initialState, { type, payload }) => {

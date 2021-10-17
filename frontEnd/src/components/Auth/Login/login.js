@@ -28,7 +28,7 @@ const  responsesuccessGoogle=(response)=>{
         setMessage("");
         dispatch(setToken(res.data.token))
         localStorage.setItem("token", res.data.token);
-        history.push("/slide");
+        history.push("/home");
       } else throw Error;
   }).catch((err) =>{
       if(err.message){
@@ -69,7 +69,7 @@ const Enter= async(e)=>{
     
 }
 
-// useEffect(() => {
+useEffect(() => {
 
 
     if (!state.token) {
@@ -77,7 +77,7 @@ const Enter= async(e)=>{
         
         //   history.push("/slide");
     }
-  });
+  },[state.token]);
 
 
     return(
