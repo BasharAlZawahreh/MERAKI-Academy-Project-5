@@ -44,7 +44,7 @@ const history=useHistory()
     }
     useEffect(() => {
       getReservationByuser();
-      }, [state.reservations]);
+      }, []);
     return(
         <div style={{"padding":"30px"}}>
             <button onClick={()=>getReservationByuser()}  >GET My Reservations</button>
@@ -57,6 +57,7 @@ const history=useHistory()
       <th>Amount</th>
       <th>Brand</th>
       <th>Action</th>
+      <th>Rate</th>
     </tr>
   </thead>
   <tbody>
@@ -74,7 +75,7 @@ const history=useHistory()
               batch(()=>{
                 localStorage.setItem("elem",JSON.stringify(elem))
                   // dispatch(updateReservation(elem))
-                  // dispatch(setEditOrInsert(false))
+                  dispatch(setEditOrInsert(true))
                   history.push("/addRes")
                   deleteReservationById(elem.res_id)
               })
@@ -100,31 +101,3 @@ const history=useHistory()
     )
 }
 export default ResevationDash;
-
-{/* <div className="dashReserve">  
-<button onClick={getReservationByuser}  >GET My Reservations</button>
-{show&&
-state.reservations.map((elem,index)=>{
-    return(
-    <div key={index}>
-    <div>returnDate {elem.returnDate}</div>
-    <div>PickUpDate {elem.PickUpDate}</div>
-    <div>amount{elem.amount}</div>
-    <input
-   type="date"
-   placeholder="returnDate"
-   onChange={(e) => setReturnDate(e.target.value)}
- />
- <input
-   type="date"
-   placeholder="PickUpDate"
-   onChange={(e) => setPickUpDate(e.target.value)}
- />
- <input type="number" disabled value={`${amount}`} placeholder="amount" />
-<button onClick={()=>{updateResrvationById()}}>Update</button>
-<button onClick={()=>{deleteReservationById()}}>Delete</button>
-    </div>
-    )
-})}
-)
-   </div> */}
