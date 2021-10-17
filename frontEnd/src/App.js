@@ -36,6 +36,9 @@ export default function App() {
         <Route path="/addRes">
           <AddReservation/>
         </Route>
+    <Route path="/updateCar/:id">
+         <UpdateCar/>
+        </Route>
       <Route path="/admin/login">
         <AdminLogin />
       </Route>
