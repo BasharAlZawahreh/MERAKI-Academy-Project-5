@@ -7,10 +7,10 @@ const createNewReservation=(req,res)=>{
     const data=[returnDate,PickUpDate,amount, users_id, car_id]
    
     reservationModel.query(query,data,(err,result)=>{
-        if (!result.affectedRows){
+        if (!result){
           return res.status(500).json({
             success: false,
-            message: `Server Error`,
+            message: `backend Server Error`,
         
           });
         }
@@ -26,27 +26,23 @@ const createNewReservation=(req,res)=>{
 
 const getAllReservationsByUserId=(req,res)=>{
   const userId=req.token.user_id
-  console.log(req.token)
-  console.log(userId)
-  const query=`SELECT * FROM reservations INNER JOIN users ON reservations.res_id= users.user_id
- INNER JOIN cars ON reservations.res_id=cars.car_id 
- INNER JOIN car_brands ON reservations.car_id=car_brands.brand_id 
- INNER JOIN  car_types ON reservations.car_id = car_types.typeCar_id
-
- WHERE reservations.res_id=?`
+  const query=`SELECT * FROM reservations INNER JOIN users ON reservations.users_id= users.user_id
+  INNER JOIN cars ON reservations.car_id=cars.car_id 
+  INNER JOIN car_brands ON reservations.car_id=car_brands.brand_id 
+   INNER JOIN  car_types ON reservations.car_id = car_types.typeCar_id
+  WHERE reservations.users_id=?`
 
  const data=[userId]
 
      reservationModel.query(query,data,(err,result)=>{
-    console.log(result)
      if (result.length){
-        res.status(201).json({
+      return  res.status(201).json({
           success: true,
           message: `All Reservation `,
           Reservations: result,
         })
       } else {
-        res.status(500).json({
+       return res.status(500).json({
           success: false,
           message: `Server Error`,
          key:err
@@ -57,14 +53,13 @@ const getAllReservationsByUserId=(req,res)=>{
 
 const updateReservationById=(req,res)=>{
 const id=req.params.id;
-   const{returnDate,PickUpDate,amount, users_id, car_id}=req.body;
-    const query=`UPDATE reservations SET returnDate=?,PickUpDate=?,amount=?, users_id=?, car_id=? WHERE res_id=${id}`
-   const data=[returnDate,PickUpDate,amount, users_id, car_id]
+   const{returnDate,PickUpDate,amount}=req.body;
+    const query=`UPDATE reservations SET returnDate=?,PickUpDate=?,amount=? WHERE res_id=${id}`
+   const data=[returnDate,PickUpDate,amount]
 
    reservationModel.query(query,data,(err,result)=>{
-       console.log(result)
-     if(result.affectedRows) {
-        res.status(202).json({
+     if(result) {
+      return  res.status(202).json({
           success: true,
           message: ` Success updated`,
           reservation: result,
@@ -97,6 +92,5 @@ const deleteReservationById=(req,res)=>{
           }
     })
 } 
-
 
 module.exports={createNewReservation,getAllReservationsByUserId,updateReservationById,deleteReservationById}

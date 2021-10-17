@@ -16,7 +16,7 @@ const AddNewCar = () => {
    const state =useSelector((state)=>{
    return{token:state.token.token} 
   })
-  console.log("stateCar",state.token);
+   console.log("stateCar",state.token);
 
 
   const [progress, setProgress] = useState(0);
