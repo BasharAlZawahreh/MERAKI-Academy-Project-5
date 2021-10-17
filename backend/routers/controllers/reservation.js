@@ -93,5 +93,4 @@ const deleteReservationById=(req,res)=>{
     })
 } 
 
-
 module.exports={createNewReservation,getAllReservationsByUserId,updateReservationById,deleteReservationById}
