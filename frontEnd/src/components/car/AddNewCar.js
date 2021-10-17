@@ -16,7 +16,7 @@ const AddNewCar = () => {
    const state =useSelector((state)=>{
    return{token:state.token.token} 
   })
-  // console.log("stateCar",state.token);
+   console.log("stateCar",state.token);
 
 
   const [progress, setProgress] = useState(0);
@@ -209,11 +209,11 @@ const AddNewCar = () => {
     }
   };
 
-  // useEffect(() => {
-  //   getCarBrands();
-  //   getCarTypes();
-  //   getAllYears();
-  // }, []);
+  useEffect(() => {
+    getCarBrands();
+    getCarTypes();
+    getAllYears();
+  }, []);
 
   const addMainIm = (e) => {
     let task=[]
@@ -334,15 +334,15 @@ const addToData=async()=>{
 
 const [enable,setEnable]=useState(true)
 
-// useEffect(()=>{
-//   console.log("IM here");
-//   if(x&&imgUrl){
-//     console.log("Odai taha jaabb");
-//     setEnable(false)
+useEffect(()=>{
+  console.log("IM here");
+  if(x&&imgUrl){
+    console.log("Odai taha jaabb");
+    setEnable(false)
     
-//   }
+  }
 
-// },[x,imgUrl])
+},[x,imgUrl])
 
   return (
     <>
