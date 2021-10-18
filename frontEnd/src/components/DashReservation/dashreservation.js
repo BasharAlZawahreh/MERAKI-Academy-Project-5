@@ -4,8 +4,8 @@ import { useDispatch, useSelector,batch } from "react-redux";
 import{setReservation,deleteReservation,setEditOrInsert,updateReservation}from "../../actions/reservations"
 import Table from 'react-bootstrap/Table';
 import { useHistory } from "react-router";
-//import EditIcon from '@mui/icons-material/Edit';
-//import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
 import {MdOutlineStarRate  } from 'react-icons/md';
 
 
@@ -72,7 +72,7 @@ const history=useHistory()
       <td>{elem.returnDate}</td>
       <td>{elem.amount}</td>
       <td>{elem.brand}</td>
-      {/* <td>{!elem.isConfirmed?(
+      <td>{!elem.isConfirmed?(
           <EditIcon
           onClick={()=>{
               batch(()=>{
@@ -84,18 +84,17 @@ const history=useHistory()
               })
           }}
           
-          /> */}
-       {/* ):""} */}
-       {/* </td> */}
-      {/* //       <td>{!elem.isConfirmed?( */}
-      {/* //    <DeleteIcon */}
-      {/* //    onClick={()=>{ */}
-      {/* //       deleteReservationById(elem.res_id)
-      //     }} */}
+          />
+      ):""}
+</td>
+    <td>{!elem.isConfirmed?( 
+     <DeleteIcon
+         onClick={()=>{ 
+             deleteReservationById(elem.res_id)
+         }} 
           
-      {/* //     /> */}
-      {/* // ):""}</td> */}
-     <td></td>
+         /> 
+      ):""}</td> 
       <td> <MdOutlineStarRate onClick={()=>
             
             history.push(`/rate/${elem.car_id}`)}/>  
