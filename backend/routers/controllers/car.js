@@ -178,21 +178,41 @@ const toggleCarAvailability = (req, res) => {
 
   connection.query(query, data, (err, result) => {
     if (err) {
+      throw err;
+    }
+
+    if (result) {
+      currentState = await result[0].is_Available;
+      let nextState = currentState === 0 ? 1 : 0;
+      const query = `UPDATE cars SET is_Available=${nextState} WHERE car_id=${id}`;
+
+      connection.query(query, (err, result) => {
+        if (err) {
+          return res.status(500).json({
+            success: false,
+            message: `server error`,
+          });
+        }
+        if (result.affectedRows) {
+          return res.status(202).json({
+            success: true,
+            message: `Success`,
+            result: result,
+          });
+        } else {
+          return res.status(404).json({
+            success: false,
+            message: `The result => ${id} not found`,
+          });
+        }
+      });
+
+    } else {
       return res.status(404).json({
         success: false,
-        message: `Server Error`,
-        err: err,
-      });
-    } else if (!result.affectedRows) {
-      return res.status(500).json({
-        success: false,
-        message: `car not found`,
+        message: `The result => ${id} not found`,
       });
     }
-    return res.status(202).json({
-      success: true,
-      result: result,
-    });
   });
 };
 
@@ -241,6 +261,7 @@ const carsFilter = (req, res) => {
     AND day_price BETWEEN 20 AND 30;`
 */
 
+ 
   const query = `SELECT * FROM cars 
   INNER JOIN car_types ON car_types.typeCar_id = car_types_id
   INNER JOIN car_brands ON car_brands.brand_id = car_brand_id

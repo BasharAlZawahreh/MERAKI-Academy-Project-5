@@ -11,7 +11,6 @@ import { BiCheckbox } from "react-icons/bi";
 import Form from "react-bootstrap/Form";
 
 const MyCars = () => {
- 
   const history = useHistory();
 
   const state = useSelector((state) => {
@@ -41,8 +40,24 @@ const MyCars = () => {
     axios
       .put(`http://localhost:5000/car/delete/${car_id}`)
       .then((result) => {
-        console.log(result.data.result);
         dispatch(deleteCar(car_id));
+      })
+      .catch((err) => {
+        console.log("err", err);
+      });
+  };
+
+  const toggleCarAvailability = (id) => {
+    axios
+      .put(
+        `http://localhost:5000/car/available/${id}`,
+        {},
+        {
+          headers: { Authorization: `Bearer ${state.token}` },
+        }
+      )
+      .then((result) => {
+        console.log(result.data.result);
       })
       .catch((err) => {
         console.log("err", err);
@@ -53,11 +68,8 @@ const MyCars = () => {
     git();
   }, []);
 
-  
   console.log("state.cars", state.cars);
 
-
-  
   return (
     <div>
       <Table striped bordered hover>
@@ -92,8 +104,7 @@ const MyCars = () => {
         <tbody>
           {state.cars.length &&
             state.cars.map((car, i) => {
-              
-              console.log("basharcar",car.is_Available);
+              console.log("basharcar", car.is_Available);
               return (
                 <tr key={i}>
                   <td class="w-25">
@@ -107,27 +118,28 @@ const MyCars = () => {
                   <td>{car.model}</td>
                   <td>{car.manifactoring_year}</td>
                   <td>
-                  
-                    {car.is_Available===0 ? (
+                    {car.is_Available === 0 ? (
                       <label style={{ marginTop: "20px" }} class="switch">
                         <input
                           type="checkbox"
-                          onClick={()=>{}}
+                          onClick={() => {
+                            toggleCarAvailability(car.car_id);
+                          }}
                         />
                         <span class="slider round"></span>
-                      
                       </label>
                     ) : (
                       <label style={{ marginTop: "20px" }} class="switch">
                         <input
-                          
                           checked="true"
                           type="checkbox"
-                          
+                          onClick={() => {
+                            toggleCarAvailability(car.car_id);
+                          }}
                         />
                         <span class="slider round"></span>
                       </label>
-                    )}{" "}
+                    )}
                   </td>
                   <td>{car.description}</td>
                   <td>{car.day_price}JD</td>
@@ -140,8 +152,8 @@ const MyCars = () => {
                         color: "green",
                       }}
                       onClick={() => {
-                        localStorage.setItem("car",JSON.stringify(car))
-                        history.push(`/updateCar/${car.car_id}`)
+                        localStorage.setItem("car", JSON.stringify(car));
+                        history.push(`/updateCar/${car.car_id}`);
                       }}
                     ></BiEditAlt>{" "}
                     <RiDeleteBin5Line
