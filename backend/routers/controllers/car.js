@@ -94,6 +94,7 @@ const getCarById = (req, res) => {
   const query = `SELECT * FROM cars INNER JOIN car_brands ON cars.car_id=car_brands.brand_id
      INNER JOIN car_types ON cars.car_id=car_types.typeCar_id 
      INNER JOIN car_imgs ON cars.car_id=car_imgs.car_id
+    
      WHERE cars.car_id=${car_id} AND cars.is_Deleted=0`;
 
   connection.query(query, (err, result) => {
