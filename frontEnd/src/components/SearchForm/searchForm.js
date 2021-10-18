@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import axios from "axios";
-import {setSearches} from '../../actions/search'
-import './searchForm.css'
+import { setSearches } from "../../actions/search";
+import "./searchForm.css";
 function SearchForm() {
   const [carTypes, setcarTypes] = useState([]);
   const [carBrands, setcarBrands] = useState([]);
@@ -215,65 +215,132 @@ function SearchForm() {
   };
 
   return (
-<>
-<div class="container-fluid bg-white pt-3 px-lg-5">
+    <>
+      <div class="container-fluid bg-white pt-3 px-lg-5">
         <div class="row w-75">
-            <div class="col-xl-2 col-lg-4 col-md-6 px-2">
-                <select class="custom-select px-4 mb-3" style={{height: "50px"}}>
-                    <option selected>choose a type</option>
-                    <option value="1">Location 1</option>
-                    <option value="2">Location 2</option>
-                    <option value="3">Location 3</option>
-                </select>
+          <div class="col-xl-2 col-lg-4 col-md-6 px-2">
+            <select
+              class="custom-select px-4 mb-3"
+              className="form-control form-control-lg"
+              onChange={(e) => {
+                setcarType(e.target.value);
+              }}
+              style={{ height: "50px" }}
+            >
+              <option defaultValue>choose a type</option>
+              {carTypes &&
+                carTypes.map((type, i) => {
+                  return (
+                    <option value={type.car_type} key={i}>
+                      {type.car_type}
+                    </option>
+                  );
+                })}
+            </select>
+          </div>
+          <div class="col-xl-2 col-lg-4 col-md-6 px-2">
+            <select
+              class="custom-select px-4 mb-3"
+              onChange={(e) => setcarBrand(e.target.value)}
+              style={{ height: "50px" }}
+            >
+              <option defaultValue>choose a brand</option>
+
+              {carBrands &&
+                carBrands.map((brand, i) => {
+                  return (
+                    <option value={brand.brand} key={i}>
+                      {brand.brand}
+                    </option>
+                  );
+                })}
+            </select>
+          </div>
+          <div class="col-xl-2 col-lg-4 col-md-6 px-2">
+            <select
+              class="custom-select px-4 mb-3"
+              onChange={(e) => setcarColor(e.target.value)}
+              style={{ height: "50px" }}
+            >
+              <option defaultValue>choose a color</option>
+
+              {colors.map((color, i) => {
+                return (
+                  <option value={color} key={i}>
+                    {color}
+                  </option>
+                );
+              })}
+            </select>
+          </div>
+          <div class="col-xl-2 col-lg-4 col-md-6 px-2">
+            <select
+              class="custom-select px-4 mb-3"
+              onChange={(e) => setcarYear(e.target.value)}
+              style={{ height: "50px" }}
+            >
+              <option defaultValue>choose a year</option>
+
+              {allYears &&
+                allYears.map((year, i) => {
+                  return (
+                    <option value={year} key={i}>
+                      {year}
+                    </option>
+                  );
+                })}
+            </select>
+          </div>
+          <div class="col-xl-2 col-lg-4 col-md-6 px-2">
+            <div class="date mb-3" id="date" data-target-input="nearest">
+              <input
+                type="text"
+                class="form-control p-4 datetimepicker-input"
+                onChange={(e) => {
+                  setModel(e.target.value);
+                }}
+                placeholder="Type model"
+                data-target="#date"
+                data-toggle="datetimepicker"
+              />
             </div>
-            <div class="col-xl-2 col-lg-4 col-md-6 px-2">
-                <select class="custom-select px-4 mb-3" style={{height: "50px"}}>
-                    <option selected>choose a brand</option>
-                    <option value="1">Location 1</option>
-                    <option value="2">Location 2</option>
-                    <option value="3">Location 3</option>
-                </select>
+          </div>
+          <div class="col-xl-2 col-lg-4 col-md-6 px-2">
+            <div class="date mb-3" id="date" data-target-input="nearest">
+              <input
+                type="text"
+                class="form-control p-4 datetimepicker-input"
+                onChange={(e) => {
+                  setpriceFrom(e.target.value);
+                }}
+                placeholder="day Price From"
+              />
             </div>
-            <div class="col-xl-2 col-lg-4 col-md-6 px-2">
-                <select class="custom-select px-4 mb-3" style={{height: "50px"}}>
-                    <option selected>choose a type</option>
-                    <option value="1">Car 1</option>
-                    <option value="2">Car 1</option>
-                    <option value="3">Car 1</option>
-                </select>
+          </div>
+          <div class="col-xl-2 col-lg-4 col-md-6 px-2">
+            <div class="time mb-3" id="time" data-target-input="nearest">
+              <input
+                type="text"
+                class="form-control p-4 datetimepicker-input"
+                placeholder="day Price to"
+                onChange={(e) => {
+                  setpriceTo(e.target.value);
+                }}
+              />
             </div>
-            <div class="col-xl-2 col-lg-4 col-md-6 px-2">
-                <select class="custom-select px-4 mb-3" style={{height: "50px"}}>
-                    <option selected>choose a year</option>
-                    <option value="1">Car 1</option>
-                    <option value="2">Car 1</option>
-                    <option value="3">Car 1</option>
-                </select>
-            </div>
-            <div class="col-xl-2 col-lg-4 col-md-6 px-2">
-                <div class="date mb-3" id="date" data-target-input="nearest">
-                    <input type="text" class="form-control p-4 datetimepicker-input" placeholder="Type model"
-                        data-target="#date" data-toggle="datetimepicker" />
-                </div>
-            </div>
-            <div class="col-xl-2 col-lg-4 col-md-6 px-2">
-                <div class="date mb-3" id="date" data-target-input="nearest">
-                    <input type="text" class="form-control p-4 datetimepicker-input" placeholder="day Price From"
-                        data-target="#date" data-toggle="datetimepicker" />
-                </div>
-            </div>
-            <div class="col-xl-2 col-lg-4 col-md-6 px-2">
-                <div class="time mb-3" id="time" data-target-input="nearest">
-                    <input type="text" class="form-control p-4 datetimepicker-input" placeholder="day Price to"
-                        data-target="#time" data-toggle="datetimepicker" />
-                </div>
-            </div>
-            <div class="col-xl-2 col-lg-4 col-md-6 px-2">
-                <button class="btn btn-primary btn-block mb-3"  style={{height: "50px"}}>Search</button>
-            </div>
+          </div>
+          <div class="col-xl-2 col-lg-4 col-md-6 px-2">
+            <button
+              class="btn btn-primary btn-block mb-3"
+              onClick={submitSearch}
+              style={{ height: "50px" }}
+            >
+              Search
+            </button>
+          </div>
         </div>
-    </div>
-</>
+      </div>
+    </>
   );
 }
 
@@ -284,10 +351,7 @@ export default SearchForm;
   <div className="form-group">
     <select
       id="carTypes"
-      className="form-control form-control-lg"
-      onChange={(e) => {
-        setcarType(e.target.value);
-      }}
+
     >
       <option defaultValue>choose a type</option>
       {carTypes &&
@@ -305,18 +369,9 @@ export default SearchForm;
     <select
       id="carBrands"
       className="form-control form-control-lg"
-      onChange={(e) => setcarBrand(e.target.value)}
-    >
-      <option defaultValue>choose a brand</option>
 
-      {carBrands &&
-        carBrands.map((brand, i) => {
-          return (
-            <option value={brand.brand} key={i}>
-              {brand.brand}
-            </option>
-          );
-        })}
+    >
+
     </select>
   </div>
 
@@ -324,17 +379,9 @@ export default SearchForm;
     <select
       id="carColors"
       className="form-control form-control-lg"
-      onChange={(e) => setcarColor(e.target.value)}
-    >
-      <option defaultValue>choose a type</option>
 
-      {colors.map((color, i) => {
-        return (
-          <option value={color} key={i}>
-            {color}
-          </option>
-        );
-      })}
+    >
+
     </select>
   </div>
 
@@ -342,18 +389,8 @@ export default SearchForm;
     <select
       id="carYear"
       className="form-control form-control-lg"
-      onChange={(e) => setcarYear(e.target.value)}
     >
-      <option defaultValue>choose a year</option>
 
-      {allYears &&
-        allYears.map((year, i) => {
-          return (
-            <option value={year} key={i}>
-              {year}
-            </option>
-          );
-        })}
     </select>
   </div>
 
@@ -375,9 +412,7 @@ export default SearchForm;
       className="form-control"
       id="dayPriceFrom"
       placeholder="15"
-      onChange={(e) => {
-        setpriceFrom(e.target.value);
-      }}
+
     />
     -
     <input
@@ -385,14 +420,12 @@ export default SearchForm;
       className="form-control"
       id="dayPriceTo"
       placeholder="300"
-      onChange={(e) => {
-        setpriceTo(e.target.value);
-      }}
+
     />
   </div>
 </form>
 
-<button className="btn btn-success" type="button" onClick={submitSearch}>
+<button className="btn btn-success" type="button" >
   Search
 </button>
 </div>

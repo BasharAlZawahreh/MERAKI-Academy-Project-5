@@ -119,7 +119,7 @@ const getCarById = (req, res) => {
 };
 
 const getCarByuserId = (req, res) => {
-  const query = `SELECT * FROM cars INNER JOIN car_brands ON cars.car_id=car_brands.brand_id
+  const query = `SELECT * FROM cars INNER JOIN car_brands ON cars.car_brand_id=car_brands.brand_id
 INNER JOIN car_types ON cars.car_types_id=car_types.typeCar_id 
 WHERE cars.user_id=${req.token.user_id} AND cars.is_Deleted=0`;
 
@@ -172,11 +172,9 @@ const updateCarById = (req, res) => {
 
 const toggleCarAvailability = (req, res) => {
   const car_id = req.params.car_id;
-  const ava = req.body.is_Available;
-  const data = [ava, car_id];
-  const query = `UPDATE cars SET is_Available=? WHERE car_id=?`;
+  const checkQuery = `SELECT is_Available FROM cars WHERE car_id=${car_id}`;
 
-  connection.query(query, data, (err, result) => {
+  connection.query(checkQuery, async (err, result) => {
     if (err) {
       throw err;
     }
@@ -184,7 +182,7 @@ const toggleCarAvailability = (req, res) => {
     if (result) {
       currentState = await result[0].is_Available;
       let nextState = currentState === 0 ? 1 : 0;
-      const query = `UPDATE cars SET is_Available=${nextState} WHERE car_id=${id}`;
+      const query = `UPDATE cars SET is_Available=${nextState} WHERE car_id=${car_id}`;
 
       connection.query(query, (err, result) => {
         if (err) {

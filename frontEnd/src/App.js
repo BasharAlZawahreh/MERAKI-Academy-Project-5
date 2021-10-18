@@ -4,7 +4,7 @@ import SearchResult from "./components/SearchResult/searchResult";
 import Login from "./components/Auth/Login/login";
 import Register from "./components/Auth/Register/register";
 import Profile from "./components/Profile/profile";
-// import Nav from "./components/NavBar/nav";
+import Nav from "./components/NavBar/nav";
 import AddReservation from "./components/Reservation/reservation";
 import { Route } from "react-router";
 import AdminLogin from "./components/Admin/Login/Login";
@@ -26,7 +26,7 @@ import Contact from "./components/home/Contact";
 export default function App() {
   return (
     <div>
-      {/* <Nav /> */}
+      <Nav />
       <Switch>
         <Route exact path="/register">
           <Register />
@@ -36,6 +36,7 @@ export default function App() {
         </Route>
         <Route exact path="/">
           <Home />
+          <SearchResult />
         </Route>
         <Route exact path="/myres">
           <ResevationDash />
