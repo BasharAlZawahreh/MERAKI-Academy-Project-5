@@ -5,8 +5,12 @@ import { useParams } from "react-router";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { updateCar } from "../../actions/cars/index";
-
+import { useHistory } from "react-router";
 const UpdateCar = ({ car }) => {
+  const history = useHistory()
+
+  const carInfo = JSON.parse(localStorage.getItem("car")) 
+  console.log(carInfo);
 
     const state = useSelector((state) => {
         return { cars: state.car.cars,
@@ -16,7 +20,7 @@ const UpdateCar = ({ car }) => {
     const dispatch = useDispatch()
     
     const [message,setMessage]=useState("");  
-    const [available,setAvailable] = useState("");
+    const [available,setAvailable] = useState(1);
      const [disabled,setDisabled]=useState(true);
   const [mainImg,setMainImg]=useState("");
   const [carColor, setcarColor] = useState("");
@@ -218,22 +222,17 @@ const UpdateCar = ({ car }) => {
 //   })
 
   const addToData=async()=>{
-      let avl = 1
-      if(available==="no"){
-        avl=0
-      }else if(available==="yes"){
-        avl = 1
-      }
-
+      
+    
     let data = {   
-      color:carColor,
+      color:carColor || carInfo.color,
   
-     description:desc,
+     description:desc || carInfo.description,
  
-     day_price:dayPrice,
-     is_Available:avl,
+     day_price:dayPrice || carInfo.day_price,
+     is_Available:available|| carInfo.available,
 
-     main_img:mainImg
+     main_img:mainImg || carInfo.main_img
      }
      console.log(data,"data");
   
@@ -242,6 +241,8 @@ const UpdateCar = ({ car }) => {
     //   dispatch(updateCar())
     console.log(result)
     setMessage("updated Successfuly")
+    history.push("/mycars")
+
 
        })
        .catch(err=>{console.log("err");})
@@ -305,7 +306,22 @@ const UpdateCar = ({ car }) => {
 
           />
         </div>
-        <div className="form-group">
+        <select
+            id="aval"
+            className="form-control form-control-lg"
+            onChange={(e) => setAvailable(e.target.value)}
+          >
+            <option defaultValue>Availability</option>
+                <option value={1} key={1}>
+                  yes
+                </option>
+                <option value={0} key={2}>
+                  No
+                </option>
+            
+          </select>
+
+        {/* <div className="form-group">
           <label htmlFor="formGroupExampleInput2">Availability</label>
           <textarea
             type="text"
@@ -315,7 +331,7 @@ const UpdateCar = ({ car }) => {
             onChange={(e)=>{setAvailable(e.target.value.toLocaleLowerCase())}}
 
           />
-        </div>
+        </div> */}
         
 
       </form>

@@ -151,7 +151,7 @@ WHERE cars.user_id=${req.token.user_id} AND cars.is_Deleted=0`;
 const updateCarById = (req, res) => {
   console.log("odai",req.body);
   const car_id = req.params.car_id;
-  const { color,  description,day_price , is_Available, main_img} = req.body;
+  const { color,  description, day_price , is_Available, main_img} = req.body;
   const query = `UPDATE cars set color=?,description=?,is_Available=?,day_price=?,main_img=? WHERE car_id=${car_id}`;
   const data = [
     color,
@@ -183,9 +183,11 @@ const updateCarById = (req, res) => {
 
 const toggleCarAvailability = (req, res) => {
   const car_id = req.params.car_id;
-  const query = `UPDATE cars SET is_Available=0 WHERE car_id=${car_id}`;
+  const ava = req.body.is_Available
+  const data = [ava,car_id]
+  const query = `UPDATE cars SET is_Available=? WHERE car_id=?`;
 
-  connection.query(query, (err, result) => {
+  connection.query(query,data,(err, result) => {
     if (err) {
       return res.status(404).json({
         success: false,
