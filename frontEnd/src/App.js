@@ -17,6 +17,7 @@ import UpdateCar from "./components/car/UpdateCar";
 import MyCars from "./components/car/Mycars";
 import Home from "./components/home/home";
 import { Switch } from "react-router";
+import Contact from "./components/home/Contact";
 export default function App() {
   return (
     <div>
@@ -35,7 +36,7 @@ export default function App() {
           <ResevationDash />
         </Route>
         <Route exact path="/about">{/* about */}</Route>
-        <Route exact path="/contact">{/* contact */}</Route>
+        <Route exact path="/contact"><Contact/></Route>
         <Route exact path="/addRes">
           <AddReservation />
         </Route>
@@ -72,3 +73,4 @@ export default function App() {
     </div>
   );
 }
+
