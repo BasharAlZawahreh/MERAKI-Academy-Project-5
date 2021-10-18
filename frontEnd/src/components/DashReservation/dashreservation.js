@@ -4,15 +4,18 @@ import { useDispatch, useSelector,batch } from "react-redux";
 import{setReservation,deleteReservation,setEditOrInsert,updateReservation}from "../../actions/reservations"
 import Table from 'react-bootstrap/Table';
 import { useHistory } from "react-router";
-import EditIcon from '@mui/icons-material/Edit';
-import DeleteIcon from '@mui/icons-material/Delete';
+//import EditIcon from '@mui/icons-material/Edit';
+//import DeleteIcon from '@mui/icons-material/Delete';
+import {MdOutlineStarRate  } from 'react-icons/md';
+
+
 const ResevationDash=()=>{
 const dispatch=useDispatch()
 const history=useHistory()
     const [show, setShow] = useState(false);
    const state=useSelector((state)=>{
        return {
-           token:state.token.token ,
+          token:state.token.token ,
         reservations: state.reservation.reservations,
         car_Id:state.searches.car_Id,
         editOrInsert:state.reservation.editOrInsert
@@ -69,28 +72,34 @@ const history=useHistory()
       <td>{elem.returnDate}</td>
       <td>{elem.amount}</td>
       <td>{elem.brand}</td>
-      <td>{!elem.isConfirmed?(
+      {/* <td>{!elem.isConfirmed?(
           <EditIcon
           onClick={()=>{
               batch(()=>{
                 localStorage.setItem("elem",JSON.stringify(elem))
                   // dispatch(updateReservation(elem))
-                  dispatch(setEditOrInsert(true))
-                  history.push("/addRes")
-                  deleteReservationById(elem.res_id)
+                  // dispatch(setEditOrInsert(true))
+                  // history.push("/addRes")
+                  // deleteReservationById(elem.res_id)
               })
           }}
           
-          />
-      ):""}</td>
-            <td>{!elem.isConfirmed?(
-          <DeleteIcon
-          onClick={()=>{
-            deleteReservationById(elem.res_id)
-          }}
+          /> */}
+       {/* ):""} */}
+       {/* </td> */}
+      {/* //       <td>{!elem.isConfirmed?( */}
+      {/* //    <DeleteIcon */}
+      {/* //    onClick={()=>{ */}
+      {/* //       deleteReservationById(elem.res_id)
+      //     }} */}
           
-          />
-      ):""}</td>
+      {/* //     /> */}
+      {/* // ):""}</td> */}
+     <td></td>
+      <td> <MdOutlineStarRate onClick={()=>
+            
+            history.push(`/rate/${elem.car_id}`)}/>  
+      </td>
     </tr>
     )
     })}

@@ -17,9 +17,11 @@ import UpdateCar from "./components/car/UpdateCar";
 import MyCars from "./components/car/Mycars";
 import Home from "./components/home/home";
 import { Switch } from "react-router";
+import AddRates from "./components/Rate/rates"
+import CarInfo from  './components/car/CarInfo/info'
 export default function App() {
   return (
-    <div>
+     <div>
       <Nav />
       <Switch>
         <Route exact path="/register">
@@ -53,7 +55,7 @@ export default function App() {
       <Route exact path="/admin/login">
         <AdminLogin />
       </Route>
-
+   
       <Route exact path="/admin/dashboard">
         <AdminDashboard />
       </Route>
@@ -69,6 +71,20 @@ export default function App() {
       <Route exact path="/admin/cars">
         <AdminCars />
       </Route>
+    
+      <Route  exact path="/rate/:id">
+      
+      <AddRates/>
+      </Route>
+      
+    
+    <Route  exact path="/carinfo/:id">
+    
+     <CarInfo/>
+    </Route>
+
+  
+
     </div>
   );
 }
