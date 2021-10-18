@@ -22,6 +22,7 @@ import AddRates from "./components/Rate/rates";
 import CarInfo from "./components/car/CarInfo/info";
 
 import Contact from "./components/home/Contact";
+import Footer from "./components/Footer/footer";
 
 export default function App() {
   return (
@@ -60,7 +61,7 @@ export default function App() {
           <SearchResult />
         </Route>
       </Switch>
-
+<Footer/>
       <Route exact path="/admin/login">
         <AdminLogin />
       </Route>
