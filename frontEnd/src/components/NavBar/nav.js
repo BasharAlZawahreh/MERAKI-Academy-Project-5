@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { setToken } from "../../actions/login";
 import { Link } from "react-router-dom";
 import "./nav.css";
+import SearchForm from '../SearchForm/searchForm'
+
 const Nav = () => {
   const history = useHistory();
   const dispatch = useDispatch();
@@ -22,7 +24,7 @@ const Nav = () => {
                 <div className="d-inline-flex align-items-center">
                     <a className="text-body pr-3" href=""><i className="fa fa-phone-alt mr-2"></i>000932777777</a>
                     <span className="text-body">|</span>
-                    <a className="text-body px-3" href=""><i className="fa fa-envelope mr-2"></i>Info@AutoRental</a>
+                    <a className="text-body px-3" href=""><i className="fa fa-envelope mr-2"></i>Info@Auto Rental</a>
                 </div>
             </div>
             <div className="col-md-6 text-center text-lg-right">
@@ -70,7 +72,8 @@ const Nav = () => {
         </div>
     </div>
       ) : (
-        <div className="container-fluid position-relative nav-bar p-0">
+        <>
+        <div className="container-fluid position-relative nav-bar p-0 ">
         <div className="position-relative px-lg-5" style={{ zIndex :"9"}}>
             <nav className="navbar navbar-expand-lg bg-secondary navbar-dark py-3 py-lg-0 pl-3 pl-lg-5">
                 <a href="" className="navbar-brand">
@@ -81,11 +84,11 @@ const Nav = () => {
                 </button>
                 <div className="collapse navbar-collapse justify-content-between px-3" id="navbarCollapse">
                     <div className="navbar-nav ml-auto py-0">
-                    <Link className="nav-item nav-link active" to="/">Home</Link> 
                     <Link className="nav-item nav-link active" to="/myres"> My Reservation</Link> 
-                    <Link className="nav-item nav-link active" to="/mycars"> My Cars</Link> 
-                        <Link className="nav-item nav-link active" to="/about">About</Link> 
-                        <Link className="nav-item nav-link active" to="/contact">Contact</Link> 
+                    <Link className="nav-item nav-link" to="/">Home</Link> 
+                    <Link className="nav-item nav-link" to="/mycars"> My Cars</Link> 
+                        <Link className="nav-item nav-link" to="/about">About</Link> 
+                        <Link className="nav-item nav-link" to="/contact">Contact</Link> 
                         <div className="col-xl-2 col-lg-4 col-md-6 px-2">
                 <button className="btn btn-primary btn-block mb-3"  style={{height: "50px"}}>Log Out</button>
             </div>
@@ -95,6 +98,9 @@ const Nav = () => {
             </nav>
         </div>
     </div>
+    <SearchForm/>
+
+    </>
       )}
     </>
   );
