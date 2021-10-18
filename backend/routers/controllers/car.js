@@ -92,22 +92,23 @@ const addImgs = (req, res) => {
 const getCarById = (req, res) => {
   const car_id = req.params.car_id;
   const query = `SELECT * FROM cars INNER JOIN car_brands ON cars.car_id=car_brands.brand_id
-     INNER JOIN car_types ON cars.car_id=car_types.typeCar_id 
-     INNER JOIN car_imgs ON cars.car_id=car_imgs.car_id
-    
-     WHERE cars.car_id=${car_id} AND cars.is_Deleted=0`;
-
+  INNER JOIN car_types ON cars.car_id=car_types.typeCar_id 
+  LEFT JOIN car_imgs ON cars.car_id=car_imgs.car_id
+  WHERE cars.car_id=${car_id} AND cars.is_Deleted=0`;
+  
   connection.query(query, (err, result) => {
-    if (!result.length) {
-      return res.status(404).json({
-        success: false,
-        message: `not found any car`,
-      });
-    } else if (err) {
+    if (err) {
+      console.log(err);
       return res.status(500).json({
         success: false,
         message: `Server Error`,
         err: err,
+      });
+    } else if (!result.length) {
+      console.log('getCarById',result)
+      return res.status(404).json({
+        success: false,
+        message: `not found any car`,
       });
     }
     return res.status(201).json({
@@ -169,41 +170,13 @@ const updateCarById = (req, res) => {
   });
 };
 
-// const toggleCarAvailability = (req, res) => {
-//   const car_id = req.params.car_id;
-//   const ava = req.body.is_Available
-//   const data = [ava,car_id]
-//   const query = `UPDATE cars SET is_Available=? WHERE car_id=?`;
+const toggleCarAvailability = (req, res) => {
+  const car_id = req.params.car_id;
+  const ava = req.body.is_Available;
+  const data = [ava, car_id];
+  const query = `UPDATE cars SET is_Available=? WHERE car_id=?`;
 
-//   connection.query(query,data,(err, result) => {
-//     if (err) {
-//       return res.status(404).json({
-//         success: false,
-//         message: `Server Error`,
-//         err: err,
-//       });
-//     } else if (!result.affectedRows) {
-//       return res.status(500).json({
-//         success: false,
-//         message: `car not found`,
-//       });
-//     }
-//     return res.status(202).json({
-//       success: true,
-//       result: result,
-//     });
-//   });
-// };
-
-const toggleCarAvailability = async(req, res) => {
-  console.log('toggle')
-  const id = req.params.car_id;
-  console.log(req.params)
-  const user_id = await req.token.user_id;
-
-  const checkQuery = `SELECT is_Available FROM cars WHERE car_id=${id} and user_id=${user_id}`;
-  let currentState = 0;
-  connection.query(checkQuery, async (err, result) => {
+  connection.query(query, data, (err, result) => {
     if (err) {
       throw err;
     }
@@ -277,6 +250,16 @@ const carsFilter = (req, res) => {
   const brand_car = req.body.brand_car || "";
   const manifactoring_year = req.body.manifactoring_year || "";
   const model = req.body.model || "";
+
+  //test query
+  /*
+  `SELECT * FROM cars
+  INNER JOIN car_types ON car_types.typeCar_id = car_types_id
+    INNER JOIN car_brands ON car_brands.brand_id = car_brand_id
+    WHERE brand="seedan" AND label="BMW" AND color="red" AND model="520"
+    AND manifactoring_year="2020-02-02" AND is_Available=1
+    AND day_price BETWEEN 20 AND 30;`
+*/
 
  
   const query = `SELECT * FROM cars 

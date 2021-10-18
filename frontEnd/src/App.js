@@ -4,7 +4,7 @@ import SearchResult from "./components/SearchResult/searchResult";
 import Login from "./components/Auth/Login/login";
 import Register from "./components/Auth/Register/register";
 import Profile from "./components/Profile/profile";
-import Nav from "./components/NavBar/nav";
+// import Nav from "./components/NavBar/nav";
 import AddReservation from "./components/Reservation/reservation";
 import { Route } from "react-router";
 import AdminLogin from "./components/Admin/Login/Login";
@@ -18,15 +18,15 @@ import MyCars from "./components/car/Mycars";
 import Home from "./components/home/home";
 import { Switch } from "react-router";
 
-import AddRates from "./components/Rate/rates"
-import CarInfo from  './components/car/CarInfo/info'
+import AddRates from "./components/Rate/rates";
+import CarInfo from "./components/car/CarInfo/info";
 
 import Contact from "./components/home/Contact";
 
 export default function App() {
   return (
-     <div>
-      <Nav />
+    <div>
+      {/* <Nav /> */}
       <Switch>
         <Route exact path="/register">
           <Register />
@@ -40,9 +40,13 @@ export default function App() {
         <Route exact path="/myres">
           <ResevationDash />
         </Route>
-        <Route exact path="/about">{/* about */}</Route>
-        <Route exact path="/contact"><Contact/></Route>
-        <Route exact path="/addRes">
+        <Route exact path="/about">
+          {/* about */}
+        </Route>
+        <Route exact path="/contact">
+          <Contact />
+        </Route>
+        <Route exact path="/addRes/:id">
           <AddReservation />
         </Route>
         <Route exact path="/mycars">
@@ -59,7 +63,7 @@ export default function App() {
       <Route exact path="/admin/login">
         <AdminLogin />
       </Route>
-   
+
       <Route exact path="/admin/dashboard">
         <AdminDashboard />
       </Route>
@@ -75,21 +79,14 @@ export default function App() {
       <Route exact path="/admin/cars">
         <AdminCars />
       </Route>
-    
-      <Route  exact path="/rate/:id">
-      
-      <AddRates/>
+
+      <Route exact path="/rate/:id">
+        <AddRates />
       </Route>
-      
-    
-    <Route  exact path="/carinfo/:id">
-    
-     <CarInfo/>
-    </Route>
 
-  
-
+      <Route exact path="/carinfo/:id">
+        <CarInfo />
+      </Route>
     </div>
   );
 }
-

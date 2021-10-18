@@ -1,9 +1,9 @@
 const express = require("express");
-const {addToRate,getRateByCarId}=require("../controllers/rate");
-const {authentication}=require("../middlewares/authentication");
+const { addToRate, getRateByCarId } = require("../controllers/rate");
+const { authentication } = require("../middlewares/authentication");
 const rateRouter = express.Router();
 
-rateRouter.post("/:car_id",authentication,addToRate);
-rateRouter.get("/:car_id",authentication,getRateByCarId);
+rateRouter.post("/:car_id", authentication, addToRate);
+rateRouter.get("/:car_id", getRateByCarId);
 
-module.exports=rateRouter;
+module.exports = rateRouter;
