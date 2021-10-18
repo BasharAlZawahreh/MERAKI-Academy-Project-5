@@ -9,3 +9,7 @@ button:enabled{
     width: 150px;
     cursor: pointer;
 }
+
+input:checked + .slider {
+    background-color: rgb(61, 214, 22);
+  }
