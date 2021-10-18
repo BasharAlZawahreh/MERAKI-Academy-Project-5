@@ -5,6 +5,8 @@ import { addReservation ,updateReservation} from "../../actions/reservations";
 import { useHistory } from "react-router";
 import { jsx } from "@emotion/react";
 import * as moment from 'moment'
+import Card from 'react-bootstrap/Card'
+import Button from 'react-bootstrap/Button'
 import "./reservation.css"
 const AddReservation = () => {
   const dispatch = useDispatch();
@@ -127,57 +129,155 @@ const updatebooking = async (car_id) => {
 // },[amount])
   return (
     <>
-    {!state.editOrInsert?(
-      <div className="Reservation_content" style={{padding:"30px"}}>
-        <label htmlFor="returnDate">Return Date</label>
+     {!state.editOrInsert?(
+      // <div className="Reservation_content" style={{padding:"30px"}}>
+      //   <label htmlFor="returnDate">Return Date</label>
+      // <input
+      //   type="date"
+      //   placeholder="returnDate"
+      //   onChange={(e) => setReturnDate(e.target.value)}
+      //   id="returnDate"
+      // /><br/>
+      //   <label htmlFor="PickUpDate">PickUp Date</label>
+      // <input
+      //   type="date"
+      //   placeholder="PickUpDate"
+      //   onChange={(e) => setPickUpDate(e.target.value)}
+      //   id="PickUpDate"
+      // /><br/>
+      //   <label htmlFor="amount">Amount</label>
+      // <input type="number" id="amount" disabled value={`${amount}`} placeholder="amount" /><br/>
+      // <button
+      //   onClick={() => {
+      //     booking();
+      //   }}
+      // >
+      //   Reservation
+      // </button>
+      // </div>
+
+      <Card style={{color:"white" , width: '25rem',height:"400px" ,marginLeft:'700px',marginTop:'150px',backgroundColor:'#003638' }}>
+ 
+ <Card.Body>
+   <Card.Title style={{textAlign:'center',fontWeight:'bold',marginTop:"10px"}}>Reservation</Card.Title>
+   <Card.Text >
+  <input
+       style={{marginTop:'40px'}}
+       type="date"
+       placeholder="returnDate"
+       onChange={(e) => setReturnDate(e.target.value)}
+     />
+    
       <input
-        type="date"
-        placeholder="returnDate"
-        onChange={(e) => setReturnDate(e.target.value)}
-        id="returnDate"
-      /><br/>
-        <label htmlFor="PickUpDate">PickUp Date</label>
-      <input
-        type="date"
-        placeholder="PickUpDate"
-        onChange={(e) => setPickUpDate(e.target.value)}
-        id="PickUpDate"
-      /><br/>
-        <label htmlFor="amount">Amount</label>
-      <input type="number" id="amount" disabled value={`${amount}`} placeholder="amount" /><br/>
-      <button
-        onClick={() => {
-          booking();
-        }}
-      >
-        Reservation
-      </button>
-      </div>
+      style={{marginTop:'40px'}}
+         type="date"
+       placeholder="PickUpDate"
+       onChange={(e) => setPickUpDate(e.target.value)}
+     />
+      <input   style={{marginTop:'30px'}}   type="number" disabled value={`${amount}`} placeholder="amount" />
+   </Card.Text>
+ <Button     style={{marginTop:'45px',marginLeft:'130px'}} variant="secondary"    >Reservation</Button>
+ </Card.Body>
+</Card>
+    
     ):(
-      <div className="Reservation_content">
+    //   <div className="Reservation_content">
+    //   <input
+    //     type="date"
+    //     placeholder="returnDate"
+    //     defaultValue={moment(new Date(newvalue.returnDate)).format('YYYY-MM-DD')}
+    //     onChange={(e) => setReturnDate(e.target.value)}
+    //   />
+    //   <input
+    //     type="date"
+    //     placeholder="PickUpDate"
+    //     defaultValue={moment(new Date(newvalue.PickUpDate)).format('YYYY-MM-DD')}
+    //     onChange={(e) => setPickUpDate(e.target.value)}
+    //   />
+    //   <input type="number" disabled value={`${newvalue.amount}`} placeholder="amount" />
+    //   <button 
+    //     onClick={() => {
+    //       updatebooking(newvalue.car_id);
+    //     }}
+    //   >
+    //     Update Reservation
+    //   </button>
+    //   </div>
+
+<Card style={{ width: '25rem',height:"400px" ,marginLeft:'700px',marginTop:'150px',backgroundColor:'#CFB784' }}>
+ 
+ <Card.Body>
+   <Card.Title style={{textAlign:'center',fontWeight:'bold'}}>Reservation</Card.Title>
+   <Card.Text >
+  <input
+       style={{marginTop:'30px'}}
+       type="date"
+       placeholder="returnDate"
+       defaultValue={moment(new Date(newvalue.returnDate)).format('YYYY-MM-DD')}
+       onChange={(e) => setReturnDate(e.target.value)}
+     />
+    
       <input
-        type="date"
-        placeholder="returnDate"
-        defaultValue={moment(new Date(newvalue.returnDate)).format('YYYY-MM-DD')}
-        onChange={(e) => setReturnDate(e.target.value)}
-      />
-      <input
-        type="date"
-        placeholder="PickUpDate"
-        defaultValue={moment(new Date(newvalue.PickUpDate)).format('YYYY-MM-DD')}
-        onChange={(e) => setPickUpDate(e.target.value)}
-      />
-      <input type="number" disabled value={`${newvalue.amount}`} placeholder="amount" />
-      <button 
-        onClick={() => {
-          updatebooking(newvalue.car_id);
-        }}
-      >
-        Update Reservation
-      </button>
-      </div>
-    )}
+      style={{marginTop:'30px'}}
+         type="date"
+       placeholder="PickUpDate"
+       defaultValue={moment(new Date(newvalue.PickUpDate)).format('YYYY-MM-DD')}
+       onChange={(e) => setPickUpDate(e.target.value)}
+     />
+      <input   style={{marginTop:'30px'}}   type="number" disabled value={`${newvalue.amount}`} placeholder="amount" />
+   </Card.Text>
+ <Button     style={{marginTop:'35px',marginLeft:'100px'}} variant="secondary"  onClick={() => {
+           updatebooking(newvalue.car_id);
+        }}   >Update Reservation</Button>
+ </Card.Body>
+</Card>
+
+
+
+
+    )} 
+
+
+
+
+
+
+
+
+
+    
 </>
   );
 };
+
+
+
+// <Card style={{ width: '25rem',height:"400px" ,marginLeft:'700px',marginTop:'150px',backgroundColor:'#CFB784' }}>
+ 
+//  <Card.Body>
+//    <Card.Title style={{textAlign:'center',fontWeight:'bold'}}>Reservation</Card.Title>
+//    <Card.Text >
+//    <input
+//        style={{marginTop:'30px'}}
+//        type="date"
+//        placeholder="returnDate"
+//        onChange={(e) => setReturnDate(e.target.value)}
+//      />
+    
+//       <input
+//       style={{marginTop:'30px'}}
+//          type="date"
+//        placeholder="PickUpDate"
+//        onChange={(e) => setPickUpDate(e.target.value)}
+//      />
+//       <input   style={{marginTop:'30px'}}   type="number" disabled value={`${amount}`} placeholder="amount" />
+//    </Card.Text>
+//  <Button     style={{marginTop:'35px',marginLeft:'100px'}} variant="secondary"    >Reservation</Button>
+//  </Card.Body>
+// </Card>
+
+
+
+
+
 export default AddReservation;

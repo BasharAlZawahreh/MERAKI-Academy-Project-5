@@ -42,6 +42,21 @@ function SearchResult() {
                 >
                   Rent Now
                 </button>
+
+
+                <button
+                  href="#"
+                  id={car.car_id}
+                  class="btn"
+                  onClick={() =>{ 
+                    history.push(`/carinfo/${car.car_id}`)
+                  
+                  }}
+                  
+                >
+                view
+                </button>
+
               </div>
             );
           })}
