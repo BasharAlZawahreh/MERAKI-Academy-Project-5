@@ -37,7 +37,7 @@ const AddReservation = () => {
           headers: { Authorization: `Bearer ${state.token}` },
         })
         .then((result)=>{
-          // console.log(result.data.status)
+          console.log(result.data.status)
           setIsOk(result.data.status)
         }).catch((err)=>{
           console.log("status",err)
@@ -125,7 +125,7 @@ const AddReservation = () => {
   },[])
   return (
     <>
-      {!state.editOrInsert && isOk  ? (
+      {!state.editOrInsert && isOk? (
      
         
         <div className="container-fluid py-5">
