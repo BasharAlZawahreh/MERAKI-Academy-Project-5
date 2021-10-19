@@ -71,11 +71,13 @@ return(
 
 
     // </div>
-    <Card style={{color:"white" , width: '25rem',height:"400px" ,marginLeft:'700px',marginTop:'150px',backgroundColor:'#003638' }}>
+    <div class="container-fluid py-5">
+    <div class="container pt-5 pb-3">
+    <Card style={{color:"white" ,height:"400px",backgroundColor:'#003638' }}>
  
     <Card.Body>
-      <Card.Title style={{textAlign:'center',fontWeight:'bold',marginTop:"30px"}}>Create Rate</Card.Title>
-      <textarea placeholder="Comment" style={{marginTop:"40px",width:"363px"}}  onChange={(e)=>{setComment(e.target.value)}}  ></textarea>
+      <Card.Title style={{textAlign:'center',color:"white" ,fontWeight:'bold',marginTop:"30px"}}>Create Rate</Card.Title>
+      <textarea placeholder="Comment" style={{marginTop:"40px", width: '100%'}}  onChange={(e)=>{setComment(e.target.value)}}  ></textarea>
 <center>
 
       <Rating
@@ -83,7 +85,7 @@ return(
         
     onClick={CreateRate} 
        ratingValue={rate}
-        size={30}
+        size={45}
         label
         transition
         fillColor="orange"
@@ -114,7 +116,8 @@ return(
     </Card.Body>
    </Card>
 
-
+</div>
+</div>
 
 
 

@@ -3,7 +3,7 @@ import React from "react";
 const Footer=()=>{
     return(
         <>
-        <div className="container-fluid bg-secondary py-5 px-sm-3 px-md-5" style={{marginTop:"90px;"}}>
+        <div className="container-fluid bg-secondary py-5 px-sm-3 px-md-5" style={{marginTop:"90px"}}>
         <div className="row pt-5">
             <div className="col-lg-3 col-md-6 mb-5">
                 <h4 className="text-uppercase text-light mb-4">Get In Touch</h4>
@@ -57,7 +57,7 @@ const Footer=()=>{
                 <p className="mb-4">Volup amet magna clita tempor. Tempor sea eos vero ipsum. Lorem lorem sit sed elitr sed kasd et</p>
                 <div className="w-100 mb-3">
                     <div className="input-group">
-                        <input type="text" className="form-control bg-dark border-dark" style={{padding:"25px;"}} placeholder="Your Email"/>
+                        <input type="text" className="form-control bg-dark border-dark" style={{padding:"25px"}} placeholder="Your Email"/>
                         <div className="input-group-append">
                             <button className="btn btn-primary text-uppercase px-3">Sign Up</button>
                         </div>
