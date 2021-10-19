@@ -467,21 +467,21 @@ function Users() {
           accessor: "is_Blocked",
           Cell: ({ cell }) => {
             return cell.row.values.is_Blocked ? (
-              <label class="switch">
+              <label class="switch1">
                 <input
                   type="checkbox"
                   checked
                   onClick={() => toggleBlockUser(cell.row.values.id)}
                 />
-                <span class="slider round"></span>
+                <span class="slider1 round1"></span>
               </label>
             ) : (
-              <label class="switch">
+              <label class="switch1">
                 <input
                   type="checkbox"
                   onClick={() => toggleBlockUser(cell.row.values.id)}
                 />
-                <span class="slider round"></span>
+                <span class="slider1 round1"></span>
               </label>
             );
           },

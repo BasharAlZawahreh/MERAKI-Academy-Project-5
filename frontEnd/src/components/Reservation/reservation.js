@@ -9,11 +9,13 @@ import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 // import "./reservation.css";
 const AddReservation = () => {
+  const history=useHistory()
   const dispatch = useDispatch();
   const [returnDate, setReturnDate] = useState("");
   const [PickUpDate, setPickUpDate] = useState("");
   const [amount, setAmount] = useState();
   const [users_id, setUsers_id] = useState();
+  const [isOk, setIsOk] = useState(false);
   const car_id=useParams().id;
   //  const[car_id,setCar_id]=useState("2")
   //   const [price, setPrice] = useState();
@@ -29,39 +31,30 @@ const AddReservation = () => {
 
   let newvalue = JSON.parse(localStorage.getItem("elem"));
 
-  // useEffect(()=>{
-  //   console.log(state.reservation);
+     const getStatus=async()=>{
+       try{
+        await   axios.get("http://localhost:5000/reserve/user/check", {
+          headers: { Authorization: `Bearer ${state.token}` },
+        })
+        .then((result)=>{
+          console.log(result.data.status)
+          setIsOk(result.data.status)
+        }).catch((err)=>{
+          console.log("status",err)
+        })
+       }catch(err){
+         console.log(err)
+       }
+     
+     }
 
-  // })
-  // let car_id = state.car_Id;
-  //   const calc=()=>{
-  // try {
-  //   let price = newvalue.day_price;
-  //   let difference = new Date(PickUpDate).getTime() - new Date(returnDate).getTime();
-  //   let days = Math.ceil(difference / (1000 * 3600 * 24));
-  //   console.log("difference",difference);
-  //   console.log("days",days);
-  //   setAmount(days * price);
 
-  // } catch (error) {
-  //   console.log(error);
-  // }
-  //   }
-  //   const updateResrvationById=async(id)=>{
-  //         calc();
-  //     try {
-  //      await axios.put(`http://localhost:5000/reserve/${id}`,{returnDate,PickUpDate,amount},{
-  //           headers: { Authorization: `Bearer ${state.token}`},
-  //       }).then((result)=>{
-  //         console.log("Nssss",result);
-  //           dispatch(updateReservation(result.data.reservation))
-  //       }).catch((err)=>{
-  //           console.log("updateReserve",err)
-  //       })
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  // }
+
+
+
+
+
+
   const updatebooking = async (car_id) => {
     // let data={ returnDate=newvalue.returnDate, PickUpDate=newvalue.returnDate, amount, car_id }
     try {
@@ -127,38 +120,17 @@ const AddReservation = () => {
       console.log("catchPrice", error);
     }
   };
-  // useEffect(()=>{
-  // },[amount])
+  useEffect(()=>{
+    getStatus()
+  },[])
   return (
     <>
-      {!state.editOrInsert ? (
-        // <div Name="Reservation_content" style={{padding:"30px"}}>
-        //   <label htmlFor="returnDate">Return Date</label>
-        // <input
-        //   type="date"
-        //   placeholder="returnDate"
-        //   onChange={(e) => setReturnDate(e.target.value)}
-        //   id="returnDate"
-        // /><br/>
-        //   <label htmlFor="PickUpDate">PickUp Date</label>
-        // <input
-        //   type="date"
-        //   placeholder="PickUpDate"
-        //   onChange={(e) => setPickUpDate(e.target.value)}
-        //   id="PickUpDate"
-        // /><br/>
-        //   <label htmlFor="amount">Amount</label>
-        // <input type="number" id="amount" disabled value={`${amount}`} placeholder="amount" /><br/>
-        // <button
-        //   onClick={() => {
-        //     booking();
-        //   }}
-        // >
-        //   Reservation
-        // </button>
-        // </div>
+      {!state.editOrInsert && isOk? (
+     
+        
         <div className="container-fluid py-5">
         <div className="container pt-5 pb-3">
+          
         <Card
           style={{
             color: "white",
@@ -176,7 +148,7 @@ const AddReservation = () => {
                 fontWeight: "bold",
                 marginTop: "20px",
                 marginBottom: "20px",
-            color: "white",
+               color: "white",
 
               }}
             >
@@ -218,29 +190,9 @@ const AddReservation = () => {
         </Card>
         </div>
         </div>
-      ) : (
-        //   <div className="Reservation_content">
-        //   <input
-        //     type="date"
-        //     placeholder="returnDate"
-        //     defaultValue={moment(new Date(newvalue.returnDate)).format('YYYY-MM-DD')}
-        //     onChange={(e) => setReturnDate(e.target.value)}
-        //   />
-        //   <input
-        //     type="date"
-        //     placeholder="PickUpDate"
-        //     defaultValue={moment(new Date(newvalue.PickUpDate)).format('YYYY-MM-DD')}
-        //     onChange={(e) => setPickUpDate(e.target.value)}
-        //   />
-        //   <input type="number" disabled value={`${newvalue.amount}`} placeholder="amount" />
-        //   <button
-        //     onClick={() => {
-        //       updatebooking(newvalue.car_id);
-        //     }}
-        //   >
-        //     Update Reservation
-        //   </button>
-        //   </div>
+      ) : !isOk && !state.editOrInsert ?(
+        history.push("/editprofile")):(
+        
         <div className="container-fluid py-5">
         <div className="container pt-5 pb-3">
         <Card
@@ -302,28 +254,5 @@ const AddReservation = () => {
   );
 };
 
-// <Card style={{ width: '25rem',height:"400px" ,marginLeft:'700px',marginTop:'150px',backgroundColor:'#CFB784' }}>
-
-//  <Card.Body>
-//    <Card.Title style={{textAlign:'center',fontWeight:'bold'}}>Reservation</Card.Title>
-//    <Card.Text >
-//    <input
-//        style={{marginTop:'30px'}}
-//        type="date"
-//        placeholder="returnDate"
-//        onChange={(e) => setReturnDate(e.target.value)}
-//      />
-
-//       <input
-//       style={{marginTop:'30px'}}
-//          type="date"
-//        placeholder="PickUpDate"
-//        onChange={(e) => setPickUpDate(e.target.value)}
-//      />
-//       <input   style={{marginTop:'30px'}}   type="number" disabled value={`${amount}`} placeholder="amount" />
-//    </Card.Text>
-//  <Button     style={{marginTop:'35px',marginLeft:'100px'}} variant="secondary"    >Reservation</Button>
-//  </Card.Body>
-// </Card>
 
 export default AddReservation;
