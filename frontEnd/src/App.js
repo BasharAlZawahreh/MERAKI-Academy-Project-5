@@ -1,5 +1,5 @@
 import React from "react";
-import "./App.css";
+// import "./App.css";
 import SearchResult from "./components/SearchResult/searchResult";
 import Login from "./components/Auth/Login/login";
 import Register from "./components/Auth/Register/register";
@@ -48,18 +48,25 @@ export default function App() {
         <Route exact path="/contact">
           <Contact />
         </Route>
-        <Route exact path="/addRes/:id">
+        <Route  path="/addRes/:id">
           <AddReservation />
         </Route>
         <Route exact path="/mycars">
           <MyCars />
         </Route>
-        <Route exact path="/updateCar/:id">
+        <Route  path="/updateCar/:id">
           <UpdateCar />
         </Route>
         <Route exact path="/result">
           <SearchResult />
         </Route>
+        <Route  path="/rate/:id">
+        <AddRates />
+      </Route>
+
+      <Route path="/carinfo/:id">
+        <CarInfo />
+      </Route>
       </Switch>
 <Footer/>
       <Route exact path="/admin/login">
@@ -80,14 +87,6 @@ export default function App() {
 
       <Route exact path="/admin/cars">
         <AdminCars />
-      </Route>
-
-      <Route exact path="/rate/:id">
-        <AddRates />
-      </Route>
-
-      <Route exact path="/carinfo/:id">
-        <CarInfo />
       </Route>
     </div>
   );

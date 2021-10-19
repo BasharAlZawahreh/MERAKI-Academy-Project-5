@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setToken } from "../../actions/login";
 import { Link } from "react-router-dom";
-import "./nav.css";
+// import "./nav.css";
 import SearchForm from "../SearchForm/searchForm";
 
 const Nav = () => {
@@ -57,7 +57,7 @@ const Nav = () => {
         <div className="container-fluid position-relative nav-bar p-0">
           <div className="position-relative px-lg-5" style={{ zIndex: "9" }}>
             <nav className="navbar navbar-expand-lg bg-secondary navbar-dark py-3 py-lg-0 pl-3 pl-lg-5">
-              <a href="" className="navbar-brand">
+              <a href="/" className="navbar-brand">
                 <h1 className="text-uppercase text-primary mb-1">
                   Auto Rental
                 </h1>
@@ -90,7 +90,7 @@ const Nav = () => {
                       onClick={() => {
                         history.push("/login");
                       }}
-                      style={{ height: "50px" }}
+                      style={{ height: "50px",marginTop:"20px" }}
                     >
                       Login
                     </button>
@@ -123,12 +123,12 @@ const Nav = () => {
                   id="navbarCollapse"
                 >
                   <div className="navbar-nav ml-auto py-0">
-                    <Link className="nav-item nav-link active" to="/myres">
+                    <Link className="nav-item nav-link active" to="/">
+                      Home
+                    </Link>
+                    <Link className="nav-item nav-link " to="/myres">
                       {" "}
                       My Reservation
-                    </Link>
-                    <Link className="nav-item nav-link" to="/">
-                      Home
                     </Link>
                     <Link className="nav-item nav-link" to="/mycars">
                       {" "}
@@ -149,7 +149,7 @@ const Nav = () => {
                           //       Appcontext.setToken("");
                           history.push("/");
                         }}
-                        style={{ height: "50px" }}
+                        style={{ height: "50px" ,marginTop:"20px" }}
                       >
                         Log Out
                       </button>

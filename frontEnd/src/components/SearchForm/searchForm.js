@@ -216,12 +216,12 @@ function SearchForm() {
 
   return (
     <>
-      <div class="container-fluid bg-white pt-3 px-lg-5">
-        <div class="row w-75">
-          <div class="col-xl-2 col-lg-4 col-md-6 px-2">
+      <div className="container-fluid bg-white pt-3 px-lg-5">
+        <div className="row w-75">
+          <div className="col-xl-2 col-lg-4 col-md-6 px-2">
             <select
-              class="custom-select px-4 mb-3"
-              className="form-control form-control-lg"
+              className="custom-select px-4 mb-3"
+              classNameName="form-control form-control-lg"
               onChange={(e) => {
                 setcarType(e.target.value);
               }}
@@ -238,9 +238,9 @@ function SearchForm() {
                 })}
             </select>
           </div>
-          <div class="col-xl-2 col-lg-4 col-md-6 px-2">
+          <div className="col-xl-2 col-lg-4 col-md-6 px-2">
             <select
-              class="custom-select px-4 mb-3"
+              className="custom-select px-4 mb-3"
               onChange={(e) => setcarBrand(e.target.value)}
               style={{ height: "50px" }}
             >
@@ -256,9 +256,9 @@ function SearchForm() {
                 })}
             </select>
           </div>
-          <div class="col-xl-2 col-lg-4 col-md-6 px-2">
+          <div className="col-xl-2 col-lg-4 col-md-6 px-2">
             <select
-              class="custom-select px-4 mb-3"
+              className="custom-select px-4 mb-3"
               onChange={(e) => setcarColor(e.target.value)}
               style={{ height: "50px" }}
             >
@@ -273,9 +273,9 @@ function SearchForm() {
               })}
             </select>
           </div>
-          <div class="col-xl-2 col-lg-4 col-md-6 px-2">
+          <div className="col-xl-2 col-lg-4 col-md-6 px-2">
             <select
-              class="custom-select px-4 mb-3"
+              className="custom-select px-4 mb-3"
               onChange={(e) => setcarYear(e.target.value)}
               style={{ height: "50px" }}
             >
@@ -291,11 +291,11 @@ function SearchForm() {
                 })}
             </select>
           </div>
-          <div class="col-xl-2 col-lg-4 col-md-6 px-2">
-            <div class="date mb-3" id="date" data-target-input="nearest">
+          <div className="col-xl-2 col-lg-4 col-md-6 px-2">
+            <div className="date mb-3" id="date" data-target-input="nearest">
               <input
                 type="text"
-                class="form-control p-4 datetimepicker-input"
+                className="form-control p-4 datetimepicker-input"
                 onChange={(e) => {
                   setModel(e.target.value);
                 }}
@@ -305,11 +305,11 @@ function SearchForm() {
               />
             </div>
           </div>
-          <div class="col-xl-2 col-lg-4 col-md-6 px-2">
-            <div class="date mb-3" id="date" data-target-input="nearest">
+          <div className="col-xl-2 col-lg-4 col-md-6 px-2">
+            <div className="date mb-3" id="date" data-target-input="nearest">
               <input
                 type="text"
-                class="form-control p-4 datetimepicker-input"
+                className="form-control p-4 datetimepicker-input"
                 onChange={(e) => {
                   setpriceFrom(e.target.value);
                 }}
@@ -317,11 +317,11 @@ function SearchForm() {
               />
             </div>
           </div>
-          <div class="col-xl-2 col-lg-4 col-md-6 px-2">
-            <div class="time mb-3" id="time" data-target-input="nearest">
+          <div className="col-xl-2 col-lg-4 col-md-6 px-2">
+            <div className="time mb-3" id="time" data-target-input="nearest">
               <input
                 type="text"
-                class="form-control p-4 datetimepicker-input"
+                className="form-control p-4 datetimepicker-input"
                 placeholder="day Price to"
                 onChange={(e) => {
                   setpriceTo(e.target.value);
@@ -329,9 +329,9 @@ function SearchForm() {
               />
             </div>
           </div>
-          <div class="col-xl-2 col-lg-4 col-md-6 px-2">
+          <div className="col-xl-2 col-lg-4 col-md-6 px-2">
             <button
-              class="btn btn-primary btn-block mb-3"
+              className="btn btn-primary btn-block mb-3"
               onClick={submitSearch}
               style={{ height: "50px" }}
             >
@@ -346,9 +346,9 @@ function SearchForm() {
 
 export default SearchForm;
 /*
-<div className="lg">
+<div classNameName="lg">
 <form>
-  <div className="form-group">
+  <div classNameName="form-group">
     <select
       id="carTypes"
 
@@ -365,39 +365,39 @@ export default SearchForm;
     </select>
   </div>
 
-  <div className="form-group">
+  <div classNameName="form-group">
     <select
       id="carBrands"
-      className="form-control form-control-lg"
+      classNameName="form-control form-control-lg"
 
     >
 
     </select>
   </div>
 
-  <div className="form-group">
+  <div classNameName="form-group">
     <select
       id="carColors"
-      className="form-control form-control-lg"
+      classNameName="form-control form-control-lg"
 
     >
 
     </select>
   </div>
 
-  <div className="form-group">
+  <div classNameName="form-group">
     <select
       id="carYear"
-      className="form-control form-control-lg"
+      classNameName="form-control form-control-lg"
     >
 
     </select>
   </div>
 
-  <div className="form-group">
+  <div classNameName="form-group">
     <input
       type="text"
-      className="form-control"
+      classNameName="form-control"
       id="model"
       placeholder="BMW"
       onChange={(e) => {
@@ -406,10 +406,10 @@ export default SearchForm;
     />
   </div>
 
-  <div className="form-group">
+  <div classNameName="form-group">
     <input
       type="text"
-      className="form-control"
+      classNameName="form-control"
       id="dayPriceFrom"
       placeholder="15"
 
@@ -417,7 +417,7 @@ export default SearchForm;
     -
     <input
       type="text"
-      className="form-control"
+      classNameName="form-control"
       id="dayPriceTo"
       placeholder="300"
 
@@ -425,7 +425,7 @@ export default SearchForm;
   </div>
 </form>
 
-<button className="btn btn-success" type="button" >
+<button classNameName="btn btn-success" type="button" >
   Search
 </button>
 </div>
