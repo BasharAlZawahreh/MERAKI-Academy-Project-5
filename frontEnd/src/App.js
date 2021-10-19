@@ -17,13 +17,13 @@ import UpdateCar from "./components/car/UpdateCar";
 import MyCars from "./components/car/Mycars";
 import Home from "./components/home/home";
 import { Switch } from "react-router";
-
 import AddRates from "./components/Rate/rates";
 import CarInfo from "./components/car/CarInfo/info";
-
 import Contact from "./components/home/Contact";
 import Footer from "./components/Footer/footer";
+
 import Payment from './components/Payment/payment'
+
 export default function App() {
   return (
     <div>
@@ -69,7 +69,6 @@ export default function App() {
         <Route  path="/rate/:id">
         <AddRates />
       </Route>
-
       <Route path="/carinfo/:id">
         <CarInfo />
       </Route>
@@ -78,19 +77,15 @@ export default function App() {
       <Route exact path="/admin/login">
         <AdminLogin />
       </Route>
-
       <Route exact path="/admin/dashboard">
         <AdminDashboard />
       </Route>
-
       <Route exact path="/admin/users">
         <AdminUsers />
       </Route>
-
       <Route exact path="/admin/reservations">
         <AdminReservations />
       </Route>
-
       <Route exact path="/admin/cars">
         <AdminCars />
       </Route>
