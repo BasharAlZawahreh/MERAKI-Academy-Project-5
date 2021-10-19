@@ -74,16 +74,16 @@ return (
                     <h1 class="display-4 text-uppercase mb-5">Mercedes Benz R3</h1>
                     <div class="row mx-n2 mb-3">
                         <div class="col-md-3 col-6 px-2 pb-2">
-                            <img class="img-fluid w-100" src="https://firebasestorage.googleapis.com/v0/b/todo-328510.appspot.com/o/images%2FScreenshot_1.png?alt=media&token=f080c1da-9ff3-4b50-839d-c0f6bcd023b3" alt=""/>
+                            <img class="img-fluid w-100" src="img/gallery-1.jpg" alt=""/>
                         </div>
                         <div class="col-md-3 col-6 px-2 pb-2">
-                            <img class="img-fluid w-100" src="https://firebasestorage.googleapis.com/v0/b/todo-328510.appspot.com/o/images%2FScreenshot_1.png?alt=media&token=f080c1da-9ff3-4b50-839d-c0f6bcd023b3" alt=""/>
+                            <img class="img-fluid w-100" src="img/gallery-2.jpg" alt=""/>
                         </div>
                         <div class="col-md-3 col-6 px-2 pb-2">
-                            <img class="img-fluid w-100" src="https://firebasestorage.googleapis.com/v0/b/todo-328510.appspot.com/o/images%2FScreenshot_1.png?alt=media&token=f080c1da-9ff3-4b50-839d-c0f6bcd023b3" alt=""/>
+                            <img class="img-fluid w-100" src="img/gallery-3.jpg" alt=""/>
                         </div>
                         <div class="col-md-3 col-6 px-2 pb-2">
-                            <img class="img-fluid w-100" src="https://firebasestorage.googleapis.com/v0/b/todo-328510.appspot.com/o/images%2FScreenshot_1.png?alt=media&token=f080c1da-9ff3-4b50-839d-c0f6bcd023b3" alt=""/>
+                            <img class="img-fluid w-100" src="img/gallery-4.jpg" alt=""/>
                         </div>
                     </div>
                     <p>Tempor erat elitr at rebum at at clita aliquyam consetetur. Diam dolor diam ipsum et, tempor voluptua sit consetetur sit. Aliquyam diam amet diam et eos sadipscing labore. Clita erat ipsum et lorem et sit, sed stet no labore lorem sit. Sanctus clita duo justo et tempor consetetur takimata eirmod, dolores takimata consetetur invidunt magna dolores aliquyam dolores dolore. Amet erat amet et magna</p>
