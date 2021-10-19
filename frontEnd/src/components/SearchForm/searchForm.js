@@ -227,8 +227,7 @@ function SearchForm() {
         <div className="row w-75">
           <div className="col-xl-2 col-lg-4 col-md-6 px-2">
             <select
-              className="custom-select px-4 mb-3"
-              classNameName="form-control form-control-lg"
+              className="custom-select px-4 mb-3 form-control form-control-lg"
               onChange={(e) => {
                 setcarType(e.target.value);
               }}

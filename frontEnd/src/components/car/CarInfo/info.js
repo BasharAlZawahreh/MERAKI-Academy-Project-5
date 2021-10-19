@@ -9,7 +9,7 @@ import { setCar } from "../../../actions/cars";
 import { useHistory } from "react-router-dom";
 import { Rating } from "react-simple-star-rating";
 import Button from "react-bootstrap/Button";
-import {setSearchCarId} from '../../../actions/search'
+import { setSearchCarId } from "../../../actions/search";
 
 const CarInfo = () => {
   const history = useHistory();
@@ -65,170 +65,87 @@ const CarInfo = () => {
     getCarInfo();
     getRates();
   }, []);
-return (
-  <>
-  <div class="container-fluid pt-5">
+
+  console.log("car", carView);
+  return (
+    <>
+      <div class="container-fluid pt-5">
         <div class="container pt-5">
-            <div class="row">
-                <div class="col-lg-8 mb-5">
-                    <h1 class="display-4 text-uppercase mb-5">Mercedes Benz R3</h1>
-                    <div class="row mx-n2 mb-3">
-                        <div class="col-md-3 col-6 px-2 pb-2">
-                            <img class="img-fluid w-100" src="img/gallery-1.jpg" alt=""/>
-                        </div>
-                        <div class="col-md-3 col-6 px-2 pb-2">
-                            <img class="img-fluid w-100" src="img/gallery-2.jpg" alt=""/>
-                        </div>
-                        <div class="col-md-3 col-6 px-2 pb-2">
-                            <img class="img-fluid w-100" src="img/gallery-3.jpg" alt=""/>
-                        </div>
-                        <div class="col-md-3 col-6 px-2 pb-2">
-                            <img class="img-fluid w-100" src="img/gallery-4.jpg" alt=""/>
-                        </div>
-                    </div>
-                    <p>Tempor erat elitr at rebum at at clita aliquyam consetetur. Diam dolor diam ipsum et, tempor voluptua sit consetetur sit. Aliquyam diam amet diam et eos sadipscing labore. Clita erat ipsum et lorem et sit, sed stet no labore lorem sit. Sanctus clita duo justo et tempor consetetur takimata eirmod, dolores takimata consetetur invidunt magna dolores aliquyam dolores dolore. Amet erat amet et magna</p>
-                    <div class="row pt-2">
-                        <div class="col-md-3 col-6 mb-2">
-                            <i class="fa fa-car text-primary mr-2"></i>
-                            <span>Model: 2015</span>
-                        </div>
-                        <div class="col-md-3 col-6 mb-2">
-                            <i class="fa fa-cogs text-primary mr-2"></i>
-                            <span>Automatic</span>
-                        </div>
-                        <div class="col-md-3 col-6 mb-2">
-                            <i class="fa fa-road text-primary mr-2"></i>
-                            <span>20km/liter</span>
-                        </div>
-                        <div class="col-md-3 col-6 mb-2">
-                            <i class="fa fa-eye text-primary mr-2"></i>
-                            <span>GPS Navigation</span>
-                        </div>
-                        <div class="col-md-3 col-6 mb-2">
-                            <i class="fa fa-car text-primary mr-2"></i>
-                            <span>Model: 2015</span>
-                        </div>
-                        <div class="col-md-3 col-6 mb-2">
-                            <i class="fa fa-cogs text-primary mr-2"></i>
-                            <span>Automatic</span>
-                        </div>
-                        <div class="col-md-3 col-6 mb-2">
-                            <i class="fa fa-road text-primary mr-2"></i>
-                            <span>20km/liter</span>
-                        </div>
-                        <div class="col-md-3 col-6 mb-2">
-                            <i class="fa fa-eye text-primary mr-2"></i>
-                            <span>GPS Navigation</span>
-                        </div>
-                        <div class="col-md-3 col-6 mb-2">
-                            <i class="fa fa-car text-primary mr-2"></i>
-                            <span>Model: 2015</span>
-                        </div>
-                        <div class="col-md-3 col-6 mb-2">
-                            <i class="fa fa-cogs text-primary mr-2"></i>
-                            <span>Automatic</span>
-                        </div>
-                        <div class="col-md-3 col-6 mb-2">
-                            <i class="fa fa-road text-primary mr-2"></i>
-                            <span>20km/liter</span>
-                        </div>
-                        <div class="col-md-3 col-6 mb-2">
-                            <i class="fa fa-eye text-primary mr-2"></i>
-                            <span>GPS Navigation</span>
-                        </div>
-                    </div>
-               </div>
-
-                
+          <div class="row">
+            <div class="col-lg-6 mb-5">
+              <h1 class="display-4 text-uppercase mb-5">{carView.brand}</h1>
+              <div class="row mx-n2 mb-3">
+                {carViews &&
+                  carViews.map((carImg, i) => {
+                    return (
+                      <div class="col-md-4 col-6 px-2 pb-2">
+                        <img
+                          key={i}
+                          variant="top"
+                          src={carImg.imgUrl}
+                          alt="car photo"
+                          class="img-fluid w-100"
+                        />
+                      </div>
+                    );
+                  })}
+              </div>
+              <p>{carView.description}</p>
+             
+              <div class="row pt-2">
+                <div class="col-md-3 col-6 mb-2">
+                  <i class="fa fa-car text-primary mr-2"></i>
+                  <span>{carView.manifactoring_year}</span>
+                </div>
+                <div class="col-md-3 col-6 mb-2">
+                  <i class="fa fa-cogs text-primary mr-2"></i>
+                  <span>Automatic</span>
+                </div>
+                <div class="col-md-3 col-6 mb-2">
+                  <i class="fa fa-road text-primary mr-2"></i>
+                  <span>20km/liter</span>
+                </div>
+              </div>
             </div>
+            <div class="col-lg-6 mb-5">
+                    <div class="bg-secondary p-5">
+                        <h3 class="text-primary text-center mb-4"> <Rating
+                style={{ paddingVertical: 10 }}
+                ratingValue={rateAvg}
+                size={30}
+                label
+                transition
+                fillColor="orange"
+                emptyColor="gray"
+                className="foo" // Will remove the inline style if applied
+              /></h3>
+                          {carRates ?
+          carRates.map((rate, i) => {
+            return (
+              <div class="form-group" key={i}>
+              <div class="date" id="date1" data-target-input="nearest">
+                  <input type="text" class="form-control p-4 datetimepicker-input" disabled={true} placeholder="Pickup Date"
+                      data-target="#date1" data-toggle="datetimepicker" />
+              </div>
+          </div> 
+            )
+          }):                        <div class="form-group">
+          <div class="time" id="time1" data-target-input="nearest">
+              <input type="text" class="form-control p-4 datetimepicker-input" disabled={true} placeholder="No Comments till now"
+                  data-target="#time1" data-toggle="datetimepicker" />
+          </div>
+      </div>}
+                       
+                        
+                        
+                        
+                    </div>
+                </div>
+          </div>
         </div>
-    </div>
-  </>
-)
-  // return (
-  //   <div>
-  //     {carView && (
-  //       <Card
-  //         style={{
-  //           color: "white",
-  //           width: "25rem",
-  //           height: "400px",
-  //           marginLeft: "700px",
-  //           marginTop: "150px",
-  //           backgroundColor: "#003638",
-  //         }}
-  //       >
-  //         <Card.Img variant="top" src={carView.main_img} />
-  //         <Card.Body>
-  //           <Card.Title
-  //             style={{
-  //               textAlign: "center",
-  //               fontWeight: "bold",
-  //               marginTop: "10px",
-  //             }}
-  //           >
-  //             <h2 style={{ color: "white" }}>{carView.brand}</h2>
-  //             {carView.model}
-  //           </Card.Title>
+      </div>
+    </>
+  );
 
-  //           <Rating
-  //             style={{ paddingVertical: 10 }}
-  //             ratingValue={rateAvg}
-  //             size={30}
-  //             label
-  //             transition
-  //             fillColor="orange"
-  //             emptyColor="gray"
-  //             className="foo" // Will remove the inline style if applied
-  //           />
-  //           <Card.Text>{carView.description}</Card.Text>
-  //           <Button
-  //             style={{ marginTop: "45px", marginLeft: "130px" }}
-  //             variant="secondary"
-  //             onClick={() => {
-  //               dispatch(setSearchCarId(car_id))
-  //               history.push(`/addRes`);
-  //             }}
-  //           >
-  //             Book
-  //           </Button>
-  //         </Card.Body>
-  //       </Card>
-  //     )}
-
-  //     {/*Map on imgs*/}
-  //     <div>
-  //       <h1>Car Images</h1>
-  //       {carViews &&
-  //         carViews.map((carImg, i) => {
-  //           return <img key={i} variant="top" src={carImg.imgUrl} alt={i} />;
-  //         })}
-  //     </div>
-
-  //     {/*Map on rates and comments*/}
-  //     <div>
-  //       <h1>Car Rates</h1>
-  //       {carRates &&
-  //         carRates.map((rate, i) => {
-  //           return (
-  //             <div key={i}>
-  //               <Rating
-  //                 style={{ paddingVertical: 10 }}
-  //                 ratingValue={rate.rate}
-  //                 size={12}
-  //                 label
-  //                 transition
-  //                 fillColor="orange"
-  //                 emptyColor="gray"
-  //                 className="foo" // Will remove the inline style if applied
-  //               />
-  //               <br />
-  //               <textarea disabled value={rate.comment} />
-  //             </div>
-  //           );
-  //         })}
-  //     </div>
-  //   </div>
-  // );
 };
 export default CarInfo;
