@@ -38,10 +38,13 @@ export default function App() {
         </Route>
         <Route exact path="/">
           <Home />
-          <SearchResult />
+          
         </Route>
         <Route exact path="/myres">
           <ResevationDash />
+        </Route>
+        <Route exact path="/searchResul">
+         <SearchResult/>
         </Route>
         <Route exact path="/about">
           {/* about */}
