@@ -9,7 +9,8 @@ const {
   carsFilter,
   getCarTypes,
   getCarBrands,
-  addImgs
+  addImgs,
+  getCars
 } = require("../controllers/car");
 const { authentication } = require("../middlewares/authentication");
 const carRouter = express.Router();
@@ -19,6 +20,7 @@ carRouter.post("/imgs",authentication,addImgs)
 carRouter.get("/user",authentication,getCarByuserId)
 carRouter.get("/cartypes", getCarTypes);
 carRouter.get("/carbrands", getCarBrands);
+carRouter.get("/cars", getCars);
 
 carRouter.get("/car/:car_id",getCarById)
 carRouter.put("/:car_id", authentication, updateCarById)

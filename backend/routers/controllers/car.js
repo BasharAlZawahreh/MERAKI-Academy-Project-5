@@ -1,6 +1,26 @@
 const connection = require("../../db/db");
 
-
+const getCars=(req,res)=>{
+  const query = `SELECT * from cars Where is_Deleted=0`
+  connection.query(query,(err,result)=>{
+    if(err){
+      return res.status(500).json({
+        success: false,
+        message: `Server Error`,
+        err: err,
+      });
+    } else if (!result.length){
+      return res.status(404).json({
+        success: false,
+        message: `No cars`,
+      });
+    }
+   return res.status(201).json({
+      success: true,
+      result: result,
+    });
+  })
+}
 
 const addNewCar = (req, res) => {
   console.log("req", req.body);
@@ -93,8 +113,9 @@ const addImgs = (req, res) => {
 
 const getCarById = (req, res) => {
   const car_id = req.params.car_id;
-  const query = `SELECT * FROM cars INNER JOIN car_brands ON cars.car_id=car_brands.brand_id
-  INNER JOIN car_types ON cars.car_id=car_types.typeCar_id 
+  
+  const query = `SELECT * FROM cars INNER JOIN car_brands ON cars.car_brand_id=car_brands.brand_id
+  INNER JOIN car_types ON cars.car_types_id=car_types.typeCar_id 
   LEFT JOIN car_imgs ON cars.car_id=car_imgs.car_id
   WHERE cars.car_id=${car_id} AND cars.is_Deleted=0`;
   
@@ -349,4 +370,5 @@ module.exports = {
   getCarTypes,
   getCarBrands,
   addImgs,
+  getCars
 };
