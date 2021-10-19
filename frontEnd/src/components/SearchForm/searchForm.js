@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import axios from "axios";
+import { useHistory, useLocation } from "react-router";
 import { setSearches } from "../../actions/search";
 import "./searchForm.css";
 function SearchForm() {
+  const history = useHistory();
+  const location = useLocation();
+  
   const [carTypes, setcarTypes] = useState([]);
   const [carBrands, setcarBrands] = useState([]);
   const [allYears, setAllYears] = useState([]);
@@ -212,6 +216,9 @@ function SearchForm() {
 
     console.log(res.data.result);
     dispatch(setSearches(res.data.result));
+    if (location.pathname !== "/searchResul") {
+      history.push("/searchResul");
+    }
   };
 
   return (

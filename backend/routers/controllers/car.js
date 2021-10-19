@@ -1,5 +1,7 @@
 const connection = require("../../db/db");
 
+
+
 const addNewCar = (req, res) => {
   console.log("req", req.body);
   let user_id = req.token.user_id;
@@ -183,7 +185,7 @@ const toggleCarAvailability = (req, res) => {
       currentState = await result[0].is_Available;
       let nextState = currentState === 0 ? 1 : 0;
       
-      const query = `UPDATE cars SET is_Available=${nextState} is_Deleted=${currentState} WHERE car_id=${car_id}`;
+      const query = `UPDATE cars SET is_Available=${nextState} WHERE car_id=${car_id}`;
 
       connection.query(query, (err, result) => {
         if (err) {
