@@ -1,13 +1,14 @@
 import React,{useState} from "react";
 import axios from "axios";
 import './register.css'
+import {useHistory} from 'react-router-dom';
 const Register=()=>{
     const[firstName,serFirstName]=useState()
     const[lastName,setLastName]=useState()
     const[email,setEmail]=useState()
     const[password,setPassword]=useState()
     const[done,setDone]=useState()
-
+    const history=useHistory();
     const reg=(e)=>{
         e.preventDefault()
         try {
@@ -54,8 +55,8 @@ const Register=()=>{
                     {done}
                 </div>
                 <div class="signup-image">
-                    <figure><img src="images/signin-image.jpg" alt="sing up image"/></figure>
-                    <a href="#" class="signup-image-link">I am already member</a>
+                    <figure><img src="images/signup-image.jpg" alt="sing up image"/></figure>
+                    <a onClick={()=>history.push("/login")} class="signup-image-link">I am already member</a>
                 </div>
             </div>
         </div>

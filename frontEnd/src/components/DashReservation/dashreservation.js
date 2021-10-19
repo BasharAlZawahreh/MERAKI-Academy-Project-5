@@ -7,7 +7,8 @@ import { useHistory } from "react-router";
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import {MdOutlineStarRate  } from 'react-icons/md';
-
+import { BiEditAlt } from "react-icons/bi";
+import { RiDeleteBin5Line } from "react-icons/ri";
 
 const ResevationDash=()=>{
 const dispatch=useDispatch()
@@ -50,7 +51,7 @@ const history=useHistory()
       }, []);
     return(
         <div style={{"padding":"30px"}}>
-            <button onClick={()=>getReservationByuser()}  >GET My Reservations</button>
+            {/* <button onClick={()=>getReservationByuser()}  >GET My Reservations</button> */}
 <Table striped bordered hover>
   <thead>
     <tr>
@@ -59,7 +60,8 @@ const history=useHistory()
       <th>Return Date</th>
       <th>Amount</th>
       <th>Brand</th>
-      <th>Action</th>
+      <th>Edit</th>
+      <th>Delete</th>
       <th>Rate</th>
     </tr>
   </thead>
@@ -73,13 +75,13 @@ const history=useHistory()
       <td>{elem.amount}</td>
       <td>{elem.brand}</td>
       <td>{!elem.isConfirmed?(
-          <EditIcon
+          <BiEditAlt
           onClick={()=>{
               batch(()=>{
                 localStorage.setItem("elem",JSON.stringify(elem))
                   // dispatch(updateReservation(elem))
-                  // dispatch(setEditOrInsert(true))
-                  // history.push("/addRes")
+                  dispatch(setEditOrInsert(true))
+                  history.push(`/addRes/${elem.car_id}`)
                   // deleteReservationById(elem.res_id)
               })
           }}
@@ -88,16 +90,17 @@ const history=useHistory()
       ):""}
 </td>
     <td>{!elem.isConfirmed?( 
-     <DeleteIcon
+     <RiDeleteBin5Line
          onClick={()=>{ 
              deleteReservationById(elem.res_id)
          }} 
           
          /> 
       ):""}</td> 
-      <td> <MdOutlineStarRate onClick={()=>
+      <td>{elem.isConfirmed?( <MdOutlineStarRate onClick={()=>
             
             history.push(`/rate/${elem.car_id}`)}/>  
+            ):""}
       </td>
     </tr>
     )
