@@ -21,10 +21,14 @@ import AddRates from "./components/Rate/rates";
 import CarInfo from "./components/car/CarInfo/info";
 import Contact from "./components/home/Contact";
 import Footer from "./components/Footer/footer";
+
+import Payment from './components/Payment/payment'
+
 export default function App() {
   return (
     <div>
       <Nav />
+
       <Switch>
         <Route exact path="/register">
           <Register />
@@ -48,8 +52,13 @@ export default function App() {
         <Route  path="/addRes/:id">
           <AddReservation />
         </Route>
+        <Route path="/editprofile">
+        < Profile/>
+        </Route>
         <Route exact path="/mycars">
           <MyCars />
+          {/* <Payment/> */}
+         
         </Route>
         <Route  path="/updateCar/:id">
           <UpdateCar />
