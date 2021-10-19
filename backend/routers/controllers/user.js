@@ -50,6 +50,7 @@ const updateUserById = async (req, res) => {
       });
     }
   });
+  
 };
 
 module.exports = { createNewUser, updateUserById };
