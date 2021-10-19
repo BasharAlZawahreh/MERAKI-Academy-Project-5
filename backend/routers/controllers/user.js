@@ -29,18 +29,25 @@ const createNewUser = async (req, res) => {
 };
 
 const updateUserById = async (req, res) => {
-  console.log(req.token.user_id)
+  
    let id = req.token.user_id;
-  let {firstName,lastName,age,city,password,ssn,birthDate,license_img,mobile } = req.body;
-  password = await bcrypt.hash(password, 10);
-  const query = `UPDATE users SET firstName=?,lastName=?,age=?,city=?,password=?,ssn=?,birthDate=?,license_img=?,mobile=? WHERE user_id=? and role="user"`;
-  const data = [firstName,lastName,age,city,password,ssn,birthDate,license_img,mobile, id];
+  let {firstName,lastName,city,ssn,birthDate,license_img } = req.body;
+ 
+  const query = `UPDATE users SET firstName=?,lastName=?,city=?,ssn=?,birthDate=?,license_img=? WHERE user_id=? and role="user"`;
+  const data = [firstName,lastName,city,ssn,birthDate,license_img, id];
 
   userModel.query(query, data, (err, result) => {
+    
+    
+
+    if(err){
+    
+      res.status(500)
+    }
     if (result.affectedRows) {
-      res.status(202).json({
+   return res.status(202).json({
         success: true,
-        message: ` Success Article updated`,
+        message: `Success updated`,
         result: result,
       });
     } else {

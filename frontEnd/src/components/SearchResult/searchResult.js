@@ -38,6 +38,7 @@ function SearchResult() {
                     <button
                       onClick={() => {
                         history.push(`/addRes/${car.car_id}`);
+                        
                         // dispatch(setSearchCarId(car.car_id));
                       }}
                       className="btn btn-primary px-3"
