@@ -182,7 +182,8 @@ const toggleCarAvailability = (req, res) => {
     if (result) {
       currentState = await result[0].is_Available;
       let nextState = currentState === 0 ? 1 : 0;
-      const query = `UPDATE cars SET is_Available=${nextState} WHERE car_id=${car_id}`;
+      
+      const query = `UPDATE cars SET is_Available=${nextState} is_Deleted=${currentState} WHERE car_id=${car_id}`;
 
       connection.query(query, (err, result) => {
         if (err) {
@@ -241,13 +242,15 @@ const deleteCarById = (req, res) => {
 
 // this function return cars according to filters
 const carsFilter = (req, res) => {
-  const { day_price_from, day_price_to } = req.body;
+
 
   const car_type = req.body.car_type || "";
   const color = req.body.color || "";
   const brand_car = req.body.brand_car || "";
   const manifactoring_year = req.body.manifactoring_year || "";
   const model = req.body.model || "";
+  const day_price_from = req.body.day_price_from || 0
+  const day_price_to = req.body.day_price_to || 1000 
 
   //test query
   /*
