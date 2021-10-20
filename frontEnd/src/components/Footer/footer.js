@@ -22,7 +22,7 @@ const Footer=()=>{
                 <h4 className="text-uppercase text-light mb-4">Usefull Links</h4>
                 <div className="d-flex flex-column justify-content-start">
                     <a className="text-body mb-2" href="#"><i className="fa fa-angle-right text-white mr-2"></i>Private Policy</a>
-                    <a classNameName="text-body mb-2" href="#"><i className="fa fa-angle-right text-white mr-2"></i>Term & Conditions</a>
+                    <a className="text-body mb-2" href="#"><i className="fa fa-angle-right text-white mr-2"></i>Term & Conditions</a>
                     <a className="text-body mb-2" href="#"><i className="fa fa-angle-right text-white mr-2"></i>New Member Registration</a>
                     <a className="text-body mb-2" href="#"><i className="fa fa-angle-right text-white mr-2"></i>Affiliate Programme</a>
                     <a className="text-body mb-2" href="#"><i className="fa fa-angle-right text-white mr-2"></i>Return & Refund</a>
