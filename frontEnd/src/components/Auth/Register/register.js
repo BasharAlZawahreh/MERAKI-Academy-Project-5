@@ -24,11 +24,11 @@ const Register=()=>{
             setDone(<div className="wrong">error happen while regeister please try again</div>)
         }
     }
-
+   //
 
     return (
         <section class="signup">
-        <div class="container">
+         <div class="container">
         <span style={{cursor:"pointer",paddingLeft:"53.5rem"}}  onClick={()=>{history.push("/login")}}><MdCancel style={{height:"26px",width:"24px",paddingTop:"5px"}} /></span>
             <div class="signup-content">
                 <div class="signup-form">
