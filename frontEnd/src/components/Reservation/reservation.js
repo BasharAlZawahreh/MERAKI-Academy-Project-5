@@ -7,6 +7,7 @@ import { jsx } from "@emotion/react";
 import * as moment from "moment";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
+import { GiCancel } from 'react-icons/gi';
 // import "./reservation.css";
 const AddReservation = () => {
   const history=useHistory()
@@ -97,8 +98,8 @@ const AddReservation = () => {
           let days = Math.ceil(difference / (1000 * 3600 * 24));
           setAmount(days * price);
         })
-        .then(async () => {
-          await axios
+        .then(() => {
+           axios
             .post(
               "http://localhost:5000/reserve",
               { returnDate, PickUpDate, amount, car_id },
@@ -107,10 +108,11 @@ const AddReservation = () => {
               }
             )
             .then(async (result) => {
+              console.log(result.data)
               dispatch(addReservation(result.data.Reservations));
             })
             .catch((err) => {
-              console.log("reserveErr", err);
+               console.log("reserveErr", err);
             });
         })
         .catch((err) => {
@@ -133,17 +135,19 @@ const AddReservation = () => {
         
         <div className="container-fluid py-5">
         <div className="container pt-5 pb-3">
-          
+        
         <Card
           style={{
             color: "white",
             width: "25rem",
+            marginLeft:"20vw",
             height: "400px",
-            marginLeft: "25%",
+            // marginLeft: "25%",
             // marginTop: "150px",
-            backgroundColor: "#003638",
+            backgroundColor:"#2B2E4A",
           }}
         >
+          <span style={{marginLeft:"23.5rem",cursor:"pointer"}}  onClick={()=>{history.push("/")}}><GiCancel style={{color:"white",width:"18px",height:"20px"}}/></span>
           <Card.Body>
             <Card.Title
               style={{
@@ -172,7 +176,7 @@ const AddReservation = () => {
                 onChange={(e) => setPickUpDate(e.target.value)}
               />
               <input
-                style={{ marginTop: "30px" }}
+                style={{ marginTop: "30px",color:"white" }}
                 type="number"
                 disabled
                 value={`${amount}`}
@@ -202,11 +206,13 @@ const AddReservation = () => {
           style={{
             width: "25rem",
             height: "400px",
-            marginLeft: "26%",
+            // marginLeft: "26%",
+            marginLeft:"20vw",
             // marginTop: "26%",
             backgroundColor: "#003638",
           }}
         >
+            <span style={{marginLeft:"23.5rem",cursor:"pointer"}}  onClick={()=>{history.push("/myres")}}><GiCancel style={{color:"white",width:"18px",height:"20px"}}/></span>
           <Card.Body>
             <Card.Title style={{ textAlign: "center",color:"white" , fontWeight: "bold" }}>
               Reservation
