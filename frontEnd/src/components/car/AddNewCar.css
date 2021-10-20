@@ -13,3 +13,8 @@ button:enabled{
 input:checked + .slider {
     background-color: rgb(61, 214, 22);
   }
+
+  .odai img{
+      height: 250px;
+      width: 100%;
+  }

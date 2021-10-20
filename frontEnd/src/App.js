@@ -21,6 +21,7 @@ import AddRates from "./components/Rate/rates";
 import CarInfo from "./components/car/CarInfo/info";
 import Contact from "./components/home/Contact";
 import Footer from "./components/Footer/footer";
+import AddNewCar from "./components/car/AddNewCar";
 
 import Payment from './components/Payment/payment'
 
@@ -65,6 +66,9 @@ export default function App() {
         </Route>
         <Route  path="/updateCar/:id">
           <UpdateCar />
+        </Route>
+        <Route  path="/addCar">
+          <AddNewCar/>
         </Route>
         <Route exact path="/result">
           <SearchResult />

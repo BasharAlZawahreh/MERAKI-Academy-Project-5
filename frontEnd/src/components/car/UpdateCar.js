@@ -20,8 +20,6 @@ const UpdateCar = ({ car }) => {
     const dispatch = useDispatch()
     
     const [message,setMessage]=useState("");  
-    const [available,setAvailable] = useState(1);
-     const [disabled,setDisabled]=useState(true);
   const [mainImg,setMainImg]=useState("");
   const [carColor, setcarColor] = useState("");
   const [dayPrice, setDayPrice] = useState(0);
@@ -213,13 +211,6 @@ const UpdateCar = ({ car }) => {
     
   };
 
-//   useEffect(()=>{
-//     console.log("odao",mainImg);
-//     if(mainImg){
-//         setDisabled(false)
-//     }
-  
-//   })
 
   const addToData=async()=>{
       
@@ -230,7 +221,7 @@ const UpdateCar = ({ car }) => {
      description:desc || carInfo.description,
  
      day_price:dayPrice || carInfo.day_price,
-     is_Available:available|| carInfo.available,
+   
 
      main_img:mainImg || carInfo.main_img
      }
@@ -238,7 +229,6 @@ const UpdateCar = ({ car }) => {
   
       await axios.put(`http://localhost:5000/car/${id}`,data,{headers:{authorization:`Bearer ${state.token}`}})
        .then((result)=>{
-    //   dispatch(updateCar())
     console.log(result)
     setMessage("updated Successfuly")
     history.push("/mycars")
@@ -249,6 +239,9 @@ const UpdateCar = ({ car }) => {
   
        
   };
+
+
+
   return (
     <>
       <div>Enter the Updated field which you want to update it</div><br></br>
@@ -306,40 +299,14 @@ const UpdateCar = ({ car }) => {
 
           />
         </div>
-        <select
-            id="aval"
-            className="form-control form-control-lg"
-            onChange={(e) => setAvailable(e.target.value)}
-          >
-            <option defaultValue>Availability</option>
-                <option value={1} key={1}>
-                  yes
-                </option>
-                <option value={0} key={2}>
-                  No
-                </option>
-            
-          </select>
 
-        {/* <div className="form-group">
-          <label htmlFor="formGroupExampleInput2">Availability</label>
-          <textarea
-            type="text"
-            className="form-control"
-            id="formGroupExampleInput2"
-            placeholder="write yes or no "
-            onChange={(e)=>{setAvailable(e.target.value.toLocaleLowerCase())}}
-
-          />
-        </div> */}
-        
 
       </form>
      
 
     </div>
     <br></br>
-     <button className="addcar"  type="button"  onClick={addToData}>
+     <button className="addcar"  type="button" onClick={addToData}>
       Save youre Update   </button><br></br>
       {message}
     </>
