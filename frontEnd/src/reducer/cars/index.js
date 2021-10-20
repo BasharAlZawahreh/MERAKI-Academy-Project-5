@@ -1,3 +1,5 @@
+import { createRef } from "react";
+
 const initialState = {
   cars: [],
 };
@@ -10,10 +12,27 @@ const car = (state = initialState, { type, payload }) => {
       return { cars: payload };
 
     case "UPDATE_CAR":
+      console.log("pay",payload);
+      let car = state.cars.find((elem)=>{
+        return elem.car_id===payload
+      })
+      console.log( car.is_Available);
+      console.log(car.is_Deleted);
+      let av = car.is_Available
+      if(av==1){
+        car.is_Available=0
+      }else if(av==0){
+        car.is_Available=1
+      }
+
+      console.log(car);
       return {
         cars: state.cars.map((elem) => {
-          return elem.car_id === payload.car_id ? payload : elem;
+          console.log(elem.car_id);
+          
+          return elem.car_id === payload ? elem=car : elem=elem;
         }),
+        
       };
     case "DELETE_CAR":
       return {
