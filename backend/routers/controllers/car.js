@@ -195,9 +195,9 @@ const updateCarById = (req, res) => {
 
 const toggleCarAvailability = (req, res) => {
   const car_id = req.params.car_id;
-  const checkQuery = `SELECT is_Available FROM cars WHERE car_id=${car_id}`;
-
-  connection.query(checkQuery, async (err, result) => {
+  const checkQuery = `SELECT *  FROM cars WHERE car_id=?`;
+  let data = [parseInt(car_id)]
+  connection.query(checkQuery,data, async (err, result) => {
     if (err) {
       throw err;
     }
@@ -205,11 +205,13 @@ const toggleCarAvailability = (req, res) => {
     if (result) {
       currentState = await result[0].is_Available;
       let nextState = currentState === 0 ? 1 : 0;
+     let  data = [nextState,parseInt(car_id)]
       
-      const query = `UPDATE cars SET is_Available=${nextState} WHERE car_id=${car_id}`;
+      const query = `UPDATE cars SET is_Available=? WHERE car_id=?`;
 
-      connection.query(query, (err, result) => {
+      connection.query(query,data, (err, result) => {
         if (err) {
+          console.log(err);
           return res.status(500).json({
             success: false,
             message: `server error`,
@@ -266,14 +268,17 @@ const deleteCarById = (req, res) => {
 // this function return cars according to filters
 const carsFilter = (req, res) => {
 
-
+console.log("req",req.body);
   const car_type = req.body.car_type || "";
   const color = req.body.color || "";
   const brand_car = req.body.brand_car || "";
   const manifactoring_year = req.body.manifactoring_year || "";
   const model = req.body.model || "";
   const day_price_from = req.body.day_price_from || 0
-  const day_price_to = req.body.day_price_to || 1000 
+  const day_price_to = req.body.day_price_to || 1000
+
+  console.log(day_price_from);
+  console.log(day_price_to);
 
   //test query
   /*
@@ -287,17 +292,20 @@ const carsFilter = (req, res) => {
 
  
   const query = `SELECT * FROM cars 
-  INNER JOIN car_types ON car_types.typeCar_id = car_types_id
-  INNER JOIN car_brands ON car_brands.brand_id = car_brand_id
+  INNER JOIN car_types ON car_types.typeCar_id =cars. car_types_id
+  INNER JOIN car_brands ON car_brands.brand_id = cars.car_brand_id
   WHERE brand LIKE "%${brand_car}"  
   AND car_type LIKE "%${car_type}"
-  AND color LIKE "%${color}"  
   AND model LIKE "%${model}%"  
+  AND color LIKE "%${color}"  
   AND manifactoring_year lIKE "%${manifactoring_year}"  
   AND day_price BETWEEN ${day_price_from} AND ${day_price_to}
   AND is_Available=1`;
+ 
 
   connection.query(query, (err, result) => {
+    console.log("err",err);
+    console.log("res",result);
     if (err) {
       return res.status(500).json({
         success: false,
