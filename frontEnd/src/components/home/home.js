@@ -37,10 +37,10 @@ const Home = () => {
                 <span>{car.day_price}JD/D</span>
               </div>
             </div>
-
+  
             <button className="btn btn-primary px-3 "
               onClick={() => {
-                history.push(`/addRes/${car.car_id}`);
+                 history.push(`/addRes/${car.car_id}`);
                 // dispatch(setSearchCarId(car.car_id));
               }}
               
