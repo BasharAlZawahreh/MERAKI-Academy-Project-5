@@ -431,11 +431,11 @@ function Users() {
           accessor: "ssn",
           filter: "fuzzyText",
         },
-        {
-          Header: "Mobile",
-          accessor: "mobile",
-          filter: "fuzzyText",
-        },
+        // {
+        //   Header: "Mobile",
+        //   accessor: "mobile",
+        //   filter: "fuzzyText",
+        // },
         {
           Header: "Age",
           accessor: "age",
