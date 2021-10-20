@@ -458,17 +458,17 @@ function Reservations() {
           accessor: "firstName",
           filter: "fuzzyText",
         },
-        {
-          Header: "Mobile",
-          accessor: "mobile",
-          filter: "fuzzyText",
-        },
-        {
-          Header: "Age",
-          accessor: "age",
-          Filter: NumberRangeColumnFilter,
-          filter: "between",
-        },
+        // {
+        //   Header: "Mobile",
+        //   accessor: "mobile",
+        //   filter: "fuzzyText",
+        // },
+        // {
+        //   Header: "Age",
+        //   accessor: "age",
+        //   Filter: NumberRangeColumnFilter,
+        //   filter: "between",
+        // },
         {
           Header: "License",
           id: "license_img",

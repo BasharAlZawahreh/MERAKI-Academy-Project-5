@@ -1,0 +1,192 @@
+.sidebar{
+    position: fixed;
+    height: 100%;
+    width: 240px;
+    background: #0A2558;
+    transition: all 0.5s ease;
+  }
+  .sidebar.active{
+    width: 60px;
+  }
+  .sidebar .logodetails{
+    height: 80px;
+    display: flex;
+    align-items: center;
+  }
+  .sidebar .logodetails i{
+    font-size: 28px;
+    font-weight: 500;
+    color: #fff;
+    min-width: 60px;
+    text-align: center
+  }
+  .sidebar .logodetails .logo_name{
+    color: #fff;
+    font-size: 24px;
+    font-weight: 500;
+  }
+  .sidebar .navlinks{
+    margin-top: 10px;
+  }
+  .sidebar .navlinks li{
+    position: relative;
+    list-style: none;
+    height: 50px;
+  }
+  .sidebar .navlinks li a{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    transition: all 0.4s ease;
+  }
+  .sidebar .navlinks li a.active{
+    background: #081D45;
+  }
+  .sidebar .navlinks li a:hover{
+    background: #081D45;
+  }
+  .sidebar .navlinks li i{
+    min-width: 60px;
+    text-align: center;
+    font-size: 18px;
+    color: #fff;
+  }
+  .sidebar .navlinks li a .links_name{
+    color: #fff;
+    font-size: 15px;
+    font-weight: 400;
+    white-space: nowrap;
+  }
+  .sidebar .navlinks .log_out{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+  }
+  .homesection{
+    position: relative;
+    background: #f5f5f5;
+    min-height: 100vh;
+    width: calc(100% - 240px);
+    left: 240px;
+    transition: all 0.5s ease;
+  }
+  .sidebar.active ~ .homesection{
+    width: calc(100% - 60px);
+    left: 60px;
+  }
+  .homesection nav{
+    display: flex;
+    justify-content: space-between;
+    height: 80px;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    position: fixed;
+    width: calc(100% - 240px);
+    left: 240px;
+    z-index: 100;
+    padding: 0 20px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+    transition: all 0.5s ease;
+  }
+  .sidebar.active ~ .homesection nav{
+    left: 60px;
+    width: calc(100% - 60px);
+  }
+  .homesection nav .sidebarbutton{
+    display: flex;
+    align-items: center;
+    font-size: 24px;
+    font-weight: 500;
+  }
+  nav .sidebarbutton i{
+    font-size: 35px;
+    margin-right: 10px;
+  }
+  .homesection nav .searchbox{
+    position: relative;
+    height: 50px;
+    max-width: 550px;
+    width: 100%;
+    margin: 0 20px;
+  }
+  nav .searchbox input{
+    height: 100%;
+    width: 100%;
+    outline: none;
+    background: #F5F6FA;
+    border: 2px solid #EFEEF1;
+    border-radius: 6px;
+    font-size: 18px;
+    padding: 0 15px;
+  }
+  nav .search-box .bxsearch{
+    position: absolute;
+    height: 40px;
+    width: 40px;
+    background: #2697FF;
+    right: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    border-radius: 4px;
+    line-height: 40px;
+    text-align: center;
+    color: #fff;
+    font-size: 22px;
+    transition: all 0.4 ease;
+  }
+  .homesection nav .profiledetails{
+    display: flex;
+    align-items: center;
+    background: #F5F6FA;
+    border: 2px solid #EFEEF1;
+    border-radius: 6px;
+    height: 50px;
+    min-width: 190px;
+    padding: 0 15px 0 2px;
+  }
+  nav .profiledetails img{
+    height: 40px;
+    width: 40px;
+    border-radius: 6px;
+    object-fit: cover;
+  }
+  nav .profiledetails .admin_name{
+    font-size: 15px;
+    font-weight: 500;
+    color: #333;
+    margin: 0 10px;
+    white-space: nowrap;
+  }
+  nav .profiledetails i{
+    font-size: 25px;
+    color: #333;
+  }
+  .homesection .homecontent{
+    position: relative;
+    padding-top: 104px;
+  }
+  .homecontent .overviewboxes{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: 0 20px;
+    margin-bottom: 26px;
+  }
+  .overviewboxes .box{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: calc(100% / 4 - 15px);
+    background: #fff;
+    padding: 15px 14px;
+    border-radius: 12px;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+  }
+  .overviewboxes .boxtopic{
+    font-size: 20px;
+    font-weight: 500;
+  }

@@ -62,6 +62,8 @@ const Login = () => {
         setMessage("Successfully logged in!");
         dispatch(setToken(res.data.token));
         localStorage.setItem("token", res.data.token);
+        history.push("/admin/dashboard");
+
       }
     } catch (error) {
       if (error.response && error.response.data) {

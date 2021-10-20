@@ -23,79 +23,92 @@ import Contact from "./components/home/Contact";
 import Footer from "./components/Footer/footer";
 import AddNewCar from "./components/car/AddNewCar";
 
-import Payment from './components/Payment/payment'
+import Payment from "./components/Payment/payment";
 
 export default function App() {
   return (
     <div>
-      <Nav />
-
       <Switch>
         <Route exact path="/register">
+          <Nav />
           <Register />
+          <Footer />
         </Route>
         <Route exact path="/login">
+          <Nav/>
           <Login />
+          <Footer/>
         </Route>
         <Route exact path="/">
+          <Nav />
           <Home />
-          
+          <Footer />
         </Route>
         <Route exact path="/myres">
+          <Nav />
           <ResevationDash />
+          <Footer />
         </Route>
         <Route exact path="/searchResul">
-         <SearchResult/>
+          <Nav />
+          <SearchResult />
+          <Footer />
         </Route>
         <Route exact path="/about">
-          {/* about */}
+          <Nav/>
+          <Footer/>
         </Route>
         <Route exact path="/contact">
+          <Nav/>
           <Contact />
+          <Footer/>
         </Route>
-        <Route  path="/addRes/:id">
+        <Route path="/addRes/:id">
+          <Nav />
           <AddReservation />
+          <Footer />
         </Route>
         <Route path="/editprofile">
-        < Profile/>
+          <Nav />
+          <Profile />
+          <Footer />
         </Route>
         <Route exact path="/mycars">
+          <Nav />
           <MyCars />
+          <Footer />
           {/* <Payment/> */}
-         
         </Route>
-        <Route  path="/updateCar/:id">
+        <Route path="/updateCar/:id">
+          <Nav />
           <UpdateCar />
+          <Footer />
         </Route>
         <Route  path="/addCar">
           <AddNewCar/>
         </Route>
         <Route exact path="/result">
+          <Nav />
           <SearchResult />
+          <Footer />
         </Route>
-        <Route  path="/rate/:id">
-        <AddRates />
-      </Route>
-      <Route path="/carinfo/:id">
-        <CarInfo />
-      </Route>
+        <Route path="/rate/:id">
+          <Nav />
+          <AddRates />
+          <Footer />
+        </Route>
+        <Route path="/carinfo/:id">
+          <Nav />
+          <CarInfo />
+          <Footer />
+        </Route>
+        <Route exact path="/admin/login">
+          <AdminLogin />
+        </Route>
+        <Route exact path="/admin/dashboard">
+          <AdminDashboard />
+        </Route>
       </Switch>
-<Footer/>
-      <Route exact path="/admin/login">
-        <AdminLogin />
-      </Route>
-      <Route exact path="/admin/dashboard">
-        <AdminDashboard />
-      </Route>
-      <Route exact path="/admin/users">
-        <AdminUsers />
-      </Route>
-      <Route exact path="/admin/reservations">
-        <AdminReservations />
-      </Route>
-      <Route exact path="/admin/cars">
-        <AdminCars />
-      </Route>
     </div>
   );
 }
