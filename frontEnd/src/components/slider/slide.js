@@ -6,7 +6,7 @@ const Slide=()=>{
     const car2="./images/car2.jpg"
     const car3="./images/car3.jpg"
     const car4="./images/car4.jpg"    
-return <div className="slide">
+return <div className="slide" style={{"padding":"30px"}}>
 
     <Carousel showThumbs={false} showIndicators={false} showArrows={true} autoPlay={true} infiniteLoop={true}>
                 <div>

@@ -15,7 +15,7 @@ const AddReservation = () => {
   const [PickUpDate, setPickUpDate] = useState("");
   const [amount, setAmount] = useState();
   const [users_id, setUsers_id] = useState();
-  const [isOk, setIsOk] = useState(false);
+  const [isOk, setIsOk] = useState(true);
   const car_id=useParams().id;
   //  const[car_id,setCar_id]=useState("2")
   //   const [price, setPrice] = useState();
@@ -125,7 +125,10 @@ const AddReservation = () => {
   },[])
   return (
     <>
-      {!state.editOrInsert && isOk? (
+    {!state.token?(
+      history.push("/login")
+    ):(
+      !state.editOrInsert && isOk? (
      
         
         <div className="container-fluid py-5">
@@ -191,7 +194,7 @@ const AddReservation = () => {
         </div>
         </div>
       ) : !isOk && !state.editOrInsert ?(
-        history.push("/editprofile")):(
+        history.push("/editprofile")):!isOk && state.editOrInsert ?(
         
         <div className="container-fluid py-5">
         <div className="container pt-5 pb-3">
@@ -249,9 +252,13 @@ const AddReservation = () => {
         </Card>
         </div>
         </div>
-      )}
+          
+    ):""
+              )}
     </>
+
   );
+            
 };
 
 

@@ -73,7 +73,7 @@ const MyCars = () => {
 
   console.log("state.cars", state.cars);
   return (
-    <div>
+    <div style={{"padding":"30px"}}>
       <Table striped bordered hover>
         <thead>
           <tr>

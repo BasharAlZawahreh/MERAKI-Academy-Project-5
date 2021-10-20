@@ -10,7 +10,8 @@ import { useHistory } from "react-router-dom";
 import { Rating } from "react-simple-star-rating";
 import Button from "react-bootstrap/Button";
 import { setSearchCarId } from "../../../actions/search";
-
+import './bootstrap.min.css'
+import './style.css'
 const CarInfo = () => {
   const history = useHistory();
   const dispatch = useDispatch();
@@ -69,22 +70,22 @@ const CarInfo = () => {
   console.log("car", carView);
   return (
     <>
-      <div class="container-fluid pt-5">
-        <div class="container pt-5">
-          <div class="row">
-            <div class="col-lg-6 mb-5">
-              <h1 class="display-4 text-uppercase mb-5">{carView.brand}</h1>
-              <div class="row mx-n2 mb-3">
+      <div className="container-fluid pt-5">
+        <div className="container pt-5">
+          <div className="row">
+            <div className="col-lg-6 mb-5">
+              <h1 className="display-4 text-uppercase mb-5">{carView.brand}</h1>
+              <div className="row mx-n2 mb-3">
                 {carViews &&
                   carViews.map((carImg, i) => {
                     return (
-                      <div class="col-md-4 col-6 px-2 pb-2">
+                      <div className="col-md-4 col-6 px-2 pb-2">
                         <img
                           key={i}
                           variant="top"
                           src={carImg.imgUrl}
                           alt="car photo"
-                          class="img-fluid w-100"
+                          className="img-fluid w-100"
                         />
                       </div>
                     );
@@ -92,24 +93,24 @@ const CarInfo = () => {
               </div>
               <p>{carView.description}</p>
              
-              <div class="row pt-2">
-                <div class="col-md-3 col-6 mb-2">
-                  <i class="fa fa-car text-primary mr-2"></i>
+              <div className="row pt-2">
+                <div className="col-md-3 col-6 mb-2">
+                  <i className="fa fa-car text-primary mr-2"></i>
                   <span>{carView.manifactoring_year}</span>
                 </div>
-                <div class="col-md-3 col-6 mb-2">
-                  <i class="fa fa-cogs text-primary mr-2"></i>
+                <div className="col-md-3 col-6 mb-2">
+                  <i className="fa fa-cogs text-primary mr-2"></i>
                   <span>Automatic</span>
                 </div>
-                <div class="col-md-3 col-6 mb-2">
-                  <i class="fa fa-road text-primary mr-2"></i>
+                <div className="col-md-3 col-6 mb-2">
+                  <i className="fa fa-road text-primary mr-2"></i>
                   <span>20km/liter</span>
                 </div>
               </div>
             </div>
-            <div class="col-lg-6 mb-5">
-                    <div class="bg-secondary p-5">
-                        <h3 class="text-primary text-center mb-4"> <Rating
+            <div className="col-lg-6 mb-5">
+                    <div className="bg-secondary p-5">
+                        <h3 className="text-primary text-center mb-4"> <Rating
                 style={{ paddingVertical: 10 }}
                 ratingValue={rateAvg}
                 size={30}
@@ -122,16 +123,16 @@ const CarInfo = () => {
                           {carRates ?
           carRates.map((rate, i) => {
             return (
-              <div class="form-group" key={i}>
-              <div class="date" id="date1" data-target-input="nearest">
-                  <input type="text" class="form-control p-4 datetimepicker-input" disabled={true} placeholder="Pickup Date"
+              <div className="form-group" key={i}>
+              <div className="date" id="date1" data-target-input="nearest">
+                  <input type="text" className="form-control p-4 datetimepicker-input" disabled={true} placeholder="Pickup Date"
                       data-target="#date1" data-toggle="datetimepicker" />
               </div>
           </div> 
             )
-          }):                        <div class="form-group">
-          <div class="time" id="time1" data-target-input="nearest">
-              <input type="text" class="form-control p-4 datetimepicker-input" disabled={true} placeholder="No Comments till now"
+          }):                        <div className="form-group">
+          <div className="time" id="time1" data-target-input="nearest">
+              <input type="text" className="form-control p-4 datetimepicker-input" disabled={true} placeholder="No Comments till now"
                   data-target="#time1" data-toggle="datetimepicker" />
           </div>
       </div>}

@@ -13,7 +13,7 @@ const Profile = () => {
   const [city, setCity] = useState("");
   const [ssn, setSsn] = useState("");
   const [birthDate, setBirthDate] = useState("");
-  const [license_img, setLicense_img] = useState("");
+  const [license_img, setLicense_img] = useState(null);
   const [mobile, setMobile] = useState("");
   const [password, setPassword] = useState("");
   const [url, setUrl] = useState("");
@@ -79,6 +79,10 @@ const Profile = () => {
   };
   console.log(url)
   return (
+    <>
+    {!state.token ? (
+      history.push("/login")
+    ):(
     <div
       className="container-fluid py-5 "
       style={{
@@ -174,6 +178,8 @@ const Profile = () => {
       {/* </div> */}
       {/* </div> */}
     </div>
+    )}
+    </>
   );
 };
 export default Profile;
