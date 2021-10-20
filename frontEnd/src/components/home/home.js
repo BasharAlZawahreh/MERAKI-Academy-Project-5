@@ -95,9 +95,9 @@ const Home = () => {
               subContainerClassName={"pages pagination"}
               activeClassName={"active"}
             />
-            {/* </div> */}
+            </div>
           </div>
-        </div>
+        
       </div>
     </>
   );
