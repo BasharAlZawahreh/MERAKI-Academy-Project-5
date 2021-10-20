@@ -4,6 +4,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import { updateUser } from "../../actions/users";
 import { storage } from "../config";
+import Card from 'react-bootstrap/Card'
+import Button  from 'react-bootstrap/Button'
+import { GiCancel } from 'react-icons/gi';
+
+
 const Profile = () => {
   const history=useHistory()
   const dispatch = useDispatch("");
@@ -79,46 +84,135 @@ const Profile = () => {
   };
   console.log(url)
   return (
-    <div
-      className="container-fluid py-5 "
-      style={{
-        width: "500px",
-        backgroundColor: "#082032",
-        marginLeft: "40rem",
-        paddingLeft: "45px",
-      }}
-    >
-      {/* <div className="container pt-5 pb-3"  style={{ backgroundColor:"#082032" }} > */}
-      <h1
-        className="display-6-center mb-5"
-        style={{ color: "white", paddingTop: "15px" }}
-      >
-        Please fill out license image
-      </h1>
-      <div className="row">
-        <div>
-          {/* <div className="contact-form bg-light mb-4 " style={{ padding:"30px",width:"500px" ,marginLeft:"40rem"}}> */}
-          {/* <form > */}
+  //   <div
+  //     className="container-fluid py-5 "
+  //     style={{
+  //       width: "500px",
+  //       backgroundColor: "#082032",
+  //       marginLeft: "40rem",
+  //       paddingLeft: "45px",
+  //     }}
+  //   >
+  //     {/* <div className="container pt-5 pb-3"  style={{ backgroundColor:"#082032" }} > */}
+  //     <h1
+  //       className="display-6-center mb-5"
+  //       style={{ color: "white", paddingTop: "15px" }}
+  //     >
+  //       Please fill out license image
+  //     </h1>
+  //     <div className="row">
+  //       <div>
+  //         {/* <div className="contact-form bg-light mb-4 " style={{ padding:"30px",width:"500px" ,marginLeft:"40rem"}}> */}
+  //         {/* <form > */}
 
+  //         <input
+  //           style={{ marginBottom: "10px", width: "400px" }}
+  //           className="form-control p-4"
+  //           type="file"
+  //           onChange={addImg}
+  //         />
+
+  //         <input
+  //           style={{ marginBottom: "10px", width: "400px" }}
+  //           className="form-control p-4"
+  //           type="text"
+  //           placeholder="firstName"
+  //           onChange={(e) => {
+  //             setFirstName(e.target.value);
+  //           }}
+  //         />
+  //         <input
+  //           style={{ marginTop: "10px", width: "400px" }}
+  //           className="form-control p-4"
+  //           type="text"
+  //           placeholder="lastName"
+  //           onChange={(e) => {
+  //             setLastName(e.target.value);
+  //           }}
+  //         />
+
+  //         <input
+  //           style={{ marginTop: "10px", width: "400px" }}
+  //           className="form-control p-4"
+  //           type="text"
+  //           placeholder="City"
+  //           onChange={(e) => {
+  //             setCity(e.target.value);
+  //           }}
+  //         />
+  //         <input
+  //           style={{ marginTop: "10px", width: "400px" }}
+  //           className="form-control p-4"
+  //           type="text"
+  //           placeholder="Ssn"
+  //           onChange={(e) => {
+  //             setSsn(e.target.value);
+  //           }}
+  //         />
+  //         <input
+  //           style={{ marginTop: "10px", width: "400px" }}
+  //           className="form-control p-4"
+  //           type="date"
+  //           placeholder="BirthDate"
+  //           onChange={(e) => {
+  //             setBirthDate(e.target.value);
+  //           }}
+  //         />
+
+  //         <button
+  //           className="btn btn-primary py-3 px-5"
+  //           style={{
+  //             marginBottom: "10px",
+  //             marginTop: "3px",
+  //             marginLeft: "8rem",
+  //           }}
+  //           onClick={() => {
+  //             editProfile()
+            
+  //           }}
+  //         >
+  //           editProfile
+  //         </button>
+  //         {/* </form> */}
+  //       </div>
+  //     </div>
+  //     {/* </div> */}
+  //     {/* </div> */}
+  //   </div>
+
+
+
+
+<Card style={{ width: '20rem',marginLeft:"40vw", backgroundColor:"#2B2E4A" } } >
+  <span style={{paddingLeft:"18.5rem",cursor:"pointer"}}  onClick={()=>{history.push("/")}}><GiCancel style={{color:"white",width:"18px",height:"20px"}}/></span>
+  <Card.Body>
+    <Card.Title style={{color:"white",textAlign:"center"}} >fill out information</Card.Title>
+    <Card.Text>
+      
           <input
-            style={{ marginBottom: "10px", width: "400px" }}
-            className="form-control p-4"
+           className="form-control p-1  "
             type="file"
             onChange={addImg}
           />
+         
 
-          <input
-            style={{ marginBottom: "10px", width: "400px" }}
-            className="form-control p-4"
+         
+         <input
+           style={{ marginTop:"5px"}}
+      
+             className="form-control p-2"
             type="text"
             placeholder="firstName"
             onChange={(e) => {
               setFirstName(e.target.value);
             }}
           />
-          <input
-            style={{ marginTop: "10px", width: "400px" }}
-            className="form-control p-4"
+
+
+
+<input
+              style={{ marginTop:"5px"}}
+           className="form-control p-2"
             type="text"
             placeholder="lastName"
             onChange={(e) => {
@@ -127,8 +221,9 @@ const Profile = () => {
           />
 
           <input
-            style={{ marginTop: "10px", width: "400px" }}
-            className="form-control p-4"
+           
+           className="form-control p-2 " 
+           style={{ marginTop:"5px"}}
             type="text"
             placeholder="City"
             onChange={(e) => {
@@ -136,8 +231,8 @@ const Profile = () => {
             }}
           />
           <input
-            style={{ marginTop: "10px", width: "400px" }}
-            className="form-control p-4"
+                 className="form-control p-2"
+                 style={{ marginTop:"5px"}}
             type="text"
             placeholder="Ssn"
             onChange={(e) => {
@@ -145,8 +240,8 @@ const Profile = () => {
             }}
           />
           <input
-            style={{ marginTop: "10px", width: "400px" }}
-            className="form-control p-4"
+                 className="form-control p-2"
+                 style={{ marginTop:"5px"}}
             type="date"
             placeholder="BirthDate"
             onChange={(e) => {
@@ -154,26 +249,28 @@ const Profile = () => {
             }}
           />
 
-          <button
-            className="btn btn-primary py-3 px-5"
-            style={{
-              marginBottom: "10px",
-              marginTop: "3px",
-              marginLeft: "8rem",
-            }}
-            onClick={() => {
+    </Card.Text>
+    <Button  style={{width:"100px",marginTop:"5PX",marginLeft:"4vw"}}    onClick={() => {
               editProfile()
             
-            }}
-          >
-            editProfile
-          </button>
-          {/* </form> */}
-        </div>
-      </div>
-      {/* </div> */}
-      {/* </div> */}
-    </div>
-  );
+            }}>Submit</Button>
+  </Card.Body>
+</Card>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   )
 };
 export default Profile;

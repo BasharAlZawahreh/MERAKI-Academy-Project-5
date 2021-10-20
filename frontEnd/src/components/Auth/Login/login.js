@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setToken } from "../../../actions/login";
 import axios from "axios";
 import GoogleLogin from "react-google-login";
-
+import {MdCancel} from 'react-icons/md';
 const Login = () => {
   const history = useHistory();
   const dispatch = useDispatch();
@@ -79,9 +79,13 @@ const Login = () => {
   return (
     <>
       <section className="sign-in">
+    
         <div className="container">
+        <span style={{cursor:"pointer",paddingLeft:"53.5rem"}}  onClick={()=>{history.push("/")}}><MdCancel style={{height:"26px",width:"24px",paddingTop:"5px"}} /></span>
           <div className="signin-content">
+            
             <div className="signin-image">
+
               <figure>
                 <img src="images/signup-image.jpg" alt="sing up image" />
               </figure>
@@ -92,8 +96,9 @@ const Login = () => {
                 Create an account
               </a>
             </div>
-
+          
             <div className="signin-form">
+              
               <h2 className="form-title">Login</h2>
               <form onSubmit={Enter} className="register-form" id="login-form">
                 <div className="form-group">
