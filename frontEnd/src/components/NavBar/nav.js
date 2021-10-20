@@ -6,7 +6,6 @@ import { setToken } from "../../actions/login";
 import { Link } from "react-router-dom";
 // import "./nav.css";
 import SearchForm from "../SearchForm/searchForm";
-
 const Nav = () => {
   const history = useHistory();
   const dispatch = useDispatch();

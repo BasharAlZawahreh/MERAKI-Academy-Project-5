@@ -16,7 +16,7 @@ const MyCars = () => {
   const state = useSelector((state) => {
     return { cars: state.car.cars, token: state.token.token };
   });
-  console.log("state.car", state.cars);
+  // console.log("state.car", state.cars);
 
   const dispatch = useDispatch();
 
@@ -26,7 +26,7 @@ const MyCars = () => {
         headers: { authorization: `Bearer ${state.token}` },
       })
       .then((result) => {
-        console.log("here", result.data.result);
+        // console.log("here", result.data.result);
         dispatch(setCar(result.data.result));
       })
       .catch((err) => {
@@ -35,7 +35,7 @@ const MyCars = () => {
   };
 
   const deleteCar1 = (car_id) => {
-    console.log("delet", state.token);
+    
     //,{headers:{authorization:`Bearer ${state.token}`}}
     axios
       .put(`http://localhost:5000/car/delete/${car_id}`)
@@ -57,7 +57,9 @@ const MyCars = () => {
         }
       )
       .then((result) => {
-        console.log(result.data.result);
+        console.log("odai",result.data.result)
+
+        dispatch(updateCar(id))
       })
       .catch((err) => {
         console.log("err", err);
@@ -68,10 +70,10 @@ const MyCars = () => {
     git();
   }, []);
 
-  console.log("state.cars", state.cars);
 
+  console.log("state.cars", state.cars);
   return (
-    <div>
+    <div style={{"padding":"30px"}}>
       <Table striped bordered hover>
         <thead>
           <tr>
@@ -107,10 +109,10 @@ const MyCars = () => {
               console.log("basharcar", car.is_Available);
               return (
                 <tr key={i}>
-                  <td class="w-25">
+                  <td className="w-25">
                     <img
                       src={car.main_img}
-                      class="img-fluid img-thumbnail"
+                      className="img-fluid img-thumbnail"
                       alt="Sheep"
                     />
                   </td>
@@ -118,28 +120,29 @@ const MyCars = () => {
                   <td>{car.model}</td>
                   <td>{car.manifactoring_year}</td>
                   <td>
-                    {car.is_Available === 0 ? (
-                      <label style={{ marginTop: "20px" }} class="switch">
+                    {car.is_Available == 0 ? (
+                      <label style={{ marginTop: "20px" }} className="switch">
                         <input
                           type="checkbox"
-                          onClick={() => {
+                          
+                          onChange={() => {
                             toggleCarAvailability(car.car_id);
                           }}
                         />
-                        <span class="slider round"></span>
+                        <span className="slider round"></span>
                       </label>
-                    ) : (
-                      <label style={{ marginTop: "20px" }} class="switch">
+                    ) : car.is_Available == 1 ? (
+                      <label style={{ marginTop: "20px" }} className="switch">
                         <input
-                          checked="true"
+                          checked
                           type="checkbox"
-                          onClick={() => {
+                          onChange={() => {
                             toggleCarAvailability(car.car_id);
                           }}
-                        />
-                        <span class="slider round"></span>
+                        />t 
+                        <span className="slider round"></span>
                       </label>
-                    )}
+                    ):""}
                   </td>
                   <td>{car.description}</td>
                   <td>{car.day_price}JD</td>
