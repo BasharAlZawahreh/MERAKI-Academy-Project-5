@@ -91,9 +91,9 @@ const deleteReservationById = (req, res) => {
 const checkprofile = (req, res) => {
   const id = req.token.user_id;
   const query = `SELECT  license_img  FROM users where user_id=${id}`;
-  console.log("checkProfile")
+ 
   reservationModel.query(query, (err, result) => {
-    console.log("bashar",result)
+   
     if (err) {
       return res.status(500).json({
         success: false,

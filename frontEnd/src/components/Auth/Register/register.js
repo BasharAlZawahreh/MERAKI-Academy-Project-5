@@ -29,7 +29,7 @@ const Register=()=>{
     return (
         <section class="signup">
          <div class="container">
-        <span style={{cursor:"pointer",paddingLeft:"53.5rem"}}  onClick={()=>{history.push("/login")}}><MdCancel style={{height:"26px",width:"24px",paddingTop:"5px"}} /></span>
+        <span style={{cursor:"pointer",marginLeft:"53.5rem"}}  onClick={()=>{history.push("/login")}}><MdCancel style={{height:"26px",width:"24px",paddingTop:"5px"}} /></span>
             <div class="signup-content">
                 <div class="signup-form">
                     <h2 class="form-title">Sign up</h2>
