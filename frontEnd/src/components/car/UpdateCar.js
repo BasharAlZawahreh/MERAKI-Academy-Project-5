@@ -239,6 +239,9 @@ const UpdateCar = ({ car }) => {
   
        
   };
+
+
+
   return (
     <>
       <div>Enter the Updated field which you want to update it</div><br></br>
@@ -303,7 +306,7 @@ const UpdateCar = ({ car }) => {
 
     </div>
     <br></br>
-     <button className="addcar"  type="button"  onClick={addToData}>
+     <button className="addcar"  type="button" onClick={addToData}>
       Save youre Update   </button><br></br>
       {message}
     </>

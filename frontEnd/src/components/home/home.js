@@ -7,21 +7,26 @@ import "./home.css";
 import { useHistory } from "react-router-dom";
 
 const Home = () => {
+ 
     const history = useHistory()
   const [offset, setOffset] = useState(0);
   const [data, setData] = useState([]);
-  const [perPage] = useState(5);
+  const [perPage] = useState(6);
   const [pageCount, setPageCount] = useState(0);
 
   const gitAllCars = async () => {
     const res = await axios.get("http://localhost:5000/car/cars");
     const data = res.data.result;
     const slice = data.slice(offset, offset + perPage);
+    
     const postData = slice.map((car, i) => {
+      let carMode = i % 2 === 0 ? "Auto" : "Manual"
+      console.log(car,"odai");
       return (
-        <div className="col-lg-4 col-md-6 mb-2">
+        <div className="col-lg-4 col-md-6 mb-2 omgs">
           <div className="rent-item mb-4" key={i}>
-            <img className="img-fluid mb-4" src={car.main_img} alt="car img" />
+           
+            <img className="img-fluid mb-4 " src={car.main_img} alt="car img" />
             <h4 className="text-uppercase mb-4">{car.brand}</h4>
             <div className="d-flex justify-content-center mb-4">
               <div className="px-2">
@@ -30,11 +35,11 @@ const Home = () => {
               </div>
               <div className="px-2 border-left border-right">
                 <i className="fa fa-cogs text-primary mr-1"></i>
-                <span>AUTO</span>
+                <span>{carMode}</span>
               </div>
               <div className="px-2">
-                <i className="fa fa-road text-primary mr-1"></i>
-                <span>{car.day_price}JD/D</span>
+                <i className="fas fa-money-bill-alt text-primary mr-1 "></i>
+                <span >{car.day_price}JD/D</span>
               </div>
             </div>
 
@@ -82,6 +87,8 @@ const Home = () => {
           <div className="row">
             {/* <div className="col-lg-4 col-md-6 mb-2"> */}
             {data}
+            </div>
+          </div>
             <ReactPaginate
               previousLabel={"prev"}
               nextLabel={"next"}
@@ -95,8 +102,6 @@ const Home = () => {
               subContainerClassName={"pages pagination"}
               activeClassName={"active"}
             />
-            </div>
-          </div>
         
       </div>
     </>

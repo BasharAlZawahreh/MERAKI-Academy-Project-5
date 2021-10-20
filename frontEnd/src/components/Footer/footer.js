@@ -7,9 +7,9 @@ const Footer=()=>{
         <div className="row pt-5">
             <div className="col-lg-3 col-md-6 mb-5">
                 <h4 className="text-uppercase text-light mb-4">Get In Touch</h4>
-                <p className="mb-2"><i className="fa fa-map-marker-alt text-white mr-3"></i>123 Street, New York, USA</p>
-                <p className="mb-2"><i className="fa fa-phone-alt text-white mr-3"></i>+012 345 67890</p>
-                <p><i className="fa fa-envelope text-white mr-3"></i>info@example.com</p>
+                <p className="mb-2"><i className="fa fa-map-marker-alt text-white mr-3"></i>Jordan-Amman</p>
+                <p className="mb-2"><i className="fa fa-phone-alt text-white mr-3"></i>0096277777</p>
+                <p><i className="fa fa-envelope text-white mr-3"></i>info@Auto_Rental</p>
                 <h6 className="text-uppercase text-white py-2">Follow Us</h6>
                 <div className="d-flex justify-content-start">
                     <a className="btn btn-lg btn-dark btn-lg-square mr-2" href="#"><i className="fab fa-twitter"></i></a>
@@ -30,25 +30,25 @@ const Footer=()=>{
                 </div>
             </div>
             <div className="col-lg-3 col-md-6 mb-5">
-                <h4 className="text-uppercase text-light mb-4"></h4>
+                <h4 className="text-uppercase text-light mb-4">Car Gallery</h4>
                 <div className="row mx-n1">
                     <div className="col-4 px-1 mb-2">
-                        <a href=""><img className="w-100" src="img/gallery-1.jpg" alt=""/></a>
+                        <a href=""><img className="w-100 h-100" src="https://images.unsplash.com/photo-1567818735868-e71b99932e29?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=387&q=80" alt=""/></a>
                     </div>
                     <div className="col-4 px-1 mb-2">
-                        <a href=""><img className="w-100" src="img/gallery-2.jpg" alt=""/></a>
+                        <a href=""><img className="w-100 h-100" src="https://images.unsplash.com/photo-1619405399517-d7fce0f13302?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=387&q=80" alt=""/></a>
                     </div>
                     <div className="col-4 px-1 mb-2">
-                        <a href=""><img className="w-100" src="img/gallery-3.jpg" alt=""/></a>
+                        <a href=""><img className="w-100 h-100" src="https://images.unsplash.com/photo-1610399214658-52b9fdea4627?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=387&q=80" alt=""/></a>
                     </div>
                     <div className="col-4 px-1 mb-2">
-                        <a href=""><img className="w-100" src="img/gallery-4.jpg" alt=""/></a>
+                        <a href=""><img className="w-100 h-100" src="https://images.unsplash.com/photo-1616422285623-13ff0162193c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=431&q=80" alt=""/></a>
                     </div>
                     <div className="col-4 px-1 mb-2">
-                        <a href=""><img className="w-100" src="img/gallery-5.jpg" alt=""/></a>
+                        <a href=""><img className="w-100 h-100" src="https://images.unsplash.com/photo-1605515121761-e2bb7b5e3744?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=406&q=80" alt=""/></a>
                     </div>
                     <div className="col-4 px-1 mb-2">
-                        <a href=""><img className="w-100" src="img/gallery-6.jpg" alt=""/></a>
+                        <a href=""><img className="w-100 h-100" src="https://images.unsplash.com/photo-1543465077-db45d34b88a5?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=465&q=80" alt=""/></a>
                     </div>
                 </div>
             </div>
@@ -63,13 +63,13 @@ const Footer=()=>{
                         </div>
                     </div>
                 </div>
-                <i>Lorem sit sed elitr sed kasd et</i>
+             
             </div>
         </div>
     </div>
     <div className="container-fluid bg-dark py-4 px-sm-3 px-md-5">
-        <p className="mb-2 text-center text-body">&copy; <a href="#">Your Site Name</a>. All Rights Reserved.</p>
-        <p className="m-0 text-center text-body">Designed by <a href="https://htmlcodex.com">HTML Codex</a></p>
+        <p className="mb-2 text-center text-body">&copy; <a href="#">Auto_Rental</a>. All Rights Reserved.</p>
+        <p className="m-0 text-center text-body">Designed by <a href="https://htmlcodex.com">Auto Team "MERAKI_ACADIMY"</a></p>
     </div>
     </>
     )

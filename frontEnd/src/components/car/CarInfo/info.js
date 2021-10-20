@@ -79,7 +79,7 @@ const CarInfo = () => {
                 {carViews &&
                   carViews.map((carImg, i) => {
                     return (
-                      <div className="col-md-4 col-6 px-2 pb-2">
+                      <div className="col-md-4 col-6 px-2 pb-2 omgs">
                         <img
                           key={i}
                           variant="top"

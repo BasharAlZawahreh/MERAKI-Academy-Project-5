@@ -70,10 +70,15 @@ const MyCars = () => {
     git();
   }, []);
 
+  const addNewCar=()=>{
+    history.push("/addCar")
+  }
+
 
   console.log("state.cars", state.cars);
   return (
     <div style={{"padding":"30px"}}>
+      <button onClick={addNewCar} style={{marginBottom:"15px",float:"right"}}>Add new Car </button>
       <Table striped bordered hover>
         <thead>
           <tr>
@@ -110,12 +115,14 @@ const MyCars = () => {
              
               return (
                 <tr key={i}>
-                  <td className="w-25">
+                  <td className="w-25 ">
+                    <div className="odai">
                     <img
                       src={car.main_img}
                       className="img-fluid img-thumbnail"
                       alt="Sheep"
                     />
+                    </div>
                   </td>
                   <td>{car.brand}</td>
                   <td>{car.model}</td>
@@ -166,6 +173,7 @@ const MyCars = () => {
             })}
         </tbody>
       </Table>
+      
     </div>
   );
 };
