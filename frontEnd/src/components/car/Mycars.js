@@ -106,7 +106,8 @@ const MyCars = () => {
         <tbody>
           {state.cars.length &&
             state.cars.map((car, i) => {
-              console.log("basharcar", car.is_Available);
+              let  ava = car.is_Available ? true : false
+             
               return (
                 <tr key={i}>
                   <td className="w-25">
@@ -120,29 +121,16 @@ const MyCars = () => {
                   <td>{car.model}</td>
                   <td>{car.manifactoring_year}</td>
                   <td>
-                    {car.is_Available == 0 ? (
-                      <label style={{ marginTop: "20px" }} className="switch">
+                  <label style={{ marginTop: "20px" }} className="switch">
                         <input
                           type="checkbox"
-                          
+                          checked={ava}
                           onChange={() => {
                             toggleCarAvailability(car.car_id);
                           }}
                         />
                         <span className="slider round"></span>
                       </label>
-                    ) : car.is_Available == 1 ? (
-                      <label style={{ marginTop: "20px" }} className="switch">
-                        <input
-                          checked
-                          type="checkbox"
-                          onChange={() => {
-                            toggleCarAvailability(car.car_id);
-                          }}
-                        />t 
-                        <span className="slider round"></span>
-                      </label>
-                    ):""}
                   </td>
                   <td>{car.description}</td>
                   <td>{car.day_price}JD</td>
