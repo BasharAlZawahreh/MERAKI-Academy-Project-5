@@ -108,6 +108,7 @@ export default function App() {
         <Route exact path="/admin/dashboard">
           <AdminDashboard />
         </Route>
+        
       </Switch>
     </div>
   );

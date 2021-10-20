@@ -1,23 +1,26 @@
 import React, { useEffect, useState } from "react";
+import { useHistory } from "react-router";
 import axios from "axios";
 //rcfe
-import "../car/AddNewCar.css"
+import "../car/AddNewCar.css";
 import { storage } from "../config";
 import { useSelector } from "react-redux";
-let car_id = 0
-let x =""
+import Card from "react-bootstrap/Card";
+import Button from "react-bootstrap/Button";
+import { GiCancel } from "react-icons/gi";
+let car_id = 0;
+let x = "";
 
-let odaisUrl=[]
+let odaisUrl = [];
 const AddNewCar = () => {
-  let message =""
-
- const [imgUrl,setImgUrl]=useState("")
- const [x,setx]=useState("")
-   const state =useSelector((state)=>{
-   return{token:state.token.token} 
-  })
-   console.log("stateCar",state.token);
-
+  let message = "";
+  const history = useHistory();
+  const [imgUrl, setImgUrl] = useState("");
+  const [x, setx] = useState("");
+  const state = useSelector((state) => {
+    return { token: state.token.token };
+  });
+  console.log("stateCar", state.token);
 
   const [progress, setProgress] = useState(0);
 
@@ -200,9 +203,8 @@ const AddNewCar = () => {
     }
   };
   const getCarTypes = async () => {
-    console.log("ddd")
+    console.log("ddd");
     const res = await axios.get("http://localhost:5000/car/cartypes");
-    
 
     if (res.data.success) {
       setcarTypes(res.data.result);
@@ -216,9 +218,9 @@ const AddNewCar = () => {
   }, []);
 
   const addMainIm = (e) => {
-    let task=[]
+    let task = [];
     if (e.target.files[0]) {
-      let mainOdai = e.target.files[0]
+      let mainOdai = e.target.files[0];
       let uploadTask = storage.ref(`images/${mainOdai.name}`).put(mainOdai);
       task.push(uploadTask);
       uploadTask.on(
@@ -231,36 +233,32 @@ const AddNewCar = () => {
           storage
             .ref("images")
             .child(mainOdai.name)
-           .getDownloadURL()
-            .then(async(url) => {
+            .getDownloadURL()
+            .then(async (url) => {
               console.log(url);
-              setx(url)
-              console.log("odai",x);
-             })
-            
+              setx(url);
+              console.log("odai", x);
+            });
         }
-      )
-      Promise.all(task)
+      );
+      Promise.all(task);
     }
-    
   };
-  
-  
+
   const handleChange = (e) => {
-    let odais = []
-   
+    let odais = [];
+
     console.log(e.target.files.length);
-    
+
     for (let i = 0; i < e.target.files.length; i++) {
       const newImage = e.target.files[i];
       newImage["id"] = Math.random();
-      odais.push(newImage)
-      console.log("=>",odais);
+      odais.push(newImage);
+      console.log("=>", odais);
     }
-    if(odais.length===e.target.files.length){
+    if (odais.length === e.target.files.length) {
       const promises = [];
       odais.map((image) => {
-       
         const uploadTask = storage.ref(`images/${image.name}`).put(image);
         promises.push(uploadTask);
         uploadTask.on(
@@ -274,71 +272,79 @@ const AddNewCar = () => {
           (error) => {
             console.log(error);
           },
-           () => {
-             storage
+          () => {
+            storage
               .ref("images")
               .child(image.name)
               .getDownloadURL()
               .then((url) => {
                 // console.log("url",url);
-                odaisUrl.push(url)
-                if(odaisUrl.length===e.target.files.length){
-                console.log(odaisUrl)
-                setImgUrl(odaisUrl)
-              console.log(imgUrl);}
+                odaisUrl.push(url);
+                if (odaisUrl.length === e.target.files.length) {
+                  console.log(odaisUrl);
+                  setImgUrl(odaisUrl);
+                  console.log(imgUrl);
+                }
                 //setImgUrl((oldUrl=>[...oldUrl,url]))
               });
           }
         );
       });
-      Promise.all(promises)
+      Promise.all(promises);
       // console.log(odaisUrl);
     }
   };
-  
-  
 
-const addToData=async()=>{
+  const addToData = async () => {
+    let data = {
+      color: carColor,
+      model: model,
+      description: desc,
+      manifactoring_year: carYear,
+      day_price: dayPrice,
+      car_types_id: carType,
+      car_brand_id: carBrand,
+      main_img: x,
+    };
 
-  let data = {   
-    color:carColor,
-   model: model,
-   description:desc,
-   manifactoring_year:carYear,
-   day_price:dayPrice,
-   car_types_id:carType,
-   car_brand_id:carBrand,
-   main_img:x
-   }
+    await axios
+      .post("http://localhost:5000/car", data, {
+        headers: { authorization: `Bearer ${state.token}` },
+      })
+      .then((result) => {
+        message = `added successfuly`;
+        car_id = result.data.insertId;
+        console.log("car_Id", car_id);
+      })
+      .catch((err) => {
+        console.log("err");
+      });
 
-    await axios.post("http://localhost:5000/car",data,{headers:{authorization:`Bearer ${state.token}`}})
-     .then(result=>{ message=`added successfuly`
-     car_id=result.data.insertId
-   console.log("car_Id",car_id)})
-     .catch(err=>{console.log("err");})
+    await axios
+      .post(
+        "http://localhost:5000/car/imgs",
+        { imgUrl, car_id },
+        { headers: { authorization: `Bearer ${state.token}` } }
+      )
+      .then((result) => {
+        console.log(result);
+      })
+      .catch((err) => console.log(err));
+  };
 
-     await  axios.post("http://localhost:5000/car/imgs",{imgUrl,car_id},{headers:{authorization:`Bearer ${state.token}`}})
-     .then(result=>{
-       console.log(result);
-     })
-   .catch((err) => console.log(err))
-};
+  const [enable, setEnable] = useState(true);
 
-const [enable,setEnable]=useState(true)
-
-useEffect(()=>{
-  console.log("IM here");
-  if(x&&imgUrl){
-    console.log("Odai taha jaabb");
-    setEnable(false)
-
-  }
-
-},[x,imgUrl])
+  useEffect(() => {
+    console.log("IM here");
+    if (x && imgUrl) {
+      console.log("Odai taha jaabb");
+      setEnable(false);
+    }
+  }, [x, imgUrl]);
 
   return (
     <>
-    <div>
+      {/* <div>
       <form>
         <div className="form-group">
           <label htmlFor="carTypes">car type</label>
@@ -473,8 +479,211 @@ useEffect(()=>{
 
      <button className="addcar" disabled={enable} type="button"  onClick={addToData}>
      add youre car 
-   </button>
-   </>
+   </button> */}
+
+      <Card
+        style={{
+          width: "50rem",
+          marginLeft: "28vw",
+          backgroundColor: "#2B2E4A",
+          alignItems: "center",
+          flexDirection: "column",
+          height: "36rem",
+        }}
+      >
+        <span
+          style={{ marginLeft: "48rem", cursor: "pointer" }}
+          onClick={() => {
+            history.push("/");
+          }}
+        >
+          <GiCancel style={{ color: "white", width: "18px", height: "20px" }} />
+        </span>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            width: "100%",
+            height: "549px",
+          }}
+        >
+          <Card.Img
+            style={{
+              width: "30%",
+              alignItems: "center",
+              marginBottom: "34px",
+              marginLeft: "13px",
+              marginTop: "57px",
+              height: "73%",
+            }}
+            variant="top"
+            src="https://images.unsplash.com/photo-1554708893-e11aa45b9bbf?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTJ8fG5ldyUyMGNhcnxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+          />
+          <Card.Body>
+            <Card.Title style={{ color: "white", textAlign: "center" }}>
+              AddCar
+            </Card.Title>
+            <form>
+              {/* <div> */}
+              <select
+                style={{ marginTop: "7px" }}
+                id="carTypes"
+                className="form-control form-control-md"
+                onChange={(e) => {
+                  setcarType(e.target.value);
+                }}
+              >
+                <option defaultValue>choose a type</option>
+                {carTypes &&
+                  carTypes.map((type, i) => {
+                    return (
+                      <option value={type.typeCar_id} key={i}>
+                        {type.car_type}
+                      </option>
+                    );
+                  })}
+              </select>
+
+              {/* </div> */}
+
+              {/* <div className="form-group"  style={{marginTop:"5px"}} style={{ marginTop: "5px" }}> */}
+              {/* <label ></label> */}
+              <select
+                style={{ marginTop: "7px" }}
+                id="carBrands"
+                className="form-control form-control-md"
+                onChange={(e) => setcarBrand(e.target.value)}
+              >
+                <option defaultValue style={{ fontWeight: "bold" }}>
+                  choose car brand
+                </option>
+
+                {carBrands &&
+                  carBrands.map((brand, i) => {
+                    return (
+                      <option value={brand.brand_id} key={i}>
+                        {brand.brand}
+                      </option>
+                    );
+                  })}
+              </select>
+              {/* </div> */}
+
+              {/* <div className="form-group" style={{ marginTop: "5px" }}> */}
+              {/* <label htmlFor="carColors"></label> */}
+              <select
+                style={{ marginTop: "7px" }}
+                id="carColors"
+                className="form-control form-control-md"
+                onChange={(e) => setcarColor(e.target.value)}
+              >
+                <option defaultValue>choose car color</option>
+
+                {colors.map((color, i) => {
+                  return (
+                    <option value={color} key={i}>
+                      {color}
+                    </option>
+                  );
+                })}
+              </select>
+              {/* </div> */}
+
+              {/* <div className="form-group" style={{ marginTop: "5px" }}> */}
+              {/* <label htmlFor="carYear"></label> */}
+              <select
+                style={{ marginTop: "7px" }}
+                id="carYear"
+                className="form-control form-control-md"
+                onChange={(e) => setcarYear(e.target.value)}
+              >
+                <option defaultValue>choose car year</option>
+
+                {allYears &&
+                  allYears.map((year, i) => {
+                    return (
+                      <option value={year} key={i}>
+                        {year}
+                      </option>
+                    );
+                  })}
+              </select>
+              {/* </div> */}
+
+              {/* <div className="form-group" style={{ marginTop: "5px" }}> */}
+              {/* <label htmlFor="formGroupExampleInput"></label> */}
+              <input
+                style={{ marginTop: "7px" }}
+                type="text"
+                className="form-control-md"
+                id="formGroupExampleInput"
+                placeholder="choose car model"
+                onChange={(e) => {
+                  setModel(e.target.value);
+                }}
+              />
+              {/* </div> */}
+
+              {/* <div className="form-group" style={{ marginTop: "5px" }}> */}
+              {/* <label htmlFor="formGroupExampleInput2"></label> */}
+              <textarea
+                style={{ width: "505px", height: "39px", marginTop: "7px" }}
+                type="text"
+                className="form-control-md"
+                id="formGroupExampleInput2"
+                placeholder="choose discription"
+                onChange={(e) => {
+                  setdesc(e.target.value);
+                }}
+              />
+              {/* </div> */}
+              {/* <div className="form-group" style={{ marginTop: "5px" }}> */}
+              {/* <label htmlFor="formGroupExampleInput2"> </label> */}
+              <textarea
+                style={{ width: "505px", height: "39px", marginTop: "0px" }}
+                type="text"
+                className="form-control-md"
+                id="formGroupExampleInput2"
+                placeholder="price per day"
+                onChange={(e) => {
+                  setDayPrice(e.target.value);
+                }}
+              />
+              {/* </div> */}
+
+              {/* <div className="form-group" style={{ marginTop: "5px" }}> */}
+              <input
+              placeholder="Main Img"
+                style={{ marginTop: "0px" ,padding:"2px"}}
+                type="file"
+                className="form-control"
+                id="formGroupExampleInput"
+                onChange={addMainIm}
+              />
+              {/* </div> */}
+              {/* <div className="form-group" style={{ marginTop: "5px" }}> */}
+              <input
+              name="More Img"
+                style={{ marginTop: "5px",padding:"2px" }}
+                type="file"
+                multiple
+                className="form-control"
+                id="formGroupExampleInput"
+                onChange={handleChange}
+              />
+              {/* </div> */}
+            </form>
+
+            <Button
+              style={{ width: "156px", marginTop: "14PX", marginLeft: "9.5vw" }}
+              className="addcar" disabled={enable}  onClick={addToData}
+            >
+              addCar
+            </Button>
+          </Card.Body>
+        </div>
+      </Card>
+    </>
   );
 };
 export default AddNewCar;

@@ -135,23 +135,32 @@ const AddReservation = () => {
         
         <div className="container-fluid py-5">
         <div className="container pt-5 pb-3">
-        
+       
         <Card
           style={{
+            flexDirection:"column",
+         
+            alignItems: "center",
             color: "white",
-            width: "25rem",
-            marginLeft:"20vw",
+            width: "50rem",
+            marginLeft:"10vw",
             height: "400px",
             // marginLeft: "25%",
             // marginTop: "150px",
             backgroundColor:"#2B2E4A",
           }}
         >
-          <span style={{marginLeft:"23.5rem",cursor:"pointer"}}  onClick={()=>{history.push("/")}}><GiCancel style={{color:"white",width:"18px",height:"20px"}}/></span>
+     
+         <span style={{cursor:"pointer",alignSelf:"flex-end"}}  onClick={()=>{history.push("/")}}><GiCancel style={{color:"white",width:"18px",height:"20px"}}/></span>
+         <div style={{display:"flex",flexDirection:"row"}}>
+            <img  style={{width:"30%",alignItems:"center",marginBottom:"34px",marginLeft:"13px",marginTop:"30px",height:"73%"}}  src="https://media.istockphoto.com/photos/calendar-3d-rendering-picture-id1186714981?b=1&k=20&m=1186714981&s=170667a&w=0&h=7vwc61aDoI8b63-UZ4GAYTEAOigv9UPxVzfswTyyzzU=" class="card-img-top" alt="..."/>
+         
+        
           <Card.Body>
             <Card.Title
               style={{
                 textAlign: "center",
+                marginRight:"70px",
                 fontWeight: "bold",
                 marginTop: "20px",
                 marginBottom: "20px",
@@ -194,6 +203,7 @@ const AddReservation = () => {
               Reservation
             </Button>
           </Card.Body>
+          </div>
         </Card>
         </div>
         </div>
@@ -203,16 +213,25 @@ const AddReservation = () => {
         <div className="container-fluid py-5">
         <div className="container pt-5 pb-3">
         <Card
-          style={{
-            width: "25rem",
-            height: "400px",
-            // marginLeft: "26%",
-            marginLeft:"20vw",
-            // marginTop: "26%",
-            backgroundColor: "#003638",
-          }}
+         
+         
+            style={{
+              flexDirection:"column",
+           
+              alignItems: "center",
+              color: "white",
+              width: "50rem",
+              marginLeft:"10vw",
+              height: "400px",
+              // marginLeft: "25%",
+              // marginTop: "150px",
+              backgroundColor:"#2B2E4A",
+            }}
         >
             <span style={{marginLeft:"23.5rem",cursor:"pointer"}}  onClick={()=>{history.push("/myres")}}><GiCancel style={{color:"white",width:"18px",height:"20px"}}/></span>
+            <div style={{display:"flex",flexDirection:"row"}}>
+
+            <img  style={{width:"30%",alignItems:"center",marginBottom:"34px",marginLeft:"13px",marginTop:"30px",height:"73%"}}  src="https://media.istockphoto.com/photos/calendar-3d-rendering-picture-id1186714981?b=1&k=20&m=1186714981&s=170667a&w=0&h=7vwc61aDoI8b63-UZ4GAYTEAOigv9UPxVzfswTyyzzU=" class="card-img-top" alt="..."/>
           <Card.Body>
             <Card.Title style={{ textAlign: "center",color:"white" , fontWeight: "bold" }}>
               Reservation
@@ -255,6 +274,7 @@ const AddReservation = () => {
               Update
             </Button>
           </Card.Body>
+          </div>
         </Card>
         </div>
         </div>
