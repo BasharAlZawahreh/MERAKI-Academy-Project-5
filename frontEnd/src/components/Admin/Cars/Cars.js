@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import swal from "sweetalert";
 import styled from "styled-components";
 import {
   useTable,
@@ -10,7 +11,7 @@ import {
 import { matchSorter } from "match-sorter";
 import "./Cars.css";
 import axios from "axios";
-import { setCar } from "../../../actions/cars";
+import { setCar, deleteCar } from "../../../actions/cars";
 import { useSelector, useDispatch } from "react-redux";
 
 const Styles = styled.div`
@@ -31,7 +32,7 @@ const Styles = styled.div`
     th,
     td {
       margin: 0;
-     
+
       border-bottom: 1px solid black;
       border-right: 1px solid black;
 
@@ -369,11 +370,40 @@ function Cars() {
     console.log(res.data.result);
   };
 
+  const deleteCarById = async (id) => {
+    swal({
+      title: "Are you sure?",
+      text: "Once deleted, you will not be able to recover this car!",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    }).then(async (willDelete) => {
+      if (willDelete) {
+        await axios
+          .patch(
+            `http://localhost:5000/admin/deleteCar/${id}`,
+            {},
+            { headers: { Authorization: `Bearer ${token}` } }
+          )
+          .then((res) => {
+            dispatch(deleteCar(id));
+            swal("Car has been deleted!", {
+              icon: "success",
+            });
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+       
+      } else {
+        swal("Deleting this car canceled!");
+      }
+    });
+  };
+
   useEffect(() => {
     getAllCars();
   }, []);
-
-  const toggleDeleteCar = () => {};
 
   const columns = React.useMemo(() => [
     {
@@ -435,31 +465,21 @@ function Cars() {
           accessor: "email",
           filter: "fuzzyText",
         },
-        // {
-        //   Header: "Delete",
-        //   id: "is_Deleted",
-        //   accessor: "is_Deleted",
-        //   Cell: ({ cell }) => {
-        //     return cell.row.values.isDeleted ? (
-        //       <label class="switch">
-        //         <input
-        //           type="checkbox"
-        //           checked
-        //           onClick={() => toggleDeleteCar(cell.row.values.id)}
-        //         />
-        //         <span class="slider round"></span>
-        //       </label>
-        //     ) : (
-        //       <label class="switch">
-        //         <input
-        //           type="checkbox"
-        //           onClick={() => toggleDeleteCar(cell.row.values.id)}
-        //         />
-        //         <span class="slider round"></span>
-        //       </label>
-        //     );
-        //   },
-        // },
+        {
+          Header: "Delete",
+          id: "delete",
+          accessor: "delete",
+          Cell: ({ cell }) => {
+            return (
+              <button
+                className="btn btn-danger"
+                onClick={() => deleteCarById(cell.row.values.id)}
+              >
+                Delete
+              </button>
+            );
+          },
+        },
       ],
     },
   ]);
