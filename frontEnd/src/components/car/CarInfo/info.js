@@ -10,8 +10,8 @@ import { useHistory } from "react-router-dom";
 import { Rating } from "react-simple-star-rating";
 import Button from "react-bootstrap/Button";
 import { setSearchCarId } from "../../../actions/search";
-import './bootstrap.min.css'
-import './style.css'
+import "./bootstrap.min.css";
+import "./style.css";
 const CarInfo = () => {
   const history = useHistory();
   const dispatch = useDispatch();
@@ -92,7 +92,7 @@ const CarInfo = () => {
                   })}
               </div>
               <p>{carView.description}</p>
-             
+
               <div className="row pt-2">
                 <div className="col-md-3 col-6 mb-2">
                   <i className="fa fa-car text-primary mr-2"></i>
@@ -108,45 +108,68 @@ const CarInfo = () => {
                 </div>
               </div>
             </div>
-            <div className="col-lg-6 mb-5">
-                    <div className="bg-secondary p-5">
-                        <h3 className="text-primary text-center mb-4"> <Rating
-                style={{ paddingVertical: 10 }}
-                ratingValue={rateAvg}
-                size={30}
-                label
-                transition
-                fillColor="orange"
-                emptyColor="gray"
-                className="foo" // Will remove the inline style if applied
-              /></h3>
-                          {carRates ?
-          carRates.map((rate, i) => {
-            return (
-              <div className="form-group" key={i}>
-              <div className="date" id="date1" data-target-input="nearest">
-                  <input type="text" className="form-control p-4 datetimepicker-input" disabled={true} placeholder="Pickup Date"
-                      data-target="#date1" data-toggle="datetimepicker" />
-              </div>
-          </div> 
-            )
-          }):                        <div className="form-group">
-          <div className="time" id="time1" data-target-input="nearest">
-              <input type="text" className="form-control p-4 datetimepicker-input" disabled={true} placeholder="No Comments till now"
-                  data-target="#time1" data-toggle="datetimepicker" />
-          </div>
-      </div>}
-                       
-                        
-                        
-                        
+            <div className="col-lg-6 mb-5" style={{ maxHeight: "504px",overflowY :"auto"}}>
+
+              <div className="bg-secondary p-5">
+                <h3 className="text-primary text-center mb-4">
+                  {" "}
+                  <Rating
+                    style={{ paddingVertical: 10 }}
+                    ratingValue={rateAvg}
+                    size={30}
+                    label
+                    transition
+                    fillColor="orange"
+                    emptyColor="gray"
+                    className="foo" // Will remove the inline style if applied
+                  />
+                </h3>
+                {carRates ? (
+                  carRates.map((rate, i) => {
+                    return (
+                      <div className="form-group" key={i}>
+                        <div
+                          className="date"
+                          id="date1"
+                          data-target-input="nearest"
+                        >
+                          <input
+                            type="text"
+                            className="form-control p-4 datetimepicker-input"
+                            disabled={true}
+                            placeholder="comment"
+                            data-target="#date1"
+                            data-toggle="datetimepicker"
+                            value={rate.comment}
+                          />
+                        </div>
+                      </div>
+                    );
+                  })
+                ) : (
+                  <div className="form-group">
+                    <div
+                      className="time"
+                      id="time1"
+                      data-target-input="nearest"
+                    >
+                      <input
+                        type="text"
+                        className="form-control p-4 datetimepicker-input"
+                        disabled={true}
+                        placeholder="No Comments till now"
+                        data-target="#time1"
+                        data-toggle="datetimepicker"
+                      />
                     </div>
-                </div>
+                  </div>
+                )}
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </>
   );
-
 };
 export default CarInfo;

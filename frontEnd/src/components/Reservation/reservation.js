@@ -8,6 +8,7 @@ import * as moment from "moment";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import { GiCancel } from 'react-icons/gi';
+import Payment from "../Payment/payment";
 // import "./reservation.css";
 const AddReservation = () => {
   const history=useHistory()
@@ -107,7 +108,7 @@ const AddReservation = () => {
                 headers: { Authorization: `Bearer ${state.token}` },
               }
             )
-            .then(async (result) => {
+            .then((result) => {
               console.log(result.data)
               dispatch(addReservation(result.data.Reservations));
             })
@@ -192,8 +193,11 @@ const AddReservation = () => {
                 placeholder="amount"
               />
             </Card.Text>
+            <Payment/>
             <Button
+
               style={{ marginTop: "10%", marginLeft: "27%" }}
+              
               className="btn btn-secondary"
               // variant="secondary"
               onClick={() => {
