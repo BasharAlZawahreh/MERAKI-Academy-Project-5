@@ -10,7 +10,10 @@ import {
 import { matchSorter } from "match-sorter";
 import "./Reservations.css";
 import axios from "axios";
-import { setReservation } from "../../../actions/reservations";
+import {
+  setReservation,
+  updateReservationConfirmation,
+} from "../../../actions/reservations";
 import { useSelector, useDispatch } from "react-redux";
 
 const Styles = styled.div`
@@ -366,23 +369,22 @@ function Reservations() {
     });
 
     dispatch(setReservation(res.data.result));
-    console.log(res.data.result);
   };
 
   useEffect(() => {
     getAllReservations();
   }, []);
 
-
-  const toggleConfirmation = (id) => {
-    axios.patch(
+  const toggleConfirmation = async (id) => {
+    await axios.patch(
       `http://localhost:5000/admin/confirmReserve/${id}`,
       {},
       {
         headers: { Authorization: `Bearer ${token}` },
       }
     );
-    
+
+    dispatch(updateReservationConfirmation(id));
   };
 
   const columns = React.useMemo(() => [
@@ -483,19 +485,13 @@ function Reservations() {
           id: "isConfirmed",
           accessor: "isConfirmed",
           Cell: ({ cell }) => {
-            return cell.row.values.isConfirmed ? (
+            let ava = cell.row.values.isConfirmed ? true : false;
+
+            return (
               <label class="switch">
                 <input
                   type="checkbox"
-                  checked
-                  onClick={() => toggleConfirmation(cell.row.values.id)}
-                />
-                <span class="slider round"></span>
-              </label>
-            ) : (
-              <label class="switch">
-                <input
-                  type="checkbox"
+                  checked={ava}
                   onClick={() => toggleConfirmation(cell.row.values.id)}
                 />
                 <span class="slider round"></span>
@@ -527,7 +523,7 @@ function Reservations() {
     };
   });
 
-  console.log('data',data)
+  console.log("data", data);
   return <Styles>{data && <Table columns={columns} data={data} />}</Styles>;
 }
 
