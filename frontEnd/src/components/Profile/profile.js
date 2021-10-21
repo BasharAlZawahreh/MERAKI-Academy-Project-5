@@ -4,13 +4,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import { updateUser } from "../../actions/users";
 import { storage } from "../config";
-import Card from 'react-bootstrap/Card'
-import Button  from 'react-bootstrap/Button'
-import { GiCancel } from 'react-icons/gi';
-
+import Card from "react-bootstrap/Card";
+import Button from "react-bootstrap/Button";
+import { GiCancel } from "react-icons/gi";
 
 const Profile = () => {
-  const history=useHistory()
+  const history = useHistory();
   const dispatch = useDispatch("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -70,42 +69,43 @@ const Profile = () => {
           .then((result) => {
             console.log(result.data);
             dispatch(updateUser(result.data.result));
-           
+
             // let message=`added successfuly`
           })
           .catch((err) => {
             console.log(err);
           });
         alert("image uploaded");
-        history.goBack()
+        history.goBack();
       })
       .catch((err) => console.log(err));
-
   };
-  console.log(url)
+  console.log(url);
   return (
- 
+    <Card
+      style={{  width: "50rem", marginLeft: "28vw", backgroundColor: "#2B2E4A", alignItems: "center",flexDirection:"column" }}
+    >
+      <span
+        style={{ marginLeft:"48rem", cursor: "pointer" }}
+        onClick={() => {
+          history.push("/");
+        }}
+      >
+        <GiCancel style={{ color: "white", width: "18px", height: "20px" }} />
+      </span>
+      <div style={{display:"flex",flexDirection:"row"}}>
+        
+      <img  style={{width:"30%",alignItems:"center",marginBottom:"34px",marginLeft:"13px",marginTop:"57px",height:"73%"}}  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT03cbnao-fSw3yZQ1I3RoxLuul1zJjBmB1kFxNei23IZiRG9XWIiccpnrg-7IdLv1ByZI&usqp=CAU" class="card-img-top" alt="..."/>
+      <Card.Body>
+        <Card.Title style={{ color: "white", textAlign: "center" }}>
+          fill out information
+        </Card.Title>
+        <Card.Text>
+          <input className="form-control p-1  " type="file" onChange={addImg} />
 
-    
-
-<Card style={{ width: '20rem',marginLeft:"40vw", backgroundColor:"#2B2E4A" } } >
-  <span style={{paddingLeft:"18.5rem",cursor:"pointer"}}  onClick={()=>{history.push("/")}}><GiCancel style={{color:"white",width:"18px",height:"20px"}}/></span>
-  <Card.Body>
-    <Card.Title style={{color:"white",textAlign:"center"}} >fill out information</Card.Title>
-    <Card.Text>
-      
           <input
-           className="form-control p-1  "
-            type="file"
-            onChange={addImg}
-          />
-         
-
-         
-         <input
-           style={{ marginTop:"5px"}}
-      
-             className="form-control p-2"
+            style={{ marginTop: "5px" }}
+            className="form-control p-2"
             type="text"
             placeholder="firstName"
             onChange={(e) => {
@@ -113,11 +113,9 @@ const Profile = () => {
             }}
           />
 
-
-
-<input
-              style={{ marginTop:"5px"}}
-           className="form-control p-2"
+          <input
+            style={{ marginTop: "5px" }}
+            className="form-control p-2"
             type="text"
             placeholder="lastName"
             onChange={(e) => {
@@ -126,9 +124,8 @@ const Profile = () => {
           />
 
           <input
-           
-           className="form-control p-2 " 
-           style={{ marginTop:"5px"}}
+            className="form-control p-2 "
+            style={{ marginTop: "5px" }}
             type="text"
             placeholder="City"
             onChange={(e) => {
@@ -136,8 +133,8 @@ const Profile = () => {
             }}
           />
           <input
-                 className="form-control p-2"
-                 style={{ marginTop:"5px"}}
+            className="form-control p-2"
+            style={{ marginTop: "5px" }}
             type="text"
             placeholder="Ssn"
             onChange={(e) => {
@@ -145,24 +142,26 @@ const Profile = () => {
             }}
           />
           <input
-                 className="form-control p-2"
-                 style={{ marginTop:"5px"}}
+            className="form-control p-2"
+            style={{ marginTop: "5px" }}
             type="date"
             placeholder="BirthDate"
             onChange={(e) => {
               setBirthDate(e.target.value);
             }}
           />
-
-    </Card.Text>
-    <Button  style={{width:"100px",marginTop:"5PX",marginLeft:"4vw"}}    onClick={() => {
-              editProfile()
-            
-            }}>Submit</Button>
-  </Card.Body>
-</Card>
-
-
-   )
+        </Card.Text>
+        <Button
+          style={{ width: "100px", marginTop: "5PX", marginLeft: "4vw" }}
+          onClick={() => {
+            editProfile();
+          }}
+        >
+          Submit
+        </Button>
+      </Card.Body>
+      </div>
+    </Card>
+  );
 };
 export default Profile;
