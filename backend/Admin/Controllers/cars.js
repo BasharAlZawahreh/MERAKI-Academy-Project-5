@@ -4,7 +4,8 @@ const getAllCars = (req, res) => {
     const query = `SELECT * FROM cars 
     INNER JOIN car_types ON car_types.typeCar_id = car_types_id
     INNER JOIN car_brands ON car_brands.brand_id = car_brand_id
-    INNER JOIN users ON users.user_id = cars.user_id`;
+    INNER JOIN users ON users.user_id = cars.user_id
+    WHERE is_Deleted = 0`;
   
     connection.query(query, (err, result) => {
       if (err) {
@@ -28,4 +29,26 @@ const getAllCars = (req, res) => {
     });
   };
 
-  module.exports = {getAllCars}
+
+  const deleteCarById = async (req, res) => {
+    let id = req.params.id;
+    const query = `UPDATE users SET is_Deleted=1 WHERE car_id=${id}`;
+  
+    connection.query(query, (err, result) => {
+      if (result.affectedRows) {
+        res.status(202).json({
+          success: true,
+          message: ` Success User updated`,
+          result: result,
+        });
+      } else {
+        return res.status(404).json({
+          success: false,
+          message: `user => ${id} not found`,
+        });
+      }
+    });
+  };
+
+
+  module.exports = {getAllCars, deleteCarById}

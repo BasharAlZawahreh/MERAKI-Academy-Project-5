@@ -9,7 +9,7 @@ const {
 
 const { DeleteRatebyId } = require("../../Admin/Controllers/rates");
 
-const { getAllCars } = require("../../Admin/Controllers/cars");
+const { getAllCars, deleteCarById } = require("../../Admin/Controllers/cars");
 
 const {
   getAllReservations,
@@ -38,14 +38,16 @@ adminRouter.get("/cars", authentication, getAllCars);
 //patch  http://localhost:5000/admin/blockUser/2
 adminRouter.patch("/blockUser/:id", authentication, toggleBlockUserById);
 
-//patch  http://localhost:5000/admin/unBlockUser/2
-// adminRouter.patch("/unblockUser/:id", authentication, unBlockUserById);
+//patch  http://localhost:5000/admin/deleteCar/2
+ adminRouter.patch("/deleteCar/:id", authentication, deleteCarById);
 
 //patch  http://localhost:5000/admin/confirmReserve/2
 adminRouter.patch("/confirmReserve/:id", authentication, toggleConfirmationById);
 
 //delete  http://localhost:5000/admin/deleteRate/2
 adminRouter.delete("/deleteRate/:id", authentication, DeleteRatebyId);
+
+
 
 //post  http://localhost:5000/admin/makeAdmin/2
 adminRouter.post(
