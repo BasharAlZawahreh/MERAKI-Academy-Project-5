@@ -1,7 +1,7 @@
 const connection = require("../../db/db");
 
 const getCars=(req,res)=>{
-  const query = `SELECT * from cars Where is_Deleted=0`
+  const query = `SELECT * from cars Where is_Deleted=0 And is_Available=1`
   connection.query(query,(err,result)=>{
     if(err){
       return res.status(500).json({

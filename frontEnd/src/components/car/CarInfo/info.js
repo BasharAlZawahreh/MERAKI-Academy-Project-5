@@ -108,7 +108,10 @@ const CarInfo = () => {
                 </div>
               </div>
             </div>
-            <div className="col-lg-6 mb-5">
+
+            <div className="col-lg-6 mb-5" style={{ maxHeight: "504px",overflowY :"auto"}}>
+
+
               <div className="bg-secondary p-5">
                 <h3 className="text-primary text-center mb-4">
                   {" "}
@@ -136,9 +139,12 @@ const CarInfo = () => {
                             type="text"
                             className="form-control p-4 datetimepicker-input"
                             disabled={true}
-                            placeholder="Pickup Date"
+
+                            placeholder="comment"
                             data-target="#date1"
                             data-toggle="datetimepicker"
+                            value={rate.comment}
+
                           />
                         </div>
                       </div>
