@@ -4,8 +4,16 @@ const makeUserAdminById = async (req, res) => {
   const query = `UPDATE users SET role="Admin" WHERE user_id=${id}`;
 
   connection.query(query, (err, result) => {
+    if (err) {
+      return res.status(500).json({
+        success: false,
+        message: ` Server Error`,
+        result: result,
+      });
+    }
+    
     if (result.affectedRows) {
-      res.status(202).json({
+      return res.status(202).json({
         success: true,
         message: ` Success User updated`,
         result: result,
@@ -24,16 +32,16 @@ const getAllUsers = (req, res) => {
   const query = `SELECT * FROM users WHERE role="user"`;
 
   connection.query(query, (err, result) => {
-    if (!result.length) {
-      return res.status(404).json({
-        success: false,
-        message: `not found any user`,
-      });
-    } else if (err) {
+    if (err) {
       return res.status(500).json({
         success: false,
         message: `Server Error`,
         err: err,
+      });
+    } else if (!result.length) {
+      return res.status(404).json({
+        success: false,
+        message: `not found any user`,
       });
     }
     return res.status(200).json({
@@ -87,35 +95,8 @@ const toggleBlockUserById = (req, res) => {
   });
 };
 
-// const unBlockUserById = (req, res) => {
-//   const id = req.params.id;
-//   const query = `UPDATE users SET is_blocked=0 WHERE user_id=${id} and role="user"`;
-
-//   connection.query(query, (err, result) => {
-//     if (err) {
-//       return res.status(500).json({
-//         success: false,
-//         message: `server error`,
-//       });
-//     }
-//     if (result.affectedRows) {
-//       return res.status(202).json({
-//         success: true,
-//         message: ` Success user unBlocked`,
-//         result: result,
-//       });
-//     } else {
-//       return res.status(404).json({
-//         success: false,
-//         message: `The result => ${id} not found`,
-//       });
-//     }
-//   });
-// };
-
 module.exports = {
   makeUserAdminById,
   getAllUsers,
   toggleBlockUserById,
-  // unBlockUserById,
 };

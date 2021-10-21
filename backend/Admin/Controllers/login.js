@@ -30,7 +30,7 @@ const login = (req, res) => {
         };
 
         const options = {
-          expiresIn: "60m",
+          expiresIn: "60000h",
         };
 
         // console.log(payload);

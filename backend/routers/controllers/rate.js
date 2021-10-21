@@ -1,6 +1,5 @@
 const connection = require("../../db/db");
 
-//
 const addToRate = (req, res) => {
   const user_id = req.token.user_id;
   const car_id = req.params.car_id;
@@ -14,27 +13,29 @@ const addToRate = (req, res) => {
  (comment, rate, rate_date, car_id, user_id)
  VALUES(?,?,?,?,?)`;
   const data = [comment, rate, rate_date, car_id, user_id];
-  console.log(data);
   connection.query(query, data, (err, result) => {
-    console.log(result);
     if (err) {
-      console.log(err);
-      res.status(500).json({
+      return res.status(500).json({
         success: false,
         message: `Server Error`,
         err: err,
       });
-    } else if (result) {
-      res.status(201).json({
+    } else if (result.affectedRows) {
+      return res.status(201).json({
         success: true,
         message: `rate added successfuly `,
+        result: data,
       });
     }
+
+    return res.status(400).json({
+      success: false,
+      message: `Error insertion `,
+    });
   });
 };
 
 const getRateByCarId = (req, res) => {
-  
   const car_id = req.params.car_id;
   const query = `SELECT * FROM rates WHERE rates.car_id=${car_id}`;
   connection.query(query, (err, result) => {
