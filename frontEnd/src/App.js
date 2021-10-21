@@ -19,10 +19,10 @@ import Home from "./components/home/home";
 import { Switch } from "react-router";
 import AddRates from "./components/Rate/rates";
 import CarInfo from "./components/car/CarInfo/info";
-import Contact from "./components/home/Contact";
+import Contact from "./components/Contact/Contact";
 import Footer from "./components/Footer/footer";
 import AddNewCar from "./components/car/AddNewCar";
-
+import About from "./components/about/about";
 import Payment from "./components/Payment/payment";
 
 export default function App() {
@@ -35,9 +35,9 @@ export default function App() {
           <Footer />
         </Route>
         <Route exact path="/login">
-          <Nav/>
+          <Nav />
           <Login />
-          <Footer/>
+          <Footer />
         </Route>
         <Route exact path="/">
           <Nav />
@@ -55,13 +55,14 @@ export default function App() {
           <Footer />
         </Route>
         <Route exact path="/about">
-          <Nav/>
-          <Footer/>
+          <Nav />
+          <About />
+          <Footer />
         </Route>
         <Route exact path="/contact">
-          <Nav/>
+          <Nav />
           <Contact />
-          <Footer/>
+          <Footer />
         </Route>
         <Route path="/addRes/:id">
           <Nav />
@@ -84,8 +85,10 @@ export default function App() {
           <UpdateCar />
           <Footer />
         </Route>
-        <Route  path="/addCar">
-          <AddNewCar/>
+        <Route path="/addCar">
+          <Nav />
+          <AddNewCar />
+          <Footer />
         </Route>
         <Route exact path="/result">
           <Nav />

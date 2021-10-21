@@ -22,7 +22,7 @@ function SearchResult() {
             state.searches.map((car, i) => {
               return (
                 <div key={i} className="col-lg-4 col-md-6 mb-2">
-                  <div className="rent-item mb-4">
+                  <div className="rent-item mb-4 omgs">
                     <img className="img-fluid mb-4" src={car.main_img} alt="" />
                     <h4 className="text-uppercase mb-4">{car.brand}</h4>
                     <div className="d-flex justify-content-center mb-4">
@@ -49,7 +49,7 @@ function SearchResult() {
                       onClick={() => {
                         history.push(`/carinfo/${car.car_id}`);
                       }}
-                      className="btn btn-primary px-3"
+                      className="btn btn-primary px-3 mt-2"
                       // to={`/carinfo/${car.car_id}`}
                     >
                       Detailes
