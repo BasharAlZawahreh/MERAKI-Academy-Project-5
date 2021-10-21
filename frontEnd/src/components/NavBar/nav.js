@@ -26,7 +26,7 @@ const Nav = () => {
               </a>
               <span className="text-body">|</span>
               <a className="text-body px-3" href="">
-                <i className="fa fa-envelope mr-2"></i>Info@Auto Rental
+                <i className="fa fa-envelope mr-2"></i>Info@AutoRental.Jo
               </a>
             </div>
           </div>
@@ -132,6 +132,10 @@ const Nav = () => {
                     <Link className="nav-item nav-link" to="/mycars">
                       {" "}
                       My Cars
+                    </Link>
+                    <Link className="nav-item nav-link" to="/addCar">
+                      {" "}
+                      Add Car
                     </Link>
                     <Link className="nav-item nav-link" to="/about">
                       About
