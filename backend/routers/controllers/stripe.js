@@ -5,7 +5,7 @@ const Pay=(req,res)=>{
         {
           source: req.body.tokenId,
           amount: req.body.amount,
-          currency: "usd",
+          currency: "JOD",
         },
         (stripeErr, stripeRes) => {
           if (stripeErr) {

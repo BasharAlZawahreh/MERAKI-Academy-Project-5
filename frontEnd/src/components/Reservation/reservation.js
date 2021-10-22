@@ -11,6 +11,7 @@ import { GiCancel } from 'react-icons/gi';
 import Payment from "../Payment/payment";
 // import "./reservation.css";
 const AddReservation = () => {
+
   const history=useHistory()
   const dispatch = useDispatch();
   const [returnDate, setReturnDate] = useState("");
@@ -88,18 +89,33 @@ const AddReservation = () => {
       console.log("catch", error);
     }
   };
+
+  const setAmount1 = ({PickUpDate,returnDate,price})=>{
+    return new Promise ((resolve,reject) =>{
+      
+      let difference =
+      new Date(PickUpDate).getTime() - new Date(returnDate).getTime();
+    let days = Math.ceil(difference / (1000 * 3600 * 24));
+   let cash = days * price
+   resolve(cash)
+  if(PickUpDate > returnDate){
+reject("Pick Up Date can not be after the return date ")
+  }
+    })
+  }
   const booking = async () => {
     try {
       await axios
         .get(`http://localhost:5000/car/car/${car_id}`)
-        .then((result) => {
+        .then(async(result) => {
           let price = result.data.result[0].day_price;
-          let difference =
-            new Date(PickUpDate).getTime() - new Date(returnDate).getTime();
-          let days = Math.ceil(difference / (1000 * 3600 * 24));
-          setAmount(days * price);
+         let cash = await setAmount1({PickUpDate,returnDate,price})
+         setAmount(cash)
+         return (cash)
+       
         })
-        .then(() => {
+        .then((amount) => {
+          console.log("amount",amount);
            axios
             .post(
               "http://localhost:5000/reserve",
@@ -193,7 +209,7 @@ const AddReservation = () => {
                 placeholder="amount"
               />
             </Card.Text>
-            <Payment/>
+            <Payment amount={amount}/>
             <Button
 
               style={{ marginTop: "10%", marginLeft: "27%" }}
