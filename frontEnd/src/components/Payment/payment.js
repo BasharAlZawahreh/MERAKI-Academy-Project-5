@@ -4,14 +4,15 @@ import Button from "react-bootstrap/Button";
 import axios from "axios";
 import socket from "../../socket";
 import { useSelector } from "react-redux";
-import {jwt} from "jsonwebtoken";
+import jwt from "jwt-decode";
 
 const Payment = ({ amount }) => {
   const state = useSelector((state) => {
     return { token: state.token.token };
   });
 
-  const decodedToken = jwt.decode(state.token)
+  const decodedToken = jwt(state.token);
+  console.log("decodedToken", decodedToken);
 
   const [stripeToken, setStripeToken] = useState(null);
   const [message, setMessage] = useState("");
@@ -19,10 +20,10 @@ const Payment = ({ amount }) => {
   const SendMessage = () => {
     const reserveContent = {
       amount,
-      username:decodedToken.payload.userName
+      username: decodedToken.userName,
     };
 
-    console.log(reserveContent);
+    console.log("reserveContent", reserveContent);
     socket.emit("set_notification", reserveContent);
   };
 

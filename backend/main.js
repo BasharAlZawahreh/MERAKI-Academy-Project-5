@@ -66,7 +66,7 @@ io.on("connection", (socket) => {
   socket.on("set_notification", (data) => {
     // console.log("data",data.amount);
     // socket.to("adminId").emit("set_notification",data.content);
-    socket.broadcast.emit("set_notification2", data);
+    socket.broadcast.emit("set_notification3", data);
     console.log('data from server',data)
   });
 

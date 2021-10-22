@@ -10,11 +10,16 @@ import Statistics from "../Statistcs/Statistics";
 const Dashboard = () => {
   const [component, setComponent] = useState("Statistics");
   const [data, setData] = useState();
+  const [notifications, setNotifications] = useState("");
   const history = useHistory();
 
-  // useEffect(() => {
-  //   socket = io(connection_port);
-  // }, [connection_port]);
+  let arr;
+  useEffect(() => {
+    arr = JSON.parse(localStorage.getItem("reservations")) || [];
+    arr.length ? setNotifications(arr.length) : setNotifications("");
+    console.log('oday',arr)
+    console.log('odai',arr.length)
+  });
 
   // useEffect(() => {
   //   socket.on("set_notification",(data)=>{
@@ -80,6 +85,15 @@ const Dashboard = () => {
 
       <section className={styles.homesection}>
         <nav>
+          <i
+            className="fa fa-bell"
+            onClick={() => {
+              arr.length && localStorage.removeItem("reservations");
+              setComponent("reservations")
+            }}
+          >
+            <span>{notifications}</span>
+          </i>
           {/* <div className={styles.sidebarbutton}> */}
           {/* <button onClick={() => setComponent("users")}>Users</button>
           </div>
