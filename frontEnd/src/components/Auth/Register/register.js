@@ -17,6 +17,7 @@ const Register=()=>{
             axios.post("http://localhost:5000/users",{firstName,lastName,email,password})
             .then((result)=>{
                 setDone(<div className="succes">the user has been added successfully</div>)
+                {history.push("/login")}
             }).catch((err)=>{
                 setDone(<div className="wrong">error happen while regeister please try again</div>)
             })
@@ -29,7 +30,7 @@ const Register=()=>{
     return (
         <section class="signup">
          <div class="container">
-        <span style={{cursor:"pointer",marginLeft:"53.5rem"}}  onClick={()=>{history.push("/login")}}><MdCancel style={{height:"26px",width:"24px",paddingTop:"5px"}} /></span>
+        <span style={{cursor:"pointer",marginLeft:"68.5rem"}}  onClick={()=>{history.push("/login")}}><MdCancel style={{height:"26px",width:"24px",paddingTop:"5px"}} /></span>
             <div class="signup-content">
                 <div class="signup-form">
                     <h2 class="form-title">Sign up</h2>
@@ -51,14 +52,19 @@ const Register=()=>{
                             <input type="password" onChange={(e)=>{setPassword(e.target.value)}} name="pass" id="pass" placeholder="Password"/>
                         </div>
                         <div class="form-group">
-                            <button  onClick={()=>{history.push("/login")}}    class="form-submit">Register</button>
+                            <button class="form-submit">Register</button>
+                        
                         </div>
+                      
                     </form>
-                    {done}
+                   
+                    {done }
+                  
+                  
                 </div>
                 <div class="signup-image">
                     <figure><img src="images/signup-image.jpg" alt="sing up image"/></figure>
-                    <a onClick={()=>history.push("/login")} class="signup-image-link">I am already member</a>
+                    <a  onClick={()=>{history.push("/login")}} class="signup-image-link">I am already member</a>
                 </div>
             </div>
         </div>
