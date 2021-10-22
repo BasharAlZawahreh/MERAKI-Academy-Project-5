@@ -18,7 +18,7 @@ const Payment=()=>{
         try {
           const res = await axios.post(`http://localhost:5000/payment`, {
             tokenId: stripeToken.id,
-            amount: 500,
+            amount: 50,
           });
           // history.push("/success", { data: res.data });
           setMessage("Success payment")
@@ -33,7 +33,8 @@ const Payment=()=>{
 
     return(
       <>
-      <StripeCheckout
+      <StripeCheckout 
+     
               name="Auto Rental"
             //   image=""
               billingAddress

@@ -81,7 +81,7 @@ const Login = () => {
       <section className="sign-in">
     
         <div className="container">
-        <span style={{cursor:"pointer",marginLeft:"53.5rem"}}  onClick={()=>{history.push("/")}}><MdCancel style={{height:"26px",width:"24px",paddingTop:"5px"}} /></span>
+        <span style={{cursor:"pointer",marginLeft:"68.5rem"}}  onClick={()=>{history.push("/")}}><MdCancel style={{height:"26px",width:"24px",paddingTop:"5px"}} /></span>
           <div className="signin-content">
             
             <div className="signin-image">
