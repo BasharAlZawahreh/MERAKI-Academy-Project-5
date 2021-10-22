@@ -41,7 +41,7 @@ const history=useHistory()
     axios.delete(`http://localhost:5000/reserve/${id}`,{
         headers: { Authorization: `Bearer ${state.token}`},  
     }).then((result)=>{
-        dispatch(deleteReservation(result.data.reservation))
+        dispatch(deleteReservation(id))
     }).catch((err)=>{
         console.log("delete reserve",err)
     })
@@ -60,7 +60,6 @@ const history=useHistory()
       <th>Return Date</th>
       <th>Amount</th>
       <th>Brand</th>
-      <th>Edit</th>
       <th>Delete</th>
       <th>Rate</th>
     </tr>
@@ -69,35 +68,24 @@ const history=useHistory()
       {show&&state.reservations&& state.reservations.map((elem,index)=>{
     return(
         <tr key={index}>
-      <td>{index}</td>
+      <td>{index+1}</td>
       <td>{elem.PickUpDate}</td>
       <td>{elem.returnDate}</td>
       <td>{elem.amount}</td>
       <td>{elem.brand}</td>
-      <td>{!elem.isConfirmed?(
-          <BiEditAlt
-          onClick={()=>{
-              batch(()=>{
-                localStorage.setItem("elem",JSON.stringify(elem))
-                  // dispatch(updateReservation(elem))
-                  dispatch(setEditOrInsert(true))
-                  history.push(`/addRes/${elem.car_id}`)
-                  // deleteReservationById(elem.res_id)
-              })
-          }}
-          
-          />
-      ):""}
-</td>
+ 
     <td>{!elem.isConfirmed?( 
      <RiDeleteBin5Line
+     style={{color:"red" ,width:"25px",height:"25px",cursor: "pointer"}}
          onClick={()=>{ 
              deleteReservationById(elem.res_id)
          }} 
           
          /> 
       ):""}</td> 
-      <td>{elem.isConfirmed?( <MdOutlineStarRate onClick={()=>
+      <td>{elem.isConfirmed?( <MdOutlineStarRate
+      style={{color:"rgb(181, 181, 15)" ,width:"25px",height:"25px",cursor: "pointer"}}
+       onClick={()=>
             
             history.push(`/rate/${elem.car_id}`)}/>  
             ):""}

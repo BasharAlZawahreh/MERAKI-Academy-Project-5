@@ -10,7 +10,7 @@ import {
 import { matchSorter } from "match-sorter";
 import "./Users.css";
 import axios from "axios";
-import { setUser, deleteUser } from "../../../actions/users";
+import { setUser, deleteUser, updateUser } from "../../../actions/users";
 import { useSelector, useDispatch } from "react-redux";
 
 const Styles = styled.div`
@@ -366,7 +366,6 @@ function Users() {
     });
 
     dispatch(setUser(res.data.result));
-    console.log(res.data.result);
   };
 
   useEffect(() => {
@@ -379,8 +378,7 @@ function Users() {
       {},
       { headers: { Authorization: `Bearer ${token}` } }
     );
-
-    console.log(res.data.result);
+    dispatch(updateUser(id));
   };
 
   const makeAdmin = async (id) => {
@@ -466,19 +464,13 @@ function Users() {
           id: "is_Blocked",
           accessor: "is_Blocked",
           Cell: ({ cell }) => {
-            return cell.row.values.is_Blocked ? (
+            let ava = cell.row.values.is_Blocked ? true : false;
+
+            return (
               <label class="switch1">
                 <input
                   type="checkbox"
-                  checked
-                  onClick={() => toggleBlockUser(cell.row.values.id)}
-                />
-                <span class="slider1 round1"></span>
-              </label>
-            ) : (
-              <label class="switch1">
-                <input
-                  type="checkbox"
+                  checked={ava}
                   onClick={() => toggleBlockUser(cell.row.values.id)}
                 />
                 <span class="slider1 round1"></span>
