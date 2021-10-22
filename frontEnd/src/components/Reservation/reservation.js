@@ -209,7 +209,7 @@ reject("Pick Up Date can not be after the return date ")
                 placeholder="amount"
               />
             </Card.Text>
-            <Payment amount={amount}/>
+            <Payment   amount={amount}/>
             <Button
 
               style={{ marginTop: "10%", marginLeft: "27%" }}
