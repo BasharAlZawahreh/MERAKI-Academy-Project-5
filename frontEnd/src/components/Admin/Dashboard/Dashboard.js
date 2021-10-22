@@ -1,4 +1,4 @@
-import React, { useState ,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Reservations from "../Reservations/Reservations";
 import Users from "../Users/Users";
@@ -6,28 +6,31 @@ import Cars from "../Cars/Cars";
 import styles from "../Dashboard.module.css";
 import { useHistory } from "react-router-dom";
 import Statistics from "../Statistcs/Statistics";
-import io from "socket.io-client";
-let socket;
-let connection_port = "http://localhost:5000";
+
 const Dashboard = () => {
   const [component, setComponent] = useState("Statistics");
-  const [data,setData]=useState();
+  const [data, setData] = useState();
+  const [notifications, setNotifications] = useState("");
   const history = useHistory();
 
+  let arr;
   useEffect(() => {
-    socket = io(connection_port);
-  }, [connection_port]);
+    arr = JSON.parse(localStorage.getItem("reservations")) || [];
+    arr.length ? setNotifications(arr.length) : setNotifications("");
+    console.log('oday',arr)
+    console.log('odai',arr.length)
+  });
 
-  useEffect(() => {
-    socket.on("set_notification",(data)=>{
-      setData(data.amount)
-      console.log(data);
-    })
-  }, [connection_port]);
-  useEffect(()=>{
+  // useEffect(() => {
+  //   socket.on("set_notification",(data)=>{
+  //     setData(data.amount)
+  //     console.log(data);
+  //   })
+  // }, [connection_port]);
+  // useEffect(()=>{
 
-    console.log("data");
-  })
+  //   console.log("data");
+  // })
   return (
     <>
       <div className={styles.sidebar}>
@@ -37,25 +40,25 @@ const Dashboard = () => {
         </div>
         <ul className={styles.navlinks}>
           <li>
-            <a onClick={()=>setComponent("cars")}>
+            <a onClick={() => setComponent("cars")}>
               {/* <i className='bx bx-box' ></i> */}
-              <span  className={styles.links_name}>Cars</span>
+              <span className={styles.links_name}>Cars</span>
             </a>
           </li>
           <li>
-            <a onClick={()=>setComponent("users")} >
+            <a onClick={() => setComponent("users")}>
               {/* <i className='bx bx-list-ul' ></i> */}
               <span className={styles.links_name}>Users</span>
             </a>
           </li>
           <li>
-            <a onClick={()=>setComponent("reservations")}>
+            <a onClick={() => setComponent("reservations")}>
               {/* <i className='bx bx-pie-chart-alt-2' ></i> */}
-              <span  className={styles.links_name}>Reservations</span>
+              <span className={styles.links_name}>Reservations</span>
             </a>
           </li>
           <li>
-            <a onClick={()=>setComponent("Statistics")}>
+            <a onClick={() => setComponent("Statistics")}>
               {/* <i className='bx bx-coin-stack' ></i> */}
               <span className={styles.links_name}>Statistics</span>
             </a>
@@ -82,8 +85,17 @@ const Dashboard = () => {
 
       <section className={styles.homesection}>
         <nav>
+          <i
+            className="fa fa-bell"
+            onClick={() => {
+              arr.length && localStorage.removeItem("reservations");
+              setComponent("reservations")
+            }}
+          >
+            <span>{notifications}</span>
+          </i>
           {/* <div className={styles.sidebarbutton}> */}
-            {/* <button onClick={() => setComponent("users")}>Users</button>
+          {/* <button onClick={() => setComponent("users")}>Users</button>
           </div>
           <div className={styles.sidebarbutton}>
             <button onClick={() => setComponent("cars")}>Cars</button>

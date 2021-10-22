@@ -1,8 +1,9 @@
 const connection = require("../../db/db");
 
 const getAllReservations = (req, res) => {
-  const query = `SELECT * FROM reservations INNER JOIN cars ON cars.car_id = res_id
-  INNER JOIN users ON users.user_id = users_id`;
+  const query = `SELECT * FROM reservations 
+  INNER JOIN cars ON cars.car_id = reservations.car_id
+    INNER JOIN users ON users.user_id = reservations.users_id`;
 
   connection.query(query, (err, result) => {
     if (err) {
@@ -24,7 +25,6 @@ const getAllReservations = (req, res) => {
     });
   });
 };
-
 
 const toggleConfirmationById = (req, res) => {
   const id = req.params.id;
@@ -71,4 +71,4 @@ const toggleConfirmationById = (req, res) => {
   });
 };
 
-module.exports = { getAllReservations,toggleConfirmationById };
+module.exports = { getAllReservations, toggleConfirmationById };
