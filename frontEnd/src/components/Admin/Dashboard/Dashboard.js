@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState ,useEffect} from "react";
 import { Link } from "react-router-dom";
 import Reservations from "../Reservations/Reservations";
 import Users from "../Users/Users";
@@ -6,9 +6,28 @@ import Cars from "../Cars/Cars";
 import styles from "../Dashboard.module.css";
 import { useHistory } from "react-router-dom";
 import Statistics from "../Statistcs/Statistics";
+import io from "socket.io-client";
+let socket;
+let connection_port = "http://localhost:5000";
 const Dashboard = () => {
   const [component, setComponent] = useState("Statistics");
+  const [data,setData]=useState();
   const history = useHistory();
+
+  useEffect(() => {
+    socket = io(connection_port);
+  }, [connection_port]);
+
+  useEffect(() => {
+    socket.on("set_notification",(data)=>{
+      setData(data.amount)
+      console.log(data);
+    })
+  }, [connection_port]);
+  useEffect(()=>{
+
+    console.log("data");
+  })
   return (
     <>
       <div className={styles.sidebar}>

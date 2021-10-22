@@ -31,6 +31,29 @@ app.use("/rate",rateRouter);
 app.use("/payment",payRouter);
 app.use("*", (req, res) => res.status(404).json("NO content at this path"));
 
+
+let onlineUsers = [];
+
+const addNewUser = (username, socketId) => {
+  !onlineUsers.some((user) => user.username === username) &&
+    onlineUsers.push({ username, socketId });
+};
+
+const removeUser = (socketId) => {
+  onlineUsers = onlineUsers.filter((user) => user.socketId !== socketId);
+};
+
+const getUser = (username) => {
+  onlineUsers.shift();
+for (let index = 0; index < onlineUsers.length; index++) {
+        if(onlineUsers[index].username==username){
+          console.log(onlineUsers[index]);
+          return onlineUsers[index]
+        }
+  
+}
+  // return onlineUsers.find((user) => user.username === username);
+};
 server.listen(port, () => {
   console.log(`App listening at http://localhost:${port}`);
 });
@@ -39,7 +62,11 @@ server.listen(port, () => {
 io.on("connection", (socket) => {
   // `socket.id` is the id assigned to the user that connected
   console.log(`${socket.id} is connected`);
-  
+  socket.on("set_notification",(data)=>{
+    // console.log("data",data.amount);
+    // socket.to("adminId").emit("set_notification",data.content);
+    socket.emit("set_notification",data.amount);
+  });
   socket.on("disconnect", (socket) => {
     console.log(`${socket.id} is disconnected`);
   })
