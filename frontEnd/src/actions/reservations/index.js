@@ -5,9 +5,15 @@ export const addReservation=(reservations)=>{
 export const setReservation=(reservations)=>{
     return {type:"SET_RESERVATION",payload:reservations}
 }
+
 export const updateReservation=(reservation)=>{
     console.log("action",reservation);
     return {type:"UPDATE_RESERVATION",payload:reservation}
+}
+
+export const updateReservationConfirmation=(id)=>{
+ 
+    return {type:"UPDATE_RESERVATION_CONFIRMATION",payload:id}
 }
 
 export const deleteReservation =(id)=>{
