@@ -16,7 +16,8 @@ const AddRates=()=>{
     const[rate,setRate]=useState(0)
     const[rate_date,setRate_Date]=useState()
     const dispatch=useDispatch()
-    const [rating, setRating] = useState(0)
+    // const [rating, setRating] = useState(0)
+    const[x,setX]=useState()
 
 const state=useSelector((state)=>{
     return{ token: state.token.token,
@@ -27,7 +28,7 @@ const state=useSelector((state)=>{
 
 
 
-const CreateRate=(rate)=>{
+const CreateRate=()=>{
   
   console.log(rate)
   // setRate(rate)
@@ -51,8 +52,15 @@ const CreateRate=(rate)=>{
     }).catch((err)=>{
         console.log(err)
     })
-}
 
+
+
+
+
+}
+const rte=(rate)=>{
+  setRate(rate)
+}
 
 return(
    
@@ -78,12 +86,13 @@ return(
       <Rating
     style={{ paddingVertical: 10 }}
       // defaultValue={rate}
-      //  value={ratingValue}
-       ratingValue={rate}
+    
+      //  ratingValue={rate}
  
-     onChange={(e)=>{  console.log(e.target.value)
-       setRate(e.target.value)}}
-  
+     onClick={rte}
+
+       ratingValue={rate}
+      
       //  rating={rating} onRating={(rate)=>setRating(rate)}
         size={45}
         label
@@ -94,7 +103,7 @@ return(
       />
 </center>
 
-      <Card.Text >
+       <Card.Text >
 
       {/* <Rating
         onClick={CreateRate}
@@ -113,9 +122,9 @@ return(
   
       </Card.Text>
       <Button
-          style={{ width: "100px", marginTop: "5PX", marginLeft: "4vw" }}
+          style={{ width: "100px", marginTop: "5PX", marginLeft: "8vw" }}
           onClick={() => {
-            CreateRate(rate)
+            CreateRate()
           }}
         >
           Submit

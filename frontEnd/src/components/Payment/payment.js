@@ -2,13 +2,13 @@ import React,{useState,useEffect} from "react";
 import StripeCheckout from "react-stripe-checkout";
 import Button from "react-bootstrap/Button";
 import axios from "axios";
-import io from "socket.io-client";
+ import io from "socket.io-client";
 let socket;
 let connection_port = "http://localhost:5000";
 const Payment=({amount})=>{
 
   useEffect(() => {
-    socket = io(connection_port);
+     socket = io(connection_port);
   }, [connection_port]);
 
   const [stripeToken, setStripeToken] = useState(null);
