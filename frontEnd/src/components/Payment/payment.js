@@ -5,35 +5,27 @@ import axios from "axios";
 import socket from "../../socket";
 import { useSelector } from "react-redux";
 import jwt from "jwt-decode";
-
 const Payment = ({ amount }) => {
   const state = useSelector((state) => {
     return { token: state.token.token };
   });
-
   const decodedToken = jwt(state.token);
   console.log("decodedToken", decodedToken);
-
   const [stripeToken, setStripeToken] = useState(null);
   const [message, setMessage] = useState("");
-
   const SendMessage = () => {
     const reserveContent = {
       amount,
       username: decodedToken.userName,
     };
-
     console.log("reserveContent", reserveContent);
-    socket.emit("set_notification", reserveContent);
+    socket.emit("set_notification3", reserveContent);
   };
-
   const KEY =
     "pk_test_51JmGKeKbP3md6iwKmNhMpoMdThc8BgleFnUw0cI1n1eGKCkRgOPHBSGDFuVBzXVaAMlsmVi8CqNaqOejDjtcBefj00iwrv2rao";
-
   const onToken = (token) => {
     setStripeToken(token);
   };
-
   useEffect(() => {
     const makeRequest = async () => {
       try {
@@ -52,7 +44,6 @@ const Payment = ({ amount }) => {
     };
     stripeToken && makeRequest();
   }, [stripeToken]);
-
   return (
     <>
       <StripeCheckout
@@ -67,10 +58,8 @@ const Payment = ({ amount }) => {
       >
         <Button>CHECKOUT NOW</Button>
       </StripeCheckout>
-
       <p>{message}</p>
     </>
   );
 };
-
 export default Payment;
