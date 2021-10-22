@@ -26,9 +26,10 @@ const getAllReservationsByUserId = (req, res) => {
   const userId = req.token.user_id;
   const query = `SELECT * FROM reservations INNER JOIN users ON reservations.users_id= users.user_id
   INNER JOIN cars ON reservations.car_id=cars.car_id 
-  INNER JOIN car_brands ON reservations.car_id=car_brands.brand_id 
-   INNER JOIN  car_types ON reservations.car_id = car_types.typeCar_id
+  INNER JOIN car_brands ON car_brand_id=car_brands.brand_id 
+   INNER JOIN  car_types ON car_types_id = car_types.typeCar_id
   WHERE reservations.users_id=?`;
+  
 
   const data = [userId];
 

@@ -3,7 +3,8 @@ import StripeCheckout from "react-stripe-checkout";
 import Button from "react-bootstrap/Button";
 import axios from "axios";
 
-const Payment=()=>{
+const Payment=({amount})=>{
+  
   const [stripeToken, setStripeToken] = useState(null);
   const [message, setMessage] = useState('');
  
@@ -18,7 +19,7 @@ const Payment=()=>{
         try {
           const res = await axios.post(`http://localhost:5000/payment`, {
             tokenId: stripeToken.id,
-            amount: 500,
+            amount: amount,
           });
           // history.push("/success", { data: res.data });
           setMessage("Success payment")
@@ -39,7 +40,7 @@ const Payment=()=>{
               billingAddress
               shippingAddress
               description="description"
-              amount="20$"
+              amount={amount*100}
               token={onToken}
               stripeKey={KEY}
             >
