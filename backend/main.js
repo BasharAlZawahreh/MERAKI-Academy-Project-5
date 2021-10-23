@@ -4,8 +4,8 @@ require("./db/db.js");
 require("dotenv").config();
 const twilio = require("twilio")
 
-const accountSid  = "ACb89581a8b196a35127df754f7faa725b"
-const authToken = "a47003ca0903be1ad382812fc661496c"
+const accountSid  = process.env.accountSid
+const authToken = process.env.authToken
 const client = new twilio(accountSid, authToken);
 
 
@@ -47,8 +47,8 @@ app.get('/send-text', (req, res) => {
   //Send Text
   client.messages.create({
       body: textmessage,
-      to: `+962${recipient}`,  // Text this number
-      from: '+14845596976' // From a valid Twilio number
+      to: `+962785021435`,  // Text this number
+      from: '+15306700666' // From a valid Twilio number
   }).then((message) => console.log("message.body",message.body))
    .catch((err)=>{console.log("err",err);})
 })

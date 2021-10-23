@@ -19,7 +19,7 @@ const Payment = ({ amount }) => {
       username: decodedToken.userName,
     };
     console.log("reserveContent", reserveContent);
-    socket.emit("set_notification3", reserveContent);
+    socket.emit("set_notification", reserveContent);
   };
   const KEY =
     "pk_test_51JmGKeKbP3md6iwKmNhMpoMdThc8BgleFnUw0cI1n1eGKCkRgOPHBSGDFuVBzXVaAMlsmVi8CqNaqOejDjtcBefj00iwrv2rao";

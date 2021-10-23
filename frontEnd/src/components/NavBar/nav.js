@@ -17,7 +17,7 @@ const Nav = () => {
 
   return (
     <>
-      <div className="container-fluid bg-dark py-3 px-lg-5 d-none d-lg-block">
+      <div className="container-fluid bg-dark py-3 px-lg-5 d-none d-lg-block" >
         <div className="row">
           <div className="col-md-6 text-center text-lg-left mb-2 mb-lg-0">
             <div className="d-inline-flex align-items-center">

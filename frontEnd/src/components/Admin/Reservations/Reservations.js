@@ -401,12 +401,12 @@ function Reservations() {
     getAllReservations();
   }, []);
 
-const sendText=async()=>{
+const sendText=()=>{
   console.log(recipient)
-  let text =await `Dear ${name} your car has been confirmed good luck Auto_Rental Team`
+  let text = `Dear Naif your car has been rented by Odai `
   //pass text message GET variables via query string
   try {
-    fetch(`http://localhost:5000/send-text?recipient=${recipient}&textmessage=${text}`)
+    fetch(`http://localhost:5000/send-text?recipient=785021435&textmessage=${text}`)
     .then((result)=>{
       console.log("messge",result);
     })
@@ -437,7 +437,8 @@ const sendText=async()=>{
      return elem.id===id
     });
     try {
-      setRecipient(car.mobile)
+      // setRecipient(car.mobile)
+      setRecipient("779103180")
       setName(car.firstName)
       toggleConfirmation(id)
       
