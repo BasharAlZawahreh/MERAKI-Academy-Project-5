@@ -1,7 +1,7 @@
 const stripe=require("stripe")(process.env.STRIPE_KEY)
 
 const Pay=(req,res)=>{
-  console.log(req.body);
+  // console.log(req.body);
     stripe.charges.create(
         {
           source: req.body.tokenId,
@@ -10,11 +10,11 @@ const Pay=(req,res)=>{
         },
         (stripeErr, stripeRes) => {
           if (stripeErr) {
-            console.log("back1",stripeErr);
+            // console.log("back1",stripeErr);
            return  res.status(500).json(stripeErr);
 
           } else {
-            console.log("back",stripeRes);
+            // console.log("back",stripeRes);
            return res.status(200).json(stripeRes);
           }
         }

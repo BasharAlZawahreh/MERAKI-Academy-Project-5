@@ -35,9 +35,9 @@ const Profile = () => {
       firstName: firstName,
       lastName: lastName,
       city: city,
-
       ssn: ssn,
       birthDate: birthDate,
+      mobile:mobile
     };
     let uploadTask = storage.ref(`images/${license_img.name}`).put(license_img);
     task.push(uploadTask);
@@ -130,6 +130,16 @@ const Profile = () => {
             placeholder="City"
             onChange={(e) => {
               setCity(e.target.value);
+            }}
+          />
+          
+          <input
+            className="form-control p-2 "
+            style={{ marginTop: "5px" }}
+            type="text"
+            placeholder="Mobile"
+            onChange={(e) => {
+              setMobile(e.target.value);
             }}
           />
           <input

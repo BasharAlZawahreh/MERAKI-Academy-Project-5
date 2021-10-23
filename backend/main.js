@@ -2,6 +2,12 @@ const express = require("express");
 const cors = require("cors");
 require("./db/db.js");
 require("dotenv").config();
+const twilio = require("twilio")
+
+const accountSid  = "ACb89581a8b196a35127df754f7faa725b"
+const authToken = "a47003ca0903be1ad382812fc661496c"
+const client = new twilio(accountSid, authToken);
+
 
 const http = require("http");
 const socket = require("socket.io");
@@ -29,6 +35,23 @@ app.use("/car", carRouter);
 app.use("/reserve", reservationRouter);
 app.use("/rate", rateRouter);
 app.use("/payment", payRouter);
+app.get('/send-text', (req, res) => {
+  //Welcome Message
+  res.send('Hello to the Twilio Server')
+
+  //_GET Variables
+  const { recipient, textmessage } = req.query;
+  console.log(req.query);
+
+
+  //Send Text
+  client.messages.create({
+      body: textmessage,
+      to: `+962${recipient}`,  // Text this number
+      from: '+14845596976' // From a valid Twilio number
+  }).then((message) => console.log("message.body",message.body))
+   .catch((err)=>{console.log("err",err);})
+})
 app.use("*", (req, res) => res.status(404).json("NO content at this path"));
 
 // let onlineUsers = [];

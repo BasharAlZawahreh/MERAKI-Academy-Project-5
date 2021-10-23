@@ -31,10 +31,10 @@ const createNewUser = async (req, res) => {
 const updateUserById = async (req, res) => {
   
    let id = req.token.user_id;
-  let {firstName,lastName,city,ssn,birthDate,license_img } = req.body;
+  let {firstName,lastName,city,ssn,birthDate,mobile,license_img } = req.body;
  
-  const query = `UPDATE users SET firstName=?,lastName=?,city=?,ssn=?,birthDate=?,license_img=? WHERE user_id=? and role="user"`;
-  const data = [firstName,lastName,city,ssn,birthDate,license_img, id];
+  const query = `UPDATE users SET firstName=?,lastName=?,city=?,ssn=?,birthDate=?,mobile=?,license_img=? WHERE user_id=? and role="user"`;
+  const data = [firstName,lastName,city,ssn,birthDate,mobile,license_img, id];
 
   userModel.query(query, data, (err, result) => {
     

@@ -8,10 +8,12 @@ socket.on("connect", () => {
   console.log(`${socket.id} is connected`);
 
   socket.on("set_notification3", (data) => {
+    console.log("object",data)
     let arr = JSON.parse(localStorage.getItem("reservations")) || [];
     arr.length && localStorage.removeItem("reservations");
     console.log("arr2", arr);
     
+  
     arr.push(data);
     localStorage.setItem("reservations", JSON.stringify(arr));
     console.log("arr1",data);
