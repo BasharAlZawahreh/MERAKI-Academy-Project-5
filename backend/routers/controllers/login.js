@@ -68,10 +68,12 @@ const loginWithGoogle = async (req, res) => {
       const { email_verified, given_name, family_name, email } =
       response.payload;
       if (email_verified) {
+
         const query = `SELECT * FROM users WHERE users.email=?`;
         data = [email];
         connection.query(query, data,async (err, result) => {
           if (result.length) {
+            console.log(result);
             try {
               const valid = await bcrypt.compare(
                 email + process.env.SECRET,
@@ -109,13 +111,24 @@ const loginWithGoogle = async (req, res) => {
             const query = `INSERT INTO users
     (firstName,lastName,email,password)
     VALUES(?,?,?,?)`;
+
             data = [response.payload.given_name,response.payload.family_name,response.payload.email, password];
             connection.query(query, data, (err, result) => {
+              const payload = {
+                user_id: result.insertId,
+                userName: data.given_name,
+                role: "user"
+            };
+          
+            const options = {
+              expiresIn: "70d",
+            };
+            const token = jwt.sign(payload, process.env.SECRET, options);
               if (result) {
                 res.status(201).json({
                   success: true,
                   message: `All users `,
-                  users: result,
+                  token: token,
                 });
               } else {
                 res.status(500).json({

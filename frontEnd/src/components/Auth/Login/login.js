@@ -26,6 +26,7 @@ const Login = () => {
       })
       .then((res) => {
         if (res.data) {
+          console.log(res.data);
           setMessage("");
           dispatch(setToken(res.data.token));
           localStorage.setItem("token", res.data.token);

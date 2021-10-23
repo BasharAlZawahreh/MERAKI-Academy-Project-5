@@ -1,6 +1,22 @@
-import React from "react";
+import React,{useState,useEffect} from "react";
 
 const Footer=()=>{
+    const [showButton, setShowButton] = useState(true);
+    useEffect(() => {
+        window.addEventListener("scroll", () => {
+          if (window.pageYOffset > 100) {
+              
+            setShowButton(true);
+          } else {
+            setShowButton(false);
+          }
+        });
+      });
+    
+      // This function will scroll the window to the top 
+      const scrollToTop = () => {
+        window.scrollTo(0, 0);
+      };
     return(
         <>
         <div className="container-fluid bg-secondary py-5 px-sm-3 px-md-5" style={{marginTop:"90px"}}>
@@ -71,6 +87,14 @@ const Footer=()=>{
         <p className="mb-2 text-center text-body">&copy; <a href="#">Auto_Rental</a>. All Rights Reserved.</p>
         <p className="m-0 text-center text-body">Designed by <a href="https://htmlcodex.com">Auto Team "MERAKI_ACADIMY"</a></p>
     </div>
+    {/* {showButton && (
+    <a  onClick={scrollToTop} class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="fa fa-angle-double-up"></i></a>
+    )} */}
+          {showButton && (
+        <button style={{height:"50px",width:"50px",background:"#F77D0A"}} onClick={scrollToTop} className="btn btn-sm  back-to-top2">
+          <i class="fa fa-angle-double-up"></i>
+        </button>
+      )}
     </>
     )
 }
