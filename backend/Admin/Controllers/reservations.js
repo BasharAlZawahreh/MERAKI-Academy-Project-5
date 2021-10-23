@@ -29,7 +29,7 @@ const getAllReservations = (req, res) => {
 const toggleConfirmationById = (req, res) => {
   const id = req.params.id;
 
-  const checkQuery = `SELECT isConfirmed FROM reservations WHERE res_id=${id}`;
+  const checkQuery = `SELECT * FROM reservations  INNER JOIN users ON users.user_id = reservations.users_id  WHERE res_id=${id}`;
 
   let currentState = 0;
   connection.query(checkQuery, async (err, result) => {
@@ -50,6 +50,7 @@ const toggleConfirmationById = (req, res) => {
           });
         }
         if (result.affectedRows) {
+          console.log("sssssss",result);
           return res.status(202).json({
             success: true,
             message: ` Success`,

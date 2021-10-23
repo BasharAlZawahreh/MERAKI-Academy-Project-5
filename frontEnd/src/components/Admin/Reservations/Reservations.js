@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect,useState } from "react";
 import styled from "styled-components";
 import {
   useTable,
@@ -15,6 +15,8 @@ import {
   updateReservationConfirmation,
 } from "../../../actions/reservations";
 import { useSelector, useDispatch } from "react-redux";
+
+
 
 const Styles = styled.div`
   padding: 1rem;
@@ -51,8 +53,10 @@ function GlobalFilter({
   globalFilter,
   setGlobalFilter,
 }) {
+  
   const count = preGlobalFilteredRows.length;
   const [value, setValue] = React.useState(globalFilter);
+  
   const onChange = useAsyncDebounce((value) => {
     setGlobalFilter(value || undefined);
   }, 200);
@@ -353,6 +357,8 @@ function filterGreaterThan(rows, id, filterValue) {
 filterGreaterThan.autoRemove = (val) => typeof val !== "number";
 
 function Reservations() {
+  const [recipient,setRecipient]=useState()
+  const [name,setName]=useState("")
   const dispatch = useDispatch();
   const state = useSelector((state) => {
     return {
@@ -371,10 +377,46 @@ function Reservations() {
     dispatch(setReservation(res.data.result));
   };
 
+  const data = state.reservations.map((e) => {
+    return {
+      id: e.res_id,
+      returnDate: e.returnDate,
+      PickUpDate: e.PickUpDate,
+      amount: e.amount,
+      model: e.model,
+      manifactoring_year: e.manifactoring_year,
+      carLicense: e.carLicense,
+      mainImg: e.main_img,
+      ssn: e.ssn,
+      firstName: e.firstName,
+      email: e.email,
+      mobile: e.mobile,
+      age: e.age,
+      license_img: e.license_img,
+      isConfirmed: e.isConfirmed,
+    };
+  });
+
   useEffect(() => {
     getAllReservations();
   }, []);
 
+const sendText=async()=>{
+  console.log(recipient)
+  let text =await `Dear ${name} your car has been confirmed good luck Auto_Rental Team`
+  //pass text message GET variables via query string
+  try {
+    fetch(`http://localhost:5000/send-text?recipient=${recipient}&textmessage=${text}`)
+    .then((result)=>{
+      console.log("messge",result);
+    })
+    .catch(err => console.error("err",err))
+    
+  } catch (error) {
+    console.log(error);
+  }
+
+}
   const toggleConfirmation = async (id) => {
     await axios.patch(
       `http://localhost:5000/admin/confirmReserve/${id}`,
@@ -385,7 +427,28 @@ function Reservations() {
     );
 
     dispatch(updateReservationConfirmation(id));
+    sendText()
+
+
   };
+
+  const sedMessage=async(id)=>{
+    const car = await data.find((elem)=>{
+     return elem.id===id
+    });
+    try {
+      setRecipient(car.mobile)
+      setName(car.firstName)
+      toggleConfirmation(id)
+      
+    } catch (error) {
+      console.log(error);
+    }
+
+    
+  }
+
+  
 
   const columns = React.useMemo(() => [
     {
@@ -487,12 +550,20 @@ function Reservations() {
           Cell: ({ cell }) => {
             let ava = cell.row.values.isConfirmed ? true : false;
 
+
+            // toggleConfirmation(cell.row.values.id)
+            // console.log(cell.row.values)
+
             return (
               <label class="switch">
                 <input
                   type="checkbox"
                   checked={ava}
-                  onClick={() => toggleConfirmation(cell.row.values.id)}
+                  onClick={() => {    
+                    
+                    sedMessage(cell.row.values.id)
+                                       
+                    }}
                 />
                 <span class="slider round"></span>
               </label>
@@ -503,25 +574,25 @@ function Reservations() {
     },
   ]);
 
-  const data = state.reservations.map((e) => {
-    return {
-      id: e.res_id,
-      returnDate: e.returnDate,
-      PickUpDate: e.PickUpDate,
-      amount: e.amount,
-      model: e.model,
-      manifactoring_year: e.manifactoring_year,
-      carLicense: e.carLicense,
-      mainImg: e.main_img,
-      ssn: e.ssn,
-      firstName: e.firstName,
-      email: e.email,
-      mobile: e.mobile,
-      age: e.age,
-      license_img: e.license_img,
-      isConfirmed: e.isConfirmed,
-    };
-  });
+  // const data = state.reservations.map((e) => {
+  //   return {
+  //     id: e.res_id,
+  //     returnDate: e.returnDate,
+  //     PickUpDate: e.PickUpDate,
+  //     amount: e.amount,
+  //     model: e.model,
+  //     manifactoring_year: e.manifactoring_year,
+  //     carLicense: e.carLicense,
+  //     mainImg: e.main_img,
+  //     ssn: e.ssn,
+  //     firstName: e.firstName,
+  //     email: e.email,
+  //     mobile: e.mobile,
+  //     age: e.age,
+  //     license_img: e.license_img,
+  //     isConfirmed: e.isConfirmed,
+  //   };
+  // });
 
   console.log("data", data);
   return <Styles>{data && <Table columns={columns} data={data} />}</Styles>;

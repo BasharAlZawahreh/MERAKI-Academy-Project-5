@@ -40,6 +40,7 @@ const login = (req, res) => {
         userName: result[0].firstName,
         country: result[0].city,
         role: result[0].role,
+        mobile: result[0].mobile
       }
       const options = {
         expiresIn: "150000h",
