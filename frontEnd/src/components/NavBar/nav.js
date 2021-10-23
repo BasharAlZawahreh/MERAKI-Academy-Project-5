@@ -4,6 +4,10 @@ import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setToken } from "../../actions/login";
 import { Link } from "react-router-dom";
+
+import { BiLogInCircle } from 'react-icons/bi';
+import { RiLogoutCircleLine } from 'react-icons/ri';
+
 // import "./nav.css";
 import SearchForm from "../SearchForm/searchForm";
 const Nav = () => {
@@ -83,17 +87,18 @@ const Nav = () => {
                   <Link className="nav-item nav-link active" to="/contact">
                     Contact
                   </Link>
-                  <div className="col-xl-2 col-lg-4 col-md-6 px-2">
-                    <button
-                      className="btn btn-primary btn-block mb-3"
+                  
+                    <span
+                      className="nav-item nav-link active"
+                      
                       onClick={() => {
                         history.push("/login");
                       }}
-                      style={{ height: "50px",marginTop:"20px" }}
+                      
                     >
-                      Login
-                    </button>
-                  </div>
+                      <BiLogInCircle size={30} color={"rgb(57, 223, 57)"}style={{cursor:"pointer"}} ></BiLogInCircle>
+                    </span>
+                  
                 </div>
               </div>
             </nav>
@@ -126,15 +131,15 @@ const Nav = () => {
                       Home
                     </Link>
                     <Link className="nav-item nav-link " to="/myres">
-                      {" "}
+                    
                       My Reservation
                     </Link>
                     <Link className="nav-item nav-link" to="/mycars">
-                      {" "}
+                     
                       My Cars
                     </Link>
                     <Link className="nav-item nav-link" to="/addCar">
-                      {" "}
+                    
                       Add Car
                     </Link>
                     <Link className="nav-item nav-link" to="/about">
@@ -143,20 +148,20 @@ const Nav = () => {
                     <Link className="nav-item nav-link" to="/contact">
                       Contact
                     </Link>
-                    <div className="col-xl-2 col-lg-4 col-md-6 px-2">
-                      <button
-                        className="btn btn-primary btn-block mb-3"
+                 
+                      <span
+                        className="nav-item nav-link"
                         onClick={() => {
                           localStorage.clear();
                           dispatch(setToken(""));
                           //       Appcontext.setToken("");
-                          history.push("/");
+                          history.push("/login");
                         }}
-                        style={{ height: "50px" ,marginTop:"20px" }}
+                        
                       >
-                        Log Out
-                      </button>
-                    </div>
+                        <RiLogoutCircleLine size={30} color={"F77D0A"} style={{cursor:"pointer"}}></RiLogoutCircleLine>
+                      </span>
+                   
                   </div>
                 </div>
               </nav>
