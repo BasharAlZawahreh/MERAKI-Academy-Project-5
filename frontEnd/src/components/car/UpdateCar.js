@@ -6,6 +6,9 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { updateCar } from "../../actions/cars/index";
 import { useHistory } from "react-router";
+import Card from "react-bootstrap/Card";
+import Button from "react-bootstrap/Button";
+import { GiCancel } from "react-icons/gi";
 const UpdateCar = ({ car }) => {
   const history = useHistory()
 
@@ -244,7 +247,7 @@ const UpdateCar = ({ car }) => {
 
   return (
     <>
-      <div>Enter the Updated field which you want to update it</div><br></br>
+      {/* <div>Enter the Updated field which you want to update it</div><br></br>
       <div>
       <form>
      
@@ -308,7 +311,108 @@ const UpdateCar = ({ car }) => {
     <br></br>
      <button className="addcar"  type="button" onClick={addToData}>
       Save youre Update   </button><br></br>
-      {message}
+//       {message} */}
+{/* ============================================================ */}
+
+
+
+
+{/* <center>
+<Card   style={{
+          width: "36rem",
+         
+          backgroundColor: "#2B2E4A",
+          
+         
+          height: "23rem",
+        }}>
+           <span
+          style={{ marginLeft: "auto", cursor: "pointer" }}
+          onClick={() => {
+            history.push("/mycars");
+          }}
+        >
+          <GiCancel style={{ color: "white", width: "18px", height: "20px" }} />
+        </span>
+ 
+  <Card.Body>
+    <Card.Title style={{ color: "white"}}  >update my cars</Card.Title>
+    <Card.Text> </Card.Text>
+
+    <form>
+     
+
+     
+     
+       <input
+        style={{ marginTop: "7px" ,padding:"5px",height: "44px"}}
+       placeholder="main img"
+    
+         type="file"
+         className="form-control"
+         id="formGroupExampleInput"
+         onChange={addMainIm}
+       />
+    
+      
+       <select
+        style={{ marginTop: "7px",height: "44px" }}
+         id="carColors"
+         className="form-control form-control-lg"
+         onChange={(e) => setcarColor(e.target.value)}
+       >
+         <option defaultValue>choose a color</option>
+
+         {colors.map((color, i) => {
+           return (
+             <option value={color} key={i}>
+               {color}
+             </option>
+           );
+         })}
+       </select>
+    
+    
+    
+       <textarea
+        style={{ marginTop: "7px" ,height: "44px"}}
+         type="text"
+         className="form-control"
+         id="formGroupExampleInput2"
+         placeholder="over view for your car's"
+         onChange={(e)=>{setdesc(e.target.value)}}
+       />
+   
+       <input
+        style={{ marginTop: "7px",height: "44px" }}
+         type="nubmer"
+         className="form-control"
+         id="formGroupExampleInput2"
+         placeholder="price ber day"
+         onChange={(e)=>{setDayPrice(e.target.value)}}
+
+       />
+    
+
+
+   </form>
+  
+
+
+
+
+
+
+
+   <Button className="addcar"   style={{ width: "156px", marginTop: "14px"}}  type="button" onClick={addToData}>
+      Save Update   </Button>
+      {message} 
+  </Card.Body>
+</Card>
+
+</center> */}
+
+
     </>
   );
 };

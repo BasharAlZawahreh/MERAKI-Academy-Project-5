@@ -82,8 +82,11 @@ const Profile = () => {
   };
   console.log(url);
   return (
+    <div className="container-fluid py-5">
+    <div className="container pt-5 pb-3">
+    <center>
     <Card
-      style={{  width: "50rem", marginLeft: "28vw", backgroundColor: "#2B2E4A", alignItems: "center",flexDirection:"column" }}
+      style={{  width: "50rem", backgroundColor: "#2B2E4A", alignItems: "center",flexDirection:"column" }}
     >
       <span
         style={{ marginLeft:"48rem", cursor: "pointer" }}
@@ -162,7 +165,7 @@ const Profile = () => {
           />
         </Card.Text>
         <Button
-          style={{ width: "100px", marginTop: "5PX", marginLeft: "4vw" }}
+          style={{ width: "100px", marginTop: "5PX"}}
           onClick={() => {
             editProfile();
           }}
@@ -172,6 +175,9 @@ const Profile = () => {
       </Card.Body>
       </div>
     </Card>
+    </center>
+    </div>
+    </div>
   );
 };
 export default Profile;
