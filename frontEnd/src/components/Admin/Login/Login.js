@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setToken } from "../../../actions/AdminActions/Login";
 import axios from "axios";
 import GoogleLogin from "react-google-login";
-
+import {MdCancel} from 'react-icons/md';
 const Login = () => {
   const history = useHistory();
   const dispatch = useDispatch();
@@ -82,20 +82,21 @@ const Login = () => {
 
   return (
     <>
-      <section class="sign-in">
-        <div class="container">
-          <div class="signin-content">
+      <section class="sign-in" >
+        
+        <div class="container"  style={{backgroundColor:"#2B2E4A"}}>
+        <span style={{cursor:"pointer",marginLeft:"68.5rem"}}  onClick={()=>{history.push("/")}}><MdCancel style={{height:"26px",width:"24px",paddingTop:"5px",color:"white"}} /></span>
+          <div class="signin-content" >
+         
             <div class="signin-image">
               <figure>
-                <img src="images/signin-image.jpg" alt="sing up image" />
+                <img src="https://thumbs.dreamstime.com/b/admin-message-working-office-table-background-93379017.jpg" alt="sing up image" />
               </figure>
-              <a href="#" class="signup-image-link">
-                Create an account
-              </a>
+            
             </div>
 
             <div class="signin-form">
-              <h2 class="form-title">Login</h2>
+              <h2 class="form-title" style={{color:"white"}}>Login</h2>
               <form onSubmit={Enter} class="register-form" id="login-form">
                 <div class="form-group">
                   <label for="your_name">

@@ -154,7 +154,7 @@ reject("Pick Up Date can not be after the return date ")
         
         <div className="container-fluid py-5">
         <div className="container pt-5 pb-3">
-       
+       <center>
         <Card
           style={{
             flexDirection:"column",
@@ -162,7 +162,7 @@ reject("Pick Up Date can not be after the return date ")
             alignItems: "center",
             color: "white",
             width: "50rem",
-            marginLeft:"10vw",
+        
             height: "400px",
             // marginLeft: "25%",
             // marginTop: "150px",
@@ -179,7 +179,7 @@ reject("Pick Up Date can not be after the return date ")
             <Card.Title
               style={{
                 textAlign: "center",
-                marginRight:"70px",
+               
                 fontWeight: "bold",
                 marginTop: "20px",
                 marginBottom: "20px",
@@ -217,9 +217,9 @@ reject("Pick Up Date can not be after the return date ")
             {!showButton && (
             <Button 
 
-style={{ marginTop: "10%", marginLeft: "27%" }}
+style={{ marginTop: "10%"}}
 
-className="btn btn-secondary"
+// className="btn btn-secondary"
 // variant="secondary"
 onClick={() => {
   booking();
@@ -231,6 +231,7 @@ Reservation
           </Card.Body>
           </div>
         </Card>
+        </center>
         </div>
         </div>
       ) : !isOk && !state.editOrInsert ?(

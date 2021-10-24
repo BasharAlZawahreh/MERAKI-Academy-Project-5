@@ -480,11 +480,11 @@ const AddNewCar = () => {
      <button className="addcar" disabled={enable} type="button"  onClick={addToData}>
      add youre car 
    </button> */}
-
+ <center>
       <Card
         style={{
           width: "50rem",
-          marginLeft: "28vw",
+      
           backgroundColor: "#2B2E4A",
           alignItems: "center",
           flexDirection: "column",
@@ -492,7 +492,7 @@ const AddNewCar = () => {
         }}
       >
         <span
-          style={{ marginLeft: "48rem", cursor: "pointer" }}
+          style={{ marginLeft: "auto", cursor: "pointer" }}
           onClick={() => {
             history.push("/");
           }}
@@ -517,10 +517,10 @@ const AddNewCar = () => {
               height: "73%",
             }}
             variant="top"
-            src="https://images.unsplash.com/photo-1554708893-e11aa45b9bbf?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTJ8fG5ldyUyMGNhcnxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+            src="https://images.all-free-download.com/images/graphiclarge/lifestyle_background_man_driving_car_desert_icons_6838675.jpg"
           />
           <Card.Body>
-            <Card.Title style={{ color: "white", textAlign: "center" }}>
+            <Card.Title style={{ color: "white" }}>
               AddCar
             </Card.Title>
             <form>
@@ -675,7 +675,7 @@ const AddNewCar = () => {
             </form>
 
             <Button
-              style={{ width: "156px", marginTop: "14PX", marginLeft: "9.5vw" }}
+              style={{ width: "156px", marginTop: "14PX"}}
               className="addcar" disabled={enable}  onClick={addToData}
             >
               addCar
@@ -683,6 +683,7 @@ const AddNewCar = () => {
           </Card.Body>
         </div>
       </Card>
+      </center>
     </>
   );
 };
