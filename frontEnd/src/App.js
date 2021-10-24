@@ -24,6 +24,7 @@ import Footer from "./components/Footer/footer";
 import AddNewCar from "./components/car/AddNewCar";
 import About from "./components/about/about";
 import Payment from "./components/Payment/payment";
+import SliderBrand from "./components/Brand/brand";
 
 export default function App() {
   return (
@@ -42,6 +43,7 @@ export default function App() {
         <Route exact path="/">
           <Nav />
           <Home />
+          <SliderBrand/>
           <Footer />
         </Route>
         <Route exact path="/myres">
@@ -57,22 +59,26 @@ export default function App() {
         <Route exact path="/about">
           <Nav />
           <About />
+          <SliderBrand/>
           <Footer />
         </Route>
         <Route exact path="/contact">
           <Nav />
           <Contact />
+          <SliderBrand/>
           <Footer />
         </Route>
         <Route path="/addRes/:id">
           <Nav />
           <AddReservation />
+          <SliderBrand/>
           <Footer />
         </Route>
         <Route path="/editprofile">
           <Nav />
           <Profile />
           <Footer />
+          <SliderBrand/>
         </Route>
         <Route exact path="/mycars">
           <Nav />
@@ -89,6 +95,7 @@ export default function App() {
           <Nav />
           <AddNewCar />
           <Footer />
+          <SliderBrand/>
         </Route>
         <Route exact path="/result">
           <Nav />
@@ -98,6 +105,7 @@ export default function App() {
         <Route path="/rate/:id">
           <Nav />
           <AddRates />
+          <SliderBrand/>
           <Footer />
         </Route>
         <Route path="/carinfo/:id">

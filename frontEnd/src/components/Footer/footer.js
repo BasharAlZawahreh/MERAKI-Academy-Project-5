@@ -4,7 +4,7 @@ const Footer=()=>{
     const [showButton, setShowButton] = useState(true);
     useEffect(() => {
         window.addEventListener("scroll", () => {
-          if (window.pageYOffset > 100) {
+          if (window.pageYOffset > 300) {
               
             setShowButton(true);
           } else {
@@ -15,7 +15,10 @@ const Footer=()=>{
     
       // This function will scroll the window to the top 
       const scrollToTop = () => {
-        window.scrollTo(0, 0);
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+          });
       };
     return(
         <>
