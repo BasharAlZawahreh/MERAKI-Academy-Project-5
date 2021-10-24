@@ -6,13 +6,31 @@ import Cars from "../Cars/Cars";
 import styles from "../Dashboard.module.css";
 import { useHistory } from "react-router-dom";
 import Statistics from "../Statistcs/Statistics";
-
+import axios from "axios";
+import { setCar, deleteCar } from "../../../actions/cars";
+import {
+  setReservation,
+  updateReservationConfirmation,
+} from "../../../actions/reservations";
+import { setUser, deleteUser, updateUser } from "../../../actions/users";
+import { useSelector, useDispatch } from "react-redux";
 const Dashboard = () => {
   const [component, setComponent] = useState("Statistics");
   const [data, setData] = useState();
   const [notifications, setNotifications] = useState("");
+  const [usersStatistics, setUsersStatistics] = useState("");
+  const [carsStatistics, setCarsStatistics] = useState("");
+  const [reservationsStatistics, setReservationsStatistics] = useState("");
+  const dispatch = useDispatch();
   const history = useHistory();
+  const state = useSelector((state) => {
+    return {
+      adminToken: state.adminToken.adminToken,
+      reservations: state.reservation.reservations,
+    };
+  });
 
+  let token = state.adminToken || localStorage.getItem("token");
   let arr;
   useEffect(() => {
     arr = JSON.parse(localStorage.getItem("reservations")) || [];
@@ -21,6 +39,44 @@ const Dashboard = () => {
     console.log('odai',arr.length)
   });
 
+  const getAllUsers = async () => {
+    const res = await axios.get("http://localhost:5000/admin/users", {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+
+    dispatch(setUser(res.data.result));
+    setUsersStatistics(res.data.result.length)
+  };
+
+  useEffect(() => {
+    getAllUsers();
+  }, []);
+
+  const getAllCars = async () => {
+    const res = await axios.get("http://localhost:5000/admin/cars", {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+
+    dispatch(setCar(res.data.result));
+    setCarsStatistics(res.data.result.length)
+  };
+
+  useEffect(() => {
+    getAllCars();
+  }, []);
+
+  const getAllReservations = async () => {
+    const res = await axios.get("http://localhost:5000/admin/reserves", {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+
+    dispatch(setReservation(res.data.result));
+    setReservationsStatistics(res.data.result.length)
+  };
+
+  useEffect(() => {
+    getAllReservations();
+  }, []);
   // useEffect(() => {
   //   socket.on("set_notification",(data)=>{
   //     setData(data.amount)
@@ -116,7 +172,7 @@ const Dashboard = () => {
         <div className={styles.homecontent}>
           <div className={styles.overviewboxes}>
             {component === "Statistics" ? (
-              <Statistics />
+              <Statistics usersStatistics={usersStatistics} carsStatistics= {carsStatistics}reservationsStatistics={reservationsStatistics}/>
             ) : component === "users" ? (
               <Users />
             ) : component === "cars" ? (

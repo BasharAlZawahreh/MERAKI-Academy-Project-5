@@ -326,12 +326,12 @@ function Table({ columns, data }) {
         </tbody>
       </table>
       <br />
-      <div>Showing the first 20 results of {rows.length} rows</div>
+      {/* <div>Showing the first 20 results of {rows.length} rows</div>
       <div>
         <pre>
           <code>{JSON.stringify(state.filters, null, 2)}</code>
         </pre>
-      </div>
+      </div> */}
     </>
   );
 }
@@ -361,14 +361,6 @@ function Cars() {
 
   let token = state.adminToken || localStorage.getItem("token");
 
-  const getAllCars = async () => {
-    const res = await axios.get("http://localhost:5000/admin/cars", {
-      headers: { Authorization: `Bearer ${token}` },
-    });
-
-    dispatch(setCar(res.data.result));
-    console.log(res.data.result);
-  };
 
   const deleteCarById = async (id) => {
     swal({
@@ -401,9 +393,7 @@ function Cars() {
     });
   };
 
-  useEffect(() => {
-    getAllCars();
-  }, []);
+
 
   const columns = React.useMemo(() => [
     {

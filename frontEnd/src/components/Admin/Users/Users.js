@@ -325,12 +325,12 @@ function Table({ columns, data }) {
         </tbody>
       </table>
       <br />
-      <div>Showing the first 20 results of {rows.length} rows</div>
+      {/* <div>Showing the first 20 results of {rows.length} rows</div>
       <div>
         <pre>
           <code>{JSON.stringify(state.filters, null, 2)}</code>
         </pre>
-      </div>
+      </div> */}
     </>
   );
 }
@@ -349,7 +349,7 @@ function filterGreaterThan(rows, id, filterValue) {
 // check, but here, we want to remove the filter if it's not a number
 filterGreaterThan.autoRemove = (val) => typeof val !== "number";
 
-function Users() {
+function Users({setTest}) {
   const dispatch = useDispatch();
   const state = useSelector((state) => {
     return {
@@ -360,17 +360,7 @@ function Users() {
 
   let token = state.adminToken || localStorage.getItem("token");
 
-  const getAllUsers = async () => {
-    const res = await axios.get("http://localhost:5000/admin/users", {
-      headers: { Authorization: `Bearer ${token}` },
-    });
 
-    dispatch(setUser(res.data.result));
-  };
-
-  useEffect(() => {
-    getAllUsers();
-  }, []);
 
   const toggleBlockUser = async (id) => {
     const res = await axios.patch(

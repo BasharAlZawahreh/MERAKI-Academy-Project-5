@@ -332,12 +332,12 @@ function Table({ columns, data }) {
         </tbody>
       </table>
       <br />
-      <div>Showing the first 20 results of {rows.length} rows</div>
+      {/* <div>Showing the first 20 results of {rows.length} rows</div>
       <div>
         <pre>
           <code>{JSON.stringify(state.filters, null, 2)}</code>
         </pre>
-      </div>
+      </div> */}
     </>
   );
 }
@@ -369,13 +369,7 @@ function Reservations() {
 
   let token = state.adminToken || localStorage.getItem("token");
 
-  const getAllReservations = async () => {
-    const res = await axios.get("http://localhost:5000/admin/reserves", {
-      headers: { Authorization: `Bearer ${token}` },
-    });
 
-    dispatch(setReservation(res.data.result));
-  };
 
   const data = state.reservations.map((e) => {
     return {
@@ -397,9 +391,7 @@ function Reservations() {
     };
   });
 
-  useEffect(() => {
-    getAllReservations();
-  }, []);
+
 
 const sendText=()=>{
   console.log(recipient)
