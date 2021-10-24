@@ -11,6 +11,7 @@ import { GiCancel } from 'react-icons/gi';
 import Payment from "../Payment/payment";
 // import "./reservation.css";
 const AddReservation = () => {
+  const [showButton, setShowButton] = useState(false);
 
   const history=useHistory()
   const dispatch = useDispatch();
@@ -111,6 +112,7 @@ reject("Pick Up Date can not be after the return date ")
           let price = result.data.result[0].day_price;
          let cash = await setAmount1({PickUpDate,returnDate,price})
          setAmount(cash)
+         setShowButton(true)
          return (cash)
        
         })
@@ -209,19 +211,23 @@ reject("Pick Up Date can not be after the return date ")
                 placeholder="amount"
               />
             </Card.Text>
+            {showButton && (
             <Payment   amount={amount}/>
-            <Button
+            )}
+            {!showButton && (
+            <Button 
 
-              style={{ marginTop: "10%", marginLeft: "27%" }}
-              
-              className="btn btn-secondary"
-              // variant="secondary"
-              onClick={() => {
-                booking();
-              }}
-            >
-              Reservation
-            </Button>
+style={{ marginTop: "10%", marginLeft: "27%" }}
+
+className="btn btn-secondary"
+// variant="secondary"
+onClick={() => {
+  booking();
+}}
+>
+Reservation
+</Button>
+            )}
           </Card.Body>
           </div>
         </Card>

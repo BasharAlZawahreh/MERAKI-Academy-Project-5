@@ -225,7 +225,7 @@ function SearchForm() {
     <>
       <div className="container-fluid bg-white pt-3 px-lg-5">
         <div className="row w-75">
-          <div className="col-xl-2 col-lg-4 col-md-6 px-2">
+          <div className="col-xl-2 col-sm-2 col-md-6 px-2">
             <select
               className="custom-select px-4 mb-3 form-control form-control-lg"
               onChange={(e) => {
@@ -244,7 +244,7 @@ function SearchForm() {
                 })}
             </select>
           </div>
-          <div className="col-xl-2 col-lg-4 col-md-6 px-2">
+          <div className="col-xl-2 col-sm-2 col-md-6 px-2">
             <select
               className="custom-select px-4 mb-3"
               onChange={(e) => setcarBrand(e.target.value)}
@@ -262,7 +262,7 @@ function SearchForm() {
                 })}
             </select>
           </div>
-          <div className="col-xl-2 col-lg-4 col-md-6 px-2">
+          <div className="col-xl-2 col-sm-2 col-md-6 px-2">
             <select
               className="custom-select px-4 mb-3"
               onChange={(e) => setcarColor(e.target.value)}
@@ -279,7 +279,7 @@ function SearchForm() {
               })}
             </select>
           </div>
-          <div className="col-xl-2 col-lg-4 col-md-6 px-2">
+          <div className="col-xl-2 col-sm-2 col-md-6 px-2">
             <select
               className="custom-select px-4 mb-3"
               onChange={(e) => setcarYear(e.target.value)}
@@ -297,7 +297,7 @@ function SearchForm() {
                 })}
             </select>
           </div>
-          <div className="col-xl-2 col-lg-4 col-md-6 px-2">
+          <div className="col-xl-2 col-sm-2 col-md-6 px-2">
             <div className="date mb-3" id="date" data-target-input="nearest">
               <input
                 type="text"
@@ -311,7 +311,7 @@ function SearchForm() {
               />
             </div>
           </div>
-          <div className="col-xl-2 col-lg-4 col-md-6 px-2">
+          <div className="col-xl-2 col-sm-2 col-md-6 px-2">
             <div className="date mb-3" id="date" data-target-input="nearest">
               <input
                 type="text"
@@ -323,7 +323,7 @@ function SearchForm() {
               />
             </div>
           </div>
-          <div className="col-xl-2 col-lg-4 col-md-6 px-2">
+          <div className="col-xl-2 col-sm-2 col-md-6 px-2">
             <div className="time mb-3" id="time" data-target-input="nearest">
               <input
                 type="text"
@@ -335,7 +335,7 @@ function SearchForm() {
               />
             </div>
           </div>
-          <div className="col-xl-2 col-lg-4 col-md-6 px-2">
+          <div className="col-xl-2 col-sm-2 col-md-6 px-2">
             <button
               className="btn btn-primary btn-block mb-3"
               onClick={submitSearch}
