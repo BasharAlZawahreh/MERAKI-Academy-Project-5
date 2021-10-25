@@ -50,7 +50,7 @@ const history=useHistory()
       getReservationByuser();
       }, []);
     return(
-        <div style={{"padding":"30px"}}>
+        <div style={{"padding":"45px"}}>
             {/* <button onClick={()=>getReservationByuser()}  >GET My Reservations</button> */}
 <Table striped bordered hover>
   <thead>

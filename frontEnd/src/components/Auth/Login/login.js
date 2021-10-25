@@ -91,6 +91,7 @@ const Login = () => {
                 <img src="images/signup-image.jpg" alt="sing up image" />
               </figure>
               <a
+                style={{cursor:"pointer"}}
                 onClick={() => history.push("/register")}
                 className="signup-image-link"
               >

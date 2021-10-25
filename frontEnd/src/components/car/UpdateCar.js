@@ -10,24 +10,22 @@ import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import { GiCancel } from "react-icons/gi";
 const UpdateCar = ({ car }) => {
-  const history = useHistory()
+  const history = useHistory();
 
-  const carInfo = JSON.parse(localStorage.getItem("car")) 
+  const carInfo = JSON.parse(localStorage.getItem("car"));
   console.log(carInfo);
 
-    const state = useSelector((state) => {
-        return { cars: state.car.cars,
-           token: state.token.token };
-      });
+  const state = useSelector((state) => {
+    return { cars: state.car.cars, token: state.token.token };
+  });
 
-    const dispatch = useDispatch()
-    
-    const [message,setMessage]=useState("");  
-  const [mainImg,setMainImg]=useState("");
+  const dispatch = useDispatch();
+
+  const [message, setMessage] = useState("");
+  const [mainImg, setMainImg] = useState("");
   const [carColor, setcarColor] = useState("");
   const [dayPrice, setDayPrice] = useState(0);
   const [desc, setdesc] = useState("");
-
 
   let id = useParams().id;
 
@@ -182,12 +180,10 @@ const UpdateCar = ({ car }) => {
     "YellowGreen",
   ];
 
-
   const addMainIm = (e) => {
-    
-    let task=[]
+    let task = [];
     if (e.target.files[0]) {
-      let img = e.target.files[0]
+      let img = e.target.files[0];
       let uploadTask = storage.ref(`images/${img.name}`).put(img);
       task.push(uploadTask);
       uploadTask.on(
@@ -200,219 +196,132 @@ const UpdateCar = ({ car }) => {
           storage
             .ref("images")
             .child(img.name)
-           .getDownloadURL()
-            .then(async(url) => {
+            .getDownloadURL()
+            .then(async (url) => {
               console.log(url);
-              setMainImg(url)
-             
-             })
-            
+              setMainImg(url);
+            });
         }
-      )
-      Promise.all(task)
+      );
+      Promise.all(task);
     }
-    
   };
 
+  const addToData = async () => {
+    let data = {
+      color: carColor || carInfo.color,
 
-  const addToData=async()=>{
-      
-    
-    let data = {   
-      color:carColor || carInfo.color,
-  
-     description:desc || carInfo.description,
- 
-     day_price:dayPrice || carInfo.day_price,
-   
+      description: desc || carInfo.description,
 
-     main_img:mainImg || carInfo.main_img
-     }
-     console.log(data,"data");
-  
-      await axios.put(`http://localhost:5000/car/${id}`,data,{headers:{authorization:`Bearer ${state.token}`}})
-       .then((result)=>{
-    console.log(result)
-    setMessage("updated Successfuly")
-    history.push("/mycars")
+      day_price: dayPrice || carInfo.day_price,
 
+      main_img: mainImg || carInfo.main_img,
+    };
+    console.log(data, "data");
 
-       })
-       .catch(err=>{console.log("err");})
-  
-       
+    await axios
+      .put(`http://localhost:5000/car/${id}`, data, {
+        headers: { authorization: `Bearer ${state.token}` },
+      })
+      .then((result) => {
+        console.log(result);
+        setMessage("updated Successfuly");
+        history.push("/mycars");
+      })
+      .catch((err) => {
+        console.log("err");
+      });
   };
-
-
 
   return (
     <>
-      {/* <div>Enter the Updated field which you want to update it</div><br></br>
-      <div>
-      <form>
-     
+      <center>
+        <Card
+          style={{
+            width: "36rem",
 
-        <div className="form-group">
-        <div className="form-group">
-        
-          <input
-          placeholder="main img"
-            type="file"
-            className="form-control"
-            id="formGroupExampleInput"
-            onChange={addMainIm}
-          />
-        </div>
-         
-          <select
-            id="carColors"
-            className="form-control form-control-lg"
-            onChange={(e) => setcarColor(e.target.value)}
-          >
-            <option defaultValue>choose a color</option>
+            backgroundColor: "#2B2E4A",
 
-            {colors.map((color, i) => {
-              return (
-                <option value={color} key={i}>
-                  {color}
-                </option>
-              );
-            })}
-          </select>
-        </div>
-       
-        <div className="form-group">
-          <label htmlFor="formGroupExampleInput2">discription</label>
-          <textarea
-            type="text"
-            className="form-control"
-            id="formGroupExampleInput2"
-            placeholder="over view for your car's"
-            onChange={(e)=>{setdesc(e.target.value)}}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="formGroupExampleInput2">Day price </label>
-          <textarea
-            type="text"
-            className="form-control"
-            id="formGroupExampleInput2"
-            placeholder="price ber day"
-            onChange={(e)=>{setDayPrice(e.target.value)}}
-
-          />
-        </div>
-
-
-      </form>
-     
-
-    </div>
-    <br></br>
-     <button className="addcar"  type="button" onClick={addToData}>
-      Save youre Update   </button><br></br>
-//       {message} */}
-{/* ============================================================ */}
-
-
-
-
-{/* <center>
-<Card   style={{
-          width: "36rem",
-         
-          backgroundColor: "#2B2E4A",
-          
-         
-          height: "23rem",
-        }}>
-           <span
-          style={{ marginLeft: "auto", cursor: "pointer" }}
-          onClick={() => {
-            history.push("/mycars");
+            height: "23rem",
           }}
         >
-          <GiCancel style={{ color: "white", width: "18px", height: "20px" }} />
-        </span>
- 
-  <Card.Body>
-    <Card.Title style={{ color: "white"}}  >update my cars</Card.Title>
-    <Card.Text> </Card.Text>
+          <span
+            style={{ marginLeft: "auto", cursor: "pointer" }}
+            onClick={() => {
+              history.push("/mycars");
+            }}
+          >
+            <GiCancel
+              style={{ color: "white", width: "18px", height: "20px" }}
+            />
+          </span>
 
-    <form>
-     
+          <Card.Body>
+            <Card.Title style={{ color: "white" }}>Update Your Car</Card.Title>
+            <Card.Text> </Card.Text>
 
-     
-     
-       <input
-        style={{ marginTop: "7px" ,padding:"5px",height: "44px"}}
-       placeholder="main img"
-    
-         type="file"
-         className="form-control"
-         id="formGroupExampleInput"
-         onChange={addMainIm}
-       />
-    
-      
-       <select
-        style={{ marginTop: "7px",height: "44px" }}
-         id="carColors"
-         className="form-control form-control-lg"
-         onChange={(e) => setcarColor(e.target.value)}
-       >
-         <option defaultValue>choose a color</option>
+            <form>
+              <input
+                style={{ marginTop: "7px", padding: "5px", height: "44px" }}
+                placeholder="main img"
+                type="file"
+                className="form-control"
+                id="formGroupExampleInput"
+                onChange={addMainIm}
+              />
 
-         {colors.map((color, i) => {
-           return (
-             <option value={color} key={i}>
-               {color}
-             </option>
-           );
-         })}
-       </select>
-    
-    
-    
-       <textarea
-        style={{ marginTop: "7px" ,height: "44px"}}
-         type="text"
-         className="form-control"
-         id="formGroupExampleInput2"
-         placeholder="over view for your car's"
-         onChange={(e)=>{setdesc(e.target.value)}}
-       />
-   
-       <input
-        style={{ marginTop: "7px",height: "44px" }}
-         type="nubmer"
-         className="form-control"
-         id="formGroupExampleInput2"
-         placeholder="price ber day"
-         onChange={(e)=>{setDayPrice(e.target.value)}}
+              <select
+                style={{ marginTop: "7px", height: "44px" }}
+                id="carColors"
+                className="form-control form-control-lg"
+                onChange={(e) => setcarColor(e.target.value)}
+              >
+                <option defaultValue>choose a color</option>
 
-       />
-    
+                {colors.map((color, i) => {
+                  return (
+                    <option value={color} key={i}>
+                      {color}
+                    </option>
+                  );
+                })}
+              </select>
 
+              <textarea
+                style={{ marginTop: "7px", height: "44px" }}
+                type="text"
+                className="form-control"
+                id="formGroupExampleInput2"
+                placeholder="over view for your car's"
+                onChange={(e) => {
+                  setdesc(e.target.value);
+                }}
+              />
 
-   </form>
-  
+              <input
+                style={{ marginTop: "7px", height: "44px" }}
+                type="nubmer"
+                className="form-control"
+                id="formGroupExampleInput2"
+                placeholder="price ber day"
+                onChange={(e) => {
+                  setDayPrice(e.target.value);
+                }}
+              />
+            </form>
 
-
-
-
-
-
-
-   <Button className="addcar"   style={{ width: "156px", marginTop: "14px"}}  type="button" onClick={addToData}>
-      Save Update   </Button>
-      {message} 
-  </Card.Body>
-</Card>
-
-</center> */}
-
-
+            <Button
+              className="addcar"
+              style={{ width: "156px", marginTop: "14px" }}
+              type="button"
+              onClick={addToData}
+            >
+              Save Update{" "}
+            </Button>
+            {message}
+          </Card.Body>
+        </Card>
+      </center>
     </>
   );
 };

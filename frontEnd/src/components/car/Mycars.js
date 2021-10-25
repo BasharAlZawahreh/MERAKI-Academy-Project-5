@@ -70,15 +70,13 @@ const MyCars = () => {
     git();
   }, []);
 
-  const addNewCar=()=>{
-    history.push("/addCar")
-  }
+ 
 
 
   console.log("state.cars", state.cars);
   return (
-    <div style={{"padding":"30px"}}>
-      <button onClick={addNewCar} style={{marginBottom:"15px",float:"right"}}>Add new Car </button>
+    <div style={{"padding":"45px"}}>
+  
       <Table striped bordered hover>
         <thead>
           <tr>

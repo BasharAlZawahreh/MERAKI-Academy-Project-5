@@ -152,7 +152,7 @@ reject("Pick Up Date can not be after the return date ")
       !state.editOrInsert && isOk? (
      
         
-        <div className="container-fluid py-5">
+        <div className="container-fluid py-5 ">
         <div className="container pt-5 pb-3">
        <center>
         <Card
@@ -172,7 +172,7 @@ reject("Pick Up Date can not be after the return date ")
      
          <span style={{cursor:"pointer",alignSelf:"flex-end"}}  onClick={()=>{history.push("/")}}><GiCancel style={{color:"white",width:"18px",height:"20px"}}/></span>
          <div style={{display:"flex",flexDirection:"row"}}>
-            <img  style={{width:"30%",alignItems:"center",marginBottom:"34px",marginLeft:"13px",marginTop:"30px",height:"73%"}}  src="https://media.istockphoto.com/photos/calendar-3d-rendering-picture-id1186714981?b=1&k=20&m=1186714981&s=170667a&w=0&h=7vwc61aDoI8b63-UZ4GAYTEAOigv9UPxVzfswTyyzzU=" class="card-img-top" alt="..."/>
+            <img  style={{width:"30%",alignItems:"center",marginBottom:"34px",marginLeft:"13px",marginTop:"30px",height:"73%"}}  src="https://thumbs.dreamstime.com/b/car-rent-sale-agent-auto-dealer-leasing-concept-104364904.jpg" class="card-img-top" alt="..."/>
          
         
           <Card.Body>
@@ -234,6 +234,7 @@ Reservation
         </center>
         </div>
         </div>
+    
       ) : !isOk && !state.editOrInsert ?(
         history.push("/editprofile")):!isOk && state.editOrInsert ?(
         
@@ -258,7 +259,7 @@ Reservation
             <span style={{marginLeft:"23.5rem",cursor:"pointer"}}  onClick={()=>{history.push("/myres")}}><GiCancel style={{color:"white",width:"18px",height:"20px"}}/></span>
             <div style={{display:"flex",flexDirection:"row"}}>
 
-            <img  style={{width:"30%",alignItems:"center",marginBottom:"34px",marginLeft:"13px",marginTop:"30px",height:"73%"}}  src="https://media.istockphoto.com/photos/calendar-3d-rendering-picture-id1186714981?b=1&k=20&m=1186714981&s=170667a&w=0&h=7vwc61aDoI8b63-UZ4GAYTEAOigv9UPxVzfswTyyzzU=" class="card-img-top" alt="..."/>
+            <img  style={{width:"30%",alignItems:"center",marginBottom:"34px",marginLeft:"13px",marginTop:"30px",height:"73%"}}  src="https://previews.123rf.com/images/ostapenko/ostapenko1806/ostapenko180600197/104370985-isometric-renting-a-new-or-used-car-car-rental-booking-reservation-banner-vector-illustration-backgr.jpg" class="card-img-top" alt="..."/>
           <Card.Body>
             <Card.Title style={{ textAlign: "center",color:"white" , fontWeight: "bold" }}>
               Reservation

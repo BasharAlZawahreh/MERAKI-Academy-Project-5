@@ -109,9 +109,10 @@ const CarInfo = () => {
               </div>
             </div>
 
-            <div className="col-lg-6 mb-5" style={{ maxHeight: "504px",overflowY :"auto"}}>
-
-
+            <div
+              className="col-lg-6 mb-5"
+              style={{ maxHeight: "504px", overflowY: "auto" }}
+            >
               <div className="bg-secondary p-5">
                 <h3 className="text-primary text-center mb-4">
                   {" "}
@@ -139,12 +140,10 @@ const CarInfo = () => {
                             type="text"
                             className="form-control p-4 datetimepicker-input"
                             disabled={true}
-
                             placeholder="comment"
                             data-target="#date1"
                             data-toggle="datetimepicker"
                             value={rate.comment}
-
                           />
                         </div>
                       </div>
@@ -171,7 +170,18 @@ const CarInfo = () => {
               </div>
             </div>
           </div>
+          <button
+        style={{position:"center"}}
+          className="btn btn-primary px-3 "
+          onClick={() => {
+            history.push(`/addRes/${car_id}`);
+            // dispatch(setSearchCarId(car.car_id));
+          }}
+        >
+          Rent Now
+        </button>
         </div>
+
       </div>
     </>
   );

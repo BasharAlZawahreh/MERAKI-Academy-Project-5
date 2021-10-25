@@ -96,7 +96,7 @@ const Nav = () => {
                       }}
                       
                     >
-                      <BiLogInCircle size={30} color={"rgb(57, 223, 57)"}style={{cursor:"pointer"}} ></BiLogInCircle>
+                      <BiLogInCircle size={30} color={"rgb(57, 223, 57)"}style={{cursor:"pointer"}} ></BiLogInCircle>Join Us
                     </span>
                   
                 </div>
@@ -159,7 +159,7 @@ const Nav = () => {
                         }}
                         
                       >
-                        <RiLogoutCircleLine size={30} color={"F77D0A"} style={{cursor:"pointer"}}></RiLogoutCircleLine>
+                       Log Out <RiLogoutCircleLine size={30} color={"F77D0A"} style={{cursor:"pointer"}}></RiLogoutCircleLine>
                       </span>
                    
                   </div>
