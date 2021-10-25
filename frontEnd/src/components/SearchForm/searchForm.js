@@ -224,7 +224,7 @@ function SearchForm() {
   return (
     <>
       <div className="container-fluid bg-white pt-3 px-lg-5">
-        <div  style={{display:"flex",flexDirection:"row",width:"1329px",marginLeft:"-7px"}} >
+        <div  style={{display:"flex",flexDirection:"row",width:"75.5%",marginLeft:"-7px"}} >
           <div className="col-xl-2 col-sm-2 col-md-6 px-2">
             <select
               className="custom-select px-4 mb-3 form-control form-control-lg"
