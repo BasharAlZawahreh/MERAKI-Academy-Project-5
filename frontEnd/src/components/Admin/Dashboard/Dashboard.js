@@ -14,6 +14,7 @@ import {
 } from "../../../actions/reservations";
 import { setUser, deleteUser, updateUser } from "../../../actions/users";
 import { useSelector, useDispatch } from "react-redux";
+
 const Dashboard = () => {
   const [component, setComponent] = useState("Statistics");
   const [data, setData] = useState();
@@ -23,6 +24,7 @@ const Dashboard = () => {
   const [reservationsStatistics, setReservationsStatistics] = useState("");
   const dispatch = useDispatch();
   const history = useHistory();
+
   const state = useSelector((state) => {
     return {
       adminToken: state.adminToken.adminToken,
@@ -35,8 +37,6 @@ const Dashboard = () => {
   useEffect(() => {
     arr = JSON.parse(localStorage.getItem("reservations")) || [];
     arr.length ? setNotifications(arr.length) : setNotifications("");
-    console.log('oday',arr)
-    console.log('odai',arr.length)
   });
 
   const getAllUsers = async () => {
@@ -45,12 +45,8 @@ const Dashboard = () => {
     });
 
     dispatch(setUser(res.data.result));
-    setUsersStatistics(res.data.result.length)
+    setUsersStatistics(res.data.result.length);
   };
-
-  useEffect(() => {
-    getAllUsers();
-  }, []);
 
   const getAllCars = async () => {
     const res = await axios.get("http://localhost:5000/admin/cars", {
@@ -58,12 +54,8 @@ const Dashboard = () => {
     });
 
     dispatch(setCar(res.data.result));
-    setCarsStatistics(res.data.result.length)
+    setCarsStatistics(res.data.result.length);
   };
-
-  useEffect(() => {
-    getAllCars();
-  }, []);
 
   const getAllReservations = async () => {
     const res = await axios.get("http://localhost:5000/admin/reserves", {
@@ -71,22 +63,15 @@ const Dashboard = () => {
     });
 
     dispatch(setReservation(res.data.result));
-    setReservationsStatistics(res.data.result.length)
+    setReservationsStatistics(res.data.result.length);
   };
 
   useEffect(() => {
     getAllReservations();
+    getAllCars();
+    getAllUsers();
   }, []);
-  // useEffect(() => {
-  //   socket.on("set_notification",(data)=>{
-  //     setData(data.amount)
-  //     console.log(data);
-  //   })
-  // }, [connection_port]);
-  // useEffect(()=>{
 
-  //   console.log("data");
-  // })
   return (
     <>
       <div className={styles.sidebar}>
@@ -145,7 +130,7 @@ const Dashboard = () => {
             className="fa fa-bell"
             onClick={() => {
               arr.length && localStorage.removeItem("reservations");
-              setComponent("reservations")
+              setComponent("reservations");
             }}
           >
             <span>{notifications}</span>
@@ -172,7 +157,11 @@ const Dashboard = () => {
         <div className={styles.homecontent}>
           <div className={styles.overviewboxes}>
             {component === "Statistics" ? (
-              <Statistics usersStatistics={usersStatistics} carsStatistics= {carsStatistics}reservationsStatistics={reservationsStatistics}/>
+              <Statistics
+                usersStatistics={usersStatistics}
+                carsStatistics={carsStatistics}
+                reservationsStatistics={reservationsStatistics}
+              />
             ) : component === "users" ? (
               <Users />
             ) : component === "cars" ? (

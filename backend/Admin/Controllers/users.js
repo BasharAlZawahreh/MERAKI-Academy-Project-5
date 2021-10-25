@@ -28,7 +28,6 @@ const makeUserAdminById = async (req, res) => {
 };
 
 const getAllUsers = (req, res) => {
-  console.log("get all users");
   const query = `SELECT * FROM users WHERE role="user"`;
 
   connection.query(query, (err, result) => {

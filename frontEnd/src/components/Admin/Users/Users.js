@@ -12,14 +12,16 @@ import "./Users.css";
 import axios from "axios";
 import { setUser, deleteUser, updateUser } from "../../../actions/users";
 import { useSelector, useDispatch } from "react-redux";
+import swal from "sweetalert";
+import jwtDecode from "jwt-decode";
 
 const Styles = styled.div`
-  padding: 1rem;
+  padding: 3rem;
 
   table {
     border-spacing: 0;
     border: 1px solid black;
-
+    
     tr {
       :last-child {
         td {
@@ -277,7 +279,7 @@ function Table({ columns, data }) {
 
   // We don't want to render all of the rows for this example, so cap
   // it for this use case
-  const firstPageRows = rows.slice(0, 10);
+  const firstPageRows = rows;
 
   return (
     <>
@@ -289,7 +291,7 @@ function Table({ columns, data }) {
                 <th {...column.getHeaderProps()}>
                   {column.render("Header")}
                   {/* Render the columns filter UI */}
-                  <div>{column.canFilter ? column.render("Filter") : null}</div>
+                  {/* <div>{column.canFilter ? column.render("Filter") : null}</div> */}
                 </th>
               ))}
             </tr>
@@ -349,7 +351,7 @@ function filterGreaterThan(rows, id, filterValue) {
 // check, but here, we want to remove the filter if it's not a number
 filterGreaterThan.autoRemove = (val) => typeof val !== "number";
 
-function Users({setTest}) {
+function Users() {
   const dispatch = useDispatch();
   const state = useSelector((state) => {
     return {
@@ -359,8 +361,7 @@ function Users({setTest}) {
   });
 
   let token = state.adminToken || localStorage.getItem("token");
-
-
+  const isSuperAdmin = jwtDecode(token).role === "SuperAdmin";
 
   const toggleBlockUser = async (id) => {
     const res = await axios.patch(
@@ -379,6 +380,7 @@ function Users({setTest}) {
         { headers: { Authorization: `Bearer ${token}` } }
       )
       .then((res) => {
+        swal('Admin set successfully!')
         dispatch(deleteUser(id));
       })
       .catch((err) => {
@@ -474,7 +476,13 @@ function Users({setTest}) {
           accessor: "makeAdmin",
           Cell: ({ cell }) => {
             return (
-              <button onClick={() => makeAdmin(cell.row.values.id)}>
+              <button
+                onClick={() => {
+                  isSuperAdmin
+                    ? makeAdmin(cell.row.values.id)
+                    : swal('Error',"Sorry, only super admin can do this!");
+                }}
+              >
                 Make Admin
               </button>
             );

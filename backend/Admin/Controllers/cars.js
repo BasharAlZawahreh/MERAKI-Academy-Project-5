@@ -34,7 +34,6 @@ const deleteCarById = async (req, res) => {
 
   connection.query(query, (err, result) => {
     if (err) {
-      console.log(err);
       return res.status(500).json({
         success: false,
         message: `Server Error`,
