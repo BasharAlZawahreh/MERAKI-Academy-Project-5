@@ -16,7 +16,6 @@ const login = (req, res) => {
    }
    try {
      const valid = await bcrypt.compare(password, data[0].password);
-     console.log(`${password},  ${data[0].password},  ${valid}`)
 
         if (!valid) {
           return res.status(403).json({
@@ -33,7 +32,6 @@ const login = (req, res) => {
           expiresIn: "60000h",
         };
 
-        // console.log(payload);
         const token = jwt.sign(payload, process.env.ADMIN_SECRET, options);
         res.status(200).json({
           success: true,

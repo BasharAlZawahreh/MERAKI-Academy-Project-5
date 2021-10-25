@@ -1,4 +1,4 @@
-import React, { useEffect,useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import {
   useTable,
@@ -15,8 +15,7 @@ import {
   updateReservationConfirmation,
 } from "../../../actions/reservations";
 import { useSelector, useDispatch } from "react-redux";
-
-
+import * as moment from "moment";
 
 const Styles = styled.div`
   padding: 1rem;
@@ -31,6 +30,10 @@ const Styles = styled.div`
           border-bottom: 0;
         }
       }
+    }
+
+    th{
+      text-align:center;
     }
 
     th,
@@ -53,10 +56,9 @@ function GlobalFilter({
   globalFilter,
   setGlobalFilter,
 }) {
-  
   const count = preGlobalFilteredRows.length;
   const [value, setValue] = React.useState(globalFilter);
-  
+
   const onChange = useAsyncDebounce((value) => {
     setGlobalFilter(value || undefined);
   }, 200);
@@ -284,7 +286,7 @@ function Table({ columns, data }) {
 
   // We don't want to render all of the rows for this example, so cap
   // it for this use case
-  const firstPageRows = rows.slice(0, 10);
+  const firstPageRows = rows;
 
   return (
     <>
@@ -296,7 +298,7 @@ function Table({ columns, data }) {
                 <th {...column.getHeaderProps()}>
                   {column.render("Header")}
                   {/* Render the columns filter UI */}
-                  <div>{column.canFilter ? column.render("Filter") : null}</div>
+                  {/* <div>{column.canFilter ? column.render("Filter") : null}</div> */}
                 </th>
               ))}
             </tr>
@@ -357,8 +359,8 @@ function filterGreaterThan(rows, id, filterValue) {
 filterGreaterThan.autoRemove = (val) => typeof val !== "number";
 
 function Reservations() {
-  const [recipient,setRecipient]=useState()
-  const [name,setName]=useState("")
+  const [recipient, setRecipient] = useState();
+  const [name, setName] = useState("");
   const dispatch = useDispatch();
   const state = useSelector((state) => {
     return {
@@ -369,13 +371,11 @@ function Reservations() {
 
   let token = state.adminToken || localStorage.getItem("token");
 
-
-
   const data = state.reservations.map((e) => {
     return {
       id: e.res_id,
-      returnDate: e.returnDate,
-      PickUpDate: e.PickUpDate,
+      returnDate: moment(new Date(e.returnDate)).format("YYYY-MM-DD"),
+      PickUpDate: moment(new Date(e.PickUpDate)).format("YYYY-MM-DD"),
       amount: e.amount,
       model: e.model,
       manifactoring_year: e.manifactoring_year,
@@ -391,24 +391,22 @@ function Reservations() {
     };
   });
 
-
-
-const sendText=()=>{
-  console.log(recipient)
-  let text = `Dear Naif your car has been rented by Odai `
-  //pass text message GET variables via query string
-  try {
-    fetch(`http://localhost:5000/send-text?recipient=785021435&textmessage=${text}`)
-    .then((result)=>{
-      console.log("messge",result);
-    })
-    .catch(err => console.error("err",err))
-    
-  } catch (error) {
-    console.log(error);
-  }
-
-}
+  const sendText = () => {
+    console.log(recipient);
+    let text = `Dear Naif your car has been rented by Odai `;
+    //pass text message GET variables via query string
+    try {
+      fetch(
+        `http://localhost:5000/send-text?recipient=785021435&textmessage=${text}`
+      )
+        .then((result) => {
+          console.log("messge", result);
+        })
+        .catch((err) => console.error("err", err));
+    } catch (error) {
+      console.log(error);
+    }
+  };
   const toggleConfirmation = async (id) => {
     await axios.patch(
       `http://localhost:5000/admin/confirmReserve/${id}`,
@@ -419,29 +417,22 @@ const sendText=()=>{
     );
 
     dispatch(updateReservationConfirmation(id));
-    sendText()
-
-
+    sendText();
   };
 
-  const sedMessage=async(id)=>{
-    const car = await data.find((elem)=>{
-     return elem.id===id
+  const sedMessage = async (id) => {
+    const car = await data.find((elem) => {
+      return elem.id === id;
     });
     try {
       // setRecipient(car.mobile)
-      setRecipient("779103180")
-      setName(car.firstName)
-      toggleConfirmation(id)
-      
+      setRecipient("779103180");
+      setName(car.firstName);
+      toggleConfirmation(id);
     } catch (error) {
       console.log(error);
     }
-
-    
-  }
-
-  
+  };
 
   const columns = React.useMemo(() => [
     {
@@ -543,7 +534,6 @@ const sendText=()=>{
           Cell: ({ cell }) => {
             let ava = cell.row.values.isConfirmed ? true : false;
 
-
             // toggleConfirmation(cell.row.values.id)
             // console.log(cell.row.values)
 
@@ -552,11 +542,9 @@ const sendText=()=>{
                 <input
                   type="checkbox"
                   checked={ava}
-                  onClick={() => {    
-                    
-                    sedMessage(cell.row.values.id)
-                                       
-                    }}
+                  onClick={() => {
+                    sedMessage(cell.row.values.id);
+                  }}
                 />
                 <span class="slider round"></span>
               </label>

@@ -15,7 +15,7 @@ import { setCar, deleteCar } from "../../../actions/cars";
 import { useSelector, useDispatch } from "react-redux";
 
 const Styles = styled.div`
-  padding: 1rem;
+  padding: 3rem;
 
   table {
     border-spacing: 0;
@@ -32,7 +32,7 @@ const Styles = styled.div`
     th,
     td {
       margin: 0;
-
+      
       border-bottom: 1px solid black;
       border-right: 1px solid black;
 
@@ -40,6 +40,7 @@ const Styles = styled.div`
         border-right: 0;
       }
     }
+
   }
 `;
 
@@ -278,7 +279,7 @@ function Table({ columns, data }) {
 
   // We don't want to render all of the rows for this example, so cap
   // it for this use case
-  const firstPageRows = rows.slice(0, 10);
+  const firstPageRows = rows;
 
   return (
     <>
@@ -290,7 +291,7 @@ function Table({ columns, data }) {
                 <th {...column.getHeaderProps()}>
                   {column.render("Header")}
                   {/* Render the columns filter UI */}
-                  <div>{column.canFilter ? column.render("Filter") : null}</div>
+                  {/* <div>{column.canFilter ? column.render("Filter") : null}</div> */}
                 </th>
               ))}
             </tr>
@@ -361,7 +362,6 @@ function Cars() {
 
   let token = state.adminToken || localStorage.getItem("token");
 
-
   const deleteCarById = async (id) => {
     swal({
       title: "Are you sure?",
@@ -386,14 +386,11 @@ function Cars() {
           .catch((err) => {
             console.log(err);
           });
-       
       } else {
         swal("Deleting this car canceled!");
       }
     });
   };
-
-
 
   const columns = React.useMemo(() => [
     {

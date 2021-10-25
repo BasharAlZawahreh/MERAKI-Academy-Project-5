@@ -50,7 +50,6 @@ const toggleConfirmationById = (req, res) => {
           });
         }
         if (result.affectedRows) {
-          console.log("sssssss",result);
           return res.status(202).json({
             success: true,
             message: ` Success`,
