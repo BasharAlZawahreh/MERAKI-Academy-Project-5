@@ -4,7 +4,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { setToken } from "../../../actions/AdminActions/Login";
 import axios from "axios";
 import GoogleLogin from "react-google-login";
-import {MdCancel} from 'react-icons/md';
+import { MdCancel } from "react-icons/md";
+import jwtDecode from "jwt-decode";
+
 const Login = () => {
   const history = useHistory();
   const dispatch = useDispatch();
@@ -30,7 +32,7 @@ const Login = () => {
             setMessage("");
             dispatch(setToken(res.data.token));
             localStorage.setItem("token", res.data.token);
-             history.push("/admin/dashboard");
+            history.push("/admin/dashboard");
           } else {
             setMessage("Sorry you aren't an Admin!");
           }
@@ -63,7 +65,6 @@ const Login = () => {
         dispatch(setToken(res.data.token));
         localStorage.setItem("token", res.data.token);
         history.push("/admin/dashboard");
-
       }
     } catch (error) {
       if (error.response && error.response.data) {
@@ -75,28 +76,52 @@ const Login = () => {
 
   useEffect(() => {
     if (!state.token && localStorage.getItem("token")) {
-      dispatch(setToken(localStorage.getItem("token")));
-      history.push("/admin/dashboard");
+      const isAdmin =
+        jwtDecode(localStorage.getItem("token")).role === "SuperAdmin" ||
+        jwtDecode(localStorage.getItem("token")).role === "Admin"
+          ? true
+          : false;
+
+      if (isAdmin) {
+        dispatch(setToken(localStorage.getItem("token")));
+        history.push("/admin/dashboard");
+      }
     }
   }, []);
 
   return (
     <>
-      <section class="sign-in" >
-        
-        <div class="container"  style={{backgroundColor:"#2B2E4A"}}>
-        <span style={{cursor:"pointer",marginLeft:"68.5rem"}}  onClick={()=>{history.push("/")}}><MdCancel style={{height:"26px",width:"24px",paddingTop:"5px",color:"white"}} /></span>
-          <div class="signin-content" >
-         
+      <section class="sign-in">
+        <div class="container" style={{ backgroundColor: "#2B2E4A" }}>
+          <span
+            style={{ cursor: "pointer", marginLeft: "68.5rem" }}
+            onClick={() => {
+              history.push("/");
+            }}
+          >
+            <MdCancel
+              style={{
+                height: "26px",
+                width: "24px",
+                paddingTop: "5px",
+                color: "white",
+              }}
+            />
+          </span>
+          <div class="signin-content">
             <div class="signin-image">
               <figure>
-                <img src="https://thumbs.dreamstime.com/b/admin-message-working-office-table-background-93379017.jpg" alt="sing up image" />
+                <img
+                  src="https://thumbs.dreamstime.com/b/admin-message-working-office-table-background-93379017.jpg"
+                  alt="sing up image"
+                />
               </figure>
-            
             </div>
 
             <div class="signin-form">
-              <h2 class="form-title" style={{color:"white"}}>Login</h2>
+              <h2 class="form-title" style={{ color: "white" }}>
+                Login
+              </h2>
               <form onSubmit={Enter} class="register-form" id="login-form">
                 <div class="form-group">
                   <label for="your_name">
