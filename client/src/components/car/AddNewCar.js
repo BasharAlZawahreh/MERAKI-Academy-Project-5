@@ -330,6 +330,8 @@ const AddNewCar = () => {
         console.log(result);
       })
       .catch((err) => console.log(err));
+
+    history.push("/mycars");
   };
 
   const [enable, setEnable] = useState(true);
@@ -480,209 +482,211 @@ const AddNewCar = () => {
      <button className="addcar" disabled={enable} type="button"  onClick={addToData}>
      add youre car 
    </button> */}
- <center>
-      <Card
-        style={{
-          width: "50rem",
-      
-          backgroundColor: "#2B2E4A",
-          alignItems: "center",
-          flexDirection: "column",
-          height: "36rem",
-        }}
-      >
-        <span
-          style={{ marginLeft: "auto", cursor: "pointer" }}
-          onClick={() => {
-            history.push("/");
-          }}
-        >
-          <GiCancel style={{ color: "white", width: "18px", height: "20px" }} />
-        </span>
-        <div
+      <center>
+        <Card
           style={{
-            display: "flex",
-            flexDirection: "row",
-            width: "100%",
-            height: "549px",
+            width: "50rem",
+
+            backgroundColor: "#2B2E4A",
+            alignItems: "center",
+            flexDirection: "column",
+            height: "36rem",
           }}
         >
-          <Card.Img
-            style={{
-              width: "30%",
-              alignItems: "center",
-              marginBottom: "34px",
-              marginLeft: "13px",
-              marginTop: "57px",
-              height: "73%",
+          <span
+            style={{ marginLeft: "auto", cursor: "pointer" }}
+            onClick={() => {
+              history.push("/");
             }}
-            variant="top"
-            src="https://images.all-free-download.com/images/graphiclarge/lifestyle_background_man_driving_car_desert_icons_6838675.jpg"
-          />
-          <Card.Body>
-            <Card.Title style={{ color: "white" }}>
-              AddCar
-            </Card.Title>
-            <form>
-              {/* <div> */}
-              <select
-                style={{ marginTop: "7px" }}
-                id="carTypes"
-                className="form-control form-control-md"
-                onChange={(e) => {
-                  setcarType(e.target.value);
-                }}
-              >
-                <option defaultValue>choose a type</option>
-                {carTypes &&
-                  carTypes.map((type, i) => {
+          >
+            <GiCancel
+              style={{ color: "white", width: "18px", height: "20px" }}
+            />
+          </span>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              width: "100%",
+              height: "549px",
+            }}
+          >
+            <Card.Img
+              style={{
+                width: "30%",
+                alignItems: "center",
+                marginBottom: "34px",
+                marginLeft: "13px",
+                marginTop: "57px",
+                height: "73%",
+              }}
+              variant="top"
+              src="https://images.all-free-download.com/images/graphiclarge/lifestyle_background_man_driving_car_desert_icons_6838675.jpg"
+            />
+            <Card.Body>
+              <Card.Title style={{ color: "white" }}>AddCar</Card.Title>
+              <form>
+                {/* <div> */}
+                <select
+                  style={{ marginTop: "7px" }}
+                  id="carTypes"
+                  className="form-control form-control-md"
+                  onChange={(e) => {
+                    setcarType(e.target.value);
+                  }}
+                >
+                  <option defaultValue>choose a type</option>
+                  {carTypes &&
+                    carTypes.map((type, i) => {
+                      return (
+                        <option value={type.typeCar_id} key={i}>
+                          {type.car_type}
+                        </option>
+                      );
+                    })}
+                </select>
+
+                {/* </div> */}
+
+                {/* <div className="form-group"  style={{marginTop:"5px"}} style={{ marginTop: "5px" }}> */}
+                {/* <label ></label> */}
+                <select
+                  style={{ marginTop: "7px" }}
+                  id="carBrands"
+                  className="form-control form-control-md"
+                  onChange={(e) => setcarBrand(e.target.value)}
+                >
+                  <option defaultValue style={{ fontWeight: "bold" }}>
+                    choose car brand
+                  </option>
+
+                  {carBrands &&
+                    carBrands.map((brand, i) => {
+                      return (
+                        <option value={brand.brand_id} key={i}>
+                          {brand.brand}
+                        </option>
+                      );
+                    })}
+                </select>
+                {/* </div> */}
+
+                {/* <div className="form-group" style={{ marginTop: "5px" }}> */}
+                {/* <label htmlFor="carColors"></label> */}
+                <select
+                  style={{ marginTop: "7px" }}
+                  id="carColors"
+                  className="form-control form-control-md"
+                  onChange={(e) => setcarColor(e.target.value)}
+                >
+                  <option defaultValue>choose car color</option>
+
+                  {colors.map((color, i) => {
                     return (
-                      <option value={type.typeCar_id} key={i}>
-                        {type.car_type}
+                      <option value={color} key={i}>
+                        {color}
                       </option>
                     );
                   })}
-              </select>
+                </select>
+                {/* </div> */}
 
-              {/* </div> */}
+                {/* <div className="form-group" style={{ marginTop: "5px" }}> */}
+                {/* <label htmlFor="carYear"></label> */}
+                <select
+                  style={{ marginTop: "7px" }}
+                  id="carYear"
+                  className="form-control form-control-md"
+                  onChange={(e) => setcarYear(e.target.value)}
+                >
+                  <option defaultValue>choose car year</option>
 
-              {/* <div className="form-group"  style={{marginTop:"5px"}} style={{ marginTop: "5px" }}> */}
-              {/* <label ></label> */}
-              <select
-                style={{ marginTop: "7px" }}
-                id="carBrands"
-                className="form-control form-control-md"
-                onChange={(e) => setcarBrand(e.target.value)}
+                  {allYears &&
+                    allYears.map((year, i) => {
+                      return (
+                        <option value={year} key={i}>
+                          {year}
+                        </option>
+                      );
+                    })}
+                </select>
+                {/* </div> */}
+
+                {/* <div className="form-group" style={{ marginTop: "5px" }}> */}
+                {/* <label htmlFor="formGroupExampleInput"></label> */}
+                <input
+                  style={{ marginTop: "7px" }}
+                  type="text"
+                  className="form-control-md"
+                  id="formGroupExampleInput"
+                  placeholder="choose car model"
+                  onChange={(e) => {
+                    setModel(e.target.value);
+                  }}
+                />
+                {/* </div> */}
+
+                {/* <div className="form-group" style={{ marginTop: "5px" }}> */}
+                {/* <label htmlFor="formGroupExampleInput2"></label> */}
+                <textarea
+                  style={{ width: "505px", height: "39px", marginTop: "7px" }}
+                  type="text"
+                  className="form-control-md"
+                  id="formGroupExampleInput2"
+                  placeholder="choose discription"
+                  onChange={(e) => {
+                    setdesc(e.target.value);
+                  }}
+                />
+                {/* </div> */}
+                {/* <div className="form-group" style={{ marginTop: "5px" }}> */}
+                {/* <label htmlFor="formGroupExampleInput2"> </label> */}
+                <textarea
+                  style={{ width: "505px", height: "39px", marginTop: "0px" }}
+                  type="text"
+                  className="form-control-md"
+                  id="formGroupExampleInput2"
+                  placeholder="price per day"
+                  onChange={(e) => {
+                    setDayPrice(e.target.value);
+                  }}
+                />
+                {/* </div> */}
+
+                {/* <div className="form-group" style={{ marginTop: "5px" }}> */}
+                <input
+                  placeholder="Main Img"
+                  style={{ marginTop: "0px", padding: "2px" }}
+                  type="file"
+                  className="form-control"
+                  id="formGroupExampleInput"
+                  onChange={addMainIm}
+                />
+                {/* </div> */}
+                {/* <div className="form-group" style={{ marginTop: "5px" }}> */}
+                <input
+                  name="More Img"
+                  style={{ marginTop: "5px", padding: "2px" }}
+                  type="file"
+                  multiple
+                  className="form-control"
+                  id="formGroupExampleInput"
+                  onChange={handleChange}
+                />
+                {/* </div> */}
+              </form>
+
+              <Button
+                style={{ width: "156px", marginTop: "14PX" }}
+                className="addcar"
+                disabled={enable}
+                onClick={addToData}
               >
-                <option defaultValue style={{ fontWeight: "bold" }}>
-                  choose car brand
-                </option>
-
-                {carBrands &&
-                  carBrands.map((brand, i) => {
-                    return (
-                      <option value={brand.brand_id} key={i}>
-                        {brand.brand}
-                      </option>
-                    );
-                  })}
-              </select>
-              {/* </div> */}
-
-              {/* <div className="form-group" style={{ marginTop: "5px" }}> */}
-              {/* <label htmlFor="carColors"></label> */}
-              <select
-                style={{ marginTop: "7px" }}
-                id="carColors"
-                className="form-control form-control-md"
-                onChange={(e) => setcarColor(e.target.value)}
-              >
-                <option defaultValue>choose car color</option>
-
-                {colors.map((color, i) => {
-                  return (
-                    <option value={color} key={i}>
-                      {color}
-                    </option>
-                  );
-                })}
-              </select>
-              {/* </div> */}
-
-              {/* <div className="form-group" style={{ marginTop: "5px" }}> */}
-              {/* <label htmlFor="carYear"></label> */}
-              <select
-                style={{ marginTop: "7px" }}
-                id="carYear"
-                className="form-control form-control-md"
-                onChange={(e) => setcarYear(e.target.value)}
-              >
-                <option defaultValue>choose car year</option>
-
-                {allYears &&
-                  allYears.map((year, i) => {
-                    return (
-                      <option value={year} key={i}>
-                        {year}
-                      </option>
-                    );
-                  })}
-              </select>
-              {/* </div> */}
-
-              {/* <div className="form-group" style={{ marginTop: "5px" }}> */}
-              {/* <label htmlFor="formGroupExampleInput"></label> */}
-              <input
-                style={{ marginTop: "7px" }}
-                type="text"
-                className="form-control-md"
-                id="formGroupExampleInput"
-                placeholder="choose car model"
-                onChange={(e) => {
-                  setModel(e.target.value);
-                }}
-              />
-              {/* </div> */}
-
-              {/* <div className="form-group" style={{ marginTop: "5px" }}> */}
-              {/* <label htmlFor="formGroupExampleInput2"></label> */}
-              <textarea
-                style={{ width: "505px", height: "39px", marginTop: "7px" }}
-                type="text"
-                className="form-control-md"
-                id="formGroupExampleInput2"
-                placeholder="choose discription"
-                onChange={(e) => {
-                  setdesc(e.target.value);
-                }}
-              />
-              {/* </div> */}
-              {/* <div className="form-group" style={{ marginTop: "5px" }}> */}
-              {/* <label htmlFor="formGroupExampleInput2"> </label> */}
-              <textarea
-                style={{ width: "505px", height: "39px", marginTop: "0px" }}
-                type="text"
-                className="form-control-md"
-                id="formGroupExampleInput2"
-                placeholder="price per day"
-                onChange={(e) => {
-                  setDayPrice(e.target.value);
-                }}
-              />
-              {/* </div> */}
-
-              {/* <div className="form-group" style={{ marginTop: "5px" }}> */}
-              <input
-              placeholder="Main Img"
-                style={{ marginTop: "0px" ,padding:"2px"}}
-                type="file"
-                className="form-control"
-                id="formGroupExampleInput"
-                onChange={addMainIm}
-              />
-              {/* </div> */}
-              {/* <div className="form-group" style={{ marginTop: "5px" }}> */}
-              <input
-              name="More Img"
-                style={{ marginTop: "5px",padding:"2px" }}
-                type="file"
-                multiple
-                className="form-control"
-                id="formGroupExampleInput"
-                onChange={handleChange}
-              />
-              {/* </div> */}
-            </form>
-
-            <Button
-              style={{ width: "156px", marginTop: "14PX"}}
-              className="addcar" disabled={enable}  onClick={addToData}
-            >
-              addCar
-            </Button>
-          </Card.Body>
-        </div>
-      </Card>
+                addCar
+              </Button>
+            </Card.Body>
+          </div>
+        </Card>
       </center>
     </>
   );

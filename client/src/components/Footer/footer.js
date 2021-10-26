@@ -76,7 +76,7 @@ const Footer = () => {
               </a>
               <a className="text-body mb-2" href="#">
                 <i className="fa fa-angle-right text-white mr-2"></i>
-                <Link to="/admin/login">Admin</Link>
+                <Link  style={{color:"#8486AD"}}   to="/admin/login">Admin</Link>
               </a>
               <a className="text-body" href="#">
                 <i className="fa fa-angle-right text-white mr-2"></i>Help & FQAs

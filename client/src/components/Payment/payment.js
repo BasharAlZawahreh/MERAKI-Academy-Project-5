@@ -51,7 +51,7 @@ const Payment = ({ amount }) => {
         billingAddress
         shippingAddress
         description="description"
-        amount={parseInt(amount * 10)}
+        amount={parseInt(amount * 100)}
         token={onToken}
         stripeKey={KEY}
       >
