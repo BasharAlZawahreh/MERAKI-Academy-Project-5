@@ -18,7 +18,7 @@ const CarInfo = () => {
   const [carViews, setCarViews] = useState(""); //for imgs
   const [carView, setCarView] = useState(""); // for car it self
   const [carRates, setCarRates] = useState(""); // for rates
-  const [rateAvg, setRateAvg] = useState(5); // for rate avg
+  const [rateAvg, setRateAvg] = useState(0); // for rate avg
   //   const state = useSelector((state) => {
   //     return { cars: state.car.cars
   //      };
@@ -115,17 +115,29 @@ const CarInfo = () => {
             >
               <div className="bg-secondary p-5">
                 <h3 className="text-primary text-center mb-4">
-                  {" "}
-                  <Rating
-                    style={{ paddingVertical: 10 }}
-                    ratingValue={rateAvg}
-                    size={30}
-                    label
-                    transition
-                    fillColor="orange"
-                    emptyColor="gray"
-                    className="foo" // Will remove the inline style if applied
-                  />
+                  {rateAvg ? (
+                    <Rating
+                      style={{ paddingVertical: 10 }}
+                      ratingValue={rateAvg}
+                      size={30}
+                      label
+                      transition
+                      fillColor="orange"
+                      emptyColor="gray"
+                      className="foo" 
+                    />
+                  ) : (
+                    <Rating
+                      style={{ paddingVertical: 10 }}
+                      ratingValue="5"
+                      size={30}
+                      label
+                      transition
+                      fillColor="orange"
+                      emptyColor="gray"
+                      className="foo" 
+                    />
+                  )}
                 </h3>
                 {carRates ? (
                   carRates.map((rate, i) => {
@@ -171,17 +183,16 @@ const CarInfo = () => {
             </div>
           </div>
           <button
-        style={{position:"center"}}
-          className="btn btn-primary px-3 "
-          onClick={() => {
-            history.push(`/addRes/${car_id}`);
-            // dispatch(setSearchCarId(car.car_id));
-          }}
-        >
-          Rent Now
-        </button>
+            style={{ position: "center" }}
+            className="btn btn-primary px-3 "
+            onClick={() => {
+              history.push(`/addRes/${car_id}`);
+              // dispatch(setSearchCarId(car.car_id));
+            }}
+          >
+            Rent Now
+          </button>
         </div>
-
       </div>
     </>
   );

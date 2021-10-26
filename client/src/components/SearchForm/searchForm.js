@@ -7,7 +7,7 @@ import "./searchForm.css";
 function SearchForm() {
   const history = useHistory();
   const location = useLocation();
-  
+
   const [carTypes, setcarTypes] = useState([]);
   const [carBrands, setcarBrands] = useState([]);
   const [allYears, setAllYears] = useState([]);
@@ -224,14 +224,21 @@ function SearchForm() {
   return (
     <>
       <div className="container-fluid bg-white pt-3 px-lg-5">
-        <div  style={{display:"flex",flexDirection:"row",width:"75.5%",marginLeft:"-7px"}} >
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            width: "75.5%",
+            marginLeft: "-7px",
+          }}
+        >
           <div className="col-xl-2 col-sm-2 col-md-6 px-2">
             <select
               className="custom-select px-4 mb-3 form-control form-control-lg"
               onChange={(e) => {
                 setcarType(e.target.value);
               }}
-              style={{ height: "50px" }}
+              style={{ height: "50px", fontSize: "0.8rem",fontWeight:"bold" }}
             >
               <option defaultValue>choose a type</option>
               {carTypes &&
@@ -248,7 +255,7 @@ function SearchForm() {
             <select
               className="custom-select px-4 mb-3"
               onChange={(e) => setcarBrand(e.target.value)}
-              style={{ height: "50px" }}
+              style={{ height: "50px", fontSize: "0.8rem",fontWeight:"bold" }}
             >
               <option defaultValue>choose a brand</option>
 
@@ -266,7 +273,7 @@ function SearchForm() {
             <select
               className="custom-select px-4 mb-3"
               onChange={(e) => setcarColor(e.target.value)}
-              style={{ height: "50px" }}
+              style={{ height: "50px", fontSize: "0.8rem",fontWeight:"bold" }}
             >
               <option defaultValue>choose a color</option>
 
@@ -281,9 +288,10 @@ function SearchForm() {
           </div>
           <div className="col-xl-2 col-sm-2 col-md-6 px-2">
             <select
+          
               className="custom-select px-4 mb-3"
               onChange={(e) => setcarYear(e.target.value)}
-              style={{ height: "50px" }}
+              style={{ height: "50px", fontSize: "0.8rem",fontWeight:"bold" }}
             >
               <option defaultValue>choose a year</option>
 
@@ -300,6 +308,7 @@ function SearchForm() {
           <div className="col-xl-2 col-sm-2 col-md-6 px-2">
             <div className="date mb-3" id="date" data-target-input="nearest">
               <input
+                style={{ fontSize: "0.8rem",fontWeight:"bold" }}
                 type="text"
                 className="form-control p-4 datetimepicker-input"
                 onChange={(e) => {
@@ -314,6 +323,7 @@ function SearchForm() {
           <div className="col-xl-2 col-sm-2 col-md-6 px-2">
             <div className="date mb-3" id="date" data-target-input="nearest">
               <input
+                style={{ fontSize: "0.7rem" ,fontWeight:"bold" }}
                 type="text"
                 className="form-control p-4 datetimepicker-input"
                 onChange={(e) => {
@@ -326,6 +336,7 @@ function SearchForm() {
           <div className="col-xl-2 col-sm-2 col-md-6 px-2">
             <div className="time mb-3" id="time" data-target-input="nearest">
               <input
+                style={{ fontSize: "0.8rem",fontWeight:"bold" }}
                 type="text"
                 className="form-control p-4 datetimepicker-input"
                 placeholder="day Price to"

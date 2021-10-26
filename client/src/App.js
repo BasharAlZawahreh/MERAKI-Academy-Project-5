@@ -43,7 +43,7 @@ export default function App() {
         <Route exact path="/">
           <Nav />
           <Home />
-          <SliderBrand/>
+          <SliderBrand />
           <Footer />
         </Route>
         <Route exact path="/myres">
@@ -59,26 +59,26 @@ export default function App() {
         <Route exact path="/about">
           <Nav />
           <About />
-          <SliderBrand/>
+          <SliderBrand />
           <Footer />
         </Route>
         <Route exact path="/contact">
           <Nav />
           <Contact />
-          <SliderBrand/>
+          <SliderBrand />
           <Footer />
         </Route>
         <Route path="/addRes/:id">
           <Nav />
           <AddReservation />
-          <SliderBrand/>
+          <SliderBrand />
           <Footer />
         </Route>
         <Route path="/editprofile">
           <Nav />
           <Profile />
           <Footer />
-          <SliderBrand/>
+          <SliderBrand />
         </Route>
         <Route exact path="/mycars">
           <Nav />
@@ -95,7 +95,7 @@ export default function App() {
           <Nav />
           <AddNewCar />
           <Footer />
-          <SliderBrand/>
+          <SliderBrand />
         </Route>
         <Route exact path="/result">
           <Nav />
@@ -105,7 +105,7 @@ export default function App() {
         <Route path="/rate/:id">
           <Nav />
           <AddRates />
-          <SliderBrand/>
+          <SliderBrand />
           <Footer />
         </Route>
         <Route path="/carinfo/:id">
@@ -119,7 +119,6 @@ export default function App() {
         <Route exact path="/admin/dashboard">
           <AdminDashboard />
         </Route>
-        
       </Switch>
     </div>
   );
