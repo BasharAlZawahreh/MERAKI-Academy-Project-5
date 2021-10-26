@@ -5,8 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { setToken } from "../../actions/login";
 import { Link } from "react-router-dom";
 
-import { BiLogInCircle } from 'react-icons/bi';
-import { RiLogoutCircleLine } from 'react-icons/ri';
+import { BiLogInCircle } from "react-icons/bi";
+import { RiLogoutCircleLine } from "react-icons/ri";
 
 // import "./nav.css";
 import SearchForm from "../SearchForm/searchForm";
@@ -21,12 +21,12 @@ const Nav = () => {
 
   return (
     <>
-      <div className="container-fluid bg-dark py-3 px-lg-5 d-none d-lg-block" >
+      <div className="container-fluid bg-dark py-3 px-lg-5 d-none d-lg-block">
         <div className="row">
           <div className="col-md-6 text-center text-lg-left mb-2 mb-lg-0">
             <div className="d-inline-flex align-items-center">
               <a className="text-body pr-3" href="">
-                <i className="fa fa-phone-alt mr-2"></i>000932777777
+                <i className="fa fa-phone-alt mr-2"></i>000962777777
               </a>
               <span className="text-body">|</span>
               <a className="text-body px-3" href="">
@@ -57,55 +57,56 @@ const Nav = () => {
       </div>
       {!state.token ? (
         <>
-        <div className="container-fluid position-relative nav-bar p-0">
-          <div className="position-relative px-lg-5" style={{ zIndex: "9" }}>
-            <nav className="navbar navbar-expand-lg bg-secondary navbar-dark py-3 py-lg-0 pl-3 pl-lg-5">
-              <a href="/" className="navbar-brand">
-                <h1 className="text-uppercase text-primary mb-1">
-                  Auto Rental
-                </h1>
-              </a>
-              <button
-                type="button"
-                className="navbar-toggler"
-                data-toggle="collapse"
-                data-target="#navbarCollapse"
-              >
-                <span className="navbar-toggler-icon"></span>
-              </button>
-              <div
-                className="collapse navbar-collapse justify-content-between px-3"
-                id="navbarCollapse"
-              >
-                <div className="navbar-nav ml-auto py-0">
-                  <Link className="nav-item nav-link active" to="/">
-                    Home
-                  </Link>
-                  <Link className="nav-item nav-link active" to="/about">
-                    About
-                  </Link>
-                  <Link className="nav-item nav-link active" to="/contact">
-                    Contact
-                  </Link>
-                  
+          <div className="container-fluid position-relative nav-bar p-0">
+            <div className="position-relative px-lg-5" style={{ zIndex: "9" }}>
+              <nav className="navbar navbar-expand-lg bg-secondary navbar-dark py-3 py-lg-0 pl-3 pl-lg-5">
+                <a href="/" className="navbar-brand">
+                  <h1 className="text-uppercase text-primary mb-1">
+                    Auto Rental
+                  </h1>
+                </a>
+                <button
+                  type="button"
+                  className="navbar-toggler"
+                  data-toggle="collapse"
+                  data-target="#navbarCollapse"
+                >
+                  <span className="navbar-toggler-icon"></span>
+                </button>
+                <div
+                  className="collapse navbar-collapse justify-content-between px-3"
+                  id="navbarCollapse"
+                >
+                  <div className="navbar-nav ml-auto py-0">
+                    <Link className="nav-item nav-link active" to="/">
+                      Home
+                    </Link>
+                    <Link className="nav-item nav-link active" to="/about">
+                      About
+                    </Link>
+                    <Link className="nav-item nav-link active" to="/contact">
+                      Contact
+                    </Link>
+
                     <span
                       className="nav-item nav-link active"
-                      
                       onClick={() => {
                         history.push("/login");
                       }}
-                      
                     >
-                      <BiLogInCircle size={30} color={"rgb(57, 223, 57)"}style={{cursor:"pointer"}} ></BiLogInCircle>Join Us
+                      <BiLogInCircle
+                        color={"rgb(57, 223, 57)"}
+                        style={{ cursor: "pointer", verticalAlign: "middle" }}
+                      ></BiLogInCircle>
+                      Join Us
                     </span>
-                  
+                  </div>
                 </div>
-              </div>
-            </nav>
+              </nav>
+            </div>
           </div>
-        </div>
           <SearchForm />
-</>
+        </>
       ) : (
         <>
           <div className="container-fluid position-relative nav-bar p-0 ">
@@ -131,15 +132,12 @@ const Nav = () => {
                       Home
                     </Link>
                     <Link className="nav-item nav-link " to="/myres">
-                    
                       My Reservation
                     </Link>
                     <Link className="nav-item nav-link" to="/mycars">
-                     
                       My Cars
                     </Link>
                     <Link className="nav-item nav-link" to="/addCar">
-                    
                       Add Car
                     </Link>
                     <Link className="nav-item nav-link" to="/about">
@@ -148,20 +146,22 @@ const Nav = () => {
                     <Link className="nav-item nav-link" to="/contact">
                       Contact
                     </Link>
-                 
-                      <span
-                        className="nav-item nav-link"
-                        onClick={() => {
-                          localStorage.clear();
-                          dispatch(setToken(""));
-                          //       Appcontext.setToken("");
-                          history.push("/login");
-                        }}
-                        
-                      >
-                       Log Out <RiLogoutCircleLine size={30} color={"F77D0A"} style={{cursor:"pointer"}}></RiLogoutCircleLine>
-                      </span>
-                   
+
+                    <span
+                      className="nav-item nav-link"
+                      onClick={() => {
+                        localStorage.clear();
+                        dispatch(setToken(""));
+                        //       Appcontext.setToken("");
+                        history.push("/login");
+                      }}
+                    >
+                      <RiLogoutCircleLine
+                        color={"F77D0A"}
+                        style={{ cursor: "pointer", verticalAlign: "middle" }}
+                      ></RiLogoutCircleLine>
+                      Log Out
+                    </span>
                   </div>
                 </div>
               </nav>

@@ -1,12 +1,10 @@
 import React from "react";
 import emailjs from "emailjs-com";
-import swal from "sweetalert"
+import swal from "sweetalert";
 
 function Contact() {
-
-
   const sendEmail = (e) => {
-      console.log("working");
+    console.log("working");
     e.preventDefault();
 
     emailjs
@@ -19,14 +17,18 @@ function Contact() {
       .then(
         (result) => {
           console.log(result.text);
-          swal("Thank you for youre messgae", "Auto_Rental team will contact with you as soon as", "success");
+          swal(
+            "Thank you for youre messgae",
+            "Auto_Rental team will contact with you as soon as",
+            "success"
+          );
         },
         (error) => {
-            console.log("err",error);
+          console.log("err", error);
           console.log(error.text);
         }
       );
-      e.target.reset()
+    e.target.reset();
   };
 
   return (
@@ -82,9 +84,18 @@ function Contact() {
                     ></textarea>
                   </div>
                   <div>
-                    <button className="btn btn-primary py-3 px-5" type="submit" >
-                      Send Message
-                    </button>
+                    <center>
+                      <button
+                        style={{
+                          width: "130px",
+                          marginTop: "5PX",
+                          height: "38px",
+                        }}
+                        type="submit"
+                      >
+                        Send Message
+                      </button>
+                    </center>
                   </div>
                 </form>
               </div>
