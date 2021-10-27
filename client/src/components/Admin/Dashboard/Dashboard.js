@@ -8,6 +8,7 @@ import { useHistory } from "react-router-dom";
 import Statistics from "../Statistcs/Statistics";
 import axios from "axios";
 import { setCar, deleteCar } from "../../../actions/cars";
+import { removeToken} from "../../../actions/AdminActions/Login";
 import {
   setReservation,
   updateReservationConfirmation,
@@ -110,6 +111,7 @@ const Dashboard = () => {
               <span
                 onClick={
                   () => {
+                    dispatch(removeToken("remove"))
                     localStorage.removeItem("token");
                     history.push("/admin/login");
                   }
