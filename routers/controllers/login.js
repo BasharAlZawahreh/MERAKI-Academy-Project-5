@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 require("dotenv").config();
 const { OAuth2Client } = require("google-auth-library");
 const client = new OAuth2Client(
-  "748391034640-4faj5hc4s827b2h6k3c9cni55uq46djh.apps.googleusercontent.com"
+  "748391034640-pnejjmgso6e2r67atsbfddo71e8hfffv.apps.googleusercontent.com"
 );
 const login = (req, res) => {
   let password = req.body.password
@@ -62,7 +62,7 @@ const loginWithGoogle = async (req, res) => {
     .verifyIdToken({
       idToken: tokenId,
       audience:
-        "748391034640-4faj5hc4s827b2h6k3c9cni55uq46djh.apps.googleusercontent.com",
+        "748391034640-pnejjmgso6e2r67atsbfddo71e8hfffv.apps.googleusercontent.com",
     })
     .then((response) => {
       const { email_verified, given_name, family_name, email } =
