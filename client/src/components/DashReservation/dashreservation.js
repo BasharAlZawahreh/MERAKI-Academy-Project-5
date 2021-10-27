@@ -14,6 +14,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { MdOutlineStarRate } from "react-icons/md";
 import { BiEditAlt } from "react-icons/bi";
 import { RiDeleteBin5Line } from "react-icons/ri";
+import moment from "moment";
 
 const ResevationDash = () => {
   const dispatch = useDispatch();
@@ -80,8 +81,8 @@ const ResevationDash = () => {
               return (
                 <tr key={index}>
                   <td>{index + 1}</td>
-                  <td>{elem.PickUpDate}</td>
-                  <td>{elem.returnDate}</td>
+                  <td>{moment(new Date(elem.PickUpDate)).format("YYYY-MM-DD")}</td>
+                  <td>{moment(new Date(elem.returnDate)).format("YYYY-MM-DD")}</td>
                   <td>{elem.amount}</td>
                   <td>{elem.brand}</td>
 
@@ -103,7 +104,7 @@ const ResevationDash = () => {
                     )}
                   </td>
                   <td>
-                    {true? (
+                    {elem.isConfirmed? (
                       <MdOutlineStarRate
                         style={{
                           color: "rgb(181, 181, 15)",

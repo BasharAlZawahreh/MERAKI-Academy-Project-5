@@ -5,6 +5,8 @@ import axios from "axios";
 import socket from "../../socket";
 import { useSelector } from "react-redux";
 import jwt from "jwt-decode";
+import swal from 'sweetalert'
+
 const Payment = ({ amount }) => {
   const state = useSelector((state) => {
     return { token: state.token.token };
@@ -35,6 +37,7 @@ const Payment = ({ amount }) => {
         });
         // history.push("/success", { data: res.data });
         setMessage("Success payment");
+        swal('Thank You!','When your reservation is confirmed you will be notified by SMS.')
         // setReserv("set_notification")
         SendMessage();
       } catch (err) {

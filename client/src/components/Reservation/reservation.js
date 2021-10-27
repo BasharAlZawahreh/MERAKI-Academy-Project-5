@@ -194,7 +194,7 @@ const AddReservation = () => {
                         color: "white",
                       }}
                     >
-                      Reservation
+                      Add Reservation
                     </Card.Title>
                     <Card.Text>
                       <input

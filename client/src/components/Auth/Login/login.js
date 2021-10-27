@@ -41,8 +41,9 @@ const Login = () => {
       });
   };
   const responseErrorGoogle = (response) => {
+
     setMessage(
-      "responseErrorGoogle => Error happened while Login, please try again"
+     response
     );
     console.log(message);
   };

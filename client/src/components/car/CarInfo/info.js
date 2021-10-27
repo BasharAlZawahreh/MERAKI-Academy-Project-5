@@ -26,6 +26,12 @@ const CarInfo = () => {
 
   let car_id = useParams().id;
 
+  useEffect(()=>{
+    window.scrollTo({
+      top: 0,
+    });
+  },[])
+
   const avgRate = async (arr) => {
     let sum = await arr.reduce((acc, elem) => {
       return acc + elem.rate;
@@ -115,7 +121,7 @@ const CarInfo = () => {
             >
               <div className="bg-secondary p-5">
                 <h3 className="text-primary text-center mb-4">
-                  {rateAvg ? (
+                  {rateAvg>0 ? (
                     <Rating
                       style={{ paddingVertical: 10 }}
                       ratingValue={rateAvg}
