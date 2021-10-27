@@ -9,9 +9,51 @@ import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import { GiCancel } from "react-icons/gi";
 import Payment from "../Payment/payment";
+import styled from "styled-components";
+import WeatherComponent from "./WeatherInfoComponent"
 // import "./reservation.css";
+
+export const WeatherIcons = {
+  "01d": "/icons/sunny.svg",
+  "01n": "/icons/night.svg",
+  "02d": "/icons/day.svg",
+  "02n": "/icons/cloudy-night.svg",
+  "03d": "/icons/cloudy.svg",
+  "03n": "/icons/cloudy.svg",
+  "04d": "/icons/perfect-day.svg",
+  "04n": "/icons/cloudy-night.svg",
+  "09d": "/icons/rain.svg",
+  "09n": "/icons/rain-night.svg",
+  "10d": "/icons/rain.svg",
+  "10n": "/icons/rain-night.svg",
+  "11d": "/icons/storm.svg",
+  "11n": "/icons/storm.svg",
+};
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 50rem;
+
+`;
+
+const AppLabel = styled.span`
+  color: black;
+  margin: 20px auto;
+  font-size: 18px;
+  font-weight: bold;
+`;
+const CloseButton = styled.span`
+  padding: 2px 3px;
+  background-color: black;
+  border-radius: 50%;
+  color: white;
+  position: absolute;
+`;
 const AddReservation = () => {
   const [showButton, setShowButton] = useState(false);
+  const [weather, updateWeather] = useState();
 
   const history = useHistory();
   const dispatch = useDispatch();
@@ -23,6 +65,7 @@ const AddReservation = () => {
   const car_id = useParams().id;
   //  const[car_id,setCar_id]=useState("2")
   //   const [price, setPrice] = useState();
+
   const state = useSelector((state) => {
     return {
       token: state.token.token,
@@ -35,10 +78,23 @@ const AddReservation = () => {
 
   let newvalue = JSON.parse(localStorage.getItem("elem"));
 
+  const fetchWeather = async () => {
+    // e.preventDefault();
+    const response = await axios.get(
+      `https://api.openweathermap.org/data/2.5/weather?q=jordan&appid=c12e81c0116820c36f0258aeb295a9f6`,
+    );
+    updateWeather(response.data);
+  };
+  
+
+  useEffect(()=>{
+    fetchWeather();
+  },[])
+
   const getStatus = async () => {
     try {
       await axios
-        .get("/reserve/user/check", {
+        .get("http://localhost:5000/reserve/user/check", {
           headers: { Authorization: `Bearer ${state.token}` },
         })
         .then((result) => {
@@ -68,7 +124,7 @@ const AddReservation = () => {
       // console.log("amount", amount);
       await axios
         .post(
-          "/reserve",
+          "http://localhost:5000/reserve",
           { returnDate, PickUpDate, amount, car_id },
           {
             headers: { Authorization: `Bearer ${state.token}` },
@@ -100,7 +156,7 @@ const AddReservation = () => {
   const booking = async () => {
     try {
       await axios
-        .get(`/car/car/${car_id}`)
+        .get(`http://localhost:5000/car/car/${car_id}`)
         .then(async (result) => {
           let price = result.data.result[0].day_price;
           let cash = await setAmount1({ PickUpDate, returnDate, price });
@@ -112,7 +168,7 @@ const AddReservation = () => {
           console.log("amount", amount);
           axios
             .post(
-              "/reserve",
+              "http://localhost:5000/reserve",
               { returnDate, PickUpDate, amount, car_id },
               {
                 headers: { Authorization: `Bearer ${state.token}` },
@@ -141,9 +197,21 @@ const AddReservation = () => {
       {!state.token ? (
         history.push("/login")
       ) : !state.editOrInsert && isOk ? (
-        <div className="container-fluid py-5 ">
+        <>
+        <div className="container-fluid py-5 " style={{display:"flex"}} >
+        
           <div className="container pt-5 pb-3">
             <center>
+            <Container>
+              <h1>Weather today</h1>
+      {/* <AppLabel>React Weather App</AppLabel> */}
+      {true && true ? (
+        <WeatherComponent weather={weather} city={"jordan"} />
+        ) : (
+          // <CityComponent updateCity={updateCity} fetchWeather={fetchWeather} />
+          ""
+          )}
+    </Container>
               <Card
                 style={{
                   flexDirection: "column",
@@ -194,7 +262,7 @@ const AddReservation = () => {
                         color: "white",
                       }}
                     >
-                      Add Reservation
+                      Reservation
                     </Card.Title>
                     <Card.Text>
                       <input
@@ -234,9 +302,12 @@ const AddReservation = () => {
                   </Card.Body>
                 </div>
               </Card>
-            </center>
+      </center>
           </div>
+
         </div>
+
+</>
       ) : !isOk && !state.editOrInsert ? (
         history.push("/editprofile")
       ) : !isOk && state.editOrInsert ? (
