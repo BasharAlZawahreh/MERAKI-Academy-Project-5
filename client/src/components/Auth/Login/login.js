@@ -146,7 +146,7 @@ const Login = () => {
                 <span className="social-label">Or login with</span>
                 <ul className="socials">
                   <GoogleLogin
-                    clientId="748391034640-4faj5hc4s827b2h6k3c9cni55uq46djh.apps.googleusercontent.com"
+                    clientId="748391034640-pnejjmgso6e2r67atsbfddo71e8hfffv.apps.googleusercontent.com"
                     buttonText="Login"
                     onSuccess={(response) => responsesuccessGoogle(response)}
                     onFailure={(response) => responseErrorGoogle(response)}
