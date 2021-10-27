@@ -9,6 +9,7 @@ import Button from "react-bootstrap/Button";
 import { GiCancel } from "react-icons/gi";
 
 const Profile = () => {
+  
   const history = useHistory();
   const dispatch = useDispatch("");
   const [firstName, setFirstName] = useState("");
@@ -17,69 +18,72 @@ const Profile = () => {
   const [city, setCity] = useState("");
   const [ssn, setSsn] = useState("");
   const [birthDate, setBirthDate] = useState("");
-  const [license_img, setLicense_img] = useState(null);
   const [mobile, setMobile] = useState("");
-  const [password, setPassword] = useState("");
+  const [license, setLicense] = useState("");
   const [url, setUrl] = useState("");
   let state = useSelector((state) => {
     return { token: state.token.token };
   });
   const addImg = (e) => {
+    let task = [];
     if (e.target.files[0]) {
-      setLicense_img(e.target.files[0]);
+      let license_img = e.target.files[0];
+      let uploadTask = storage.ref(`images/${license_img.name}`).put(license_img);
+      task.push(uploadTask);
+      uploadTask.on(
+        "state_change",
+        (snapshot) => {},
+        (error) => {
+          console.log(error);
+        },
+        () => {
+          storage
+            .ref("images")
+            .child(license_img.name)
+            .getDownloadURL()
+            .then(async (url) => {
+              console.log(url);
+              setLicense(url);
+              
+
+            });
+        }
+      );
+      Promise.all(task);
     }
   };
-  const editProfile = () => {
-    let task = [];
+
+  const editProfile = async() => {
+
     let data = {
       firstName: firstName,
       lastName: lastName,
       city: city,
       ssn: ssn,
       birthDate: birthDate,
-      mobile:mobile
+      mobile:mobile ,
+      license_img: license
     };
-    let uploadTask = storage.ref(`images/${license_img.name}`).put(license_img);
-    task.push(uploadTask);
-    uploadTask.on(
-      "state_change",
-      (snapshot) => {},
-      (error) => {
-        console.log(error);
-      },
-      async () => {
-        await storage
-          .ref("images")
-          .child(license_img.name)
-          .getDownloadURL()
-          .then(async (url) => {
-            data["license_img"] = url;
-            setUrl(url);
-          });
-      }
-    );
-    Promise.all(task)
-      .then(() => {
-        data["license_img"] = url;
-        //  console.log(data);
-        axios
-          .put("/users/edit", data, {
-            headers: { authorization: `Bearer ${state.token}` },
-          })
-          .then((result) => {
-            console.log(result.data);
-            dispatch(updateUser(result.data.result));
+  console.log("data",data);
+    await axios
+    .post("/users/edit", data, {
+      headers: { authorization: `Bearer ${state.token}` },
+    })
+    .then((result) => {
+      dispatch(updateUser(result.data.result))
+      history.goBack()
+    
+    })
+    .catch((err) => {
+      console.log("err",err);
+    });
+      
 
-            // let message=`added successfuly`
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-        alert("image uploaded");
-        history.goBack();
-      })
-      .catch((err) => console.log(err));
   };
+
+
+
+  
   console.log(url);
   return (
     <div className="container-fluid py-5">
