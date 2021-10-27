@@ -20,40 +20,8 @@ const Login = () => {
     };
   });
 
-  const responsesuccessGoogle = (response) => {
-    axios
-      .post("/login/loginWithGoogle", {
-        tokenId: response.tokenId,
-      })
-      .then((res) => {
-        console.log("NAif from admin", res);
-        if (res.data) {
-          if (res.data.role === "Admin" || res.data.role === "SuperAdmin") {
-            setMessage("");
-            dispatch(setToken(res.data.token));
-            localStorage.setItem("token", res.data.token);
-            history.push("/admin/dashboard");
-          } else {
-            setMessage("Sorry you aren't an Admin!");
-          }
-        } else throw Error;
-      })
-      .catch((err) => {
-        if (err.message) {
-          setMessage("Error happened while Login, please try again");
-          console.log(message);
-        }
-      });
-  };
-  const responseErrorGoogle = (response) => {
-    setMessage(
-      "responseErrorGoogle => Error happened while Login, please try again"
-    );
-    console.log(message);
-  };
 
   const Enter = async (e) => {
-    console.log("enter admin");
     e.preventDefault();
     try {
       const res = await axios.post("/admin/login", {
@@ -158,19 +126,6 @@ const Login = () => {
                 </div>
               </form>
               {message && <div>{message}</div>}
-
-              <div class="social-login">
-                <span class="social-label">Or login with</span>
-                <ul class="socials">
-                  <GoogleLogin
-                    clientId="748391034640-4faj5hc4s827b2h6k3c9cni55uq46djh.apps.googleusercontent.com"
-                    buttonText="Login"
-                    onSuccess={(response) => responsesuccessGoogle(response)}
-                    onFailure={(response) => responseErrorGoogle(response)}
-                    cookiePolicy={"single_host_origin"}
-                  />
-                </ul>
-              </div>
             </div>
           </div>
         </div>
