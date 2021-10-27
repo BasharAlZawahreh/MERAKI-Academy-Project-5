@@ -66,11 +66,12 @@ const Profile = () => {
     };
   console.log("data",data);
     await axios
-    .post("/users/edit", data, {
+    .put("/users/edit", data, {
       headers: { authorization: `Bearer ${state.token}` },
     })
     .then((result) => {
-      dispatch(updateUser(result.data.result))
+      console.log("result",result);
+      // dispatch(updateUser(result.data.result))
       history.goBack()
     
     })

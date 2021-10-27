@@ -65,13 +65,13 @@ const ResevationDash = () => {
       <Table striped bordered hover>
         <thead>
           <tr>
-            <th>Number</th>
-            <th>PickUp Date</th>
-            <th>Return Date</th>
-            <th>Amount</th>
-            <th>Brand</th>
-            <th>Delete</th>
-            <th>Rate</th>
+            <th style={{ textAlign: "center" }} >Number</th>
+            <th style={{ textAlign: "center" }}>PickUp Date</th>
+            <th style={{ textAlign: "center" }}>Return Date</th>
+            <th style={{ textAlign: "center" }}>Amount</th>
+            <th style={{ textAlign: "center" }}>Brand</th>
+            <th style={{ textAlign: "center" }}> Delete</th>
+            <th style={{ textAlign: "center" }}>Rate</th>
           </tr>
         </thead>
         <tbody>
@@ -80,13 +80,13 @@ const ResevationDash = () => {
             state.reservations.map((elem, index) => {
               return (
                 <tr key={index}>
-                  <td>{index + 1}</td>
-                  <td>{moment(new Date(elem.PickUpDate)).format("YYYY-MM-DD")}</td>
-                  <td>{moment(new Date(elem.returnDate)).format("YYYY-MM-DD")}</td>
-                  <td>{elem.amount}</td>
-                  <td>{elem.brand}</td>
+                  <td style={{ textAlign: "center" }}>{index + 1}</td>
+                  <td style={{ textAlign: "center" }}>{moment(new Date(elem.PickUpDate)).format("YYYY-MM-DD")}</td>
+                  <td style={{ textAlign: "center" }}>{moment(new Date(elem.returnDate)).format("YYYY-MM-DD")}</td>
+                  <td style={{ textAlign: "center" }}>{elem.amount}</td>
+                  <td style={{ textAlign: "center" }}>{elem.brand}</td>
 
-                  <td>
+                  <td style={{ textAlign: "center" }}>
                     {!elem.isConfirmed ? (
                       <RiDeleteBin5Line
                         style={{
@@ -103,7 +103,7 @@ const ResevationDash = () => {
                       ""
                     )}
                   </td>
-                  <td>
+                  <td style={{ textAlign: "center" }}>
                     {elem.isConfirmed? (
                       <MdOutlineStarRate
                         style={{

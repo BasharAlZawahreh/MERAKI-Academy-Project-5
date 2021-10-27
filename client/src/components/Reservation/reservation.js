@@ -10,7 +10,7 @@ import Button from "react-bootstrap/Button";
 import { GiCancel } from "react-icons/gi";
 import Payment from "../Payment/payment";
 import styled from "styled-components";
-import WeatherComponent from "./WeatherInfoComponent"
+import WeatherComponent from "./WeatherInfoComponent";
 // import "./reservation.css";
 
 export const WeatherIcons = {
@@ -34,8 +34,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 50rem;
-
+  width: 33%;
 `;
 
 const AppLabel = styled.span`
@@ -81,15 +80,14 @@ const AddReservation = () => {
   const fetchWeather = async () => {
     // e.preventDefault();
     const response = await axios.get(
-      `https://api.openweathermap.org/data/2.5/weather?q=jordan&appid=c12e81c0116820c36f0258aeb295a9f6`,
+      `https://api.openweathermap.org/data/2.5/weather?q=jordan&appid=c12e81c0116820c36f0258aeb295a9f6`
     );
     updateWeather(response.data);
   };
-  
 
-  useEffect(()=>{
+  useEffect(() => {
     fetchWeather();
-  },[])
+  }, []);
 
   const getStatus = async () => {
     try {
@@ -198,116 +196,114 @@ const AddReservation = () => {
         history.push("/login")
       ) : !state.editOrInsert && isOk ? (
         <>
-        <div className="container-fluid py-5 " style={{display:"flex"}} >
-        
-          <div className="container pt-5 pb-3">
-            <center>
-            <Container>
-              <h1>Weather today</h1>
-      {/* <AppLabel>React Weather App</AppLabel> */}
-      {true && true ? (
-        <WeatherComponent weather={weather} city={"jordan"} />
-        ) : (
-          // <CityComponent updateCity={updateCity} fetchWeather={fetchWeather} />
-          ""
-          )}
-    </Container>
-              <Card
-                style={{
-                  flexDirection: "column",
+          <div className="container-fluid py-5 " >
+            <div className="container pt-5 pb-3" style={{ display: "flex" ,flexDirection:"row"}}>
+              
 
-                  alignItems: "center",
-                  color: "white",
-                  width: "50rem",
+                <Container>
+                  <h1>Weather Today</h1>
+                  {/* <AppLabel>React Weather App</AppLabel> */}
+                  {true && true ? (
+                    <WeatherComponent weather={weather} city={"jordan"} />
+                  ) : (
+                    // <CityComponent updateCity={updateCity} fetchWeather={fetchWeather} />
+                    ""
+                  )}
+                </Container>
+                <Card
+                  style={{
+                    flexDirection: "column",
 
-                  height: "400px",
-                  // marginLeft: "25%",
-                  // marginTop: "150px",
-                  backgroundColor: "#2B2E4A",
-                }}
-              >
-                <span
-                  style={{ cursor: "pointer", alignSelf: "flex-end" }}
-                  onClick={() => {
-                    history.push("/");
+                    alignItems: "center",
+                    color: "white",
+                    width: "50rem",
+
+                    height: "400px",
+                    // marginLeft: "25%",
+                    // marginTop: "150px",
+                    backgroundColor: "#2B2E4A",
                   }}
                 >
-                  <GiCancel
-                    style={{ color: "white", width: "18px", height: "20px" }}
-                  />
-                </span>
-                <div style={{ display: "flex", flexDirection: "row" }}>
-                  <img
-                    style={{
-                      width: "30%",
-                      alignItems: "center",
-                      marginBottom: "34px",
-                      marginLeft: "13px",
-                      marginTop: "30px",
-                      height: "73%",
+                  <span
+                    style={{ cursor: "pointer", alignSelf: "flex-end" }}
+                    onClick={() => {
+                      history.push("/");
                     }}
-                    src="https://thumbs.dreamstime.com/b/car-rent-sale-agent-auto-dealer-leasing-concept-104364904.jpg"
-                    class="card-img-top"
-                    alt="..."
-                  />
-
-                  <Card.Body>
-                    <Card.Title
+                  >
+                    <GiCancel
+                      style={{ color: "white", width: "18px", height: "20px" }}
+                    />
+                  </span>
+                  <div style={{ display: "flex", flexDirection: "row" }}>
+                    <img
                       style={{
-                        textAlign: "center",
-
-                        fontWeight: "bold",
-                        marginTop: "20px",
-                        marginBottom: "20px",
-                        color: "white",
+                        width: "30%",
+                        alignItems: "center",
+                        marginBottom: "34px",
+                        marginLeft: "13px",
+                        marginTop: "30px",
+                        height: "73%",
                       }}
-                    >
-                      Reservation
-                    </Card.Title>
-                    <Card.Text>
-                      <input
-                        // style={{ marginTop: "40px" }}
-                        type="date"
-                        placeholder="returnDate"
-                        onChange={(e) => setReturnDate(e.target.value)}
-                      />
+                      src="https://thumbs.dreamstime.com/b/car-rent-sale-agent-auto-dealer-leasing-concept-104364904.jpg"
+                      class="card-img-top"
+                      alt="..."
+                    />
 
-                      <input
-                        style={{ marginTop: "40px" }}
-                        type="date"
-                        placeholder="PickUpDate"
-                        onChange={(e) => setPickUpDate(e.target.value)}
-                      />
-                      <input
-                        style={{ marginTop: "30px", color: "white" }}
-                        type="number"
-                        disabled
-                        value={`${amount}`}
-                        placeholder="amount"
-                      />
-                    </Card.Text>
-                    {showButton && <Payment amount={amount} />}
-                    {!showButton && (
-                      <Button
-                        style={{ marginTop: "10%" }}
-                        // className="btn btn-secondary"
-                        // variant="secondary"
-                        onClick={() => {
-                          booking();
+                    <Card.Body>
+                      <Card.Title
+                        style={{
+                          textAlign: "center",
+
+                          fontWeight: "bold",
+                          marginTop: "20px",
+                          marginBottom: "20px",
+                          color: "white",
                         }}
                       >
                         Reservation
-                      </Button>
-                    )}
-                  </Card.Body>
-                </div>
-              </Card>
-      </center>
+                      </Card.Title>
+                      <Card.Text>
+                        <input
+                          // style={{ marginTop: "40px" }}
+                          type="date"
+                          placeholder="returnDate"
+                          onChange={(e) => setReturnDate(e.target.value)}
+                        />
+
+                        <input
+                          style={{ marginTop: "40px" }}
+                          type="date"
+                          placeholder="PickUpDate"
+                          onChange={(e) => setPickUpDate(e.target.value)}
+                        />
+                        <input
+                          style={{ marginTop: "30px", color: "white" }}
+                          type="number"
+                          disabled
+                          value={`${amount}`}
+                          placeholder="amount"
+                        />
+                      </Card.Text>
+                      {showButton && <Payment amount={amount} />}
+                      {!showButton && (
+                        <Button
+                          style={{ marginTop: "10%" }}
+                          // className="btn btn-secondary"
+                          // variant="secondary"
+                          onClick={() => {
+                            booking();
+                          }}
+                        >
+                          Reservation
+                        </Button>
+                      )}
+                    </Card.Body>
+                  </div>
+                </Card>
+              
+            </div>
           </div>
-
-        </div>
-
-</>
+        </>
       ) : !isOk && !state.editOrInsert ? (
         history.push("/editprofile")
       ) : !isOk && state.editOrInsert ? (
