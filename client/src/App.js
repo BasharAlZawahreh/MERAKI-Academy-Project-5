@@ -77,8 +77,9 @@ export default function App() {
         <Route path="/editprofile">
           <Nav />
           <Profile />
-          <Footer />
           <SliderBrand />
+          <Footer />
+          
         </Route>
         <Route exact path="/mycars">
           <Nav />

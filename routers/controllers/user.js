@@ -32,6 +32,7 @@ const updateUserById = async (req, res) => {
   
    let id = req.token.user_id;
   let {firstName,lastName,city,ssn,birthDate,mobile,license_img } = req.body;
+  console.log("ddd",req.body);
  
   const query = `UPDATE users SET firstName=?,lastName=?,city=?,ssn=?,birthDate=?,mobile=?,license_img=? WHERE user_id=? and role="user"`;
   const data = [firstName,lastName,city,ssn,birthDate,mobile,license_img, id];
