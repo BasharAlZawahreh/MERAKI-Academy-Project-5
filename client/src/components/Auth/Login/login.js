@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setToken } from "../../../actions/login";
 import axios from "axios";
 import GoogleLogin from "react-google-login";
-import {MdCancel} from 'react-icons/md';
+import { MdCancel } from "react-icons/md";
 const Login = () => {
   const history = useHistory();
   const dispatch = useDispatch();
@@ -41,11 +41,8 @@ const Login = () => {
       });
   };
   const responseErrorGoogle = (response) => {
-
-    setMessage(
-     response
-    );
-    console.log(message);
+    setMessage("Error happened while Login, please try again");
+    console.log(response);
   };
 
   const Enter = async (e) => {
@@ -81,27 +78,32 @@ const Login = () => {
   return (
     <>
       <section className="sign-in">
-    
         <div className="container">
-        <span style={{cursor:"pointer",marginLeft:"68.5rem"}}  onClick={()=>{history.push("/")}}><MdCancel style={{height:"26px",width:"24px",paddingTop:"5px"}} /></span>
+          <span
+            style={{ cursor: "pointer", marginLeft: "68.5rem" }}
+            onClick={() => {
+              history.push("/");
+            }}
+          >
+            <MdCancel
+              style={{ height: "26px", width: "24px", paddingTop: "5px" }}
+            />
+          </span>
           <div className="signin-content">
-            
             <div className="signin-image">
-
               <figure>
                 <img src="images/signup-image.jpg" alt="sing up image" />
               </figure>
               <a
-                style={{cursor:"pointer"}}
+                style={{ cursor: "pointer" }}
                 onClick={() => history.push("/register")}
                 className="signup-image-link"
               >
                 Create an account
               </a>
             </div>
-          
+
             <div className="signin-form">
-              
               <h2 className="form-title">Login</h2>
               <form onSubmit={Enter} className="register-form" id="login-form">
                 <div className="form-group">
