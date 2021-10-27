@@ -107,13 +107,13 @@ const MyCars = () => {
           </tr>
         </thead>
         <tbody>
-          {state.cars.length &&
+          {
             state.cars.map((car, i) => {
               let  ava = car.is_Available ? true : false
              
               return (
                 <tr key={i}>
-                  <td className="w-25 ">
+                  <td style={{ textAlign: "center" }} className="w-25 ">
                     <div className="odai">
                     <img
                       src={car.main_img}
@@ -122,10 +122,10 @@ const MyCars = () => {
                     />
                     </div>
                   </td>
-                  <td>{car.brand}</td>
-                  <td>{car.model}</td>
-                  <td>{car.manifactoring_year}</td>
-                  <td>
+                  <td style={{ textAlign: "center" }}>{car.brand}</td>
+                  <td style={{ textAlign: "center" }}>{car.model}</td>
+                  <td style={{ textAlign: "center" }}>{car.manifactoring_year}</td>
+                  <td style={{ textAlign: "center" }}>
                   <label style={{ marginTop: "20px" }} className="switch">
                         <input
                           type="checkbox"
@@ -137,9 +137,9 @@ const MyCars = () => {
                         <span className="slider round"></span>
                       </label>
                   </td>
-                  <td>{car.description}</td>
-                  <td>{car.day_price}JD</td>
-                  <td>
+                  <td style={{ textAlign: "center" }}>{car.description}</td>
+                  <td style={{ textAlign: "center" }}>{car.day_price}JD</td>
+                  <td style={{ textAlign: "center" }}>
                     <BiEditAlt
                       style={{
                         width: "50px",
