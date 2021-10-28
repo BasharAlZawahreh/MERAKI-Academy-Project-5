@@ -89,13 +89,14 @@ const Login = () => {
               style={{ height: "26px", width: "24px", paddingTop: "5px" }}
             />
           </span>
-          <div className="signin-content">
-            <div className="signin-image">
+        
+          <div className="signin-content d-flex">
+            <div className="signin-image" style={{height:"100%"}}>
               <figure>
                 <img src="images/signup-image.jpg" alt="sing up image" />
               </figure>
               <a
-                style={{ cursor: "pointer" }}
+                style={{ cursor: "pointer" ,fontSize:"20px" , fontWeight:"bold" , color:"#2B2E4A"}}
                 onClick={() => history.push("/register")}
                 className="signup-image-link"
               >
@@ -135,14 +136,16 @@ const Login = () => {
                   />
                 </div>
                 <div className="form-group form-button">
-                  <button name="signin" id="signin" className="form-submit">
+                  <button name="signin" id="signin" className="btn btn-primary btn-block mb-3" style={{ height: "50px" }}>
                     Login
                   </button>
                 </div>
               </form>
               {message && <div>{message}</div>}
 
-              <div className="social-login">
+           
+
+              <div className="social-login mt-0" >
                 <span className="social-label">Or login with</span>
                 <ul className="socials">
                   <GoogleLogin
@@ -154,7 +157,8 @@ const Login = () => {
                   />
                 </ul>
               </div>
-            </div>
+           
+          </div>
           </div>
         </div>
       </section>

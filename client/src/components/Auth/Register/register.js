@@ -51,10 +51,11 @@ const Register=()=>{
                             <label for="pass"><i class="zmdi zmdi-lock"></i></label>
                             <input type="password" onChange={(e)=>{setPassword(e.target.value)}} name="pass" id="pass" placeholder="Password"/>
                         </div>
-                        <div class="form-group">
-                            <button class="form-submit">Register</button>
-                        
-                        </div>
+                        <div className="form-group form-button">
+                  <button name="signin" id="signin" className="btn btn-primary btn-block mb-3" style={{ height: "50px" }}>
+                    Register
+                  </button>
+                </div>
                       
                     </form>
                    

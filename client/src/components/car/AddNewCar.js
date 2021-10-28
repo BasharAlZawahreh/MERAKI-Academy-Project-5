@@ -399,7 +399,7 @@ const AddNewCar = () => {
                     setcarType(e.target.value);
                   }}
                 >
-                  <option defaultValue>choose a type</option>
+                  <option defaultValue>Choose a type</option>
                   {carTypes &&
                     carTypes.map((type, i) => {
                       return (
@@ -417,7 +417,7 @@ const AddNewCar = () => {
                   onChange={(e) => setcarBrand(e.target.value)}
                 >
                   <option defaultValue style={{ fontWeight: "bold" }}>
-                    choose car brand
+                    Choose car brand
                   </option>
 
                   {carBrands &&
@@ -436,7 +436,7 @@ const AddNewCar = () => {
                   className="form-control form-control-md"
                   onChange={(e) => setcarColor(e.target.value)}
                 >
-                  <option defaultValue>choose car color</option>
+                  <option defaultValue>Choose car color</option>
 
                   {colors.map((color, i) => {
                     return (
@@ -453,7 +453,7 @@ const AddNewCar = () => {
                   className="form-control form-control-md"
                   onChange={(e) => setcarYear(e.target.value)}
                 >
-                  <option defaultValue>choose car year</option>
+                  <option defaultValue>Choose car year</option>
 
                   {allYears &&
                     allYears.map((year, i) => {
@@ -468,9 +468,9 @@ const AddNewCar = () => {
                 <input
                   style={{ marginTop: "7px" }}
                   type="text"
-                  className="form-control-md"
+                  className="form-control form-control-md"
                   id="formGroupExampleInput"
-                  placeholder="choose car model"
+                  placeholder="Choose car model"
                   onChange={(e) => {
                     setModel(e.target.value);
                   }}
@@ -479,37 +479,38 @@ const AddNewCar = () => {
                 <textarea
                   style={{ width: "505px", height: "39px", marginTop: "7px" }}
                   type="text"
-                  className="form-control-md"
+                  className="form-control form-control-md"
                   id="formGroupExampleInput2"
-                  placeholder="choose discription"
+                  placeholder="Choose discription"
                   onChange={(e) => {
                     setdesc(e.target.value);
                   }}
                 />
 
-                <textarea
-                  style={{ width: "505px", height: "39px", marginTop: "0px" }}
+                <input
+                  style={{ width: "505px", height: "39px", marginTop: "7px" }}
                   type="text"
-                  className="form-control-md"
+                  className="form-control form-control-md"
                   id="formGroupExampleInput2"
-                  placeholder="price per day"
+                  placeholder="Price per day"
                   onChange={(e) => {
                     setDayPrice(e.target.value);
                   }}
                 />
-
+                <span style={{fontSize: "0.8rem", color:"white"}}>Add main Img </span>
                 <input
                   placeholder="Main Img"
-                  style={{ marginTop: "0px", padding: "2px" }}
+                  style={{ marginTop: "7px", padding: "2px" }}
                   type="file"
-                  className="form-control"
-                  id="formGroupExampleInput"
+                  className="form-control "
+                  title = "addMainIm"
+                  id="main"
                   onChange={addMainIm}
                 />
-       
+                <span style={{fontSize: "0.8rem", color:"white"}}>license Img</span>
                 <input
                   name="More Img"
-                  style={{ marginTop: "5px", padding: "2px" }}
+                  style={{ marginTop: "7px", padding: "2px" }}
                   type="file"
                   multiple
                   className="form-control"
@@ -520,7 +521,7 @@ const AddNewCar = () => {
               </form>
 
               <Button
-                style={{ width: "156px", marginTop: "14PX" }}
+                style={{ width: "156px", marginTop: "7PX" }}
                 className="addcar"
                 disabled={enable}
                 onClick={addToData}
