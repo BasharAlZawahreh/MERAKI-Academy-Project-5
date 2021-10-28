@@ -109,6 +109,7 @@ const Profile = () => {
           fill out information
         </Card.Title>
         <Card.Text>
+        <span style={{fontSize: "0.8rem", color:"white"}}>Add more Imgs </span>
           <input className="form-control p-1  " type="file" onChange={addImg} />
 
           <input
