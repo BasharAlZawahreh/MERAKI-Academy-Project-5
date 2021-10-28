@@ -92,7 +92,7 @@ const AddReservation = () => {
   const getStatus = async () => {
     try {
       await axios
-        .get("http://localhost:5000/reserve/user/check", {
+        .get("/reserve/user/check", {
           headers: { Authorization: `Bearer ${state.token}` },
         })
         .then((result) => {
@@ -122,7 +122,7 @@ const AddReservation = () => {
       // console.log("amount", amount);
       await axios
         .post(
-          "http://localhost:5000/reserve",
+          "/reserve",
           { returnDate, PickUpDate, amount, car_id },
           {
             headers: { Authorization: `Bearer ${state.token}` },
@@ -154,7 +154,7 @@ const AddReservation = () => {
   const booking = async () => {
     try {
       await axios
-        .get(`http://localhost:5000/car/car/${car_id}`)
+        .get(`/car/car/${car_id}`)
         .then(async (result) => {
           let price = result.data.result[0].day_price;
           let cash = await setAmount1({ PickUpDate, returnDate, price });
@@ -166,7 +166,7 @@ const AddReservation = () => {
           console.log("amount", amount);
           axios
             .post(
-              "http://localhost:5000/reserve",
+              "/reserve",
               { returnDate, PickUpDate, amount, car_id },
               {
                 headers: { Authorization: `Bearer ${state.token}` },
