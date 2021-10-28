@@ -90,13 +90,15 @@ const Nav = () => {
 
                     <span
                       className="nav-item nav-link active"
+                      style={{ cursor: "pointer"}}
                       onClick={() => {
                         history.push("/login");
                       }}
                     >
                       <BiLogInCircle
+                       size="25px"
                         color={"rgb(57, 223, 57)"}
-                        style={{ cursor: "pointer", verticalAlign: "middle" }}
+                        style={{ verticalAlign: "middle" }}
                       ></BiLogInCircle>
                       Join Us
                     </span>
@@ -149,6 +151,7 @@ const Nav = () => {
 
                     <span
                       className="nav-item nav-link"
+                      style={{ cursor: "pointer"}}
                       onClick={() => {
                         localStorage.clear();
                         dispatch(setToken(""));
@@ -158,7 +161,7 @@ const Nav = () => {
                     >
                       <RiLogoutCircleLine
                         color={"F77D0A"}
-                        style={{ cursor: "pointer", verticalAlign: "middle" }}
+                        style={{  verticalAlign: "middle" }}
                       ></RiLogoutCircleLine>
                       Log Out
                     </span>

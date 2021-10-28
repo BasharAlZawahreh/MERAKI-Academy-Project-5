@@ -80,9 +80,12 @@ const Profile = () => {
   console.log(url);
   return (
     <div className="container-fluid py-5">
+
       <div className="container pt-5 pb-3">
+   
         <center>
-          <Card
+      
+         <Card
             style={{
               width: "50rem",
               backgroundColor: "#2B2E4A",
