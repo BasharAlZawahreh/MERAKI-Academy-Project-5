@@ -137,7 +137,7 @@ const Profile = () => {
                     className="lis"
                     style={{
                       color: "grey",
-                      paddingLeft: "535px",
+                      left: "535px",
                       paddingBottom: "257px",
                       fontWeight: "bold",
                     }}
