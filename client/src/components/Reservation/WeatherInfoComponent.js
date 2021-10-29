@@ -138,8 +138,8 @@ function  WeatherComponent() {
   const [name, setName] = useState("");
   if (!name) {
     axios
-      .get(
-        `http://api.openweathermap.org/data/2.5/weather?q=jordan&appid=fe5020d8dbf399a7c40ed4cd37fb5c74&lang=en`
+       .get(
+        `http://api.openweathermap.org/data/2.5/weather?q=jordan&appid=c12e81c0116820c36f0258aeb295a9f6&lang=en`
       )
       .then((result) => {
         setIcon(result.data.weather[0].icon);
