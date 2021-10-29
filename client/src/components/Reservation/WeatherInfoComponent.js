@@ -128,7 +128,7 @@ import { WiThermometer } from "react-icons/wi";
 import { FaMapPin } from "react-icons/fa";
 import { GiPlanePilot } from "react-icons/gi";
 
-function  WeatherComponent() {
+function WeatherComponent() {
   const [icon, setIcon] = useState();
   const [description, setDescription] = useState("");
   const [temperature, setTemperature] = useState("");
@@ -138,7 +138,7 @@ function  WeatherComponent() {
   const [name, setName] = useState("");
   if (!name) {
     axios
-       .get(
+      .get(
         `http://api.openweathermap.org/data/2.5/weather?q=jordan&appid=c12e81c0116820c36f0258aeb295a9f6&lang=en`
       )
       .then((result) => {
@@ -156,7 +156,6 @@ function  WeatherComponent() {
   }
 
   const changeHandler = (e) => {
-
     axios
       .get(
         `http://api.openweathermap.org/data/2.5/weather?q=${e.target.value}&appid=fe5020d8dbf399a7c40ed4cd37fb5c74&lang=en`
@@ -177,34 +176,32 @@ function  WeatherComponent() {
 
   return (
     <div className="weather_div">
-        <center>
-      <h1 style={{ fontSize: "20px" }}>
-        <span style={{ color: "#F77D0A" }}>AUTO RENTAL</span>
-        {/* <span style={{ color: "rgb(252,158,21)" }}>to</span>
+      <center>
+        <h1 style={{ fontSize: "20px" }}>
+          <span style={{ color: "#F77D0A" }}>AUTO RENTAL</span>
+          {/* <span style={{ color: "rgb(252,158,21)" }}>to</span>
        
         <span style={{ color: "rgb(227,64,61)" }}>rental</span> */}
-      </h1>
+        </h1>
       </center>
-      <p style={{marginTop:"10px"}}>Weather</p>
-{/*      
+      <p style={{ marginTop: "10px" }}>Weather</p>
+      {/*      
       <select className="weather_select" onChange={changeHandler}>
         <option> -- jordan --</option> */}
 
-        {/* {data_1 
+      {/* {data_1 
        .map((elem, i) => {
           return <option key={i}>{elem}</option>;
         })} */}
       {/* </select> */}
       <div className="weather_details">
-        <p style={{ color: "white" }} >
-          {name} <FaMapPin />
+        <p style={{ color: "white" }}>
+          Hashemite Kingdom of Jordan  <FaMapPin />
         </p>
-        <h1 style={{ color: "#FDFAF6" }}>{description}</h1>
+        <h1 style={{ color: "#FDFAF6" }}>Cloudy</h1>
 
-        <div className="weather_img" >
-          {description && (
-            <img src={`https://openweathermap.org/img/wn/${icon}@4x.png`}></img>
-          )}
+        <div className="weather_img">
+          <img src="/icons/cloudy.svg"></img>
         </div>
       </div>
 
@@ -212,18 +209,20 @@ function  WeatherComponent() {
         <div className="weather_item_sub" style={{ color: "rgb(19,145,210)" }}>
           <WiThermometer size={40} color="ffff" />
 
-          <h1 className="weather_temp" style={{color:"#fff"}} >{`${temperature} °F`}</h1>
+          <h1 className="weather_temp" style={{ color: "#fff" }}>
+            17 °C
+          </h1>
 
           <div
             className="weather_item_sub"
             style={{ color: "rgb(252,154,31)" }}
           >
             <WiHumidity size={40} color="ffff" />
-            <h1  style={{color:"#fff"}}>{humidity}%</h1>
+            <h1 style={{ color: "#fff" }}>28%</h1>
           </div>
           <div className="weather_item_sub" style={{ color: "rgb(227,64,61)" }}>
             <WiStrongWind size={40} color="ffff" />
-            <h1 style={{color:"#fff"}}>{wind} m/s</h1>
+            <h1 style={{ color: "#fff" }}>2.05 m/s</h1>
           </div>
         </div>
       </div>
@@ -232,4 +231,3 @@ function  WeatherComponent() {
 }
 
 export default WeatherComponent;
-
