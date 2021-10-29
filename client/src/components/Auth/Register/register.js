@@ -138,6 +138,7 @@ const Register = () => {
               <img src="images/signup-image.jpg" alt="sing up image" />
             </figure>
             <a
+            style={{cursor: "pointer"}}
               onClick={() => {
                 history.push("/login");
               }}

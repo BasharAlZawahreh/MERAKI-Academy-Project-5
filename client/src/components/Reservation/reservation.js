@@ -190,6 +190,13 @@ const AddReservation = () => {
   useEffect(() => {
     getStatus();
   }, []);
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+    });
+  }, []);
+
   return (
     <>
       {!state.token ? (
