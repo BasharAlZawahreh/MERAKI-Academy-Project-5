@@ -1,0 +1,68 @@
+.weather_div {
+    padding: 10px;
+  
+    position: absolute;
+    top: 37.5vh;
+    /* right: -76px; */
+    overflow: hidden;
+    /* height: 65vh; */
+    font-size: 40%;
+    font: bold !important;
+    color: aliceblue;
+    width: 29.9%;
+    margin: 0 80px 0 0;
+    /* border-radius: 10px; */
+    font-family: Arial, Helvetica, sans-serif !important;
+    background-image: url("https://images.designtrends.com/wp-content/uploads/2016/01/28101245/Night-Sky-Background.jpg");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+
+  }
+  .weather_select:hover {
+    cursor: pointer;
+  }
+  .weather_details {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 40vh;
+  }
+  
+  .weather_div p {
+    font-size: 1rem;
+  }
+  .weather_select {
+    position: relative;
+    font-family: Arial;
+  
+    width: 90%;
+    border: none;
+    border-radius: 5px;
+    text-align: center;
+    background-color: rgba(200, 213, 223, 0.534);
+    text-indent: 20px;
+  }
+  
+  .weather_select option {
+    background-color: rgba(89, 175, 245, 0.534);
+    border: none;
+    cursor: pointer !important;
+  }
+  
+  .weather_item {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  
+    border-radius: 10px;
+    border: 1px solid black;
+    border-style: dashed;
+  }
+  
+  .weather_item_sub {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }

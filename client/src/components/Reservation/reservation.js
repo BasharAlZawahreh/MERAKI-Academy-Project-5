@@ -199,17 +199,19 @@ const AddReservation = () => {
           <div className="container-fluid py-5 " >
             <div className="container pt-5 pb-3" style={{ display: "flex" ,flexDirection:"row"}}>
               
-
+{/* 
                 <Container>
                   <h1>Weather Today</h1>
                   {/* <AppLabel>React Weather App</AppLabel> */}
-                  {true && true ? (
-                    <WeatherComponent weather={weather} city={"jordan"} />
-                  ) : (
+                  {/* {true && true ? (
+                    <WeatherComponent weather={weather} city={"jordan"} /> */}
+                  {/* ) : (
                     // <CityComponent updateCity={updateCity} fetchWeather={fetchWeather} />
                     ""
-                  )}
-                </Container>
+                  )} */}
+                {/* </Container> */} 
+
+               <WeatherComponent/>
                 <Card
                   style={{
                     flexDirection: "column",
@@ -217,11 +219,13 @@ const AddReservation = () => {
                     alignItems: "center",
                     color: "white",
                     width: "50rem",
-
-                    height: "400px",
+                    marginLeft:"405px",
+                    height: "453px",
                     // marginLeft: "25%",
                     // marginTop: "150px",
+                    border:"12px",
                     backgroundColor: "#2B2E4A",
+                    marginTop:"-110px",
                   }}
                 >
                   <span
@@ -241,10 +245,10 @@ const AddReservation = () => {
                         alignItems: "center",
                         marginBottom: "34px",
                         marginLeft: "13px",
-                        marginTop: "30px",
+                        marginTop: "39px",
                         height: "73%",
                       }}
-                      src="https://thumbs.dreamstime.com/b/car-rent-sale-agent-auto-dealer-leasing-concept-104364904.jpg"
+                       src="https://thumbs.dreamstime.com/b/car-rent-sale-agent-auto-dealer-leasing-concept-104364904.jpg"
                       class="card-img-top"
                       alt="..."
                     />
@@ -286,6 +290,7 @@ const AddReservation = () => {
                       </Card.Text>
                       {showButton && <Payment amount={amount} />}
                       {!showButton && (
+                        <center>
                         <Button
                           style={{ marginTop: "10%" }}
                           // className="btn btn-secondary"
@@ -296,6 +301,7 @@ const AddReservation = () => {
                         >
                           Reservation
                         </Button>
+                        </center>
                       )}
                     </Card.Body>
                   </div>
