@@ -60,7 +60,7 @@ const Login = () => {
   return (
     <>
       <section class="sign-in">
-        <div class="container" style={{ backgroundColor: "#2B2E4A" }}>
+        <div class="container" >
           <span
             style={{ cursor: "pointer", marginLeft: "68.5rem" }}
             onClick={() => {
@@ -76,7 +76,7 @@ const Login = () => {
               }}
             />
           </span>
-          <div class="signin-content">
+          <div class="signin-content" style={{backgroundColor: "rgb(43, 46, 74)"}}>
             <div class="signin-image">
               <figure>
                 <img
@@ -120,7 +120,8 @@ const Login = () => {
                   />
                 </div>
                 <div class="form-group form-button">
-                  <button name="signin" id="signin" class="form-submit">
+                  <button name="signin" id="signin" className="btn btn-primary btn-block mb-3"
+                    style={{ height: "50px" }}>
                     Login
                   </button>
                 </div>
