@@ -37,7 +37,7 @@ const Dashboard = () => {
   let arr;
   useEffect(() => {
     arr = JSON.parse(localStorage.getItem("reservations")) || [];
-    arr.length ? setNotifications(arr.length) : setNotifications("");
+    arr.length ? setNotifications(`${arr.length} new reservation(s)`) : setNotifications("");
   });
 
   const getAllUsers = async () => {
@@ -78,7 +78,7 @@ const Dashboard = () => {
       <div className={styles.sidebar}>
         <div className={styles.logodetails}>
           {/* <i className='bx bxl-c-plus-plus'></i> */}
-          <span className={styles.logo_name}>Auto Rental</span>
+          <span className={styles.logo_name}> Auto Rental</span>
         </div>
         <ul className={styles.navlinks}>
           <li>
@@ -135,7 +135,7 @@ const Dashboard = () => {
               setComponent("reservations");
             }}
           >
-            <span>{notifications}</span>
+            <span>{notifications} </span>
           </i>
           {/* <div className={styles.sidebarbutton}> */}
           {/* <button onClick={() => setComponent("users")}>Users</button>

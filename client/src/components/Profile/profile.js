@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
@@ -20,9 +20,17 @@ const Profile = () => {
   const [mobile, setMobile] = useState("");
   const [license, setLicense] = useState("");
   const [url, setUrl] = useState("");
+  
   let state = useSelector((state) => {
     return { token: state.token.token };
   });
+  
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+    });
+  }, []);
+
   const addImg = (e) => {
     let task = [];
     if (e.target.files[0]) {
@@ -80,18 +88,15 @@ const Profile = () => {
   console.log(url);
   return (
     <div className="container-fluid py-5">
-
       <div className="container pt-5 pb-3">
-   
         <center>
-      
-         <Card
+          <Card
             style={{
               width: "50rem",
               backgroundColor: "#2B2E4A",
               alignItems: "center",
-              marginTop:"-110px",
-              border:"12px",
+              marginTop: "-110px",
+              border: "12px",
             }}
           >
             <span
@@ -128,7 +133,17 @@ const Profile = () => {
                     type="file"
                     onChange={addImg}
                   />
-                <label className="lis" style={{color:"grey",paddingLeft: "535px",paddingBottom: "257px",fontWeight:"bold"}}    >Liscence image</label>
+                  <label
+                    className="lis"
+                    style={{
+                      color: "grey",
+                      paddingLeft: "535px",
+                      paddingBottom: "257px",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    Liscence image
+                  </label>
 
                   <input
                     style={{ marginTop: "5px" }}

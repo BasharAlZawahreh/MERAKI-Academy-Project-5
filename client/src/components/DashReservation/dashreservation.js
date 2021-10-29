@@ -30,6 +30,12 @@ const ResevationDash = () => {
   });
   let car_id = state.car_Id;
 
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+    });
+  }, []);
+
   const getReservationByuser = () => {
     axios
       .get("/reserve/user", {

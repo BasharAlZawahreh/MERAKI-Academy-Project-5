@@ -374,8 +374,8 @@ function Reservations() {
   const data = state.reservations.map((e) => {
     return {
       id: e.res_id,
-      returnDate: moment(new Date(e.returnDate)).format("YYYY-MM-DD"),
-      PickUpDate: moment(new Date(e.PickUpDate)).format("YYYY-MM-DD"),
+      returnDate: moment(new Date(e.returnDate)).format("DD-MM-YYYY"),
+      PickUpDate: moment(new Date(e.PickUpDate)).format("DD-MM-YYYY"),
       amount: e.amount,
       model: e.model,
       manifactoring_year: e.manifactoring_year,
@@ -447,7 +447,7 @@ function Reservations() {
           accessor: "PickUpDate",
         },
         {
-          Header: "returnDate",
+          Header: "Return Date",
           accessor: "returnDate",
           filter: "fuzzyText",
         },
@@ -471,15 +471,15 @@ function Reservations() {
           accessor: "manifactoring_year",
           filter: "fuzzyText",
         },
-        {
-          Header: "License",
-          id: "carLicense",
-          accessor: "carLicense",
-          filter: "none",
-          Cell: ({ cell }) => (
-            <img src={cell.row.values.carLicense} alt="license" />
-          ),
-        },
+        // {
+        //   Header: "License",
+        //   id: "carLicense",
+        //   accessor: "carLicense",
+        //   filter: "none",
+        //   Cell: ({ cell }) => (
+        //     <img src={cell.row.values.carLicense} alt="license" />
+        //   ),
+        // },
         {
           Header: "Main Image",
           id: "mainImg",

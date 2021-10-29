@@ -431,15 +431,15 @@ function Cars() {
           Filter: NumberRangeColumnFilter,
           filter: "between",
         },
-        {
-          Header: "License",
-          id: "carLicense",
-          accessor: "carLicense",
-          filter: "none",
-          Cell: ({ cell }) => (
-            <img src={cell.row.values.carLicense} alt="license" />
-          ),
-        },
+        // { 
+        //   Header: "License",
+        //   id: "carLicense",
+        //   accessor: "carLicense",
+        //   filter: "none",
+        //   Cell: ({ cell }) => (
+        //     <img src={cell.row.values.carLicense} alt="license" />
+        //   ),
+        // },
         {
           Header: "Main Image",
           id: "mainImg",
