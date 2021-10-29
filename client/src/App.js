@@ -95,8 +95,9 @@ export default function App() {
         <Route path="/addCar">
           <Nav />
           <AddNewCar />
-          <Footer />
           <SliderBrand />
+          <Footer />
+          
         </Route>
         <Route exact path="/result">
           <Nav />

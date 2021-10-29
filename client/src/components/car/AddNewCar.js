@@ -382,10 +382,10 @@ const AddNewCar = () => {
                 marginBottom: "34px",
                 marginLeft: "13px",
                 marginTop: "57px",
-                height: "73%",
+                height: "83%",
               }}
               variant="top"
-              src="https://images.all-free-download.com/images/graphiclarge/lifestyle_background_man_driving_car_desert_icons_6838675.jpg"
+              src="https://wallpapercave.com/wp/wp4028757.jpg"
             />
             <Card.Body>
               <Card.Title style={{ color: "white" }}>AddCar</Card.Title>
@@ -507,7 +507,7 @@ const AddNewCar = () => {
                   id="main"
                   onChange={addMainIm}
                 />
-                <span style={{fontSize: "0.8rem", color:"white"}}>license Img</span>
+                <span style={{fontSize: "0.8rem", color:"white"}}>Add more Imgs</span>
                 <input
                   name="More Img"
                   style={{ marginTop: "7px", padding: "2px" }}
