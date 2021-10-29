@@ -42,7 +42,7 @@ function Contact() {
             <div className="col-lg-7 mb-2">
               <div
                 className="contact-form bg-light mb-4"
-                style={{ padding: "30px" }}
+                style={{ padding: "40px" }}
               >
                 <form onSubmit={sendEmail}>
                   <div className="row">
@@ -86,6 +86,8 @@ function Contact() {
                   <div>
                     <center>
                       <button
+                        className="btn btn-primary btn-block mb-3"
+                    
                         style={{
                           width: "130px",
                           marginTop: "5PX",
@@ -93,7 +95,7 @@ function Contact() {
                         }}
                         type="submit"
                       >
-                        Send Message
+                        Send 
                       </button>
                     </center>
                   </div>
