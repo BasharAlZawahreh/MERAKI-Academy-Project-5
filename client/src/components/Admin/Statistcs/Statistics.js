@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "../Dashboard.module.css";
-import { Bar } from 'react-chartjs-2';
+import {Bar} from 'react-chartjs-2'
 const Statistics=({usersStatistics,carsStatistics,reservationsStatistics})=>{
   // const {usersStatistics,carsStatistics,reservationsStatistics}=statistics
   const data = {
